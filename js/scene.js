@@ -39,8 +39,8 @@ class Scenee
         this.TestScene.add( helper );
 
         var Terreno = new Terrain();
-        Terreno.HeightMapC("Assets/Images/grass.jpg", "Assets/Images/bump2.png", "Assets/Images/distB.jpg", "Assets/Images/bump1.png", "Assets/Images/Blendmap.jpg");
-        this.TestScene.add(Terreno.RenderT());
+        Terreno.MultitextureTerrain("Assets/Images/grass.jpg", "Assets/Images/Ground1.jpg", "Assets/Images/Alts.png", "Assets/Images/Blend.png");
+        this.TestScene.add(Terreno.GetPlane());
 
         var SkydomeT = new skydome();
         SkydomeT.Create('Assets/Images/skyboxDay.png');

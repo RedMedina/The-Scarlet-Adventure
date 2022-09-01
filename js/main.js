@@ -1,6 +1,3 @@
-//import * as THREE from 'https://cdn.skypack.dev/three@0.118.0';
-//import {FBXLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/FBXLoader.js';
-//import {OrbitControls} from 'https://cdn.jsdelivr.net/npm/three@0.118/examples/jsm/controls/OrbitControls.js';
 import * as THREE from 'three';
 import {Cameraa} from '/PWGW/js/camera.js';
 import {Audioo} from '/PWGW/js/audio.js';
@@ -26,13 +23,13 @@ function main()
     let mixerPersonaje;
     let mixer = new Array();    
     //CreateModelTestScene("Assets/Models/PersonajeTest/Running.fbx", 5, 5, 5, 0.04, 0, 0, 0);
-    CreateModelTestScene("Assets/Models/Player/Player_Attack.fbx", 5, 5, 5, 0.05, 0, 0, 0);
-    CreateModelTestScene("Assets/Models/Player/Player_Diying.fbx", 10, 5, 5, 0.05, 0, 0, 0);
-    CreateModelTestScene("Assets/Models/Player/Player_Dodge.fbx", 15, 5, 5, 0.05, 0, 0, 0);
-    CreateModelTestScene("Assets/Models/Player/Player_Hanging_Idle.fbx", 20, 5, 5, 0.05, 0, 0, 0);
+    //CreateModelTestScene("Assets/Models/Player/Player_Attack.fbx", 5, 5, 5, 0.05, 0, 0, 0);
+    //CreateModelTestScene("Assets/Models/Player/Player_Diying.fbx", 10, 5, 5, 0.05, 0, 0, 0);
+    //CreateModelTestScene("Assets/Models/Player/Player_Dodge.fbx", 15, 5, 5, 0.05, 0, 0, 0);
+    //CreateModelTestScene("Assets/Models/Player/Player_Hanging_Idle.fbx", 20, 5, 5, 0.05, 0, 0, 0);
     CreateModelTestScene("Assets/Models/Player/Player_Idle.fbx", 25, 5, 5, 0.05, 0, 0, 0);
-    CreateModelTestScene("Assets/Models/Player/Player_Jump.fbx", 30, 5, 5, 0.05, 0, 0, 0);
-    CreateModelTestScene("Assets/Models/Player/Player_Run.fbx", 35, 5, 5, 0.05, 0, 0, 0);
+    //CreateModelTestScene("Assets/Models/Player/Player_Jump.fbx", 30, 5, 5, 0.05, 0, 0, 0);
+    //CreateModelTestScene("Assets/Models/Player/Player_Run.fbx", 35, 5, 5, 0.05, 0, 0, 0);
 
     document.addEventListener("keydown", onDocumentKeyDown, false);
     function onDocumentKeyDown(event) {
@@ -75,7 +72,7 @@ function main()
 				sunDirection: new THREE.Vector3(),
 				sunColor: 0xffffff,
 				//waterColor: 0x001e0f,
-                waterColor: 0x001e0f,
+                waterColor: 0xDEF1FF,
 				distortionScale: 3.7
 			}
 		);

@@ -6,10 +6,10 @@ class Lightt
     {
          this.light = new THREE.DirectionalLight(color, intensity);
          this.light.castShadow = true;
-         this.light.shadowCameraLeft = -70;
-         this.light.shadowCameraRight = 70;
-         this.light.shadowCameraTop = 75;
-         this.light.shadowCameraBottom = -70;
+         this.light.shadow.camera.left = -70;
+         this.light.shadow.camera.right = 70;
+         this.light.shadow.camera.top = 70;
+         this.light.shadow.camera.bottom = -70;
          this.light.shadow.mapSize.x = 2048;
          this.light.shadow.mapSize.y = 2048;
     }

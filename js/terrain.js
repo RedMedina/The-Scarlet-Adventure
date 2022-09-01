@@ -19,6 +19,7 @@ class Terrain
         });
         this.mesh = new THREE.Mesh(planeGeo, planeMat);
         this.mesh.rotation.x = Math.PI * -.5;
+        this.mesh.receiveShadow = true;
     }
 
     Render()
@@ -26,100 +27,103 @@ class Terrain
         return this.mesh;
     }
 
-    HeightMapC(text, normal, texture2, normal2, blend)
+    MultitextureTerrain(textura1, textura2, heighmap, blendmap)
     {
-        const groundGeo = new THREE.PlaneGeometry(100, 100, 20, 20);
-        let Load = new THREE.TextureLoader();
-        let distMap = Load.load("Assets/Images/Alts.png");
-        distMap.wrapS = distMap.wrapT = THREE.RepeatWrapping;
-        distMap.repeat.set("Assets/Images/Alts.png", "Assets/Images/Alts.png");
+        const vertexShader = `
+        uniform sampler2D bumpTexture;
+        uniform float bumpScale;
+        uniform sampler2D blendmap;
+        
+        varying float vAmount;
+        varying float vBlend;
+        varying vec2 vUV;
+        
+        void main() 
+        { 
+            vUV = uv;
+            vec4 bumpData = texture2D( bumpTexture, uv );
+            vec4 blendData = texture2D( blendmap, uv );
 
-        const TexturaLoad = new THREE.TextureLoader();
-        let Texture = TexturaLoad.load(text);
-        Texture.wrapS = THREE.RepeatWrapping;
-        Texture.wrapT = THREE.RepeatWrapping;
-        Texture.magFilter = THREE.NearestFilter;
-        const repeats = 70 / 2;
-        Texture.repeat.set(repeats, repeats);
+            vAmount = bumpData.r; // assuming map is grayscale it doesn't matter if you use r, g, or b.
+            vBlend = blendData.r;
+            
+            // move the position along the normal
+            vec3 newPosition = position + normal * bumpScale * vAmount;
+            
+            gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
+        }`;
 
-        const TexturaLoadNormla = new THREE.TextureLoader();
-        let TextureNormal = TexturaLoadNormla.load(normal);
-        TextureNormal.wrapS = THREE.RepeatWrapping;
-        TextureNormal.wrapT = THREE.RepeatWrapping;
-        TextureNormal.magFilter = THREE.NearestFilter;
-        const repeats2 = 70 / 2;
-        TextureNormal.repeat.set(repeats2, repeats2);
+        const fragmentShader = `
+        uniform sampler2D oceanTexture;
+        uniform sampler2D sandyTexture;
+        //uniform sampler2D grassTexture;
+        //uniform sampler2D rockyTexture;
+        //uniform sampler2D snowyTexture;
+        
+        varying vec2 vUV;
+        
+        varying float vAmount;
+        varying float vBlend;
+        
+        void main() 
+        {
+            vec4 water = (smoothstep(0.01, 0.50, vBlend) - smoothstep(0.51, 1.0, vBlend) ) * texture2D( oceanTexture, vUV * 10.0 );
+            vec4 sandy = (smoothstep(0.51, 1.0, vBlend) /*- smoothstep(0.28, 0.31, vBlend)*/ ) * texture2D( sandyTexture, vUV * 10.0 );
+            //vec4 grass = (smoothstep(0.28, 0.32, vAmount) - smoothstep(0.35, 0.40, vAmount)) * texture2D( grassTexture, vUV * 20.0 );
+            //vec4 rocky = (smoothstep(0.30, 0.50, vAmount) - smoothstep(0.40, 0.70, vAmount)) * texture2D( rockyTexture, vUV * 20.0 );
+            //vec4 snowy = (smoothstep(0.50, 0.65, vAmount))                                   * texture2D( snowyTexture, vUV * 10.0 );
+            gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0) + water + sandy; //, 1.0);
+        }`;
 
-        const TexturaLoad2 = new THREE.TextureLoader();
-        let Texture2 = TexturaLoad2.load(texture2);
-        Texture2.wrapS = THREE.RepeatWrapping;
-        Texture2.wrapT = THREE.RepeatWrapping;
-        Texture2.magFilter = THREE.NearestFilter;
-        const repeats3 = 70 / 2;
-        Texture2.repeat.set(repeats3, repeats3);
-
-        const TexturaLoadNorm2 = new THREE.TextureLoader();
-        let TextureNormal2 = TexturaLoadNorm2.load(normal2);
-        TextureNormal2.wrapS = THREE.RepeatWrapping;
-        TextureNormal2.wrapT = THREE.RepeatWrapping;
-        TextureNormal2.magFilter = THREE.NearestFilter;
-        const repeats4 = 70 / 2;
-        TextureNormal2.repeat.set(repeats4, repeats4);
-
-        const TexturaLoadBlend = new THREE.TextureLoader();
-        let TextureBlend = TexturaLoadBlend.load(blend);
-        TextureBlend.wrapS = THREE.RepeatWrapping;
-        TextureBlend.wrapT = THREE.RepeatWrapping;
-        TextureBlend.magFilter = THREE.NearestFilter;
-        const repeats5 = 70 / 2;
-        TextureBlend.repeat.set(repeats5, repeats5);
-
-        const NormalScale = new THREE.Vector2( 5, 5 );
-
-        const groundMat = new THREE.MeshPhongMaterial({
-            map: Texture,
-            normalScale: NormalScale,
-            normalMap: TextureNormal,
-            wireframe: false,
-            displacementMap: distMap,
-            specular: 0xFFFFFF,
-            shininess: 1.5,
-            displacementScale: 10
-            //transparent : true
-        });
-
-        const groundMat2 = new THREE.MeshPhongMaterial({
-            map: Texture2,
-            normalScale: NormalScale,
-            normalMap: TextureNormal2,
-            wireframe: false,
-            displacementMap: distMap,
-            specular: 0xFFFFFF,
-            shininess: 1.5,
-            displacementScale: 10
-            //transparent : true
-        });
-
-        var uniforms = {
-            texture1: { value:  Texture},
-            texture2: { value:  Texture2},
-            texture3: { value:  TextureBlend },
+        // texture used to generate "bumpiness"
+        var bumpTexture = new THREE.TextureLoader().load( heighmap );
+        bumpTexture.wrapS = bumpTexture.wrapT = THREE.RepeatWrapping; 
+        //blendMap
+        var BlendTexture = new THREE.TextureLoader().load( blendmap );
+        BlendTexture.wrapS = BlendTexture.wrapT = THREE.RepeatWrapping;
+        // magnitude of normal displacement
+        var bumpScale   = 20.0;
+        var oceanTexture = new THREE.TextureLoader().load( textura1 );
+        oceanTexture.wrapS = oceanTexture.wrapT = THREE.RepeatWrapping;         
+        var sandyTexture = new THREE.TextureLoader().load( textura2 );
+        sandyTexture.wrapS = sandyTexture.wrapT = THREE.RepeatWrapping; 
+        /*var grassTexture = new THREE.TextureLoader().load( textura3 );
+        grassTexture.wrapS = grassTexture.wrapT = THREE.RepeatWrapping; 
+        var rockyTexture = new THREE.TextureLoader().load( textura4 );
+        rockyTexture.wrapS = rockyTexture.wrapT = THREE.RepeatWrapping; 
+        var snowyTexture = new THREE.TextureLoader().load( textura5 );
+        snowyTexture.wrapS = snowyTexture.wrapT = THREE.RepeatWrapping;*/
+        
+        var customUniforms = {
+            ['bumpTexture']:	{ type: "t", value: bumpTexture },
+            ['blendmap']:	{ type: "t", value: BlendTexture },
+            ['bumpScale']:	    { type: "f", value: bumpScale },
+            ['oceanTexture']:	{ type: "t", value: oceanTexture },
+            ['sandyTexture']:	{ type: "t", value: sandyTexture },
+           // ['grassTexture']:	{ type: "t", value: grassTexture },
+           // ['rockyTexture']:	{ type: "t", value: rockyTexture },
+           // ['snowyTexture']:	{ type: "t", value: snowyTexture },
         };
 
-        /*const ShaderMaterial = new THREE.RawShaderMaterial({
-            uniforms: uniforms,
-            vertexShader: document.getElementById("vertexShader_multitexture").textContent,
-            fragmentShader: document.getElementById("fragmentShader_multitexture").textContent
-        });*/
+        var customMaterial = new THREE.ShaderMaterial( 
+        {
+            uniforms: customUniforms,
+            vertexShader:   vertexShader,
+            fragmentShader: fragmentShader,
+            //lights: true,
+            // side: THREE.DoubleSide
+        });
 
-        this.groundMesh = new THREE.Mesh(groundGeo, groundMat);
-        this.groundMesh.receiveShadow = true;
-        this.groundMesh.rotation.x = Math.PI * -.5;
+        var planeGeo = new THREE.PlaneGeometry( 100, 100, 100, 100 );
+	    this.plane = new THREE.Mesh(	planeGeo, customMaterial );
+	    this.plane.rotation.x = -Math.PI / 2;
+	    this.plane.position.y = 0;
+        this.plane.receiveShadow = true;
     }
 
-    RenderT()
+    GetPlane()
     {
-        return this.groundMesh;
+        return this.plane;
     }
 
 }
