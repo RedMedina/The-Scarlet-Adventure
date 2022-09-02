@@ -39,7 +39,7 @@ class Scenee
         this.TestScene.add( helper );
 
         var Terreno = new Terrain();
-        Terreno.MultitextureTerrain("Assets/Images/grass.jpg", "Assets/Images/Ground1.jpg", "Assets/Images/Alts.png", "Assets/Images/Blend.png");
+        Terreno.MultitextureTerrain("Assets/Images/grass.jpg", "Assets/Images/Ground1.jpg", "Assets/Images/Ground2.jpg", "Assets/Images/Alts.png", "Assets/Images/Blend1.png");
         this.TestScene.add(Terreno.GetPlane());
 
         var SkydomeT = new skydome();

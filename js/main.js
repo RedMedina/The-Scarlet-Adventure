@@ -80,6 +80,9 @@ function main()
     water.position.y = 5;
     Escenario.GetTestScene().add( water );
 
+    let stats = new Stats();
+    canvas.appendChild( stats.dom );
+
     const controls = new OrbitControls(Camara.GetCamera(), canvas);
     controls.target.set(0, 5, 0);
     controls.update();
@@ -137,6 +140,7 @@ function main()
         if ( mixer[5] ) {mixer[5].update( delta );}
         if ( mixer[6] ) {mixer[6].update( delta );}
         water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
+        stats.update();
         renderer.render(Escenario.GetTestScene(), Camara.GetCamera());
         requestAnimationFrame(render);
     }

@@ -27,7 +27,7 @@ class Terrain
         return this.mesh;
     }
 
-    MultitextureTerrain(textura1, textura2, heighmap, blendmap)
+    MultitextureTerrain(textura1, textura2, textura3, heighmap, blendmap)
     {
         const vertexShader = `
         uniform sampler2D bumpTexture;
@@ -36,6 +36,9 @@ class Terrain
         
         varying float vAmount;
         varying float vBlend;
+        varying float vBlendr;
+        varying float vBlendg;
+        varying float vBlendb;
         varying vec2 vUV;
         
         void main() 
@@ -46,6 +49,9 @@ class Terrain
 
             vAmount = bumpData.r; // assuming map is grayscale it doesn't matter if you use r, g, or b.
             vBlend = blendData.r;
+            vBlendr = blendData.r;
+            vBlendg = blendData.g;
+            vBlendb = blendData.b;
             
             // move the position along the normal
             vec3 newPosition = position + normal * bumpScale * vAmount;
@@ -56,7 +62,7 @@ class Terrain
         const fragmentShader = `
         uniform sampler2D oceanTexture;
         uniform sampler2D sandyTexture;
-        //uniform sampler2D grassTexture;
+        uniform sampler2D grassTexture;
         //uniform sampler2D rockyTexture;
         //uniform sampler2D snowyTexture;
         
@@ -64,15 +70,21 @@ class Terrain
         
         varying float vAmount;
         varying float vBlend;
+        varying float vBlendr;
+        varying float vBlendg;
+        varying float vBlendb;
         
         void main() 
         {
-            vec4 water = (smoothstep(0.01, 0.50, vBlend) - smoothstep(0.51, 1.0, vBlend) ) * texture2D( oceanTexture, vUV * 10.0 );
-            vec4 sandy = (smoothstep(0.51, 1.0, vBlend) /*- smoothstep(0.28, 0.31, vBlend)*/ ) * texture2D( sandyTexture, vUV * 10.0 );
+            //vec4 water = (smoothstep(0.00, 0.50, vBlend) - smoothstep(0.51, 1.0, vBlend) ) * texture2D( oceanTexture, vUV * 10.0 );
+            //vec4 sandy = (smoothstep(0.51, 1.0, vBlend) /*- smoothstep(0.28, 0.31, vBlend)*/ ) * texture2D( sandyTexture, vUV * 10.0 );
             //vec4 grass = (smoothstep(0.28, 0.32, vAmount) - smoothstep(0.35, 0.40, vAmount)) * texture2D( grassTexture, vUV * 20.0 );
             //vec4 rocky = (smoothstep(0.30, 0.50, vAmount) - smoothstep(0.40, 0.70, vAmount)) * texture2D( rockyTexture, vUV * 20.0 );
             //vec4 snowy = (smoothstep(0.50, 0.65, vAmount))                                   * texture2D( snowyTexture, vUV * 10.0 );
-            gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0) + water + sandy; //, 1.0);
+            vec4 water = vBlendr * texture2D( oceanTexture, vUV * 10.0 );
+            vec4 sandy = vBlendg * texture2D( sandyTexture, vUV * 10.0 );
+            vec4 grass = vBlendb * texture2D( grassTexture, vUV * 10.0 );
+            gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0) + water + sandy + grass; //, 1.0);
         }`;
 
         // texture used to generate "bumpiness"
@@ -87,37 +99,46 @@ class Terrain
         oceanTexture.wrapS = oceanTexture.wrapT = THREE.RepeatWrapping;         
         var sandyTexture = new THREE.TextureLoader().load( textura2 );
         sandyTexture.wrapS = sandyTexture.wrapT = THREE.RepeatWrapping; 
-        /*var grassTexture = new THREE.TextureLoader().load( textura3 );
+        var grassTexture = new THREE.TextureLoader().load( textura3 );
         grassTexture.wrapS = grassTexture.wrapT = THREE.RepeatWrapping; 
-        var rockyTexture = new THREE.TextureLoader().load( textura4 );
+        /*var rockyTexture = new THREE.TextureLoader().load( textura4 );
         rockyTexture.wrapS = rockyTexture.wrapT = THREE.RepeatWrapping; 
         var snowyTexture = new THREE.TextureLoader().load( textura5 );
         snowyTexture.wrapS = snowyTexture.wrapT = THREE.RepeatWrapping;*/
-        
-        var customUniforms = {
-            ['bumpTexture']:	{ type: "t", value: bumpTexture },
-            ['blendmap']:	{ type: "t", value: BlendTexture },
-            ['bumpScale']:	    { type: "f", value: bumpScale },
-            ['oceanTexture']:	{ type: "t", value: oceanTexture },
-            ['sandyTexture']:	{ type: "t", value: sandyTexture },
-           // ['grassTexture']:	{ type: "t", value: grassTexture },
-           // ['rockyTexture']:	{ type: "t", value: rockyTexture },
-           // ['snowyTexture']:	{ type: "t", value: snowyTexture },
+
+        const mirrorShader = {
+            uniforms: THREE.UniformsUtils.merge( [
+            THREE.UniformsLib[ 'fog' ],
+            THREE.UniformsLib[ 'lights' ],
+            THREE.UniformsLib.fog,
+            THREE.UniformsLib.lights,
+            THREE.UniformsLib.shadowmap,
+            THREE.UniformsLib.ambient,
+            {
+                'bumpTexture': { value: bumpTexture },
+                'blendmap': { value: BlendTexture },
+                'bumpScale': { value: bumpScale },
+                'oceanTexture': { value: oceanTexture },
+                'sandyTexture': { value: sandyTexture },
+                'grassTexture': { value: grassTexture },
+            }
+        ] )
         };
 
         var customMaterial = new THREE.ShaderMaterial( 
         {
-            uniforms: customUniforms,
+            uniforms: THREE.UniformsUtils.clone( mirrorShader.uniforms ),
             vertexShader:   vertexShader,
             fragmentShader: fragmentShader,
-            //lights: true,
+            lights: true,
+            shadowmap: true,
             // side: THREE.DoubleSide
         });
 
         var planeGeo = new THREE.PlaneGeometry( 100, 100, 100, 100 );
 	    this.plane = new THREE.Mesh(	planeGeo, customMaterial );
 	    this.plane.rotation.x = -Math.PI / 2;
-	    this.plane.position.y = 0;
+	    this.plane.position.y = -2;
         this.plane.receiveShadow = true;
     }
 
