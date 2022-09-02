@@ -81,7 +81,7 @@ function main()
     Escenario.GetTestScene().add( water );
 
     let stats = new Stats();
-    canvas.appendChild( stats.dom );
+    document.body.appendChild( stats.domElement );
 
     const controls = new OrbitControls(Camara.GetCamera(), canvas);
     controls.target.set(0, 5, 0);
