@@ -29,14 +29,14 @@
     </section>
     
     <!--script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script-->
-    <script type='text/javascript' src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://unpkg.com/three@0.129.0/build/three.js"></script>
-    <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/controls/OrbitControls.js"></script>
-    <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/loaders/LoaderSupport.js"></script>
+    <script type='text/javascript' src="modules/jquery-3.3.1.min.js"></script>
+	<script type='text/javascript' src="modules/jquery.min.js"></script>
+    <script src="modules/three.js"></script>
+    <script src="modules/OrbitControls.js"></script>
+    <!--script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/loaders/LoaderSupport.js"></script>
     <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/loaders/OBJLoader2.js"></script>
-    <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/loaders/MTLLoader.js"></script>
-    <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/loaders/GLTFLoader.js"></script>
+    <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/loaders/MTLLoader.js"></script-->
+    <script src="modules/GLTFLoader.js"></script>
     <script src="jsindex/mainindex.js"></script>
 </body>
 </html>

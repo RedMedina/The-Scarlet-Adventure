@@ -63,6 +63,11 @@
     border: 0px;
   }
 
+  .IniciarSesion:hover, .Opciones:hover, .Ranking:hover
+  {
+    opacity: 0.75;
+  }
+
   .jugar
   {
     position: absolute;
