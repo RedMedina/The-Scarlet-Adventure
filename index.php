@@ -19,9 +19,9 @@
         <canvas id="c"></canvas>
         <img src="Assets/Images/Inicio.png" height="762" width="620">
         <button class="jugar">Jugar</button>
-        <button class="Opciones"><img src="https://cdn.pixabay.com/photo/2016/01/03/11/24/gear-1119298_640.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
-        <button class="Ranking" onclick="window.modal.showModal();"><img src="https://cdn-icons-png.flaticon.com/512/1077/1077196.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
-        <button class="IniciarSesion"><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" width="60" height="60" style="position: absolute; left: -12%;"></button>
+        <button class="Opciones"><img src="Assets/Images/gear.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
+        <button class="Ranking" onclick="window.modal.showModal();"><img src="Assets/Images/ranking.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
+        <button class="IniciarSesion"><img src="Assets/Images/user.png" width="60" height="60" style="position: absolute; left: -12%;"></button>
     </div>
 
     <center>
