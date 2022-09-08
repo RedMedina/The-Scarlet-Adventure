@@ -1,0 +1,66 @@
+.modal_inicio_Sesion
+{
+    border: 0px;
+    border-radius: 15px;
+    width: 30%;
+    height: 55%;
+}
+
+.IS_titulo
+{
+    font-family: Permanent Marker;
+    font-size: 40px;
+    position: absolute;
+    bottom: 69%;
+    left: 25%;
+}
+
+.Input_IS
+{
+    position: relative;
+    left: 0%;
+    top: 30%;
+    border: 0px;
+    width: 350px;
+    height: 40px;
+    background-color: rgb(241, 241, 241);
+    border-radius: 5px;
+    font-family: Permanent Marker;
+    font-size: 15px;
+}
+
+.IS_button
+{
+    font-family: Permanent Marker;
+    border: 0px;
+    width: 140px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgb(94, 196, 255);
+    font-size: 18px;
+    position: relative;
+    left: 0%;
+    top: 35%;
+}
+
+.IS_button:hover
+{
+    background-color: rgb(158, 219, 255);
+}
+
+.IS_button_reg
+{
+    background-color: white;
+    border: 0px;
+    font-family: Permanent Marker;
+    text-decoration: underline;
+    font-size: 17px;
+    position: relative;
+    top: 37%;
+    left: 38%;
+}
+
+.IS_button_reg:hover
+{
+    color:rgb(94, 196, 255);
+}
