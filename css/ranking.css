@@ -1,4 +1,84 @@
-.Ranking_div
+.modal
 {
-    
+    background-color: white;
+    border: 0px;
+    position: relative;
+    bottom: 0%;
+    height: 85%;
+    border-radius: 15px;
+    overflow-x: hidden;
+}
+
+table
+{
+    background-color: white;
+    border-radius: 15px;
+    position: relative;
+    top: 17%;
+}
+
+h3
+{
+    font-family: Permanent Marker;
+    font-size: 50px;
+    position: absolute;
+    bottom: 77%;
+    right: 33%;
+}
+
+td, tr
+{
+    font-family: Permanent Marker;
+    font-weight: lighter;
+    font-size: 20px;
+    padding: 7px;
+    text-align: center;
+}
+
+th, .nombre, .UConexion
+{
+    font-family: Permanent Marker;
+    font-weight: bold;
+    font-size: 21px;
+    padding: 7px;
+    /*border-bottom: 1px solid black;*/
+    background-color: rgb(94, 196, 255);
+}
+
+.nombre
+{
+    border-top-left-radius: 15px;
+}
+
+
+.UConexion
+{
+    border-top-right-radius: 15px;
+}
+
+.volverBtn
+{
+    font-family: Permanent Marker;
+    position: relative;
+    top: 73%;
+    left: 0%;
+    border: 0px;
+    width: 140px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgb(94, 196, 255);
+    font-size: 19px;
+}
+
+.volverBtn:hover
+{
+    background-color: rgb(158, 219, 255);
+}
+
+.imgRanking
+{
+    position: relative;
+    top: 51%;
+    left: 35%;
+    transform: rotate(320deg);
 }

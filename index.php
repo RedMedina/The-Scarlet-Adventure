@@ -11,6 +11,7 @@
     <link href='https://css.gg/trophy.css' rel='stylesheet'>
     <link rel="stylesheet" href="css/game.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/ranking.css">
 </head>
 <body>
 
@@ -19,9 +20,37 @@
         <img src="Assets/Images/Inicio.png" height="762" width="620">
         <button class="jugar">Jugar</button>
         <button class="Opciones"><img src="https://cdn.pixabay.com/photo/2016/01/03/11/24/gear-1119298_640.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
-        <button class="Ranking"><img src="https://cdn-icons-png.flaticon.com/512/1077/1077196.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
+        <button class="Ranking" onclick="window.modal.showModal();"><img src="https://cdn-icons-png.flaticon.com/512/1077/1077196.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
         <button class="IniciarSesion"><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" width="60" height="60" style="position: absolute; left: -12%;"></button>
     </div>
+
+    <center>
+    <dialog id="modal" class="modal">
+        <h3>Ranking</h3>
+        <table cellspacing="0">
+            <tr>
+                <th class="nombre">Nombre</th>
+                <th>Nivel</th>
+                <th>Tiempo Jugado</th>
+                <th class="UConexion">Ultima Conexión</th>
+            </tr>
+            <tr>
+                <td>Usuario</td>
+                <td>1</td>
+                <td>24:49 horas</td>
+                <td>06-09-20220</td>
+            </tr>
+            <tr>
+                <td>Usuario</td>
+                <td>2</td>
+                <td>23:44 horas</td>
+                <td>07-09-20220</td>
+            </tr>
+        </table>
+        <button onclick="window.modal.close();" class="volverBtn">Volver</button><br>
+        <!--img src="Assets/Images/Pincelada.png" width="230" height="85" class="imgRanking"-->
+    </dialog>
+    </center>
 
     <section id="loading-screen">
         <div id="loader"></div>
