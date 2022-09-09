@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--link href='https://fonts.googleapis.com/css?family=Permanent Marker' rel='stylesheet'-->
     <link rel="stylesheet" href="css/inicio_sesion.css">
+    <link rel="stylesheet" href="css/registro.css">
     <link rel="stylesheet" href="css/font.css">
     <title>Graficas Web</title>
     <script type='text/javascript'>
@@ -31,13 +32,12 @@
 
     <center>
         <dialog id="modal_registro" class="modal_registro">
-            <h3>Registro</h3>
-            <input type="text" placeholder="nombre..."><br><br>
-            <input type="file"><br><br>
-            <input type="text" placeholder="contraseña..."><br><br>
-            <input type="text" placeholder="confirmar contraseña..."><br><br>
-            <button>Registrarse</button><br>
-            <button onclick="window.modal_registro.close();">Cancelar</button><br>
+            <h3 class="Reg_Titulo">Registro</h3>
+            <input type="text" placeholder="nombre..." class="Input_Reg"><br><br><br>
+            <input type="text" placeholder="contraseña..." class="Input_Reg"><br><br><br>
+            <input type="text" placeholder="confirmar contraseña..." class="Input_Reg"><br><br>
+            <button class="Reg_button_reg">Registrarse</button><br><br>
+            <button onclick="window.modal_registro.close();" class="Reg_button_can">Cancelar</button><br>
         </dialog>
     </center>
 

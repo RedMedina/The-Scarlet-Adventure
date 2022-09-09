@@ -1,0 +1,47 @@
+.modal_registro
+{
+    border: 0px;
+    border-radius: 15px;
+    width: 30%;
+    height: 60%;
+}
+
+.Reg_Titulo
+{
+    font-family: Permanent Marker;
+    font-size: 40px;
+    position: absolute;
+    bottom: 75%;
+    left: 35%;
+}
+
+.Input_Reg
+{
+    width: 350px;
+    height: 40px;
+    background-color: rgb(241, 241, 241);
+    border-radius: 5px;
+    font-family: Permanent Marker;
+    font-size: 15px;
+    border: 0px;
+    position: relative;
+    top: 23%;
+}
+
+.Reg_button_reg, .Reg_button_can
+{
+    font-family: Permanent Marker;
+    border-radius: 10px;
+    background-color: rgb(94, 196, 255);
+    border: 0px;
+    width: 140px;
+    height: 40px;
+    font-size: 18px;
+    position: relative;
+    top: 27%;
+}
+
+.Reg_button_reg:hover, .Reg_button_can:hover
+{
+    background-color: rgb(158, 219, 255);
+}

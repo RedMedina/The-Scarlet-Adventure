@@ -5,12 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Graficas Web</title>
-    <link href='https://fonts.googleapis.com/css?family=Permanent Marker' rel='stylesheet'>
+    <link rel="stylesheet" href="css/font.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href='https://css.gg/profile.css' rel='stylesheet'>
     <link href='https://css.gg/trophy.css' rel='stylesheet'>
     <link rel="stylesheet" href="css/game.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/inicio_sesion.css">
+    <link rel="stylesheet" href="css/registro.css">
     <link rel="stylesheet" href="css/ranking.css">
 </head>
 <body>
@@ -21,7 +23,7 @@
         <button class="jugar">Jugar</button>
         <button class="Opciones"><img src="Assets/Images/gear.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
         <button class="Ranking" onclick="window.modal.showModal();"><img src="Assets/Images/ranking.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
-        <button class="IniciarSesion"><img src="Assets/Images/user.png" width="60" height="60" style="position: absolute; left: -12%;"></button>
+        <button class="IniciarSesion" onclick="window.modal_inicio_Sesion.showModal();"><img src="Assets/Images/user.png" width="60" height="60" style="position: absolute; left: -12%;"></button>
     </div>
 
     <center>
@@ -50,6 +52,29 @@
         <button onclick="window.modal.close();" class="volverBtn">Volver</button><br>
         <!--img src="Assets/Images/Pincelada.png" width="230" height="85" class="imgRanking"-->
     </dialog>
+
+    <center>
+        <dialog id="modal_inicio_Sesion" class="modal_inicio_Sesion">
+            <h3 class="IS_titulo">Inicio Sesión</h3>
+            <input type="text" placeholder="Usuario" class="Input_IS"><br><br><br>
+            <input type="password" placeholder="Contraseña" class="Input_IS"><br><br>
+            <button id="IS_enviar" class="IS_button">Iniciar Sesión</button><br><br>
+            <button id="IS_volver" class="IS_button" onclick="window.modal_inicio_Sesion.close();">Volver</button><br>
+            <button class="IS_button_reg" onclick="window.modal_inicio_Sesion.close(); window.modal_registro.showModal();">Registrarse</button>
+        </dialog>
+    </center>
+
+    <center>
+        <dialog id="modal_registro" class="modal_registro">
+            <h3 class="Reg_Titulo">Registro</h3>
+            <input type="text" placeholder="nombre..." class="Input_Reg"><br><br><br>
+            <input type="text" placeholder="contraseña..." class="Input_Reg"><br><br><br>
+            <input type="text" placeholder="confirmar contraseña..." class="Input_Reg"><br><br>
+            <button class="Reg_button_reg">Registrarse</button><br><br>
+            <button onclick="window.modal_registro.close();" class="Reg_button_can">Cancelar</button><br>
+        </dialog>
+    </center>
+
     </center>
 
     <section id="loading-screen">
