@@ -4,22 +4,24 @@
     border-radius: 15px;
     width: 30%;
     height: 55%;
+    overflow:hidden;
 }
 
 .IS_titulo
 {
     font-family: Permanent Marker;
     font-size: 40px;
-    position: absolute;
-    bottom: 69%;
-    left: 25%;
+    position: relative;
+    bottom: 7%;
+    left: 1%;
+    align-items: center;
 }
 
 .Input_IS
 {
     position: relative;
     left: 0%;
-    top: 30%;
+    bottom: 7%;
     border: 0px;
     width: 350px;
     height: 40px;
@@ -40,7 +42,7 @@
     font-size: 18px;
     position: relative;
     left: 0%;
-    top: 35%;
+    bottom: 1%;
 }
 
 .IS_button:hover
@@ -56,7 +58,7 @@
     text-decoration: underline;
     font-size: 17px;
     position: relative;
-    top: 37%;
+    bottom: -1%;
     left: 38%;
 }
 

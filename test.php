@@ -7,6 +7,7 @@
     <!--link href='https://fonts.googleapis.com/css?family=Permanent Marker' rel='stylesheet'-->
     <link rel="stylesheet" href="css/inicio_sesion.css">
     <link rel="stylesheet" href="css/registro.css">
+    <link rel="stylesheet" href="css/config.css">
     <link rel="stylesheet" href="css/font.css">
     <title>Graficas Web</title>
     <script type='text/javascript'>
@@ -38,6 +39,23 @@
             <input type="text" placeholder="confirmar contraseña..." class="Input_Reg"><br><br>
             <button class="Reg_button_reg">Registrarse</button><br><br>
             <button onclick="window.modal_registro.close();" class="Reg_button_can">Cancelar</button><br>
+        </dialog>
+    </center>
+
+    <center>
+        <button onclick="window.modal_config.showModal();">B</button>
+        <dialog id="modal_config" class="modal_config">
+            <h3 class="TituloConfig">Ajustes</h3>
+            <label class="l1">Dificultad: </label><br>
+            <select class="DificultadConfig">
+                <option value="Facil">Facil</option>
+                <option value="Normal">Normal</option>
+                <option value="Dificil">Dificil</option>
+            </select><br>
+            <label class="l2">Volumen: </label><input type="range" min="0" max="100" class="RangoC" value="50" oninput="this.nextElementSibling.value = this.value">
+            <output class="outputRange">50</output><br>
+            <button class="guardarConfig">Guardar</button>
+            <button class="SalirConfig" onclick="window.modal_config.close();">Salir</button>
         </dialog>
     </center>
 

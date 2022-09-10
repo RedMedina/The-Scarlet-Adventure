@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/inicio_sesion.css">
     <link rel="stylesheet" href="css/registro.css">
     <link rel="stylesheet" href="css/ranking.css">
+    <link rel="stylesheet" href="css/config.css">
 </head>
 <body>
 
@@ -21,7 +22,7 @@
         <canvas id="c"></canvas>
         <img src="Assets/Images/Inicio.png" height="762" width="620">
         <button class="jugar">Jugar</button>
-        <button class="Opciones"><img src="Assets/Images/gear.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
+        <button class="Opciones" onclick="window.modal_config.showModal();"><img src="Assets/Images/gear.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
         <button class="Ranking" onclick="window.modal.showModal();"><img src="Assets/Images/ranking.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
         <button class="IniciarSesion" onclick="window.modal_inicio_Sesion.showModal();"><img src="Assets/Images/user.png" width="60" height="60" style="position: absolute; left: -12%;"></button>
     </div>
@@ -75,6 +76,22 @@
         </dialog>
     </center>
 
+    </center>
+
+    <center>
+        <dialog id="modal_config" class="modal_config">
+            <h3 class="TituloConfig">Ajustes</h3>
+            <label class="l1">Dificultad: </label><br>
+            <select class="DificultadConfig">
+                <option value="Facil">Facil</option>
+                <option value="Normal">Normal</option>
+                <option value="Dificil">Dificil</option>
+            </select><br>
+            <label class="l2">Volumen: </label><input type="range" min="0" max="100" class="RangoC" value="50" oninput="this.nextElementSibling.value = this.value">
+            <output class="outputRange">50</output><br>
+            <button class="guardarConfig">Guardar</button>
+            <button class="SalirConfig" onclick="window.modal_config.close();">Salir</button>
+        </dialog>
     </center>
 
     <section id="loading-screen">

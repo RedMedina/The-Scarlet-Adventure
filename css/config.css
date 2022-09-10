@@ -1,0 +1,86 @@
+.modal_config
+{
+    border: 0px;
+    border-radius: 15px;
+    width: 30%;
+    height: 40%;
+}
+
+.TituloConfig
+{
+    font-family: Permanent Marker;
+    font-size: 33px;
+    position: relative;
+    left: 1%;
+    bottom: 10%;
+}
+
+.DificultadConfig
+{
+    font-family: Permanent Marker;
+    width: 300px;
+    height: 30px;
+    position: relative;
+    bottom: 5%;
+    border-radius: 15px;
+}
+
+.l1
+{
+    font-family: Permanent Marker;
+    position: relative;
+    bottom: 10%;
+    font-size: 20px;
+}
+
+.l2
+{
+    font-family: Permanent Marker;
+    position: relative;
+    bottom: -2%;
+    font-size: 20px;
+}
+
+.RangoC
+{
+    position: relative;
+    bottom: -3%;
+}
+
+.outputRange
+{
+    position: relative;
+    bottom: -3%;
+    font-family: Permanent Marker;
+}
+
+.guardarConfig
+{
+    border-radius: 10px;
+    background-color: rgb(94, 196, 255);
+    font-family: Permanent Marker;
+    border: 0px;
+    width: 90px;
+    height: 50px;
+    position: relative;
+    top: 14%;
+    font-size: 18px;
+}
+
+.SalirConfig
+{
+    border-radius: 10px;
+    background-color: rgb(94, 196, 255);
+    font-family: Permanent Marker;
+    border: 0px;
+    height: 50px;
+    width: 90px;
+    position: relative;
+    top: 14%;
+    font-size: 18px;
+}
+
+.guardarConfig:hover, .SalirConfig:hover
+{
+    background-color: rgb(158, 219, 255);
+}
