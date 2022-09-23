@@ -29,7 +29,7 @@ function main()
     //CreateModelTestScene("Assets/Models/Player/Player_Hanging_Idle.fbx", 20, 5, 5, 0.05, 0, 0, 0);
     CreateModelTestScene("Assets/Models/Player/Player_Idle.fbx", 25, 5, 5, 0.05, 0, 0, 0);
     //CreateModelTestScene("Assets/Models/Player/Player_Jump.fbx", 30, 5, 5, 0.05, 0, 0, 0);
-    //CreateModelTestScene("Assets/Models/Player/Player_Run.fbx", 35, 5, 5, 0.05, 0, 0, 0);
+    CreateModelTestScene("Assets/Models/Player/Player_Run.fbx", 35, 5, 5, 0.05, 0, 0, 0);
 
     document.addEventListener("keydown", onDocumentKeyDown, false);
     function onDocumentKeyDown(event) {

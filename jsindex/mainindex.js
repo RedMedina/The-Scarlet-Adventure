@@ -1,3 +1,9 @@
+import * as THREE from 'three';
+import {OrbitControls} from '/PWGW/node_modules/three/examples/jsm/controls/OrbitControls.js';
+import {GLTFLoader} from '/PWGW/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+import {TerrainIndex} from '/PWGW/jsindex/terrain_index.js';
+import Stats from '/PWGW/node_modules/three/examples/jsm/libs/stats.module.js';
+
 function main()
 {
 
@@ -54,45 +60,12 @@ function main()
     sky.material.side = THREE.BackSide;
     scene.add( sky );
 
-    const groundGeo = new THREE.PlaneGeometry(650, 750, 10, 10);
-    let Load = new THREE.TextureLoader();
-    let distMap = Load.load("Assets/Images/AlturasInico.png");
-    distMap.wrapS = distMap.wrapT = THREE.RepeatWrapping;
-    distMap.repeat.set("Assets/Images/AlturasInico.png", "Assets/Images/AlturasInico.png");
-    
-    const TexturaLoad = new THREE.TextureLoader();
-    let Texture = TexturaLoad.load("Assets/Images/Ground3.jpg");
-    Texture.wrapS = THREE.RepeatWrapping;
-    Texture.wrapT = THREE.RepeatWrapping;
-    Texture.magFilter = THREE.NearestFilter;
-    const repeats = 25 / 2;
-    Texture.repeat.set(repeats, repeats);
+    var Terreno = new TerrainIndex();
+    Terreno.MultitextureTerrain("Assets/Images/grass.jpg", "Assets/Images/Ground1.jpg", "Assets/Images/Ground2.jpg", "Assets/Images/Alts.png", "Assets/Images/Blend1.png");
+    scene.add(Terreno.GetPlane());
 
-    const TexturaLoadNormla = new THREE.TextureLoader();
-    let TextureNormal = TexturaLoadNormla.load("Assets/Images/TitleScreenGN.jpg");
-    TextureNormal.wrapS = THREE.RepeatWrapping;
-    TextureNormal.wrapT = THREE.RepeatWrapping;
-    TextureNormal.magFilter = THREE.NearestFilter;
-    const repeats2 = 20 / 2;
-    TextureNormal.repeat.set(repeats2, repeats2);
-
-    const NormalScale = new THREE.Vector2( 5, 5 );
-
-    const groundMat = new THREE.MeshStandardMaterial({
-        map: Texture,
-        wireframe: false,
-        displacementMap: distMap,
-        normalMap: TextureNormal,
-        normalScale: NormalScale,
-        displacementScale: 0
-    });
-
-    let groundMesh = new THREE.Mesh(groundGeo, groundMat);
-    groundMesh.receiveShadow = true;
-    groundMesh.position.y = 5;
-    groundMesh.rotation.x = Math.PI * -.5;
-
-    scene.add( groundMesh );
+    let stats = new Stats();
+    document.body.appendChild( stats.domElement );
     
     const axesHelper = new THREE.AxesHelper( 50 );
     //scene.add( axesHelper );
@@ -115,8 +88,8 @@ function main()
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -100, 5, 275, 15.7);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -70, 5, 40, 15.7);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -120, 5, 30, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -135, 5, 0, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb", -55, 5, 0, 3);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", 0, 5, 200, 15.7);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb", -20, 5, 150, 3);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -190, 5, 0, 15.7);
     //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -189, 5, 43, 15.7);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -110, 5, 123, 15.7);
@@ -184,6 +157,11 @@ function main()
     RendericeModel("Assets/Models/Roca/roca3.glb",  -140, 5, 40, 10);
     RendericeModel("Assets/Models/Roca/RocaGrande.glb",  -190, 200, 0, 25);
     RendericeModel("Assets/Models/Roca/RocaGrande2.glb",  90, 6, 0, 0.2);
+    RendericeModel("Assets/Models/Roca/RocaGrande3.glb",  33, -95, -380, 270);
+
+    //RendericeModel("Assets/Models/Arbusto/Arbusto.glb",  -7, -9, 240, 30);
+    //RendericeModel("Assets/Models/Arbusto/Arbusto.glb", -55, -9, -20, 30);
+    //RendericeModel("Assets/Models/Arbusto/Arbusto.glb", 40, -9, -90, 30);
 
 
     const map = new THREE.TextureLoader().load( 'Assets/Images/mountain.png' );
@@ -292,16 +270,16 @@ function main()
         sound.play();
         sound.setVolume( 0.0 );
     });
-    groundMesh.add(sound);   
+    Terreno.GetPlane().add(sound);   
 
-    const controls = new THREE.OrbitControls(camera, canvas);
+    const controls = new OrbitControls(camera, canvas);
     controls.target.set(0, 5, 0);
     controls.update();
 
 
     function RendericeModel(obj, x, y, z, scale)
     {
-        const gltfLoader = new THREE.GLTFLoader(loadingManager);
+        const gltfLoader = new GLTFLoader(loadingManager);
         gltfLoader.load(obj, (gltf) => {
             gltf.scene.traverse((child)=>{
                 child.castShadow = true;
@@ -366,6 +344,7 @@ function main()
         leavesMateriala.uniforms.time.value = clock.getElapsedTime();
         leavesMateriala.uniformsNeedUpdate = true;
         sky.rotation.y = RotationSky;
+        stats.update();
     }
 
     requestAnimationFrame(render);

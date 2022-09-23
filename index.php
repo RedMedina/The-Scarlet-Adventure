@@ -99,15 +99,23 @@
         <center><p id="loading-text">Cargando...</p></center>
     </section>
     
+    <script type="importmap">
+		{
+			"imports": {
+				"three": "/PWGW/node_modules/three/build/three.module.js"
+			}
+		}
+	 </script>
+
     <!--script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script-->
     <script type='text/javascript' src="modules/jquery-3.3.1.min.js"></script>
 	<script type='text/javascript' src="modules/jquery.min.js"></script>
-    <script src="modules/three.js"></script>
+    <!--script src="modules/three.js"></script>
     <script src="modules/OrbitControls.js"></script>
-    <!--script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/loaders/LoaderSupport.js"></script>
+    <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/loaders/LoaderSupport.js"></script>
     <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/loaders/OBJLoader2.js"></script>
-    <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/loaders/MTLLoader.js"></script-->
-    <script src="modules/GLTFLoader.js"></script>
-    <script src="jsindex/mainindex.js"></script>
+    <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/loaders/MTLLoader.js"></script>
+    <script src="modules/GLTFLoader.js"></script-->
+    <script src="jsindex/mainindex.js" type="module"></script>
 </body>
 </html>
