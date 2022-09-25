@@ -69,7 +69,7 @@ class TerrainIndex
         var BlendTexture = new THREE.TextureLoader().load( blendmap );
         BlendTexture.wrapS = BlendTexture.wrapT = THREE.RepeatWrapping;
         // magnitude of normal displacement
-        var bumpScale   = 20.0;
+        var bumpScale   = 70.0;
         var oceanTexture = new THREE.TextureLoader().load( textura1 );
         oceanTexture.wrapS = oceanTexture.wrapT = THREE.RepeatWrapping;         
         var sandyTexture = new THREE.TextureLoader().load( textura2 );

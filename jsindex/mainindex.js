@@ -3,6 +3,8 @@ import {OrbitControls} from '/PWGW/node_modules/three/examples/jsm/controls/Orbi
 import {GLTFLoader} from '/PWGW/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 import {TerrainIndex} from '/PWGW/jsindex/terrain_index.js';
 import Stats from '/PWGW/node_modules/three/examples/jsm/libs/stats.module.js';
+import {Lensflare, LensflareElement} from '/PWGW/js/lensflare.js';
+import { Water } from '/PWGW/node_modules/three/examples/jsm/objects/Water.js';
 
 function main()
 {
@@ -61,8 +63,44 @@ function main()
     scene.add( sky );
 
     var Terreno = new TerrainIndex();
-    Terreno.MultitextureTerrain("Assets/Images/grass.jpg", "Assets/Images/Ground1.jpg", "Assets/Images/Ground2.jpg", "Assets/Images/Alts.png", "Assets/Images/Blend1.png");
+    Terreno.MultitextureTerrain("Assets/Images/Ground3.jpg", "Assets/Images/Ground4.jpg", "Assets/Images/Ground4.jpg", "Assets/Images/AlturasIndex3.png", "Assets/Images/BlendmapIndex3.png");
     scene.add(Terreno.GetPlane());
+
+    const textureLoader = new THREE.TextureLoader();
+    const textureFlare0 = textureLoader.load( 'Assets/Images/LensFlare.png' );
+    const textureFlare3 = textureLoader.load( 'Assets/Images/lensflare3.png' );
+    const Pointlight = new THREE.PointLight( 0xffffff, 1.5, 2000 );
+    Pointlight.color.setHSL( 0.58, 1.0, 1 );
+    Pointlight.position.set( 1450, 450, -3000 );
+    scene.add( Pointlight );
+    const lensflare = new Lensflare();
+    lensflare.addElement( new LensflareElement( textureFlare0, 700, 0, Pointlight.color ) );
+    lensflare.addElement( new LensflareElement( textureFlare3, 60, 0.6 ) );
+    lensflare.addElement( new LensflareElement( textureFlare3, 70, 0.7 ) );
+    lensflare.addElement( new LensflareElement( textureFlare3, 120, 0.9 ) );
+    lensflare.addElement( new LensflareElement( textureFlare3, 70, 1 ) );
+    Pointlight.add( lensflare );
+
+    let water;
+    const waterGeometry = new THREE.PlaneGeometry( 650, 750 );
+	water = new Water(
+		waterGeometry,
+		{
+			textureWidth: 512,
+			textureHeight: 512,
+			waterNormals: new THREE.TextureLoader().load( 'Assets/Images/Water_1_M_Normal.jpg', function ( texture ) {
+				texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+			} ),
+			sunDirection: new THREE.Vector3(),
+			sunColor: 0xffffff,
+			//waterColor: 0x001e0f,
+            waterColor: 0xDEF1FF,
+			distortionScale: 3.7
+		}
+	);
+	water.rotation.x = - Math.PI / 2;
+    water.position.y = 5;
+    scene.add( water );
 
     let stats = new Stats();
     document.body.appendChild( stats.domElement );
@@ -84,26 +122,32 @@ function main()
     }
 
     //RendericeModel("Assets/Models/Arboles_Inicio/Arbol1.glb", 5, 5, 5, 3);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol2.glb", 10, 5, 5, 5);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -100, 5, 275, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -70, 5, 40, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -120, 5, 30, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", 0, 5, 200, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb", -20, 5, 150, 3);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -190, 5, 0, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -189, 5, 43, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -110, 5, 123, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  154, 5, 0, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb",  190, 5, 45, 3);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   83, 5, 43, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   63, 5, 143, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   23, 5, 103, 15.7);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol2.glb", -140, 5, 5, 10);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol2.glb", 10, 5, 5, 10);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol2.glb", -250, 5, 5, 10);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol2.glb", -80, 5, 5, 10);
+    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol2.glb", 50, 5, 5, 10);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -170, 5, 130, 19.7);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -20, 5, 50, 19.7);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -100, 5, 90, 19.7);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -160, 5, 20, 19.7);
+    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb", 130, 20, -120, 3);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -70, 5, 40, 19.7);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -170, 5, 60, 19.7);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -40, 5, 70, 19.7);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  20, 5, 70, 19.7);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  80, 5, 5, 19.7);
+    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  -30, 5, 20, 19.7);
+    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb",  190, 5, 45, 3);
+    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   -80, 5, 43, 19.7);
+    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   63, 5, 70, 19.7);
+    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   23, 5, 103, 15.7);
     //RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb",   10, 5, 140, 3);
     //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   40, 5, 70, 15.7);
     //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   80, 5, 210, 15.7);
     //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   110, 5, 198, 15.7);
     //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   40, 5, 230, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb",    0, 5, 0, 3);
+    /*RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb",    0, 5, 0, 3);
     //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  -220, 5, -130, 15.7);
     //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  -120, 5, -60, 15.7);
     //RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb",   -90, 5, -70, 3);
@@ -134,30 +178,37 @@ function main()
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb",   0, 5, 105, 3);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb", -80, 5, 125, 3); 
     
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol5.glb", -5, 5, 5, 5.3);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  -30, 5, 270, 15.7);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  -50, 5, 240, 15.7);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  -70, 5, 210, 15.7);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  -90, 5, 250, 15.7);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  -10, 5, 230, 15.7);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  -120, 5, 250, 15.7);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  -130, 5, 210, 15.7);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  -140, 5, 220, 15.7);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  -150, 5, 230, 15.7);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  -90, 5, 100, 15.7);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  -60, 5, 130, 15.7);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  -50, 5, 140, 15.7);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  -20, 5, 90, 15.7);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  -10, 5, 120, 15.7);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  0, 5, 125, 15.7);
+    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol5.glb", -5, 5, 5, 5.3);*/
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -30, 5, 100, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -50, 5, 100, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -70, 5, 70, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -90, 5, 120, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -10, 5, 110, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -120, 5, 110, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -130, 5, 80, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -140, 5, 90, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -150, 5, 100, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -90, 5, 50, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -60, 5, 20, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -50, 5, 80, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -20, 5, 20, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -10, 5, 100, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -170, 5, 100, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -190, 5, 120, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -140, 5, 80, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -150, 5, 130, 19.7);
 
-    RendericeModel("Assets/Models/Roca/roca3.glb",  20, 5, 190, 10);
-    RendericeModel("Assets/Models/Roca/roca3.glb",  -90, 5, 170, 10);
-    RendericeModel("Assets/Models/Roca/roca3.glb", 40, 5, 0, 10);
+    RendericeModel("Assets/Models/Arbusto/planta.glb",  -98, 2, 295, 40);
+
+    RendericeModel("Assets/Models/Roca/roca3.glb",  -50, 2, 230, 10);
+    RendericeModel("Assets/Models/Roca/roca3.glb",  -90, 2, 170, 10);
+    RendericeModel("Assets/Models/Roca/roca3.glb", -120, 2, 240, 10);
     RendericeModel("Assets/Models/Roca/roca3.glb",  -140, 5, 40, 10);
-    RendericeModel("Assets/Models/Roca/RocaGrande.glb",  -190, 200, 0, 25);
-    RendericeModel("Assets/Models/Roca/RocaGrande2.glb",  90, 6, 0, 0.2);
-    RendericeModel("Assets/Models/Roca/RocaGrande3.glb",  33, -95, -380, 270);
+    RendericeModel("Assets/Models/Roca/roca3.glb",  20, 5, -30, 10);
+    RendericeModel("Assets/Models/Roca/roca3.glb",  -50, 5, 30, 10);
+    RendericeModel("Assets/Models/Roca/RocaGrande.glb",  65, 100, 270, 13);
+    //RendericeModel("Assets/Models/Roca/RocaGrande2.glb",  90, 6, 0, 0.2);
+    //RendericeModel("Assets/Models/Roca/RocaGrande3.glb",  33, -95, -380, 270);
 
     //RendericeModel("Assets/Models/Arbusto/Arbusto.glb",  -7, -9, 240, 30);
     //RendericeModel("Assets/Models/Arbusto/Arbusto.glb", -55, -9, -20, 30);
@@ -225,14 +276,15 @@ function main()
         side: THREE.DoubleSide,
     });
 
-    const instanceNumber = 495000;
+    const instanceNumber = 89000;
     const dummy = new THREE.Object3D();
 
     const geometry = new THREE.PlaneGeometry( 0.1, 1, 1, 4 );
     geometry.translate( 0, 0.5, 0 ); // move grass blade geometry lowest point at 0.
 
     const instancedMesh = new THREE.InstancedMesh( geometry, leavesMateriala, instanceNumber );
-    instancedMesh.position.y = 6;
+    instancedMesh.position.y = 7;
+    instancedMesh.position.z = -60;
     instancedMesh.scale.x = 4;
     instancedMesh.scale.y = 2.5;
     instancedMesh.scale.z = 4;
@@ -246,7 +298,7 @@ function main()
         dummy.position.set(
         ( Math.random() - 0.5 ) * 170,
         0,
-        ( Math.random() - 0.5 ) * 170
+        ( Math.random() - 0.5 ) * 100
     );
     
     dummy.scale.setScalar( 0.5 + Math.random() * 0.5 );
@@ -263,14 +315,23 @@ function main()
     //camera.add( listener );
     //var sound = new THREE.Audio( listener ); 
     const sound = new THREE.PositionalAudio( listener );
+    const sound2 = new THREE.PositionalAudio( listener );
     const audioLoader = new THREE.AudioLoader(loadingManager);
+    const audioLoader2 = new THREE.AudioLoader(loadingManager);
     audioLoader.load( "Assets/BGM/TitleScreen.mp3", function( buffer ) {
         sound.setBuffer( buffer );
         sound.setLoop( true );
         sound.play();
-        sound.setVolume( 0.0 );
+        sound.setVolume( 0.1 );
     });
-    Terreno.GetPlane().add(sound);   
+    Terreno.GetPlane().add(sound);
+    audioLoader2.load( "Assets/BGM/WaterSound.mp3", function( buffer ) {
+        sound2.setBuffer( buffer );
+        sound2.setLoop( true );
+        sound2.play();
+        sound2.setVolume( 0.2 );
+    });
+    water.add(sound2);   
 
     const controls = new OrbitControls(camera, canvas);
     controls.target.set(0, 5, 0);
@@ -321,7 +382,7 @@ function main()
         requestAnimationFrame(render);
         var per = frame / maxFrame,
         rotationLight = Math.PI * 2 * per;
-        RotationSky < 360 ? RotationSky += 0.0003 : RotationSky = 0;
+        RotationSky < 360 ? RotationSky += 0.0005 : RotationSky = 0;
         
         if (intensityL) {
 			intensityAmbientLight += 0.001;
@@ -344,6 +405,7 @@ function main()
         leavesMateriala.uniforms.time.value = clock.getElapsedTime();
         leavesMateriala.uniformsNeedUpdate = true;
         sky.rotation.y = RotationSky;
+        water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
         stats.update();
     }
 
