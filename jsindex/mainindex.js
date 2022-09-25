@@ -126,59 +126,15 @@ function main()
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol2.glb", 10, 5, 5, 10);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol2.glb", -250, 5, 5, 10);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol2.glb", -80, 5, 5, 10);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol2.glb", 50, 5, 5, 10);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -170, 5, 130, 19.7);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -20, 5, 50, 19.7);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -100, 5, 90, 19.7);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -160, 5, 20, 19.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb", 130, 20, -120, 3);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -70, 5, 40, 19.7);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -170, 5, 60, 19.7);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -40, 5, 70, 19.7);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  20, 5, 70, 19.7);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  80, 5, 5, 19.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  -30, 5, 20, 19.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb",  190, 5, 45, 3);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   -80, 5, 43, 19.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   63, 5, 70, 19.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   23, 5, 103, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb",   10, 5, 140, 3);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   40, 5, 70, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   80, 5, 210, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   110, 5, 198, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",   40, 5, 230, 15.7);
-    /*RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb",    0, 5, 0, 3);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  -220, 5, -130, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  -120, 5, -60, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb",   -90, 5, -70, 3);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  -100, 5, -90, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  -200, 5, -120, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb",  -240, 5, -70, 3);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  -280, 5, -150, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb",  -100, 5, 150, 3);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  -120, 5, 180, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  -140, 5, 190, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  -160, 5, 220, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  0, 5, -180, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  40, 5, -270, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  20, 5, -270, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  60, 5, -240, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  100, 5, -140, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  140, 5, -160, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  160, 5, -130, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  130, 5, -100, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  -10, 5, 20, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  -70, 5, 40, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  -30, 5, 60, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  -60, 5, 80, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  80, 5, -280, 15.7);
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  100, 5, -270, 15.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  90, 5, -260, 15.7);
-    
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb",   0, 5, 105, 3);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol4.glb", -80, 5, 125, 3); 
-    
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol5.glb", -5, 5, 5, 5.3);*/
     RendericeModel("Assets/Models/Flores/flower2.glb",  -30, 5, 100, 19.7);
     RendericeModel("Assets/Models/Flores/flower2.glb",  -50, 5, 100, 19.7);
     RendericeModel("Assets/Models/Flores/flower2.glb",  -70, 5, 70, 19.7);
@@ -197,9 +153,7 @@ function main()
     RendericeModel("Assets/Models/Flores/flower2.glb",  -190, 5, 120, 19.7);
     RendericeModel("Assets/Models/Flores/flower2.glb",  -140, 5, 80, 19.7);
     RendericeModel("Assets/Models/Flores/flower2.glb",  -150, 5, 130, 19.7);
-
     RendericeModel("Assets/Models/Arbusto/planta.glb",  -98, 2, 295, 40);
-
     RendericeModel("Assets/Models/Roca/roca3.glb",  -50, 2, 230, 10);
     RendericeModel("Assets/Models/Roca/roca3.glb",  -90, 2, 170, 10);
     RendericeModel("Assets/Models/Roca/roca3.glb", -120, 2, 240, 10);
@@ -207,12 +161,6 @@ function main()
     RendericeModel("Assets/Models/Roca/roca3.glb",  20, 5, -30, 10);
     RendericeModel("Assets/Models/Roca/roca3.glb",  -50, 5, 30, 10);
     RendericeModel("Assets/Models/Roca/RocaGrande.glb",  65, 100, 270, 13);
-    //RendericeModel("Assets/Models/Roca/RocaGrande2.glb",  90, 6, 0, 0.2);
-    //RendericeModel("Assets/Models/Roca/RocaGrande3.glb",  33, -95, -380, 270);
-
-    //RendericeModel("Assets/Models/Arbusto/Arbusto.glb",  -7, -9, 240, 30);
-    //RendericeModel("Assets/Models/Arbusto/Arbusto.glb", -55, -9, -20, 30);
-    //RendericeModel("Assets/Models/Arbusto/Arbusto.glb", 40, -9, -90, 30);
 
 
     const map = new THREE.TextureLoader().load( 'Assets/Images/mountain.png' );

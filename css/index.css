@@ -65,7 +65,67 @@
 
   .IniciarSesion:hover, .Opciones:hover, .Ranking:hover
   {
-    opacity: 0.75;
+    background-color: #d1d1d1;
+  }
+
+  dialog[open] {
+    opacity: 1;
+    pointer-events: auto;
+    animation: slidein 0.5s forwards;
+  }
+  
+
+  dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+    animation: fadein 0.5s forwards;
+  }
+  
+  dialog.close[open] {
+    animation: slideout 0.5s forwards;
+  }
+  
+  dialog.close::backdrop {
+    animation: fadeout 0.5s forwards;
+  }
+  
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeout {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes slidein {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideout {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
   }
 
   .jugar
