@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/registro.css">
     <link rel="stylesheet" href="css/config.css">
     <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="css/perfil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Graficas Web</title>
     <script type='text/javascript'>
         function a()
@@ -56,6 +58,20 @@
             <output class="outputRange">50</output><br>
             <button class="guardarConfig">Guardar</button>
             <button class="SalirConfig" onclick="window.modal_config.close();">Salir</button>
+        </dialog>
+    </center>
+
+    <center>
+        <button onclick="window.modal_perfil.showModal();">C</button>
+        <dialog id="modal_perfil" class="modal_perfil">
+            <h3 class="user">Perfil</h3>
+            <input type="text" id="namePerfil" class="namePerfil" value="Nombre"><br>
+            <img src="Assets/Images/user.png" width="60" height="60"><br>
+            <input type="file" id="filePerfil" class="filePerfil"><br>
+            <label for="filePerfil" class="filePerfilL">Cambiar Foto <i class="fa fa-cloud-upload"></i></label><br>
+            <button id="Logout" class="Logout"><i class="fa fa-power-off"></i></button><br>
+            <button class="guardarPerfil">Guardar</button>
+            <button class="SalirPerfil" onclick="window.modal_perfil.close();">Salir</button>
         </dialog>
     </center>
 

@@ -15,65 +15,13 @@
     <link rel="stylesheet" href="css/registro.css">
     <link rel="stylesheet" href="css/ranking.css">
     <link rel="stylesheet" href="css/config.css">
-    <script>
-        //Ranking
-        function closeModalRanking() {
-            modal1 = document.getElementById("modal");
-            modal1.close();
-            modal1.classList.remove('close');
-            modal1.removeEventListener('animationend', closeModalRanking);
-        }
-
-        function closeModalClickRanking() {
-            modal1 = document.getElementById("modal");
-            modal1.addEventListener('animationend', closeModalRanking);
-            modal1.classList.add('close');
-        }
-
-        //Config
-        function closeModalConfig() {
-            modal1 = document.getElementById("modal_config");
-            modal1.close();
-            modal1.classList.remove('close');
-            modal1.removeEventListener('animationend', closeModalConfig);
-        }
-
-        function closeModalClickConfig() {
-            modal1 = document.getElementById("modal_config");
-            modal1.addEventListener('animationend', closeModalConfig);
-            modal1.classList.add('close');
-        }
-
-        //InicioSesion
-        function closeModalInicioS() {
-            modal1 = document.getElementById("modal_inicio_Sesion");
-            modal1.close();
-            modal1.classList.remove('close');
-            modal1.removeEventListener('animationend', closeModalInicioS);
-        }
-
-        function closeModalClickInicioS() {
-            modal1 = document.getElementById("modal_inicio_Sesion");
-            modal1.addEventListener('animationend', closeModalInicioS);
-            modal1.classList.add('close');
-        }
-
-        //InicioSesion
-        function closeModalReg() {
-            modal1 = document.getElementById("modal_registro");
-            modal1.close();
-            modal1.classList.remove('close');
-            modal1.removeEventListener('animationend', closeModalReg);
-        }
-
-        function closeModalClickReg() {
-            modal1 = document.getElementById("modal_registro");
-            modal1.addEventListener('animationend', closeModalReg);
-            modal1.classList.add('close');
-        }
-    </script>
+    <link rel="stylesheet" href="css/perfil.css">
 </head>
 <body>
+
+<?php
+    session_start();
+?>
 
     <div id="large-header" class="large-header">
         <canvas id="c"></canvas>
@@ -81,75 +29,26 @@
         <button class="jugar">Jugar</button>
         <button class="Opciones" onclick="window.modal_config.showModal();"><img src="Assets/Images/gear.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
         <button class="Ranking" onclick="window.modal.showModal();"><img src="Assets/Images/ranking.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
+        <?php
+            if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+            {
+        ?>
+        <button class="IniciarSesion" onclick="window.modal_perfil.showModal();"><img src=<?php echo $_SESSION['photo'];?> width="60" height="60" style="position: absolute; left: -12%;"></button>
+        <?php       
+            }
+            else
+            {
+        ?>
         <button class="IniciarSesion" onclick="window.modal_inicio_Sesion.showModal();"><img src="Assets/Images/user.png" width="60" height="60" style="position: absolute; left: -12%;"></button>
+        <?php         
+            }
+        ?> 
     </div>
 
-    <center>
-    <dialog id="modal" class="modal">
-        <h3>Ranking</h3>
-        <table cellspacing="0">
-            <tr>
-                <th class="nombre">Nombre</th>
-                <th>Nivel</th>
-                <th>Tiempo Jugado</th>
-                <th class="UConexion">Ultima Conexión</th>
-            </tr>
-            <tr>
-                <td>Usuario</td>
-                <td>1</td>
-                <td>24:49 horas</td>
-                <td>06-09-20220</td>
-            </tr>
-            <tr>
-                <td>Usuario</td>
-                <td>2</td>
-                <td>23:44 horas</td>
-                <td>07-09-20220</td>
-            </tr>
-        </table>
-        <button onclick="closeModalClickRanking();" class="volverBtn">Volver</button><br>
-        <!--img src="Assets/Images/Pincelada.png" width="230" height="85" class="imgRanking"-->
-    </dialog>
-
-    <center>
-        <dialog id="modal_inicio_Sesion" class="modal_inicio_Sesion">
-            <h3 class="IS_titulo">Inicio Sesión</h3>
-            <input type="text" placeholder="Usuario" class="Input_IS" id="is_us"><br><br><br>
-            <input type="password" placeholder="Contraseña" class="Input_IS" id="is_pass"><br><br>
-            <button id="IS_enviar" class="IS_button">Iniciar Sesión</button><br><br>
-            <button id="IS_volver" class="IS_button" onclick=" closeModalClickInicioS();">Volver</button><br>
-            <button class="IS_button_reg" onclick="closeModalClickInicioS(); window.modal_registro.showModal();">Registrarse</button>
-        </dialog>
-    </center>
-
-    <center>
-        <dialog id="modal_registro" class="modal_registro">
-            <h3 class="Reg_Titulo">Registro</h3>
-            <input type="text" placeholder="nombre..." class="Input_Reg" id="nombre"><br><br><br>
-            <input type="password" placeholder="contraseña..." class="Input_Reg" id="pass"><br><br><br>
-            <input type="password" placeholder="confirmar contraseña..." class="Input_Reg" id="Cpass"><br><br>
-            <button class="Reg_button_reg" id="registrar">Registrarse</button><br><br>
-            <button onclick="closeModalClickReg();" class="Reg_button_can">Cancelar</button><br>
-        </dialog>
-    </center>
-
-    </center>
-
-    <center>
-        <dialog id="modal_config" class="modal_config">
-            <h3 class="TituloConfig">Ajustes</h3>
-            <label class="l1">Dificultad: </label><br>
-            <select class="DificultadConfig">
-                <option value="Facil">Facil</option>
-                <option value="Normal">Normal</option>
-                <option value="Dificil">Dificil</option>
-            </select><br>
-            <label class="l2">Volumen: </label><input type="range" min="0" max="100" class="RangoC" value="50" oninput="this.nextElementSibling.value = this.value">
-            <output class="outputRange">50</output><br>
-            <button class="guardarConfig">Guardar</button>
-            <button class="SalirConfig" onclick="closeModalClickConfig();">Salir</button>
-        </dialog>
-    </center>
+    <?php include("ranking.php") ?>
+    <?php include("login.php") ?>
+    <?php include("config.php") ?>
+    <?php include("perfil.php") ?>
 
     <section id="loading-screen">
         <div id="loader"></div>
@@ -168,6 +67,7 @@
 	<script type='text/javascript' src="modules/jquery.min.js"></script>
     <script type='text/javascript' src="backend/register.back.js"></script>
     <script type='text/javascript' src="backend/sesion.back.js"></script>
+    <script type='text/javascript' src="backend/logout.back.js"></script>
     <script src="jsindex/mainindex.js" type="module"></script>
 </body>
 </html>
