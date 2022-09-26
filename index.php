@@ -114,8 +114,8 @@
     <center>
         <dialog id="modal_inicio_Sesion" class="modal_inicio_Sesion">
             <h3 class="IS_titulo">Inicio Sesión</h3>
-            <input type="text" placeholder="Usuario" class="Input_IS"><br><br><br>
-            <input type="password" placeholder="Contraseña" class="Input_IS"><br><br>
+            <input type="text" placeholder="Usuario" class="Input_IS" id="is_us"><br><br><br>
+            <input type="password" placeholder="Contraseña" class="Input_IS" id="is_pass"><br><br>
             <button id="IS_enviar" class="IS_button">Iniciar Sesión</button><br><br>
             <button id="IS_volver" class="IS_button" onclick=" closeModalClickInicioS();">Volver</button><br>
             <button class="IS_button_reg" onclick="closeModalClickInicioS(); window.modal_registro.showModal();">Registrarse</button>
@@ -125,10 +125,10 @@
     <center>
         <dialog id="modal_registro" class="modal_registro">
             <h3 class="Reg_Titulo">Registro</h3>
-            <input type="text" placeholder="nombre..." class="Input_Reg"><br><br><br>
-            <input type="password" placeholder="contraseña..." class="Input_Reg"><br><br><br>
-            <input type="password" placeholder="confirmar contraseña..." class="Input_Reg"><br><br>
-            <button class="Reg_button_reg">Registrarse</button><br><br>
+            <input type="text" placeholder="nombre..." class="Input_Reg" id="nombre"><br><br><br>
+            <input type="password" placeholder="contraseña..." class="Input_Reg" id="pass"><br><br><br>
+            <input type="password" placeholder="confirmar contraseña..." class="Input_Reg" id="Cpass"><br><br>
+            <button class="Reg_button_reg" id="registrar">Registrarse</button><br><br>
             <button onclick="closeModalClickReg();" class="Reg_button_can">Cancelar</button><br>
         </dialog>
     </center>
@@ -166,6 +166,8 @@
 
     <script type='text/javascript' src="modules/jquery-3.3.1.min.js"></script>
 	<script type='text/javascript' src="modules/jquery.min.js"></script>
+    <script type='text/javascript' src="backend/register.back.js"></script>
+    <script type='text/javascript' src="backend/sesion.back.js"></script>
     <script src="jsindex/mainindex.js" type="module"></script>
 </body>
 </html>
