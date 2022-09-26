@@ -36,4 +36,4 @@
     }
 ?>
 
-<script type='text/javascript' src="PreImagen.js"></script>
+<script type='text/javascript' src="frontend/PreImagen.js"></script>

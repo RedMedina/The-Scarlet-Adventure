@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/ranking.css">
     <link rel="stylesheet" href="css/config.css">
     <link rel="stylesheet" href="css/perfil.css">
+    <link rel="stylesheet" href="css/sweetalert2.css">
 </head>
 <body>
 
@@ -69,6 +70,7 @@
     <script type='text/javascript' src="backend/sesion.back.js"></script>
     <script type='text/javascript' src="backend/logout.back.js"></script>
     <script type='text/javascript' src="backend/update.back.js"></script>
+    <script type='text/javascript' src="frontend/sweetalert2.js"></script>
     <script src="jsindex/mainindex.js" type="module"></script>
 </body>
 </html>
