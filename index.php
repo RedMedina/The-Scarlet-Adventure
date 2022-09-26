@@ -33,7 +33,7 @@
             if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
             {
         ?>
-        <button class="IniciarSesion" onclick="window.modal_perfil.showModal();"><img src=<?php echo $_SESSION['photo'];?> width="60" height="60" style="position: absolute; left: -12%;"></button>
+        <button class="IniciarSesion" onclick="window.modal_perfil.showModal();"><img src=<?php echo $_SESSION['photo'];?> width="60" height="60" style="position: absolute; left: -12%; border-radius: 50%;"></button>
         <?php       
             }
             else
@@ -68,6 +68,7 @@
     <script type='text/javascript' src="backend/register.back.js"></script>
     <script type='text/javascript' src="backend/sesion.back.js"></script>
     <script type='text/javascript' src="backend/logout.back.js"></script>
+    <script type='text/javascript' src="backend/update.back.js"></script>
     <script src="jsindex/mainindex.js" type="module"></script>
 </body>
 </html>

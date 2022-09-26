@@ -7,12 +7,12 @@
         private $Con;
         private $Statement;
 
-        public function Register($nombre, $userkey)
+        public function Register($nombre, $userkey, $img)
         {
             $Con = new Conexion;
-            $Statement = $Con->Conecta()->prepare("insert into user (Nombre, User_Key, Horas_Jugadas, active, Creacion) 
-            values (?, ?, '00:00:00', true, sysdate())");
-            $Statement->bind_param('ss', $nombre, $userkey);
+            $Statement = $Con->Conecta()->prepare("insert into user (Nombre, User_Key, Photo, Horas_Jugadas, active, Creacion) 
+            values (?, ?, ?, '00:00:00', true, sysdate())");
+            $Statement->bind_param('sss', $nombre, $userkey, $img);
             $Statement->execute();
             $Statement->close();
             $Con->Desconectar();
@@ -44,6 +44,16 @@
             $Con = new Conexion;
             $Statement = $Con->Conecta()->prepare("update user set Horas_Jugadas = ? where Id = ?");
             $Statement->bind_param('ss', $horas, $id);
+            $Statement->execute();
+            $Statement->close();
+            $Con->Desconectar();
+        }
+
+        public function update($id, $nombre, $photo)
+        {
+            $Con = new Conexion;
+            $Statement = $Con->Conecta()->prepare("update user set Nombre = ?, Photo = ? where Id = ?");
+            $Statement->bind_param('sss', $nombre, $photo, $id);
             $Statement->execute();
             $Statement->close();
             $Con->Desconectar();

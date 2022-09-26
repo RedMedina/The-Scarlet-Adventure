@@ -1,9 +1,9 @@
 $(document).ready
 (
-	function($){$("#IS_enviar").click(function(){ upUser(); })}
+	function($){$("#IS_enviar").click(function(){ SesUser(); })}
 );
 
-function upUser()
+function SesUser()
 {
     var user = $("#is_us").val();
     var pass = $("#is_pass").val();

@@ -13,7 +13,7 @@ function upUser()
         url: './Include/Register_Inc.php',
         type: 'POST',
         async: true,
-        data: {'response':Json},
+        data: {'register':Json},
         success: function(response)
         {
             alert(response);

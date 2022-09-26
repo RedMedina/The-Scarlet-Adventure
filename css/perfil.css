@@ -28,12 +28,21 @@
     top: 23%;
 }
 
-.modal_perfil img
+.imgP
 {
     border-radius: 50%;
     border: 0px;
     position: relative;
     top:27%;
+}
+
+.imageP
+{
+    width: 20px;
+    height: 60px;
+    position: relative;
+    top:28%;
+    right: 9%;
 }
 
 .filePerfil

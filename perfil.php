@@ -22,9 +22,11 @@
         <dialog id="modal_perfil" class="modal_perfil">
             <h3 class="user">Perfil</h3>
             <input type="text" id="namePerfil" class="namePerfil" value=<?php echo $_SESSION['nombre'];?>><br>
-            <img src=<?php echo $_SESSION['photo'];?> width="60" height="60" id="imgP"><br>
+            <div class="imageP">
+            <img src=<?php echo $_SESSION['photo'];?> width="60" height="60" id="imgP" class="imgP"><br>
+            </div>
             <input type="file" id="file-upload" class="filePerfil"><br>
-            <label for="file-upload" class="filePerfilL" id="file-upload" onchange="encodeImageFileAsURL(this);">Cambiar Foto <i class="fa fa-cloud-upload"></i></label><br>
+            <label for="file-upload" class="filePerfilL" id="file-upload">Cambiar Foto <i class="fa fa-cloud-upload"></i></label><br>
             <button id="Logout" class="Logout"><i class="fa fa-power-off"></i></button><br>
             <button class="guardarPerfil" id="guardarPerfil">Guardar</button>
             <button class="SalirPerfil" onclick="closeModalClickPerfil();">Salir</button>
