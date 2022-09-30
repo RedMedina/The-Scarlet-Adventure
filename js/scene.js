@@ -18,7 +18,7 @@ class Scenee
         var Luces = new Lightt();
         Luces.DirectionalLight(0xFFFFFF, 0.3);
         Luces.DirectionDLight(20, 90, 0);
-        Luces.AmbientLight();
+        Luces.AmbientLight(0xFFFFFF);
         this.TestScene.add(Luces.GetAmbientLight());
         this.TestScene.add(Luces.GetDirectionalLight());
         this.TestScene.add(Luces.GetDirectionalLight().target);
@@ -62,6 +62,33 @@ class Scenee
         this.Pointlight.add( lensflare );
     }
 
+    PantanoScene()
+    {
+        this.Pantano = new THREE.Scene();
+        var Luces = new Lightt();
+        Luces.DirectionalLight(0xFFFFFF, 0.3);
+        Luces.DirectionDLight(20, 90, 0);
+        Luces.AmbientLight(0x757575);
+        this.Pantano.add(Luces.GetAmbientLight());
+        this.Pantano.add(Luces.GetDirectionalLight());
+        this.Pantano.add(Luces.GetDirectionalLight().target);
+        Luces.GetDirectionalLight().shadow.mapSize.width = 512;
+        Luces.GetDirectionalLight().shadow.mapSize.height = 512;
+        Luces.GetDirectionalLight().shadow.camera.near = 0.5;
+        Luces.GetDirectionalLight().shadow.camera.far = 500;
+
+        const helper = new THREE.CameraHelper( Luces.GetDirectionalLight().shadow.camera );
+        this.Pantano.add( helper );
+
+        var Terreno = new Terrain();
+        Terreno.MultitextureTerrain("Assets/Images/grass.jpg", "Assets/Images/Ground1.jpg", "Assets/Images/Ground2.jpg", "Assets/Images/Alts.png", "Assets/Images/Blend1.png");
+        this.Pantano.add(Terreno.GetPlane());
+
+        var SkydomeT = new skydome();
+        SkydomeT.Create('Assets/Images/skyboxDay.png');
+        this.Pantano.add(SkydomeT.Render());
+    }
+
     Create3DModel(mtl, obj, baseColor, normal, toon, x, y, z)
     {
         const objLoader = new THREE.OBJLoader2();
@@ -78,44 +105,49 @@ class Scenee
         });
     }
 
-    CreateToon3DModel(obj, baseColor, normal, textura, x, y, z)
+    Rain()
     {
-        const TexturaLoad = new THREE.TextureLoader();
-        let Texture = TexturaLoad.load(textura);
-
-        const TexturaLoadB = new THREE.TextureLoader();
-        let TextureColor = TexturaLoad.load(baseColor);
-
-        const TexturaLoadN = new THREE.TextureLoader();
-        let TextureNormal = TexturaLoad.load(normal);
-
-        Texture.magFilter = THREE.NearestFilter;
-        Texture.minFilter = THREE.NearestFilter;
-        const CellShading = new THREE.MeshToonMaterial({
-            map: TextureColor,
-            normalMap: TextureNormal,
-            gradientMap: Texture,
+        this.rainCount = 10000;
+        let rainBuffer = new THREE.BufferGeometry();
+        let posRain = new Float32Array(this.rainCount * 3);
+        for (let i = 0; i < (this.rainCount * 3); i += 3) {
+            posRain[i] = Math.random() * 400 - 200;
+            posRain[i+1] = Math.random() * 100 - 50;
+            posRain[i+2] = Math.random() * 300 - 150;
+        }
+        rainBuffer.setAttribute('position', new THREE.BufferAttribute(posRain, 3));
+        let texture = new THREE.TextureLoader().load('Assets/Images/drop.png');
+        let RainMaterial = new THREE.PointsMaterial({
+            //color: 0x002757,
+            map: texture,
+            size: 0.2,
+            transparent: true
         });
+        this.rain = new THREE.Points(rainBuffer, RainMaterial);
+        this.Pantano.add(this.rain);
+    }
 
-        const gltfLoader = new THREE.GLTFLoader();
-        const NormalScale = new THREE.Vector2( 5, 5 );
-        gltfLoader.load(obj, (gltf) => {
-            gltf.scene.traverse((child)=>{
-                //child.material = CellShading;
-                child.material = new THREE.MeshToonMaterial({map:TextureColor, normalScale: NormalScale, normalMap: TextureNormal})
-                child.castShadow = true;
-                child.receiveShadow = true;
-            })
-            gltf.scene.position.x = x;
-            gltf.scene.position.y = y;
-            gltf.scene.position.z = z;
-            this.TestScene.add(gltf.scene);
-        });
+    RainUpdate()
+    {
+        const positions = this.rain.geometry.attributes.position.array;
+        for (let i = 0; i < (this.rainCount * 3); i++) {
+            positions[i+1] -= 2.0 + Math.random() * 0.1;
+            if(positions[i+1] < (-300 * Math.random()))
+            {
+                positions[i+1] = 100;
+            }
+            this.rain.geometry.attributes.position.needsUpdate = true;
+        }
     }
 
     GetTestScene()
     {
         return this.TestScene;
+    }
+
+    GetPantanoScene()
+    {
+        return this.Pantano;
     }
 }
 

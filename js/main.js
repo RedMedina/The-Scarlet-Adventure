@@ -52,6 +52,8 @@ function main()
     };
 
     Escenario.InitScene();
+    Escenario.PantanoScene();
+    Escenario.Rain();
 
     var Obsidiana1 = new Audioo();
     Obsidiana1.create();
@@ -141,7 +143,9 @@ function main()
         if ( mixer[6] ) {mixer[6].update( delta );}
         water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
         stats.update();
-        renderer.render(Escenario.GetTestScene(), Camara.GetCamera());
+        Escenario.RainUpdate();
+        //renderer.render(Escenario.GetTestScene(), Camara.GetCamera());
+        renderer.render(Escenario.GetPantanoScene(), Camara.GetCamera());
         requestAnimationFrame(render);
     }
 

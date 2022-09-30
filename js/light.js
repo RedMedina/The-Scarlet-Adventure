@@ -24,9 +24,9 @@ class Lightt
         this.Elight = new THREE.HemisphereLight(skyColor, groundColor, intensity);
     }
 
-    AmbientLight()
+    AmbientLight(color)
     {
-        this.Alight = new THREE.AmbientLight( 0xFFFFFF );
+        this.Alight = new THREE.AmbientLight(color);
     }
 
     GetDirectionalLight()
