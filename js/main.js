@@ -144,8 +144,8 @@ function main()
         water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
         stats.update();
         Escenario.RainUpdate();
-        //renderer.render(Escenario.GetTestScene(), Camara.GetCamera());
-        renderer.render(Escenario.GetPantanoScene(), Camara.GetCamera());
+        renderer.render(Escenario.GetTestScene(), Camara.GetCamera());
+        //renderer.render(Escenario.GetPantanoScene(), Camara.GetCamera());
         requestAnimationFrame(render);
     }
 
