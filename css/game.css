@@ -2,8 +2,121 @@ html, body {
     margin: 0;
     height: 100%;
   }
-  #c {
+
+body
+{
+    position: relative;
     width: 100%;
-    height: 100%;
-    display: block;
-  }
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+    z-index: 1;
+}
+
+#Vida_bar
+{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 4%;
+  left: 75%;
+  height: 35px;
+  width: 350px;
+  -webkit-appearance: none;
+  border-radius: 5px;
+}
+
+#Vida_bar::-webkit-progress-bar
+{
+  background-color: aliceblue;
+  border-radius: 20px;
+}
+
+#Vida_bar::-webkit-progress-value {
+  background-color: rgb(0, 187, 84);
+  border-radius: 20px;
+}
+
+#Exp_bar
+{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 8.5%;
+  left: 75.8%;
+  -webkit-appearance: none;
+  height: 10px;
+}
+
+#Exp_bar::-webkit-progress-bar
+{
+  background-color: aliceblue;
+  border-radius: 5px;
+}
+
+#Exp_bar::-webkit-progress-value {
+  background-color: rgb(0, 157, 255);
+  border-radius: 5px;
+}
+
+#Vida_value
+{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 1%;
+  left: 71%;
+  font-size: 25px;
+  font-family: Permanent Marker;
+  border: 7px solid rgb(0, 187, 84);
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  background-color: aliceblue;
+}
+
+#Vida_value label
+{
+  position: absolute;
+  left: 11%;
+  top:20%;
+}
+
+#movement
+{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 40%;
+  left: 1%;
+  font-family: Permanent Marker;
+  font-size: 22px;
+}
+
+#AttackH
+{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 50%;
+  left: 1%;
+  font-family: Permanent Marker;
+  font-size: 22px;
+}
+
+#MenuH
+{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 60%;
+  left: 1%;
+  font-family: Permanent Marker;
+  font-size: 22px;
+}
+
+#c {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

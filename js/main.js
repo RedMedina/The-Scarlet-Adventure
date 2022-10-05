@@ -6,6 +6,7 @@ import Stats from '/PWGW/node_modules/three/examples/jsm/libs/stats.module.js';
 import { Water } from '/PWGW/node_modules/three/examples/jsm/objects/Water.js';
 import {FBXLoader} from '/PWGW/node_modules/three/examples/jsm/loaders/FBXLoader.js';
 import {OrbitControls} from '/PWGW/node_modules/three/examples/jsm/controls/OrbitControls.js';
+import {GUI} from '/PWGW/js/gui.js';
 
 function main()
 {
@@ -88,6 +89,9 @@ function main()
     const controls = new OrbitControls(Camara.GetCamera(), canvas);
     controls.target.set(0, 5, 0);
     controls.update();
+
+    const ui = new GUI();
+    ui.CreateLife();
 
     function CreateModelTestScene(model, posx, posy, posz, scale, rotx, roty, rotz)
     {
