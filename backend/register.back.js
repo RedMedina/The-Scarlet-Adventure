@@ -16,7 +16,14 @@ function upUser()
         data: {'register':Json},
         success: function(response)
         {
-            alert(response);
+            closeModalClickReg();
+            var JsonResponse = JSON.parse(response);
+            var imgInicioSesion = document.getElementById("imgUser");
+            imgInicioSesion.src = JsonResponse.photo;
+            var btnInicioSesion =  document.getElementById("IniciarSesion");
+            btnInicioSesion.setAttribute('onclick','window.modal_perfil.showModal()');
+            document.getElementById("imgP").src = JsonResponse.photo;
+            document.getElementById("namePerfil").value = JsonResponse.name;
         }
     });
 }

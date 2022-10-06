@@ -16,7 +16,21 @@ function SesUser()
         data: {'response':Json},
         success: function(response)
         {
-            alert(response);
+            var JsonResponse = JSON.parse(response);
+            if(JsonResponse.correcto == true)
+            {
+                closeModalClickInicioS();
+                var imgInicioSesion = document.getElementById("imgUser");
+                imgInicioSesion.src = JsonResponse.photo;
+                var btnInicioSesion =  document.getElementById("IniciarSesion");
+                btnInicioSesion.setAttribute('onclick','window.modal_perfil.showModal()');
+                document.getElementById("imgP").src = JsonResponse.photo;
+                document.getElementById("namePerfil").value = JsonResponse.name;
+            }
+            else
+            {
+                alert(JsonResponse.message);
+            }
         }
     });
 }

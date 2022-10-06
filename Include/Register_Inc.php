@@ -18,5 +18,6 @@
         $_SESSION['photo'] = $user->getPhoto();
         $_SESSION['nombre'] = $user->getNombre();
         $_SESSION['horas_jugadas'] = $user->getHorasjugadas();
+        echo json_encode(array("name" => $user->getNombre(), "photo" => $user->getPhoto()));
     }
 ?>

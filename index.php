@@ -34,13 +34,13 @@
             if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
             {
         ?>
-        <button class="IniciarSesion" onclick="window.modal_perfil.showModal();"><img src=<?php echo $_SESSION['photo'];?> width="60" height="60" style="position: absolute; left: -12%; border-radius: 50%;"></button>
+        <button class="IniciarSesion" id="IniciarSesion" onclick="window.modal_perfil.showModal();"><img src=<?php echo $_SESSION['photo'];?> width="60" height="60" style="position: absolute; left: -12%; border-radius: 50%;" id="imgUser"></button>
         <?php       
             }
             else
             {
         ?>
-        <button class="IniciarSesion" onclick="window.modal_inicio_Sesion.showModal();"><img src="Assets/Images/user.png" width="60" height="60" style="position: absolute; left: -12%;"></button>
+        <button class="IniciarSesion" id="IniciarSesion" onclick="window.modal_inicio_Sesion.showModal();"><img src="Assets/Images/user.png" width="60" height="60" style="position: absolute; left: -12%; border-radius: 50%;" id="imgUser"></button>
         <?php         
             }
         ?> 
