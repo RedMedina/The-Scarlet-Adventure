@@ -27,7 +27,7 @@ class Terrain
         return this.mesh;
     }
 
-    MultitextureTerrain(textura1, textura2, textura3, heighmap, blendmap)
+    MultitextureTerrain(textura1, textura2, textura3, heighmap, blendmap, bump, width, height)
     {
         const vertexShader = `
         uniform sampler2D bumpTexture;
@@ -81,9 +81,9 @@ class Terrain
             //vec4 grass = (smoothstep(0.28, 0.32, vAmount) - smoothstep(0.35, 0.40, vAmount)) * texture2D( grassTexture, vUV * 20.0 );
             //vec4 rocky = (smoothstep(0.30, 0.50, vAmount) - smoothstep(0.40, 0.70, vAmount)) * texture2D( rockyTexture, vUV * 20.0 );
             //vec4 snowy = (smoothstep(0.50, 0.65, vAmount))                                   * texture2D( snowyTexture, vUV * 10.0 );
-            vec4 water = vBlendr * texture2D( oceanTexture, vUV * 10.0 );
-            vec4 sandy = vBlendg * texture2D( sandyTexture, vUV * 10.0 );
-            vec4 grass = vBlendb * texture2D( grassTexture, vUV * 10.0 );
+            vec4 water = vBlendr * texture2D( oceanTexture, vUV * 15.0 );
+            vec4 sandy = vBlendg * texture2D( sandyTexture, vUV * 15.0 );
+            vec4 grass = vBlendb * texture2D( grassTexture, vUV * 15.0 );
             gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0) + water + sandy + grass; //, 1.0);
         }`;
 
@@ -94,7 +94,7 @@ class Terrain
         var BlendTexture = new THREE.TextureLoader().load( blendmap );
         BlendTexture.wrapS = BlendTexture.wrapT = THREE.RepeatWrapping;
         // magnitude of normal displacement
-        var bumpScale   = 20.0;
+        var bumpScale   = bump;
         var oceanTexture = new THREE.TextureLoader().load( textura1 );
         oceanTexture.wrapS = oceanTexture.wrapT = THREE.RepeatWrapping;         
         var sandyTexture = new THREE.TextureLoader().load( textura2 );
@@ -135,7 +135,7 @@ class Terrain
             // side: THREE.DoubleSide
         });
 
-        var planeGeo = new THREE.PlaneGeometry( 100, 100, 100, 100 );
+        var planeGeo = new THREE.PlaneGeometry( width, height, 100, 100 );
 	    this.plane = new THREE.Mesh(	planeGeo, customMaterial );
 	    this.plane.rotation.x = -Math.PI / 2;
 	    this.plane.position.y = -2;

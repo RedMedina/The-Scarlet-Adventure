@@ -31,6 +31,10 @@ function main()
     CreateModelTestScene("Assets/Models/Player/Player_Idle.fbx", 25, 5, 5, 0.05, 0, 0, 0);
     //CreateModelTestScene("Assets/Models/Player/Player_Jump.fbx", 30, 5, 5, 0.05, 0, 0, 0);
     CreateModelTestScene("Assets/Models/Player/Player_Run.fbx", 35, 5, 5, 0.05, 0, 0, 0);
+    
+    //Player Pradera------------------------------------------------------------------
+    CreateModelPradera("Assets/Models/Player/Player_Run.fbx", 35, 194, 380, 0.05, 0, 0, 0);
+    //---------------------------------------------------------------------------------
 
     document.addEventListener("keydown", onDocumentKeyDown, false);
     function onDocumentKeyDown(event) {
@@ -54,6 +58,7 @@ function main()
 
     Escenario.InitScene();
     Escenario.PantanoScene();
+    Escenario.PraderaScene();
     Escenario.Rain();
 
     var Obsidiana1 = new Audioo();
@@ -114,10 +119,35 @@ function main()
 	    object.position.y = posy;
 	    object.position.z = posz;
         mixer.push(mixerPersonaje);
-        object.name = name;
 	    Escenario.GetTestScene().add(object);
 	    } );   
     }
+
+    function CreateModelPradera(model, posx, posy, posz, scale, rotx, roty, rotz)
+    {
+        const loader = new FBXLoader();
+	    loader.load( model, function ( object ) {
+        mixerPersonaje = new THREE.AnimationMixer( object );
+	    const action = mixerPersonaje.clipAction( object.animations[ 0 ] );
+	    action.play();
+	    object.traverse( function ( child ) {
+		    if ( child.isMesh ) {
+			    child.castShadow = true;
+			    child.receiveShadow = true;
+			    }
+		    } );
+	    object.scale.set( scale, scale, scale);
+	    object.rotation.x = rotx;
+        object.rotation.y = roty;
+        object.rotation.z = rotz;
+	    object.position.x = posx;
+	    object.position.y = posy;
+	    object.position.z = posz;
+        mixer.push(mixerPersonaje);
+	    Escenario.GetPraderaScene().add(object);
+	    } );   
+    }
+    
 
     function resizeRendererToDisplaySize(renderer) {
         const canvas = renderer.domElement;
@@ -148,7 +178,9 @@ function main()
         water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
         stats.update();
         Escenario.RainUpdate();
-        renderer.render(Escenario.GetTestScene(), Camara.GetCamera());
+        //renderer.render(Escenario.GetTestScene(), Camara.GetCamera());
+        //Pradera primer mapa
+        renderer.render(Escenario.GetPraderaScene(), Camara.GetCamera());
         //renderer.render(Escenario.GetPantanoScene(), Camara.GetCamera());
         requestAnimationFrame(render);
     }

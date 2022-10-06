@@ -39,7 +39,7 @@ class Scenee
         this.TestScene.add( helper );
 
         var Terreno = new Terrain();
-        Terreno.MultitextureTerrain("Assets/Images/grass.jpg", "Assets/Images/Ground1.jpg", "Assets/Images/Ground2.jpg", "Assets/Images/Alts.png", "Assets/Images/Blend1.png");
+        Terreno.MultitextureTerrain("Assets/Images/grass.jpg", "Assets/Images/Ground1.jpg", "Assets/Images/Ground2.jpg", "Assets/Images/Alts.png", "Assets/Images/Blend1.png", 20, 100, 100);
         this.TestScene.add(Terreno.GetPlane());
 
         var SkydomeT = new skydome();
@@ -81,12 +81,61 @@ class Scenee
         this.Pantano.add( helper );
 
         var Terreno = new Terrain();
-        Terreno.MultitextureTerrain("Assets/Images/grass.jpg", "Assets/Images/Ground1.jpg", "Assets/Images/Ground2.jpg", "Assets/Images/Alts.png", "Assets/Images/Blend1.png");
+        Terreno.MultitextureTerrain("Assets/Images/grass.jpg", "Assets/Images/Ground1.jpg", "Assets/Images/Ground2.jpg", "Assets/Images/Alts.png", "Assets/Images/Blend1.png", 20, 100, 100);
         this.Pantano.add(Terreno.GetPlane());
 
         var SkydomeT = new skydome();
         SkydomeT.Create('Assets/Images/skyboxDay.png');
         this.Pantano.add(SkydomeT.Render());
+    }
+
+    PraderaScene()
+    {
+        //Incia la escena
+        this.Pradera = new THREE.Scene();
+
+        //Luces
+        var Luces = new Lightt();
+        Luces.DirectionalLight(0xFFFFFF, 0.3);
+        Luces.DirectionDLight(20, 90, 0);
+        Luces.AmbientLight(0xFFFFFF);
+        this.Pradera.add(Luces.GetAmbientLight());
+        this.Pradera.add(Luces.GetDirectionalLight());
+        this.Pradera.add(Luces.GetDirectionalLight().target);
+        Luces.GetDirectionalLight().shadow.mapSize.width = 512;
+        Luces.GetDirectionalLight().shadow.mapSize.height = 512;
+        Luces.GetDirectionalLight().shadow.camera.near = 0.5;
+        Luces.GetDirectionalLight().shadow.camera.far = 500;
+
+        //Lensflare
+        const textureLoader = new THREE.TextureLoader();
+        const textureFlare0 = textureLoader.load( 'Assets/Images/LensFlare.png' );
+        const textureFlare3 = textureLoader.load( 'Assets/Images/lensflare3.png' );
+        this.Pointlight = new THREE.PointLight( 0xffffff, 1.5, 2000 );
+        this.Pointlight.color.setHSL( 0.58, 1.0, 0.95 );
+        this.Pointlight.position.set( 1000, 0, 0 );
+        this.Pradera.add( this.Pointlight );
+        const lensflare = new Lensflare();
+        lensflare.addElement( new LensflareElement( textureFlare0, 700, 0, this.Pointlight.color ) );
+        lensflare.addElement( new LensflareElement( textureFlare3, 60, 0.6 ) );
+        lensflare.addElement( new LensflareElement( textureFlare3, 70, 0.7 ) );
+        lensflare.addElement( new LensflareElement( textureFlare3, 120, 0.9 ) );
+        lensflare.addElement( new LensflareElement( textureFlare3, 70, 1 ) );
+        this.Pointlight.add( lensflare );
+
+        //Help para el día y la noche
+        const helper = new THREE.CameraHelper( Luces.GetDirectionalLight().shadow.camera );
+        this.Pradera.add( helper );
+
+        //Skydome
+        var SkydomeT = new skydome();
+        SkydomeT.Create('Assets/Images/skyboxDay.png');
+        this.Pradera.add(SkydomeT.Render());
+
+        //Terreno
+        var Terreno = new Terrain();
+        Terreno.MultitextureTerrain("Assets/Images/grass.jpg", "Assets/Images/Ground1.jpg", "Assets/Images/Ground2.jpg", "Assets/Pradera/Alturas_Pradera.png", "Assets/Images/Blend1.png", 200, 800, 800);
+        this.Pradera.add(Terreno.GetPlane());
     }
 
     Create3DModel(mtl, obj, baseColor, normal, toon, x, y, z)
@@ -148,6 +197,11 @@ class Scenee
     GetPantanoScene()
     {
         return this.Pantano;
+    }
+
+    GetPraderaScene()
+    {
+        return this.Pradera;
     }
 }
 
