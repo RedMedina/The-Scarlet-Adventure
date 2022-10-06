@@ -30,7 +30,9 @@ function updateUser()
             data: {'update':Json},
             success: function(response)
             {
-                alert(response);
+                var JsonResponse = JSON.parse(response);
+                var imgInicioSesion = document.getElementById("imgUser");
+                imgInicioSesion.src = JsonResponse.photo;
             }
         });
     });

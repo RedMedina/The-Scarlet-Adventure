@@ -9,5 +9,7 @@
         $update->update($_SESSION['id'], $response->name, $response->imge);
         $_SESSION['photo'] = $response->imge;
         $_SESSION['nombre'] = $response->name;
+
+        echo json_encode(array("name" => $response->name, "photo" => $response->imge));
     }
 ?>
