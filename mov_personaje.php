@@ -77,10 +77,10 @@
             };
 
             var clock = new THREE.Clock();
-            var animations = ["Assets/Models/Player/Player_Idle_Final", "Assets/Models/Player/Player_Run_Final",
-            "Assets/Models/Player/Player_Attack_Final", "Assets/Models/Player/Player_Diying_Final",
-            "Assets/Models/Player/Player_Dodge_Final", "Assets/Models/Player/Player_Hanging_Idle_Final",
-            "Assets/Models/Player/Player_Jump_Final"];
+            var animations = ["Assets/Models/Player/Idle_Final", "Assets/Models/Player/Run_Final",
+            "Assets/Models/Player/Attack_Final", "Assets/Models/Player/Diying_Final",
+            "Assets/Models/Player/Dodge_Final", "Assets/Models/Player/Hanging_Idle_Final",
+            "Assets/Models/Player/Jump_Final"];
             var mixer;
             var actions;
 
