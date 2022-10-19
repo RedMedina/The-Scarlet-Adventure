@@ -21,40 +21,10 @@ function main()
 
     const clock = new THREE.Clock();
     
-    let mixerPersonaje;
-    let mixer = new Array();    
-    //CreateModelTestScene("Assets/Models/PersonajeTest/Running.fbx", 5, 5, 5, 0.04, 0, 0, 0);
-    //CreateModelTestScene("Assets/Models/Player/Player_Attack.fbx", 5, 5, 5, 0.05, 0, 0, 0);
-    //CreateModelTestScene("Assets/Models/Player/Player_Diying.fbx", 10, 5, 5, 0.05, 0, 0, 0);
-    //CreateModelTestScene("Assets/Models/Player/Player_Dodge.fbx", 15, 5, 5, 0.05, 0, 0, 0);
-    //CreateModelTestScene("Assets/Models/Player/Player_Hanging_Idle.fbx", 20, 5, 5, 0.05, 0, 0, 0);
-    CreateModelTestScene("Assets/Models/Player/Player_Idle.fbx", 25, 5, 5, 0.05, 0, 0, 0);
-    //CreateModelTestScene("Assets/Models/Player/Player_Jump.fbx", 30, 5, 5, 0.05, 0, 0, 0);
-    CreateModelTestScene("Assets/Models/Player/Player_Run.fbx", 35, 5, 5, 0.05, 0, 0, 0);
-    
-    //Player Pradera------------------------------------------------------------------
-    CreateModelPradera("Assets/Models/Player/Player_Run.fbx", 35, 194, 380, 0.05, 0, 0, 0);
-    //---------------------------------------------------------------------------------
+    var keys = {};
 
-    document.addEventListener("keydown", onDocumentKeyDown, false);
-    function onDocumentKeyDown(event) {
-        var keyCode = event.which;
-        if (keyCode == 87) {
-            //Escenario.GetTestScene().remove(a); //W  Movimiento
-        } else if (keyCode == 65) {
-           // cube.position.y -= ySpeed; //A  Movimiento
-        } else if (keyCode == 83) {
-           // cube.position.y -= ySpeed; //S  Movimiento        
-        } else if (keyCode == 68) {
-           // cube.position.y -= ySpeed; //D  Movimiento          
-        } else if (keyCode == 32) {
-           // cube.position.y -= ySpeed; //SPACE Salto       
-        } else if (keyCode == 69) {
-           // cube.position.y -= ySpeed; //E Ataque  
-        } else if (keyCode == 81) {
-           // cube.position.y -= ySpeed; //Q Esquivar    
-        }
-    };
+    document.addEventListener('keydown', onKeyDown);
+	document.addEventListener('keyup', onKeyUp);
 
     Escenario.InitScene();
     Escenario.PantanoScene();
@@ -98,56 +68,76 @@ function main()
     const ui = new GUI();
     ui.CreateLife();
 
-    function CreateModelTestScene(model, posx, posy, posz, scale, rotx, roty, rotz)
+    var animations = ["Assets/Models/Player/Idle_Final", "Assets/Models/Player/Run_Final",
+        "Assets/Models/Player/Attack_Final", "Assets/Models/Player/Diying_Final",
+        "Assets/Models/Player/Dodge_Final", "Assets/Models/Player/Hanging_Idle_Final",
+        "Assets/Models/Player/Jump_Final"];
+    var mixer;
+    var actions;
+    var AnimacionActual = 8;
+    var RotacionActual = 0;
+    var PosX = 0;
+    var PosZ = 0;
+
+    const loader = new FBXLoader();
+        loader.load( 'Assets/Models/Player/Player_Idle.fbx', function ( object ) {
+            mixer = new THREE.AnimationMixer( object );
+            actions = [];
+            object.traverse( function ( child ) {
+            if ( child.isMesh ) {
+                child.castShadow = true;
+                child.receiveShadow = false;
+                child.material.side = THREE.DoubleSide;
+             }
+            } );
+            //object.scale.set(0.05, 0.05, 0.05);
+            //object.position.x = 25;
+            //object.position.y = 5;
+            //object.position.z = 5;
+            object.name = "player";
+            Escenario.GetPraderaScene().add( object );
+            loadNextAnim(loader);
+    } );
+
+    function loadNextAnim(loader)
     {
-        const loader = new FBXLoader();
-	    loader.load( model, function ( object ) {
-        mixerPersonaje = new THREE.AnimationMixer( object );
-	    const action = mixerPersonaje.clipAction( object.animations[ 0 ] );
-	    action.play();
-	    object.traverse( function ( child ) {
-		    if ( child.isMesh ) {
-			    child.castShadow = true;
-			    child.receiveShadow = true;
-			    }
-		    } );
-	    object.scale.set( scale, scale, scale);
-	    object.rotation.x = rotx;
-        object.rotation.y = roty;
-        object.rotation.z = rotz;
-	    object.position.x = posx;
-	    object.position.y = posy;
-	    object.position.z = posz;
-        mixer.push(mixerPersonaje);
-	    Escenario.GetTestScene().add(object);
-	    } );   
+        const anim = animations.pop();
+        loader.load( `${anim}.fbx`, function ( object ) {
+        const action = mixer.clipAction( object.animations[ 0 ] );
+        actions.push(action);
+        object.traverse( function ( child ) {
+            if ( child.isMesh ) {
+                child.castShadow = true;
+                child.receiveShadow = false;
+                child.material.side = THREE.DoubleSide;
+            }
+        } );
+        //object.scale.set(0.05, 0.05, 0.05);
+        object.name = "player";
+        Escenario.GetPraderaScene().add( object );
+        if (animations.length>0){
+            loadNextAnim(loader);
+        }
+        } );
     }
 
-    function CreateModelPradera(model, posx, posy, posz, scale, rotx, roty, rotz)
-    {
-        const loader = new FBXLoader();
-	    loader.load( model, function ( object ) {
-        mixerPersonaje = new THREE.AnimationMixer( object );
-	    const action = mixerPersonaje.clipAction( object.animations[ 0 ] );
-	    action.play();
-	    object.traverse( function ( child ) {
-		    if ( child.isMesh ) {
-			    child.castShadow = true;
-			    child.receiveShadow = true;
-			    }
-		    } );
-	    object.scale.set( scale, scale, scale);
-	    object.rotation.x = rotx;
-        object.rotation.y = roty;
-        object.rotation.z = rotz;
-	    object.position.x = posx;
-	    object.position.y = posy;
-	    object.position.z = posz;
-        mixer.push(mixerPersonaje);
-	    Escenario.GetPraderaScene().add(object);
-	    } );   
+    function playAnimation(index){
+        if(index != AnimacionActual)
+        {
+            mixer.stopAllAction();
+            const action = actions[index];
+            action.weight = 1;
+            action.fadeIn(0.5);
+            action.play();
+        }
     }
-    
+
+    function onKeyDown(event) {
+		keys[String.fromCharCode(event.keyCode)] = true;
+	}
+	function onKeyUp(event) {
+		keys[String.fromCharCode(event.keyCode)] = false;
+	}
 
     function resizeRendererToDisplaySize(renderer) {
         const canvas = renderer.domElement;
@@ -168,13 +158,47 @@ function main()
             Camara.GetCamera().updateProjectionMatrix();
         }
         const delta = clock.getDelta();
-		if ( mixer[0] ) {mixer[0].update( delta );}
-        if ( mixer[1] ) {mixer[1].update( delta );} 
-        if ( mixer[2] ) {mixer[2].update( delta );}
-        if ( mixer[3] ) {mixer[3].update( delta );} 
-        if ( mixer[4] ) {mixer[4].update( delta );}
-        if ( mixer[5] ) {mixer[5].update( delta );}
-        if ( mixer[6] ) {mixer[6].update( delta );}
+
+        if (keys["W"]){
+            playAnimation(5);
+            AnimacionActual = 5;
+            Escenario.GetPraderaScene().getObjectByName("player").rotation.y = 0 * 3.1416 / 180;
+            PosZ += 50 * delta;
+            Escenario.GetPraderaScene().getObjectByName("player").position.z = PosZ;
+            Escenario.GetPraderaScene().getObjectByName("player").position.x = PosX;
+            RotacionActual = Escenario.GetPraderaScene().getObjectByName("player").rotation.y;
+        } else if (keys["A"]){
+            playAnimation(5);
+            AnimacionActual = 5;
+            Escenario.GetPraderaScene().getObjectByName("player").rotation.y = 90 * 3.1416 / 180;
+            PosX += 50 * delta;
+            Escenario.GetPraderaScene().getObjectByName("player").position.x = PosX;
+            Escenario.GetPraderaScene().getObjectByName("player").position.z = PosZ;
+            RotacionActual = Escenario.GetPraderaScene().getObjectByName("player").rotation.y;
+        } else if (keys["S"]){
+            playAnimation(5);
+            AnimacionActual = 5;
+            Escenario.GetPraderaScene().getObjectByName("player").rotation.y = 180 * 3.1416 / 180;
+            PosZ -= 50 * delta;
+            Escenario.GetPraderaScene().getObjectByName("player").position.z = PosZ;
+            Escenario.GetPraderaScene().getObjectByName("player").position.x = PosX;
+            RotacionActual = Escenario.GetPraderaScene().getObjectByName("player").rotation.y;
+        } else if (keys["D"]){
+            playAnimation(5);
+            AnimacionActual = 5;
+            Escenario.GetPraderaScene().getObjectByName("player").rotation.y = 270 * 3.1416 / 180;
+            PosX -= 50 * delta;
+            Escenario.GetPraderaScene().getObjectByName("player").position.x = PosX;
+            Escenario.GetPraderaScene().getObjectByName("player").position.z = PosZ;
+            RotacionActual = Escenario.GetPraderaScene().getObjectByName("player").rotation.y;
+        } else if (keys["W"] == false || keys["A"] == false || keys["S"] == false || keys["D"] == false){
+            playAnimation(6);
+            AnimacionActual = 6;
+            Escenario.GetPraderaScene().getObjectByName("player").rotation.y = RotacionActual;
+            Escenario.GetPraderaScene().getObjectByName("player").position.x = PosX;
+            Escenario.GetPraderaScene().getObjectByName("player").position.z = PosZ;
+        }
+        if ( mixer ) mixer.update( delta );
         water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
         stats.update();
         Escenario.RainUpdate();
