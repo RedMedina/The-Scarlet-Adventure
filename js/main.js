@@ -22,9 +22,11 @@ function main()
     const clock = new THREE.Clock();
     
     var keys = {};
+    var mousekeys = [];
 
     document.addEventListener('keydown', onKeyDown);
 	document.addEventListener('keyup', onKeyUp);
+    document.addEventListener('mousemove', onMouseMove);
 
     Escenario.InitScene();
     Escenario.PantanoScene();
@@ -34,7 +36,7 @@ function main()
     var Obsidiana1 = new Audioo();
     Obsidiana1.create();
     Camara.GetCamera().add(Obsidiana1.getListener());
-    Obsidiana1.Sound("Assets/BGM/Obsidian1.mp3");
+    //Obsidiana1.Sound("Assets/BGM/Obsidian1.mp3");
     //Obsidiana1.Stop();
     
     let water;
@@ -90,10 +92,6 @@ function main()
                 child.material.side = THREE.DoubleSide;
              }
             } );
-            //object.scale.set(0.05, 0.05, 0.05);
-            //object.position.x = 25;
-            //object.position.y = 5;
-            //object.position.z = 5;
             object.name = "player";
             Escenario.GetPraderaScene().add( object );
             loadNextAnim(loader);
@@ -112,7 +110,6 @@ function main()
                 child.material.side = THREE.DoubleSide;
             }
         } );
-        //object.scale.set(0.05, 0.05, 0.05);
         object.name = "player";
         Escenario.GetPraderaScene().add( object );
         if (animations.length>0){
@@ -138,6 +135,10 @@ function main()
 	function onKeyUp(event) {
 		keys[String.fromCharCode(event.keyCode)] = false;
 	}
+    function onMouseMove(event){
+        mousekeys[0] = event.movementX;
+        mousekeys[1] = event.movementY;
+    }
 
     function resizeRendererToDisplaySize(renderer) {
         const canvas = renderer.domElement;
@@ -191,6 +192,14 @@ function main()
             Escenario.GetPraderaScene().getObjectByName("player").position.x = PosX;
             Escenario.GetPraderaScene().getObjectByName("player").position.z = PosZ;
             RotacionActual = Escenario.GetPraderaScene().getObjectByName("player").rotation.y;
+        } else if (keys["%"] /*<-*/){ 
+            //Camara.GetCamera().rotation.y += (30 * 3.1416 / 180) * delta;
+        } else if (keys["'"] /*->*/){ 
+            //Camara.GetCamera().rotation.y -= (30 * 3.1416 / 180) * delta;
+        } else if (keys["&"] /*^*/){ 
+            //Camara.GetCamera().rotation.x -= (30 * 3.1416 / 180) * delta;
+        } else if (keys["("] /*V*/){ 
+            //Camara.GetCamera().rotation.x += (30 * 3.1416 / 180) * delta;
         } else if (keys["W"] == false || keys["A"] == false || keys["S"] == false || keys["D"] == false){
             playAnimation(6);
             AnimacionActual = 6;
@@ -198,6 +207,7 @@ function main()
             Escenario.GetPraderaScene().getObjectByName("player").position.x = PosX;
             Escenario.GetPraderaScene().getObjectByName("player").position.z = PosZ;
         }
+        //Camara.GetCamera().position.set(PosX, 140, PosZ - 340);
         if ( mixer ) mixer.update( delta );
         water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
         stats.update();
