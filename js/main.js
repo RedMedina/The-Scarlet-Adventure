@@ -17,7 +17,7 @@ function main()
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
     var Escenario = new Scenee();
-    var Camara = new Cameraa(45, 2, 0.1, 100000);
+    var Camara = new Cameraa(45, 2, 0.1, 1000000);
 
     const clock = new THREE.Clock();
     
@@ -40,7 +40,7 @@ function main()
     //Obsidiana1.Stop();
     
     let water;
-    const waterGeometry = new THREE.PlaneGeometry( 100, 100 );
+    const waterGeometry = new THREE.PlaneGeometry( 10000, 10000 );
 	water = new Water(
 		waterGeometry,
 			{
@@ -57,8 +57,10 @@ function main()
 			}
 		);
 	water.rotation.x = - Math.PI / 2;
-    water.position.y = 5;
-    Escenario.GetTestScene().add( water );
+    water.position.x = -300;
+    water.position.z = -3000; 
+    water.position.y = 50;
+    Escenario.GetPraderaScene().add( water );
 
     let stats = new Stats();
     document.body.appendChild( stats.domElement );
@@ -66,6 +68,12 @@ function main()
     const controls = new OrbitControls(Camara.GetCamera(), canvas);
     controls.target.set(0, 5, 0);
     controls.update();
+
+    var leavesMateriala = [];
+    CreatePasto(12000, -2400, 7000, 30, 25, 30, 170, 120);
+    CreatePasto(12000, 4300, 7000, 30, 25, 30, 170, 120);
+    CreatePasto(12000,  300, -6600, 30, 25, 30, 170, 120);
+    CreatePasto(12000, -7300, -3000, 30, 25, 30, 110, 120);
 
     const ui = new GUI();
     ui.CreateLife();
@@ -93,6 +101,10 @@ function main()
              }
             } );
             object.name = "player";
+            object.rotation.y = 180 * 3.1416 / 180;
+            object.position.x = 1000;
+            object.position.y = 200;
+            object.position.z = 8550;
             Escenario.GetPraderaScene().add( object );
             loadNextAnim(loader);
     } );
@@ -127,6 +139,96 @@ function main()
             action.fadeIn(0.5);
             action.play();
         }
+    }
+
+    function CreatePasto(instanNumber, posx, posz, scalex, scaley, scalez, spacex, spacez)
+    {
+        const vertexShader = `
+            varying vec2 vUv;
+            uniform float time;
+            
+                void main() {
+
+                vUv = uv;
+                
+                // VERTEX POSITION
+                
+                vec4 mvPosition = vec4( position, 1.0 );
+                #ifdef USE_INSTANCING
+                    mvPosition = instanceMatrix * mvPosition;
+                #endif
+                
+                // DISPLACEMENT
+                
+                // here the displacement is made stronger on the blades tips.
+                float dispPower = 1.0 - cos( uv.y * 3.1416 / 2.0 );
+                
+                float displacement = sin( mvPosition.z + time * 5.0 ) * ( 0.1 * dispPower );
+                mvPosition.z += displacement;
+                
+                //
+                
+                vec4 modelViewPosition = modelViewMatrix * mvPosition;
+                gl_Position = projectionMatrix * modelViewPosition;
+
+                }
+            `;
+            const fragmentShader = `
+            varying vec2 vUv;
+            
+            void main() {
+                vec3 baseColor = vec3( 0.41, 1.0, 0.5 );
+                float clarity = ( vUv.y * 0.5 ) + 0.5;
+                gl_FragColor = vec4( baseColor * clarity, 1 );
+            }
+            `;
+
+        var leavesMaterialaa = new THREE.ShaderMaterial({
+            vertexShader,
+            fragmentShader,
+            uniforms:
+            {
+                time: {
+                    value: 0
+                }
+            },
+            side: THREE.DoubleSide,
+        });
+
+        const instanceNumber = instanNumber;
+        const dummy = new THREE.Object3D();
+        
+        const geometry = new THREE.PlaneGeometry( 0.1, 1, 1, 4 );
+        geometry.translate( 0, 0.5, 0 ); // move grass blade geometry lowest point at 0.
+
+        const instancedMesh = new THREE.InstancedMesh( geometry, leavesMaterialaa, instanceNumber );
+        instancedMesh.position.x = posx;
+        instancedMesh.position.y = 200;
+        instancedMesh.position.z = posz;
+        instancedMesh.scale.x = scalex;
+        instancedMesh.scale.y = scaley;
+        instancedMesh.scale.z = scalez;
+        instancedMesh.receiveShadow = true;
+        Escenario.GetPraderaScene().add( instancedMesh );
+
+        for ( let i=0 ; i<instanceNumber ; i++ ) {
+
+            dummy.position.set(
+            ( Math.random() - 0.5 ) * spacex,
+            0,
+            ( Math.random() - 0.5 ) * spacez
+        );
+        
+        dummy.scale.setScalar( 0.5 + Math.random() * 0.5 );
+        
+        dummy.rotation.y = Math.random() * Math.PI;
+        dummy.receiveShadow = true;
+        
+        dummy.updateMatrix();
+        instancedMesh.setMatrixAt( i, dummy.matrix );
+    
+        }
+        leavesMateriala.push(leavesMaterialaa);
     }
 
     function onKeyDown(event) {
@@ -216,6 +318,15 @@ function main()
         //Pradera primer mapa
         renderer.render(Escenario.GetPraderaScene(), Camara.GetCamera());
         //renderer.render(Escenario.GetPantanoScene(), Camara.GetCamera());
+        leavesMateriala[0].uniforms.time.value = clock.getElapsedTime();
+        leavesMateriala[0].uniformsNeedUpdate = true;
+        leavesMateriala[1].uniforms.time.value = clock.getElapsedTime();
+        leavesMateriala[1].uniformsNeedUpdate = true;
+        leavesMateriala[2].uniforms.time.value = clock.getElapsedTime();
+        leavesMateriala[2].uniformsNeedUpdate = true;
+        leavesMateriala[3].uniforms.time.value = clock.getElapsedTime();
+        leavesMateriala[3].uniformsNeedUpdate = true;
+        
         requestAnimationFrame(render);
     }
 

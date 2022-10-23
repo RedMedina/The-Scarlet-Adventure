@@ -5,7 +5,7 @@ class skydome
 {
     Create(textura)
     {
-        var skyGeo = new THREE.SphereGeometry(30000, 25, 25);
+        var skyGeo = new THREE.SphereGeometry(50000, 25, 25);
         var loader  = new THREE.TextureLoader();
         var texture = loader.load( textura );
         var material = new THREE.MeshPhongMaterial({ 
