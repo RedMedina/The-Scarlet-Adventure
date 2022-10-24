@@ -4,6 +4,7 @@ import {Terrain} from '/PWGW/js/terrain.js';
 import {skydome} from '/PWGW/js/skydome.js';
 import {Lensflare, LensflareElement} from '/PWGW/js/lensflare.js';
 import {GLTFLoader} from '/PWGW/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+import {Mud} from '/PWGW/js/lodo.js';
 
 class Scenee
 {
@@ -82,12 +83,18 @@ class Scenee
         this.Pantano.add( helper );
 
         var Terreno = new Terrain();
-        Terreno.MultitextureTerrain("Assets/Images/grass.jpg", "Assets/Images/Ground1.jpg", "Assets/Images/Ground2.jpg", "Assets/Images/Alts.png", "Assets/Images/Blend1.png", 20, 100, 100);
+        Terreno.MultitextureTerrain("Assets/Images/grass.jpg", "Assets/Images/Ground1.jpg", "Assets/Images/Ground2.jpg", "Assets/Images/Alts.png", "Assets/Images/Blend1.png", 1700, 18000, 18000);
+        Terreno.GetPlane().position.y = -720;
         this.Pantano.add(Terreno.GetPlane());
 
         var SkydomeT = new skydome();
         SkydomeT.Create('Assets/Images/skyboxDay.png');
         this.Pantano.add(SkydomeT.Render());
+
+        this.Lodo = new Mud();
+        this.Lodo.CreateMud('Assets/Images/skyboxDay.png', "Assets/Pantano/lodo.jpg", "Assets/Pantano/lodoNormal.png");
+        this.Pantano.add(this.Lodo.GetMud());
+        this.tiempo = 0;
     }
 
     PraderaScene()
@@ -796,13 +803,13 @@ class Scenee
 
     Rain()
     {
-        this.rainCount = 10000;
+        this.rainCount = 100000;
         let rainBuffer = new THREE.BufferGeometry();
         let posRain = new Float32Array(this.rainCount * 3);
         for (let i = 0; i < (this.rainCount * 3); i += 3) {
-            posRain[i] = Math.random() * 400 - 200;
-            posRain[i+1] = Math.random() * 100 - 50;
-            posRain[i+2] = Math.random() * 300 - 150;
+            posRain[i] = Math.random() * 24000 - 200;
+            posRain[i+1] = Math.random() * 21000 - 50;
+            posRain[i+2] = Math.random() * 23000 - 150;
         }
         rainBuffer.setAttribute('position', new THREE.BufferAttribute(posRain, 3));
         let texture = new THREE.TextureLoader().load('Assets/Images/drop.png');
@@ -813,6 +820,9 @@ class Scenee
             transparent: true
         });
         this.rain = new THREE.Points(rainBuffer, RainMaterial);
+        this.rain.position.x = -10000;
+        this.rain.position.y = -10000;
+        this.rain.position.z = -10000;
         this.Pantano.add(this.rain);
     }
 
@@ -820,13 +830,19 @@ class Scenee
     {
         const positions = this.rain.geometry.attributes.position.array;
         for (let i = 0; i < (this.rainCount * 3); i++) {
-            positions[i+1] -= 2.0 + Math.random() * 0.1;
+            positions[i+1] -= 20.0 + Math.random() * 0.1;
             if(positions[i+1] < (-300 * Math.random()))
             {
-                positions[i+1] = 100;
+                positions[i+1] = 20000;
             }
             this.rain.geometry.attributes.position.needsUpdate = true;
         }
+    }
+
+    LodoUpdate()
+    {
+        this.tiempo++;
+        this.Lodo.GetMud().material.map.offset.y = this.tiempo * 0.0015;
     }
 
     GetTestScene()

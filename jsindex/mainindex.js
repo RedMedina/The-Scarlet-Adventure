@@ -121,12 +121,32 @@ function main()
         $("#loading-screen").remove();
     }
 
-    //RendericeModel("Assets/Models/Arboles_Inicio/Arbol1.glb", 5, 5, 5, 3);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol2.glb", -140, 5, 5, 10);
+    /*RendericeModel("Assets/Models/Arboles_Inicio/Arbol2.glb", -140, 5, 5, 10);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol2.glb", 10, 5, 5, 10);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol2.glb", -250, 5, 5, 10);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol2.glb", -80, 5, 5, 10);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -170, 5, 130, 19.7);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol2.glb", -80, 5, 5, 10);*/
+
+    Load3dModel("Assets/Models/Arboles_Inicio/Arbol2.glb", (object)=>{ //Arbol_2
+        object.scale.set(10, 10, 10);
+
+        var arbol2 = object.clone();
+        arbol2.position.set(-140, 5, 5);
+
+        var arbol3 = object.clone();
+        arbol3.position.set(10, 5, 5);
+
+        var arbol4 = object.clone();
+        arbol4.position.set(-250, 5, 5);
+
+        object.position.set(-80, 5, 5);
+
+        scene.add( object );
+        scene.add( arbol2 );
+        scene.add( arbol3 );
+        scene.add( arbol4 );
+    });
+
+    /*RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -170, 5, 130, 19.7);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -20, 5, 50, 19.7);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -100, 5, 90, 19.7);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -160, 5, 20, 19.7);
@@ -134,8 +154,49 @@ function main()
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -170, 5, 60, 19.7);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb", -40, 5, 70, 19.7);
     RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  20, 5, 70, 19.7);
-    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  80, 5, 5, 19.7);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  -30, 5, 100, 19.7);
+    RendericeModel("Assets/Models/Arboles_Inicio/Arbol3.glb",  80, 5, 5, 19.7);*/
+
+    Load3dModel("Assets/Models/Arboles_Inicio/Arbol3.glb", (object)=>{ //Arbol_3
+        object.scale.set(19.7, 19.7, 19.7);
+
+        var arbol2 = object.clone();
+        arbol2.position.set(-170, 5, 130);
+
+        var arbol3 = object.clone();
+        arbol3.position.set(-20, 5, 50);
+
+        var arbol4 = object.clone();
+        arbol4.position.set(-100, 5, 90);
+
+        var arbol5 = object.clone();
+        arbol5.position.set(-160, 5, 20);
+        
+        var arbol6 = object.clone();
+        arbol6.position.set(-70, 5, 40);
+
+        var arbol7 = object.clone();
+        arbol7.position.set(-170, 5, 60);
+
+        var arbol8 = object.clone();
+        arbol8.position.set(-40, 5, 70);
+
+        var arbol9 = object.clone();
+        arbol9.position.set(20, 5, 70);
+
+        object.position.set(80, 5, 5);
+
+        scene.add( object );
+        scene.add( arbol2 );
+        scene.add( arbol3 );
+        scene.add( arbol4 );
+        scene.add( arbol5 );
+        scene.add( arbol6 );
+        scene.add( arbol7 );
+        scene.add( arbol8 );
+        scene.add( arbol9 );
+    });
+
+    /*RendericeModel("Assets/Models/Flores/flower2.glb",  -30, 5, 100, 19.7);
     RendericeModel("Assets/Models/Flores/flower2.glb",  -50, 5, 100, 19.7);
     RendericeModel("Assets/Models/Flores/flower2.glb",  -70, 5, 70, 19.7);
     RendericeModel("Assets/Models/Flores/flower2.glb",  -90, 5, 120, 19.7);
@@ -152,14 +213,93 @@ function main()
     RendericeModel("Assets/Models/Flores/flower2.glb",  -170, 5, 100, 19.7);
     RendericeModel("Assets/Models/Flores/flower2.glb",  -190, 5, 120, 19.7);
     RendericeModel("Assets/Models/Flores/flower2.glb",  -140, 5, 80, 19.7);
-    RendericeModel("Assets/Models/Flores/flower2.glb",  -150, 5, 130, 19.7);
+    RendericeModel("Assets/Models/Flores/flower2.glb",  -150, 5, 130, 19.7);*/
+
+    Load3dModel("Assets/Models/Flores/flower2.glb", (object)=>{ //Flores
+        object.scale.set(19.7, 19.7, 19.7);
+
+        var flor2 = object.clone();
+        flor2.position.set(-30, 5, 100);
+
+        var flor3 = object.clone();
+        flor3.position.set(-50, 5, 100);
+
+        var flor4 = object.clone();
+        flor4.position.set(-70, 5, 70);
+
+        var flor5 = object.clone();
+        flor5.position.set(-90, 5, 120);
+
+        var flor6 = object.clone();
+        flor6.position.set(-10, 5, 110);
+
+        var flor7 = object.clone();
+        flor7.position.set(-120, 5, 110);
+
+        var flor8 = object.clone();
+        flor8.position.set(-130, 5, 80);
+
+        var flor9 = object.clone();
+        flor9.position.set(-140, 5, 90);
+
+        var flor10 = object.clone();
+        flor10.position.set(-150, 5, 100);
+
+        var flor11 = object.clone();
+        flor11.position.set(-90, 5, 50);
+
+        var flor12 = object.clone();
+        flor12.position.set(-60, 5, 20);
+        
+        var flor13 = object.clone();
+        flor13.position.set(-50, 5, 80);
+
+        var flor14 = object.clone();
+        flor14.position.set(-20, 5, 20);
+
+        var flor15 = object.clone();
+        flor15.position.set(-10, 5, 100);
+
+        var flor16 = object.clone();
+        flor16.position.set(-170, 5, 100);
+        
+        var flor17 = object.clone();
+        flor17.position.set(-190, 5, 120);
+
+        var flor18 = object.clone();
+        flor18.position.set(-140, 5, 80);
+
+        object.position.set(-150, 5, 130);
+
+        scene.add(object);
+        scene.add(flor2);
+        scene.add(flor3);
+        scene.add(flor4);
+        scene.add(flor5);
+        scene.add(flor6);
+        scene.add(flor7);
+        scene.add(flor8);
+        scene.add(flor9);
+        scene.add(flor10);
+        scene.add(flor11);
+        scene.add(flor12);
+        scene.add(flor13);
+        scene.add(flor14);
+        scene.add(flor15);
+        scene.add(flor16);
+        scene.add(flor17);
+        scene.add(flor18);
+    });
+
     RendericeModel("Assets/Models/Arbusto/planta.glb",  -98, 2, 295, 40);
+
     RendericeModel("Assets/Models/Roca/roca3.glb",  -50, 2, 230, 10);
     RendericeModel("Assets/Models/Roca/roca3.glb",  -90, 2, 170, 10);
     RendericeModel("Assets/Models/Roca/roca3.glb", -120, 2, 240, 10);
     RendericeModel("Assets/Models/Roca/roca3.glb",  -140, 5, 40, 10);
     RendericeModel("Assets/Models/Roca/roca3.glb",  20, 5, -30, 10);
     RendericeModel("Assets/Models/Roca/roca3.glb",  -50, 5, 30, 10);
+
     RendericeModel("Assets/Models/Roca/RocaGrande.glb",  65, 100, 270, 13);
 
 
@@ -285,6 +425,18 @@ function main()
     controls.target.set(0, 5, 0);
     controls.update();
 
+    function Load3dModel(model, onLoadCallback)
+    {
+        const gltfLoader = new GLTFLoader(loadingManager);
+        gltfLoader.load(model, (gltf) => {
+            gltf.scene.traverse((child)=>{
+                child.castShadow = true;
+                child.receiveShadow = false;
+            })
+            gltf.scene.frustumCulled = true;
+            onLoadCallback(gltf.scene);
+        });
+    }
 
     function RendericeModel(obj, x, y, z, scale)
     {

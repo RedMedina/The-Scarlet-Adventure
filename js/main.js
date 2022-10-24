@@ -106,6 +106,7 @@ function main()
             object.position.y = 200;
             object.position.z = 8550;
             Escenario.GetPraderaScene().add( object );
+            Escenario.GetPantanoScene().add( object );
             loadNextAnim(loader);
     } );
 
@@ -124,6 +125,7 @@ function main()
         } );
         object.name = "player";
         Escenario.GetPraderaScene().add( object );
+        Escenario.GetPantanoScene().add( object );
         if (animations.length>0){
             loadNextAnim(loader);
         }
@@ -314,10 +316,11 @@ function main()
         water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
         stats.update();
         Escenario.RainUpdate();
+        Escenario.LodoUpdate();
         //renderer.render(Escenario.GetTestScene(), Camara.GetCamera());
         //Pradera primer mapa
-        renderer.render(Escenario.GetPraderaScene(), Camara.GetCamera());
-        //renderer.render(Escenario.GetPantanoScene(), Camara.GetCamera());
+        //renderer.render(Escenario.GetPraderaScene(), Camara.GetCamera());
+        renderer.render(Escenario.GetPantanoScene(), Camara.GetCamera());
         leavesMateriala[0].uniforms.time.value = clock.getElapsedTime();
         leavesMateriala[0].uniformsNeedUpdate = true;
         leavesMateriala[1].uniforms.time.value = clock.getElapsedTime();
