@@ -34,7 +34,7 @@ class Mud
             //combine:  THREE.MultiplyOperation,
             //reflectivity: 1
             transparent: true,
-            opacity: 0.7
+            opacity: 0.85
         });
         this.plane = new THREE.Mesh(planeGeo, material);
         this.plane.position.y = -100;

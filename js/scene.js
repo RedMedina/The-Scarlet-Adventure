@@ -83,7 +83,7 @@ class Scenee
         this.Pantano.add( helper );
 
         var Terreno = new Terrain();
-        Terreno.MultitextureTerrain("Assets/Images/grass.jpg", "Assets/Images/Ground1.jpg", "Assets/Images/Ground2.jpg", "Assets/Images/Alts.png", "Assets/Images/Blend1.png", 1700, 18000, 18000);
+        Terreno.MultitextureTerrain("Assets/Pantano/Pasto_Ot.jpg", "Assets/Pantano/Tierra_Mojada.jpg", "Assets/Pantano/Hojas_Tierra.jpg", "Assets/Pantano/Alts.png", "Assets/Pantano/Blendmap_Pantano.png", 1700, 18000, 18000);
         Terreno.GetPlane().position.y = -720;
         this.Pantano.add(Terreno.GetPlane());
 
@@ -95,6 +95,404 @@ class Scenee
         this.Lodo.CreateMud('Assets/Images/skyboxDay.png', "Assets/Pantano/lodo.jpg", "Assets/Pantano/lodoNormal.png");
         this.Pantano.add(this.Lodo.GetMud());
         this.tiempo = 0;
+
+        //Modelos
+        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol_O2.glb", (object)=>{ //Arbol Otoño
+            object.position.y = 340;
+            object.scale.x = 100;
+            object.scale.y = 100;
+            object.scale.z = 100;
+
+            var Arbol2 = object.clone();
+            Arbol2.position.x = 5800;
+            Arbol2.position.y = 380;
+            Arbol2.position.z = 7900;
+
+            var Arbol3 = object.clone();
+            Arbol3.position.x = 5000;
+            Arbol3.position.z = 7000;
+
+            var Arbol4 = object.clone();
+            Arbol4.position.x = 7000;
+            Arbol4.position.z = 7000;
+
+            var Arbol5 = object.clone();
+            Arbol5.position.x = 2800;
+            Arbol5.position.y = 230;
+            Arbol5.position.z = 7900;
+
+            var Arbol6 = object.clone();
+            Arbol6.position.x = 4800;
+            Arbol6.position.y = 190;
+            Arbol6.position.z = 8400;
+
+            var Arbol7 = object.clone();
+            Arbol7.position.x = 3800;
+            Arbol7.position.y = 150;
+            Arbol7.position.z = 8400;
+
+            var Arbol8 = object.clone();
+            Arbol8.position.x = 4300;
+            Arbol8.position.y = 180;
+            Arbol8.position.z = 7100;
+
+            var Arbol9 = object.clone();
+            Arbol9.position.x = 2300;
+            Arbol9.position.z = 1000;
+
+            var Arbol10 = object.clone();
+            Arbol10.position.x = 3100;
+            Arbol10.position.y = 520;
+            Arbol10.position.z = 1000;
+
+            var Arbol11 = object.clone();
+            Arbol11.position.x = 2700;
+            Arbol11.position.y = 505;
+            Arbol11.position.z = 1900;
+
+            var Arbol12 = object.clone();
+            Arbol12.position.x = 3500;
+            Arbol12.position.y = 480;
+            Arbol12.position.z = 1400;
+
+            var Arbol13 = object.clone();
+            Arbol13.position.x = 3100;
+            Arbol13.position.y = 450;
+            Arbol13.position.z = 2300;
+
+            var Arbol14 = object.clone();
+            Arbol14.position.x = 2700;
+            Arbol14.position.y = 450;
+            Arbol14.position.z = 2800;
+
+            var Arbol15 = object.clone();
+            Arbol15.position.x = 3500;
+            Arbol15.position.y = 100;
+            Arbol15.position.z = 3200;
+
+            var Arbol16 = object.clone();
+            Arbol16.position.x = 3100;
+            Arbol16.position.y = 520;
+            Arbol16.position.z = 300;
+
+            var Arbol17 = object.clone();
+            Arbol17.position.x = 2700;
+            Arbol17.position.y = 420;
+            Arbol17.position.z = -800;
+
+            var Arbol18 = object.clone();
+            Arbol18.position.x = 3500;
+            Arbol18.position.y = 600;
+            Arbol18.position.z = -1200;
+
+            var Arbol19 = object.clone();
+            Arbol19.position.x = 4500;
+            Arbol19.position.y = 400;
+            Arbol19.position.z = 300;
+
+            var Arbol20 = object.clone();
+            Arbol20.position.x = 4000;
+            Arbol20.position.y = 400;
+            Arbol20.position.z = 900;
+
+            var Arbol21 = object.clone();
+            Arbol21.position.x = 4000;
+            Arbol21.position.y = 600;
+            Arbol21.position.z = -600;
+
+            var Arbol22 = object.clone();
+            Arbol22.position.x = 4000;
+            Arbol22.position.y = 200;
+            Arbol22.position.z = 1800;
+
+            var Arbol23 = object.clone();
+            Arbol23.position.x = 4000;
+            Arbol23.position.y = 30;
+            Arbol23.position.z = 2600;
+
+            var Arbol24 = object.clone();
+            Arbol24.position.x = 5200;
+            Arbol24.position.y = 60;
+            Arbol24.position.z = 1200;
+
+            var Arbol25 = object.clone();
+            Arbol25.position.x = 5200;
+            Arbol25.position.y = 160;
+            Arbol25.position.z = -1300;
+
+            var Arbol26 = object.clone();
+            Arbol26.position.x = 5200;
+            Arbol26.position.y = 320;
+            Arbol26.position.z = -100;
+
+            var Arbol27 = object.clone();
+            Arbol27.position.x = -5200;
+            Arbol27.position.y = 400;
+            Arbol27.position.z = 5100;
+
+            var Arbol28 = object.clone();
+            Arbol28.position.x = -6600;
+            Arbol28.position.y = 240;
+            Arbol28.position.z = 4200;
+
+            var Arbol29 = object.clone();
+            Arbol29.position.x = -4200;
+            Arbol29.position.y = 500;
+            Arbol29.position.z = 4200;
+
+            var Arbol30 = object.clone();
+            Arbol30.position.x = -5200;
+            Arbol30.position.y = 520;
+            Arbol30.position.z = 3100;
+
+            var Arbol31 = object.clone();
+            Arbol31.position.x = -6600;
+            Arbol31.position.y = 220;
+            Arbol31.position.z = 2400;
+
+            var Arbol32 = object.clone();
+            Arbol32.position.x = -4200;
+            Arbol32.position.y = 380;
+            Arbol32.position.z = 2400;
+
+            var Arbol33 = object.clone();
+            Arbol33.position.x = -6000;
+            Arbol33.position.y = 340;
+            Arbol33.position.z = 3700;
+
+            var Arbol34 = object.clone();
+            Arbol34.position.x = -2800;
+            Arbol34.position.y = 380;
+            Arbol34.position.z = 3100;
+
+            var Arbol35 = object.clone();
+            Arbol35.position.x = -4800;
+            Arbol35.position.y = 240;
+            Arbol35.position.z = -3100;
+
+            var Arbol36 = object.clone();
+            Arbol36.position.x = -7200;
+            Arbol36.position.y = 240;
+            Arbol36.position.z = -3100;
+
+            var Arbol37 = object.clone();
+            Arbol37.position.x = -5500;
+            Arbol37.position.y = 220;
+            Arbol37.position.z = -2100;
+
+            var Arbol38 = object.clone();
+            Arbol38.position.x = -6500;
+            Arbol38.position.y = 230;
+            Arbol38.position.z = -4100;
+
+            var Arbol39 = object.clone();
+            Arbol39.position.x = -6500;
+            Arbol39.position.y = 130;
+            Arbol39.position.z = -1100;
+
+            var Arbol40 = object.clone();
+            Arbol40.position.x = -7900;
+            Arbol40.position.y = 120;
+            Arbol40.position.z = -200;
+
+            object.position.x = 6000;
+            object.position.z = 8550;
+
+            this.Pantano.add(object);
+            this.Pantano.add(Arbol2);
+            this.Pantano.add(Arbol3);
+            this.Pantano.add(Arbol4);
+            this.Pantano.add(Arbol5);
+            this.Pantano.add(Arbol6);
+            this.Pantano.add(Arbol7);
+            this.Pantano.add(Arbol8);
+            this.Pantano.add(Arbol9);
+            this.Pantano.add(Arbol10);
+            this.Pantano.add(Arbol11);
+            this.Pantano.add(Arbol12);
+            this.Pantano.add(Arbol13);
+            this.Pantano.add(Arbol14);
+            this.Pantano.add(Arbol15);
+            this.Pantano.add(Arbol16);
+            this.Pantano.add(Arbol17);
+            this.Pantano.add(Arbol18);
+            this.Pantano.add(Arbol19);
+            this.Pantano.add(Arbol20);
+            this.Pantano.add(Arbol21);
+            this.Pantano.add(Arbol22);
+            this.Pantano.add(Arbol23);
+            this.Pantano.add(Arbol24);
+            this.Pantano.add(Arbol25);
+            this.Pantano.add(Arbol26);
+            this.Pantano.add(Arbol27);
+            this.Pantano.add(Arbol28);
+            this.Pantano.add(Arbol29);
+            this.Pantano.add(Arbol30);
+            this.Pantano.add(Arbol31);
+            this.Pantano.add(Arbol32);
+            this.Pantano.add(Arbol33);
+            this.Pantano.add(Arbol34);
+            this.Pantano.add(Arbol35);
+            this.Pantano.add(Arbol36);
+            this.Pantano.add(Arbol37);
+            this.Pantano.add(Arbol38);
+            this.Pantano.add(Arbol39);
+            this.Pantano.add(Arbol40);
+        });
+
+        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol_Seco.glb", (object)=>{ //Arbol Seco
+            object.position.y = 30;
+            object.scale.set(20, 20, 20);
+
+            var ArbolS2 = object.clone();
+            ArbolS2.position.x = -800;
+            ArbolS2.position.y = 30;
+            ArbolS2.position.z = 3850;
+
+            var ArbolS3 = object.clone();
+            ArbolS3.position.x = -5800;
+            ArbolS3.position.y = 290;
+            ArbolS3.position.z = 6850;
+
+            var ArbolS4 = object.clone();
+            ArbolS4.position.x = -4000;
+            ArbolS4.position.y = 290;
+            ArbolS4.position.z = 6050;
+
+            var ArbolS5 = object.clone();
+            ArbolS5.position.x = -4800;
+            ArbolS5.position.y = 90;
+            ArbolS5.position.z = 8050;
+
+            var ArbolS6 = object.clone();
+            ArbolS6.position.x = -1800;
+            ArbolS6.position.y = 0;
+            ArbolS6.position.z = -2850;
+
+            var ArbolS7 = object.clone();
+            ArbolS7.position.x = -1800;
+            ArbolS7.position.y = 300;
+            ArbolS7.position.z = -100;
+
+            var ArbolS8 = object.clone();
+            ArbolS8.position.x = -3200;
+            ArbolS8.position.y = 130;
+            ArbolS8.position.z = -1100;
+
+            var ArbolS9 = object.clone();
+            ArbolS9.position.x = 3200;
+            ArbolS9.position.y = 370;
+            ArbolS9.position.z = -6100;
+
+            var ArbolS10 = object.clone();
+            ArbolS10.position.x = 4100;
+            ArbolS10.position.y = 180;
+            ArbolS10.position.z = -4100;
+
+            var ArbolS11 = object.clone();
+            ArbolS11.position.x = 3200;
+            ArbolS11.position.y = 330;
+            ArbolS11.position.z = -4700;
+
+            var ArbolS12 = object.clone();
+            ArbolS12.position.x = 4100;
+            ArbolS12.position.y = 300;
+            ArbolS12.position.z = -6700;
+
+            var ArbolS13 = object.clone();
+            ArbolS13.position.x = 8600;
+            ArbolS13.position.y = 300;
+            ArbolS13.position.z = 3000;
+
+            object.position.x = 800;
+            object.position.z = 3550;
+
+            this.Pantano.add(object);
+            this.Pantano.add(ArbolS2);
+            this.Pantano.add(ArbolS3);
+            this.Pantano.add(ArbolS4);
+            this.Pantano.add(ArbolS5);
+            this.Pantano.add(ArbolS6);
+            this.Pantano.add(ArbolS7);
+            this.Pantano.add(ArbolS8);
+            this.Pantano.add(ArbolS9);
+            this.Pantano.add(ArbolS10);
+            this.Pantano.add(ArbolS11);
+            this.Pantano.add(ArbolS12);
+            this.Pantano.add(ArbolS13);
+        });
+
+        this.Load3dModelGLTF("Assets/Models/Campamento/Hoguera.glb", (object)=>{ //Hoguera
+            object.position.y = 220;
+            object.scale.set(25, 25, 25);
+
+            object.position.x = -5000;
+            object.position.z = 7300;
+            this.Pantano.add(object);
+        });
+
+        this.Load3dModelGLTF("Assets/Models/Campamento/Antorcha.glb", (object)=>{ //Antorcha
+            object.position.y = 320;
+            object.scale.set(13, 13, 13);
+
+            var Antorcha2 = object.clone();
+            Antorcha2.position.x = -200;
+            Antorcha2.position.y = -50;
+            Antorcha2.position.z = 6500;
+
+            var Antorcha3 = object.clone();
+            Antorcha3.position.x = 1500;
+            Antorcha3.position.y = 250;
+            Antorcha3.position.z = 6500;
+
+            var Antorcha4 = object.clone();
+            Antorcha4.position.x = 1500;
+            Antorcha4.position.y = 320;
+            Antorcha4.position.z = -6500;
+
+            var Antorcha5 = object.clone();
+            Antorcha5.position.x = -2500;
+            Antorcha5.position.y = -60;
+            Antorcha5.position.z = -6500;
+
+            object.position.x = -5000;
+            object.position.z = 6300;
+
+            this.Pantano.add(object);
+            this.Pantano.add(Antorcha2);
+            this.Pantano.add(Antorcha3);
+            this.Pantano.add(Antorcha4);
+            this.Pantano.add(Antorcha5);
+        });
+
+        this.Load3dModelGLTF("Assets/Models/Campamento/Tronco.glb", (object)=>{ //Tronco
+            object.position.y = 220;
+            object.scale.set(25, 25, 25);
+
+            object.rotation.y = 45 * 3.1416 / 180;
+            object.position.x = -5900;
+            object.position.z = 7800;
+
+            this.Pantano.add(object);
+        });
+
+        this.Load3dModelGLTF("Assets/Models/Roca/roca3.glb", (object)=>{
+            object.position.y = 220;
+            object.scale.set(100, 100, 100);
+
+            var roca2 = object.clone();
+            roca2.position.set(-500,10,5000);
+
+            var roca3 = object.clone();
+            roca3.position.set(-2000,10,5700);
+
+            object.position.x = -3000;
+            object.position.z = 5000;
+
+            this.Pantano.add(object);
+            this.Pantano.add(roca2);
+            this.Pantano.add(roca3);
+        });
     }
 
     PraderaScene()
@@ -803,7 +1201,7 @@ class Scenee
 
     Rain()
     {
-        this.rainCount = 100000;
+        this.rainCount = 30000;
         let rainBuffer = new THREE.BufferGeometry();
         let posRain = new Float32Array(this.rainCount * 3);
         for (let i = 0; i < (this.rainCount * 3); i += 3) {
@@ -830,7 +1228,7 @@ class Scenee
     {
         const positions = this.rain.geometry.attributes.position.array;
         for (let i = 0; i < (this.rainCount * 3); i++) {
-            positions[i+1] -= 20.0 + Math.random() * 0.1;
+            positions[i+1] -= 70.0 + Math.random() * 0.1;
             if(positions[i+1] < (-300 * Math.random()))
             {
                 positions[i+1] = 20000;
@@ -842,7 +1240,7 @@ class Scenee
     LodoUpdate()
     {
         this.tiempo++;
-        this.Lodo.GetMud().material.map.offset.y = this.tiempo * 0.0015;
+        this.Lodo.GetMud().material.map.offset.y = this.tiempo * 0.0025;
     }
 
     GetTestScene()
