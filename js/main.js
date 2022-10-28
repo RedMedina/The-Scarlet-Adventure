@@ -35,11 +35,41 @@ function main()
     Escenario.Rain();
     Escenario.Snow();
 
-    var Obsidiana1 = new Audioo();
-    Obsidiana1.create();
-    Camara.GetCamera().add(Obsidiana1.getListener());
-    //Obsidiana1.Sound("Assets/BGM/Obsidian1.mp3");
-    //Obsidiana1.Stop();
+    //Pradera Sound 1
+    const PraderaSound1 = new Audioo();
+    //PraderaSound1.create("Pradera1");
+    //PraderaSound1.Sound("Assets/BGM/Pradera1.mp3");
+    //Camara.GetCamera().add(PraderaSound1.getListener());
+
+    //Pradera Sound 2
+    const PraderaSound2 = new Audioo();
+    PraderaSound2.create("Pradera2");
+    PraderaSound2.Sound("Assets/BGM/Pradera2.mp3");
+    Camara.GetCamera().add(PraderaSound2.getListener());
+
+    //Pantano Sound 1
+    const PantanoSound1 = new Audioo();
+    //PantanoSound1.create("Pantano1");
+    //PantanoSound1.Sound("Assets/BGM/Pantano1.mp3");
+    //Camara.GetCamera().add(PantanoSound1.getListener());
+
+    //Pantano Sound 1
+    const PantanoSound2 = new Audioo();
+    //PantanoSound2.create("Pantano2");
+    //PantanoSound2.Sound("Assets/BGM/Pantano2.mp3");
+    //Camara.GetCamera().add(PantanoSound2.getListener());
+
+    //Nieve Sound 1
+    const NieveSound1 = new Audioo();
+    //NieveSound1.create("Nieve1");
+    //NieveSound1.Sound("Assets/BGM/Nieve1.mp3");
+    //Camara.GetCamera().add(NieveSound1.getListener());
+
+    //Nieve Sound 2
+    const NieveSound2 = new Audioo();
+    //NieveSound2.create("Nieve2");
+    //NieveSound2.Sound("Assets/BGM/Nieve2.mp3");
+    //Camara.GetCamera().add(NieveSound2.getListener());
     
     let water;
     const waterGeometry = new THREE.PlaneGeometry( 10000, 10000 );
@@ -325,9 +355,9 @@ function main()
         Escenario.SnowUpdate(time);
         //renderer.render(Escenario.GetTestScene(), Camara.GetCamera());
         //Pradera primer mapa
-        //renderer.render(Escenario.GetPraderaScene(), Camara.GetCamera());
+        renderer.render(Escenario.GetPraderaScene(), Camara.GetCamera());
         //renderer.render(Escenario.GetPantanoScene(), Camara.GetCamera());
-        renderer.render(Escenario.GetNieveScene(), Camara.GetCamera());
+        //renderer.render(Escenario.GetNieveScene(), Camara.GetCamera());
         leavesMateriala[0].uniforms.time.value = clock.getElapsedTime();
         leavesMateriala[0].uniformsNeedUpdate = true;
         leavesMateriala[1].uniforms.time.value = clock.getElapsedTime();

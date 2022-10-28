@@ -3,10 +3,10 @@ import * as THREE from 'three';
 
 class Audioo
 {
-    create()
+    create(nameListener)
     {
          this.listener = new THREE.AudioListener();
-         this.stopSound = new THREE.Audio( this.listener );
+         this.listener.name = nameListener;
     }
 
     getListener()
@@ -16,22 +16,14 @@ class Audioo
 
     Sound(bgm)
     {
-        //var sound = new THREE.Audio( this.listener );
-        var sound = new THREE.PositionalAudio( this.listener );
+        var sound = new THREE.Audio( this.listener );
         const audioLoader = new THREE.AudioLoader();
         audioLoader.load( bgm, function( buffer ) {
             sound.setBuffer( buffer );
             sound.setLoop( true );
+            sound.setVolume( 0.3 );
             sound.play();
-            sound.setVolume( 0.7 );
         });
-        //terrain.add(sound)
-        this.stopSound = sound;
-    }
-
-    Stop()
-    {
-        this.stopSound.stop();
     }
 }
 
