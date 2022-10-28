@@ -31,7 +31,9 @@ function main()
     Escenario.InitScene();
     Escenario.PantanoScene();
     Escenario.PraderaScene();
+    Escenario.NieveScene();
     Escenario.Rain();
+    Escenario.Snow();
 
     var Obsidiana1 = new Audioo();
     Obsidiana1.create();
@@ -107,6 +109,7 @@ function main()
             object.position.z = 8550;
             Escenario.GetPraderaScene().add( object );
             Escenario.GetPantanoScene().add( object );
+            Escenario.GetNieveScene().add( object );
             loadNextAnim(loader);
     } );
 
@@ -126,6 +129,7 @@ function main()
         object.name = "player";
         Escenario.GetPraderaScene().add( object );
         Escenario.GetPantanoScene().add( object );
+        Escenario.GetNieveScene().add( object );
         if (animations.length>0){
             loadNextAnim(loader);
         }
@@ -317,10 +321,13 @@ function main()
         stats.update();
         Escenario.RainUpdate();
         Escenario.LodoUpdate();
+        const time = Date.now() * 0.00005;
+        Escenario.SnowUpdate(time);
         //renderer.render(Escenario.GetTestScene(), Camara.GetCamera());
         //Pradera primer mapa
         //renderer.render(Escenario.GetPraderaScene(), Camara.GetCamera());
-        renderer.render(Escenario.GetPantanoScene(), Camara.GetCamera());
+        //renderer.render(Escenario.GetPantanoScene(), Camara.GetCamera());
+        renderer.render(Escenario.GetNieveScene(), Camara.GetCamera());
         leavesMateriala[0].uniforms.time.value = clock.getElapsedTime();
         leavesMateriala[0].uniformsNeedUpdate = true;
         leavesMateriala[1].uniforms.time.value = clock.getElapsedTime();

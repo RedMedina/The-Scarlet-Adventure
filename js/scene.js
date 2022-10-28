@@ -88,7 +88,7 @@ class Scenee
         this.Pantano.add(Terreno.GetPlane());
 
         var SkydomeT = new skydome();
-        SkydomeT.Create('Assets/Images/skyboxDay.png');
+        SkydomeT.Create('Assets/Images/skybox_2.png');
         this.Pantano.add(SkydomeT.Render());
 
         this.Lodo = new Mud();
@@ -1170,6 +1170,283 @@ class Scenee
         });
     }
 
+    NieveScene()
+    {
+        //Incia la escena
+        this.Nieve = new THREE.Scene();
+
+        //Luces
+        var Luces = new Lightt();
+        Luces.DirectionalLight(0xFFFFFF, 0.3);
+        Luces.DirectionDLight(20, 90, 0);
+        Luces.AmbientLight(0xFFFFFF);
+        this.Nieve.add(Luces.GetAmbientLight());
+        this.Nieve.add(Luces.GetDirectionalLight());
+        this.Nieve.add(Luces.GetDirectionalLight().target);
+        Luces.GetDirectionalLight().shadow.mapSize.width = 512;
+        Luces.GetDirectionalLight().shadow.mapSize.height = 512;
+        Luces.GetDirectionalLight().shadow.camera.near = 0.5;
+        Luces.GetDirectionalLight().shadow.camera.far = 10000;
+
+        //Lensflare
+        const textureLoader = new THREE.TextureLoader();
+        const textureFlare0 = textureLoader.load( 'Assets/Images/LensFlare.png' );
+        const textureFlare3 = textureLoader.load( 'Assets/Images/lensflare3.png' );
+        this.Pointlight = new THREE.PointLight( 0xffffff, 0.2, 2000 );
+        this.Pointlight.color.setHSL( 0.58, 1.0, 0.95 );
+        this.Pointlight.position.set( -15000, 4000, -20000 );
+        //this.Nieve.add( this.Pointlight );
+        const lensflare = new Lensflare();
+        lensflare.addElement( new LensflareElement( textureFlare0, 700, 0, this.Pointlight.color ) );
+        lensflare.addElement( new LensflareElement( textureFlare3, 60, 0.6 ) );
+        lensflare.addElement( new LensflareElement( textureFlare3, 70, 0.7 ) );
+        lensflare.addElement( new LensflareElement( textureFlare3, 120, 0.9 ) );
+        lensflare.addElement( new LensflareElement( textureFlare3, 70, 1 ) );
+        this.Pointlight.add( lensflare );
+
+        //Help para el día y la noche
+        const helper = new THREE.CameraHelper( Luces.GetDirectionalLight().shadow.camera );
+        this.Nieve.add( helper );
+
+        //Skydome
+        var SkydomeT = new skydome();
+        SkydomeT.Create('Assets/Images/skyboxDay.png');
+        this.Nieve.add(SkydomeT.Render());
+
+        //Terreno
+        var Terreno = new Terrain();
+        Terreno.MultitextureTerrain("Assets/Nieve/Rock_Nieve.png", "Assets/Nieve/Snow.jpg", "Assets/Nieve/Snow2.jpg", "Assets/Nieve/Alturas.png", "Assets/Nieve/Blendmap_Nieve.png", 900, 18000, 18000);
+        Terreno.GetPlane().position.y = -290;
+        this.Nieve.add(Terreno.GetPlane());
+
+        //Modelos
+        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Pino.glb", (object)=>{ //Pino
+            object.scale.set(0.45, 0.45, 0.45);
+
+            var Arbol2 = object.clone();
+            Arbol2.position.set(300, 240, 7500);
+
+            var Arbol3 = object.clone();
+            Arbol3.position.set(-2300, 200, 6500);
+
+            var Arbol4 = object.clone();
+            Arbol4.position.set(-800, 290, 6900);
+
+            var Arbol5 = object.clone();
+            Arbol5.position.set(-2300, 120, 8000);
+
+            var Arbol6 = object.clone();
+            Arbol6.position.set(-4300, 50, 5500);
+
+            var Arbol7 = object.clone();
+            Arbol7.position.set(-5300, 290, 7000);
+
+            var Arbol8 = object.clone();
+            Arbol8.position.set(4900, 190, 5000);
+
+            var Arbol9 = object.clone();
+            Arbol9.position.set(6900, 50, 5000);
+
+            var Arbol10 = object.clone();
+            Arbol10.position.set(5900, -100, 7000);
+
+            var Arbol11 = object.clone();
+            Arbol11.position.set(7600, -60, 7500);
+
+            var Arbol12 = object.clone();
+            Arbol12.position.set(-500, 210, 1500);
+
+            var Arbol13 = object.clone();
+            Arbol13.position.set(1500, 210, -500);
+
+            var Arbol14 = object.clone();
+            Arbol14.position.set(-1500, -10, -500);
+
+            var Arbol15 = object.clone();
+            Arbol15.position.set(6500, 120, -6500);
+
+            object.position.set(500, 390, 5500);
+
+            this.Nieve.add(object);
+            this.Nieve.add(Arbol2);
+            this.Nieve.add(Arbol3);
+            this.Nieve.add(Arbol4);
+            this.Nieve.add(Arbol5);
+            this.Nieve.add(Arbol6);
+            this.Nieve.add(Arbol7);
+            this.Nieve.add(Arbol8);
+            this.Nieve.add(Arbol9);
+            this.Nieve.add(Arbol10);
+            this.Nieve.add(Arbol11);
+            this.Nieve.add(Arbol12);
+            this.Nieve.add(Arbol13);
+            this.Nieve.add(Arbol14);
+            this.Nieve.add(Arbol15);
+        });
+
+        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol_O3.glb", (object)=>{ //Arbol
+            object.scale.set(130, 130, 130);
+
+            var Arbol2 = object.clone();
+            Arbol2.position.set(-800, 350, 5000);
+
+            var Arbol3 = object.clone();
+            Arbol3.position.set(-800, 230, 2500);
+
+            var Arbol4 = object.clone();
+            Arbol4.position.set(-7800, 450, 1500);
+
+            var Arbol5 = object.clone();
+            Arbol5.position.set(-5800, 400, 500);
+
+            var Arbol6 = object.clone();
+            Arbol6.position.set(-4800, 400, 1500);
+
+            var Arbol7 = object.clone();
+            Arbol7.position.set(-6800, 450, 500);
+
+            var Arbol8 = object.clone();
+            Arbol8.position.set(-7800, 200, 4000);
+
+            var Arbol9 = object.clone();
+            Arbol9.position.set(-5800, 400, 3000);
+
+            var Arbol10 = object.clone();
+            Arbol10.position.set(-4800, 160, 4000);
+
+            var Arbol11 = object.clone();
+            Arbol11.position.set(-6800, 400, 3000);
+
+            var Arbol12 = object.clone();
+            Arbol12.position.set(-6400, 200, 6000);
+
+            var Arbol13 = object.clone();
+            Arbol13.position.set(-7800, 250, 8200);
+
+            var Arbol14 = object.clone();
+            Arbol14.position.set(8200, 50, 400);
+
+            var Arbol15 = object.clone();
+            Arbol15.position.set(5200, 200, 400);
+
+            var Arbol16 = object.clone();
+            Arbol16.position.set(8500, 50, 2000);
+
+            var Arbol17 = object.clone();
+            Arbol17.position.set(5800, 200, 2000);
+
+            object.position.set(-3000, -30, 4000);
+            
+            this.Nieve.add(object);
+            this.Nieve.add(Arbol2);
+            this.Nieve.add(Arbol3);
+            this.Nieve.add(Arbol4);
+            this.Nieve.add(Arbol5);
+            this.Nieve.add(Arbol6);
+            this.Nieve.add(Arbol7);
+            this.Nieve.add(Arbol8);
+            this.Nieve.add(Arbol9);
+            this.Nieve.add(Arbol10);
+            this.Nieve.add(Arbol11);
+            this.Nieve.add(Arbol12);
+            this.Nieve.add(Arbol13);
+            this.Nieve.add(Arbol14);
+            this.Nieve.add(Arbol15);
+            this.Nieve.add(Arbol16);
+            this.Nieve.add(Arbol17);
+        });
+
+        this.Load3dModelGLTF("Assets/Models/Campamento/Antorcha.glb", (object)=>{ //Antorcha
+            object.scale.set(13, 13, 13);
+
+            var Antorcha2 = object.clone();
+            Antorcha2.position.set(5200, 240, -500);
+
+            var Antorcha3 = object.clone();
+            Antorcha3.position.set(3300, 420, -2500);
+
+            var Antorcha4 = object.clone();
+            Antorcha4.position.set(5200, 110, -2500);
+
+            var Antorcha5 = object.clone();
+            Antorcha5.position.set(500, 380, -3500);
+
+            var Antorcha6 = object.clone();
+            Antorcha6.position.set(500, 250, -7200);
+
+            var Antorcha7 = object.clone();
+            Antorcha7.position.set(-6500, 210, -3500);
+
+            var Antorcha8 = object.clone();
+            Antorcha8.position.set(-6500, 300, -7200);
+
+            object.position.set(3700, 330, -500);
+
+            this.Nieve.add(object);
+            this.Nieve.add(Antorcha2);
+            this.Nieve.add(Antorcha3);
+            this.Nieve.add(Antorcha4);
+            this.Nieve.add(Antorcha5);
+            this.Nieve.add(Antorcha6);
+            this.Nieve.add(Antorcha7);
+            this.Nieve.add(Antorcha8);
+        });
+
+        this.Load3dModelGLTF("Assets/Models/Campamento/Hoguera.glb", (object)=>{ //Hoguera
+            object.scale.set(25, 25, 25);
+
+            object.position.set(-3900, -30, -5500);
+            this.Nieve.add(object);
+        });
+
+        this.Load3dModelGLTF("Assets/Models/Campamento/Casa.glb", (object)=>{ //Casa
+            object.scale.set(3, 3, 3);
+
+            var Casa2 = object.clone();
+            Casa2.rotation.y = 90 * 3.1416 / 180;
+            Casa2.position.set(-6200, 190, -5300);
+
+            object.position.set(-3900, -30, -8000);
+            this.Nieve.add(object);
+            this.Nieve.add(Casa2);
+        });
+
+        this.Load3dModelGLTF("Assets/Models/Roca/Snow_Rock.glb", (object)=>{ //Roca
+            object.scale.set(0.1, 0.1, 0.1);
+
+            var roca2 = object.clone();
+            roca2.position.set(-1500, 240, 1800);
+
+            var roca3 = object.clone();
+            roca3.position.set(2200, 200, 1800);
+
+            var roca4 = object.clone();
+            roca4.position.set(-4200, 200, 8000);
+
+            var roca5 = object.clone();
+            roca5.position.set(-6200, 380, 7600);
+
+            var roca6 = object.clone();
+            roca6.position.set(6200, 180, 4600);
+
+            var roca7 = object.clone();
+            roca7.position.set(4500, 180, 7600);
+
+            var roca8 = object.clone();
+            roca8.position.set(8200, 70, 7600);
+
+            object.position.set(500, 200, 100);
+            this.Nieve.add(object);
+            this.Nieve.add(roca2);
+            this.Nieve.add(roca3);
+            this.Nieve.add(roca4);
+            this.Nieve.add(roca5);
+            this.Nieve.add(roca6);
+            this.Nieve.add(roca7);
+            this.Nieve.add(roca8);
+        });
+    }
+
     Load3dModelGLTF(model, onLoadCallback)
     {
         const gltfLoader = new GLTFLoader();
@@ -1243,6 +1520,66 @@ class Scenee
         this.Lodo.GetMud().material.map.offset.y = this.tiempo * 0.0025;
     }
 
+    Snow()
+    {
+        const geometry = new THREE.BufferGeometry();
+        let parameters;
+	    const vertices = [];
+        const materials = [];
+        this.ParticlesSnow = [];
+        const textureLoader = new THREE.TextureLoader();
+
+        const sprite1 = textureLoader.load( 'Assets/Nieve/snowflake1.png' );
+		const sprite2 = textureLoader.load( 'Assets/Nieve/snowflake2.png' );
+		const sprite3 = textureLoader.load( 'Assets/Nieve/snowflake3.png' );
+		const sprite4 = textureLoader.load( 'Assets/Nieve/snowflake4.png' );
+		const sprite5 = textureLoader.load( 'Assets/Nieve/snowflake5.png' );
+
+        for ( let i = 0; i < 70000; i ++ ) {
+            const x = Math.random() * 2000 - 1000;
+            const y = Math.random() * 2000 - 1000;
+            const z = Math.random() * 2000 - 1000;
+            vertices.push( x, y, z );
+        }
+        geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+
+        parameters = [
+            [[ 1.0, 0.2, 0.5 ], sprite2, 20 ],
+            [[ 0.95, 0.1, 0.5 ], sprite3, 15 ],
+            [[ 0.90, 0.05, 0.5 ], sprite1, 10 ],
+            [[ 0.85, 0, 0.5 ], sprite5, 8 ],
+            [[ 0.80, 0, 0.5 ], sprite4, 5 ]
+        ];
+
+        for ( let i = 0; i < parameters.length; i ++ ) {
+            const color = parameters[ i ][ 0 ];
+            const sprite = parameters[ i ][ 1 ];
+            const size = parameters[ i ][ 2 ];
+            materials[ i ] = new THREE.PointsMaterial( { size: size, map: sprite, blending: THREE.AdditiveBlending, depthTest: false, transparent: true } );
+            materials[ i ].color.setHSL( color[ 0 ], color[ 1 ], color[ 2 ] );
+            const particles = new THREE.Points( geometry, materials[ i ] );
+            particles.rotation.x = Math.random() * 6;
+            particles.rotation.y = Math.random() * 6;
+            particles.rotation.z = Math.random() * 6;
+            particles.scale.set(10, 10, 10);
+            this.ParticlesSnow.push(particles);
+        }
+
+        for (let i = 0; i < this.ParticlesSnow.length; i++) {
+            this.Nieve.add( this.ParticlesSnow[i] );
+        }
+    }
+
+    SnowUpdate(time)
+    {
+        for ( let i = 0; i < this.ParticlesSnow.length; i ++ ) {
+            const object = this.ParticlesSnow[ i ];
+            if ( object instanceof THREE.Points ) {
+                object.rotation.y = time * ( i < 4 ? i + 1 : - ( i + 1 ) );
+            }
+        }
+    }
+
     GetTestScene()
     {
         return this.TestScene;
@@ -1256,6 +1593,11 @@ class Scenee
     GetPraderaScene()
     {
         return this.Pradera;
+    }
+
+    GetNieveScene()
+    {
+        return this.Nieve;
     }
 }
 
