@@ -19,6 +19,11 @@
 		}
 	 </script>
 
+     <section id="loading-screen">
+        <div id="loader"></div>
+        <center><p id="loading-text">Cargando...</p></center>
+    </section>
+
     <!--script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
     <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
     <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/controls/OrbitControls.js"></script>

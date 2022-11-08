@@ -5,20 +5,40 @@ import {skydome} from '/PWGW/js/skydome.js';
 import {Lensflare, LensflareElement} from '/PWGW/js/lensflare.js';
 import {GLTFLoader} from '/PWGW/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 import {Mud} from '/PWGW/js/lodo.js';
+import {modelAnimController} from '/PWGW/js/modelAnimationController.js';
+import {player} from '/PWGW/js/player.js';
+import {Backpack} from '/PWGW/js/backpack.js';
+import {HealItem} from '/PWGW/js/HealItem.js';
 
 class Scenee
 {
+
+    constructor()
+    {
+        this.Playeranimations = ["Assets/Models/Player/Idle_Final", "Assets/Models/Player/Run_Final",
+        "Assets/Models/Player/Attack_Final", "Assets/Models/Player/Diying_Final",
+        "Assets/Models/Player/Dodge_Final", "Assets/Models/Player/Hanging_Idle_Final",
+        "Assets/Models/Player/Jump_Final"];
+
+        //while obteniendo los items y creando el array
+        var HealItems = [new HealItem("Pocion Basica", 100, 1), new HealItem("Pocion Alta", 500, 1)];
+
+        //Obtiene los items por ajax
+        var Mochila = new Backpack(HealItems);
+        this.Player = new player("User_name", {x: 0, y: 0, z: 0}, 1000, Mochila, 1, {Boss1: false, Boss2: false, Boss3: false});
+    }
+
     CreateScene()
     {
         const scene = new THREE.Scene();
         return scene;
     }
 
-    InitScene()
+    InitScene(loadingManager)
     {
         this.TestScene = new THREE.Scene();
         var Luces = new Lightt();
-        Luces.DirectionalLight(0xFFFFFF, 0.3);
+        Luces.DirectionalLight(0xFFFFFF, 1);
         Luces.DirectionDLight(20, 90, 0);
         Luces.AmbientLight(0xFFFFFF);
         this.TestScene.add(Luces.GetAmbientLight());
@@ -33,9 +53,18 @@ class Scenee
         const sphereMaterial = new THREE.MeshPhongMaterial( { color: 0xff0000, specular: 0xFFFFFF, shininess:8.5} );
         const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
         sphere.castShadow = true; //default is false
-        sphere.receiveShadow = true; //default
-        sphere.position.y = 10;
+        sphere.receiveShadow = false; //default
+        sphere.position.y = 20;
         this.TestScene.add( sphere );
+
+        const planeGeometry = new THREE.PlaneGeometry(60, 60, 100, 100);
+        const planeMaterial = new THREE.MeshPhongMaterial({color: 0x64EFFF});
+        const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+        //plane.castShadow = true;
+        plane.receiveShadow = true;
+        plane.rotation.x = Math.PI * -.5;
+        plane.position.y = 10;
+        this.TestScene.add( plane );
 
         const helper = new THREE.CameraHelper( Luces.GetDirectionalLight().shadow.camera );
         this.TestScene.add( helper );
@@ -54,7 +83,7 @@ class Scenee
         this.Pointlight = new THREE.PointLight( 0xffffff, 1.5, 2000 );
         this.Pointlight.color.setHSL( 0.58, 1.0, 0.95 );
         this.Pointlight.position.set( 1000, 0, 0 );
-        this.TestScene.add( this.Pointlight );
+        //this.TestScene.add( this.Pointlight );
         const lensflare = new Lensflare();
         lensflare.addElement( new LensflareElement( textureFlare0, 700, 0, this.Pointlight.color ) );
         lensflare.addElement( new LensflareElement( textureFlare3, 60, 0.6 ) );
@@ -62,9 +91,16 @@ class Scenee
         lensflare.addElement( new LensflareElement( textureFlare3, 120, 0.9 ) );
         lensflare.addElement( new LensflareElement( textureFlare3, 70, 1 ) );
         this.Pointlight.add( lensflare );
+
+        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol3.glb", loadingManager, (object)=>{
+            object.position.y = 10;
+            object.position.x = 10;
+            object.scale.set(3, 3, 3);
+            this.TestScene.add(object);
+        });
     }
 
-    PantanoScene()
+    PantanoScene(loadingManager)
     {
         this.Pantano = new THREE.Scene();
         var Luces = new Lightt();
@@ -97,7 +133,7 @@ class Scenee
         this.tiempo = 0;
 
         //Modelos
-        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol_O2.glb", (object)=>{ //Arbol Otoño
+        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol_O2.glb", loadingManager, (object)=>{ //Arbol Otoño
             object.position.y = 340;
             object.scale.x = 100;
             object.scale.y = 100;
@@ -340,7 +376,7 @@ class Scenee
             this.Pantano.add(Arbol40);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol_Seco.glb", (object)=>{ //Arbol Seco
+        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol_Seco.glb", loadingManager,(object)=>{ //Arbol Seco
             object.position.y = 30;
             object.scale.set(20, 20, 20);
 
@@ -422,7 +458,7 @@ class Scenee
             this.Pantano.add(ArbolS13);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Campamento/Hoguera.glb", (object)=>{ //Hoguera
+        this.Load3dModelGLTF("Assets/Models/Campamento/Hoguera.glb", loadingManager,(object)=>{ //Hoguera
             object.position.y = 220;
             object.scale.set(25, 25, 25);
 
@@ -431,7 +467,7 @@ class Scenee
             this.Pantano.add(object);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Campamento/Antorcha.glb", (object)=>{ //Antorcha
+        this.Load3dModelGLTF("Assets/Models/Campamento/Antorcha.glb", loadingManager,(object)=>{ //Antorcha
             object.position.y = 320;
             object.scale.set(13, 13, 13);
 
@@ -465,7 +501,7 @@ class Scenee
             this.Pantano.add(Antorcha5);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Campamento/Tronco.glb", (object)=>{ //Tronco
+        this.Load3dModelGLTF("Assets/Models/Campamento/Tronco.glb", loadingManager, (object)=>{ //Tronco
             object.position.y = 220;
             object.scale.set(25, 25, 25);
 
@@ -476,7 +512,7 @@ class Scenee
             this.Pantano.add(object);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Roca/roca3.glb", (object)=>{
+        this.Load3dModelGLTF("Assets/Models/Roca/roca3.glb", loadingManager, (object)=>{
             object.position.y = 220;
             object.scale.set(100, 100, 100);
 
@@ -495,7 +531,7 @@ class Scenee
         });
     }
 
-    PraderaScene()
+    PraderaScene(loadingManager)
     {
         //Incia la escena
         this.Pradera = new THREE.Scene();
@@ -546,7 +582,7 @@ class Scenee
 
         //Modelos
 
-        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol3.glb", (object)=>{ //Arbol_1
+        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol3.glb", loadingManager, (object)=>{ //Arbol_1
             object.position.y = 200;
             object.scale.x = 100;
             object.scale.y = 100;
@@ -766,7 +802,7 @@ class Scenee
             this.Pradera.add(arbol43);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Roca/roca3.glb", (object)=>{ //Roca_1
+        this.Load3dModelGLTF("Assets/Models/Roca/roca3.glb", loadingManager, (object)=>{ //Roca_1
             object.position.y = 200;
             object.scale.set(100, 100, 100);
 
@@ -856,7 +892,7 @@ class Scenee
             this.Pradera.add(roca17);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Roca/RocaGrande.glb", (object)=>{ //Roca_2
+        this.Load3dModelGLTF("Assets/Models/Roca/RocaGrande.glb", loadingManager, (object)=>{ //Roca_2
             object.position.y = 800;
             object.scale.set(70, 70, 70);
 
@@ -882,7 +918,7 @@ class Scenee
             this.Pradera.add(GRoca4);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Arbusto/planta_conjunto.glb", (object)=>{ //planta_conjunto
+        this.Load3dModelGLTF("Assets/Models/Arbusto/planta_conjunto.glb", loadingManager, (object)=>{ //planta_conjunto
             object.position.y = 200;
             object.scale.set(65, 65, 65);
 
@@ -941,7 +977,7 @@ class Scenee
             this.Pradera.add(flores11);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Vallas/vallas.glb", (object)=>{
+        this.Load3dModelGLTF("Assets/Models/Vallas/vallas.glb", loadingManager, (object)=>{
             object.position.y = 200;
             object.scale.set(50, 50, 50);
             object.rotation.y = 90 * 3.1416 / 180;
@@ -952,7 +988,7 @@ class Scenee
             this.Pradera.add(object);
         });
         
-        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol2.glb", (object)=>{
+        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol2.glb", loadingManager, (object)=>{
             object.position.y = 200;
             object.scale.x = 45;
             object.scale.y = 45;
@@ -994,7 +1030,7 @@ class Scenee
             this.Pradera.add(Arbol7);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Campamento/Hoguera.glb", (object)=>{
+        this.Load3dModelGLTF("Assets/Models/Campamento/Hoguera.glb", loadingManager, (object)=>{
             object.position.y = 220;
             object.scale.set(25, 25, 25);
 
@@ -1003,7 +1039,7 @@ class Scenee
             this.Pradera.add(object);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Campamento/Antorcha.glb", (object)=>{
+        this.Load3dModelGLTF("Assets/Models/Campamento/Antorcha.glb", loadingManager, (object)=>{
             object.position.y = 220;
             object.scale.set(13, 13, 13);
 
@@ -1083,7 +1119,7 @@ class Scenee
             this.Pradera.add(Antorcha15);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Campamento/Tronco.glb", (object)=>{
+        this.Load3dModelGLTF("Assets/Models/Campamento/Tronco.glb", loadingManager, (object)=>{
             object.position.y = 220;
             object.scale.set(25, 25, 25);
 
@@ -1110,7 +1146,7 @@ class Scenee
             this.Pradera.add(Tronco3);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol4.glb", (object)=>{
+        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol4.glb", loadingManager, (object)=>{
             object.scale.set(23, 23, 23);
             object.position.y = 200;
 
@@ -1168,9 +1204,26 @@ class Scenee
             this.Pradera.add(Arbol10);
             this.Pradera.add(Arbol11);
         });
+
+        //Personaje
+        var ModelPlayer = new modelAnimController(this.Playeranimations, "Assets/Models/Player/Player_Idle.fbx");
+        ModelPlayer.CreateBaseModel("PlayerModell", loadingManager, (object)=>{
+            var PlayerModel = new THREE.Object3D();
+            PlayerModel.name = "PlayerModel";
+            PlayerModel.add(object);
+            for (let i = 0; i < this.Playeranimations.length; i++) {
+                ModelPlayer.LoadMultipleAnimations(i, (objectAnim)=>{
+                    PlayerModel.add(objectAnim);
+                });
+            }
+            this.Pradera.add(PlayerModel);
+            PlayerModel.position.set(1000, 200, 8550);
+            PlayerModel.rotation.y = 180 * 3.1416 / 180;
+        });
+        this.Player.SetModel(ModelPlayer, "Pradera");
     }
 
-    NieveScene()
+    NieveScene(loadingManager)
     {
         //Incia la escena
         this.Nieve = new THREE.Scene();
@@ -1220,7 +1273,7 @@ class Scenee
         this.Nieve.add(Terreno.GetPlane());
 
         //Modelos
-        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Pino.glb", (object)=>{ //Pino
+        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Pino.glb", loadingManager, (object)=>{ //Pino
             object.scale.set(0.45, 0.45, 0.45);
 
             var Arbol2 = object.clone();
@@ -1284,7 +1337,7 @@ class Scenee
             this.Nieve.add(Arbol15);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol_O3.glb", (object)=>{ //Arbol
+        this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol_O3.glb", loadingManager, (object)=>{ //Arbol
             object.scale.set(130, 130, 130);
 
             var Arbol2 = object.clone();
@@ -1356,7 +1409,7 @@ class Scenee
             this.Nieve.add(Arbol17);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Campamento/Antorcha.glb", (object)=>{ //Antorcha
+        this.Load3dModelGLTF("Assets/Models/Campamento/Antorcha.glb", loadingManager, (object)=>{ //Antorcha
             object.scale.set(13, 13, 13);
 
             var Antorcha2 = object.clone();
@@ -1392,14 +1445,14 @@ class Scenee
             this.Nieve.add(Antorcha8);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Campamento/Hoguera.glb", (object)=>{ //Hoguera
+        this.Load3dModelGLTF("Assets/Models/Campamento/Hoguera.glb", loadingManager, (object)=>{ //Hoguera
             object.scale.set(25, 25, 25);
 
             object.position.set(-3900, -30, -5500);
             this.Nieve.add(object);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Campamento/Casa.glb", (object)=>{ //Casa
+        this.Load3dModelGLTF("Assets/Models/Campamento/Casa.glb", loadingManager, (object)=>{ //Casa
             object.scale.set(3, 3, 3);
 
             var Casa2 = object.clone();
@@ -1411,7 +1464,7 @@ class Scenee
             this.Nieve.add(Casa2);
         });
 
-        this.Load3dModelGLTF("Assets/Models/Roca/Snow_Rock.glb", (object)=>{ //Roca
+        this.Load3dModelGLTF("Assets/Models/Roca/Snow_Rock.glb", loadingManager, (object)=>{ //Roca
             object.scale.set(0.1, 0.1, 0.1);
 
             var roca2 = object.clone();
@@ -1447,9 +1500,9 @@ class Scenee
         });
     }
 
-    Load3dModelGLTF(model, onLoadCallback)
+    Load3dModelGLTF(model, loadingManager, onLoadCallback)
     {
-        const gltfLoader = new GLTFLoader();
+        const gltfLoader = new GLTFLoader(loadingManager);
         gltfLoader.load(model, (gltf) => {
             gltf.scene.traverse((child)=>{
                 child.castShadow = true;
@@ -1598,6 +1651,11 @@ class Scenee
     GetNieveScene()
     {
         return this.Nieve;
+    }
+
+    GetPlayer()
+    {
+        return this.Player;
     }
 }
 

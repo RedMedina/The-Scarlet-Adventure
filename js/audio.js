@@ -16,14 +16,18 @@ class Audioo
 
     Sound(bgm)
     {
-        var sound = new THREE.Audio( this.listener );
+        this.sound = new THREE.Audio( this.listener );
         const audioLoader = new THREE.AudioLoader();
-        audioLoader.load( bgm, function( buffer ) {
-            sound.setBuffer( buffer );
-            sound.setLoop( true );
-            sound.setVolume( 0.3 );
-            sound.play();
+        audioLoader.load( bgm, ( buffer )=> {
+            this.sound.setBuffer( buffer );
+            this.sound.setLoop( true );
+            this.sound.setVolume( 0.01 );
         });
+    }
+
+    GetSound()
+    {
+        return this.sound;
     }
 }
 

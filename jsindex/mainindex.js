@@ -303,9 +303,9 @@ function main()
     RendericeModel("Assets/Models/Roca/RocaGrande.glb",  65, 100, 270, 13);
 
 
-    const map = new THREE.TextureLoader().load( 'Assets/Images/mountain.png' );
-    const material1 = new THREE.SpriteMaterial( { map: map, sizeAttenuation: false, lights: true } );
-    const sprite = new THREE.Sprite( material1 );
+    //const map = new THREE.TextureLoader().load( 'Assets/Images/mountain.png' );
+    //const material1 = new THREE.SpriteMaterial( { map: map, sizeAttenuation: false, lights: true } );
+    //const sprite = new THREE.Sprite( material1 );
     //sprite.scale.x = 1000;
     //sprite.scale.y = 1000;
     //sprite.scale.z = 1000;
@@ -502,7 +502,7 @@ function main()
         //Alight.intensity = intensityAmbientLight + 0.2;
         //light.position.set(Math.cos(rotationLight) * 5, Math.sin(rotationLight) * 5, 0);
         frame = (frame + 0.057) % maxFrame;
-        leavesMateriala.uniforms.time.value = clock.getElapsedTime();
+        leavesMateriala.uniforms.time.value += 1.0 / 60.0;
         leavesMateriala.uniformsNeedUpdate = true;
         sky.rotation.y = RotationSky;
         water.material.uniforms[ 'time' ].value += 1.0 / 60.0;

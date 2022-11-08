@@ -1,12 +1,11 @@
 import * as THREE from 'three';
 import {Cameraa} from '/PWGW/js/camera.js';
-import {Audioo} from '/PWGW/js/audio.js';
 import {Scenee} from '/PWGW/js/scene.js';
 import Stats from '/PWGW/node_modules/three/examples/jsm/libs/stats.module.js';
 import { Water } from '/PWGW/node_modules/three/examples/jsm/objects/Water.js';
-import {FBXLoader} from '/PWGW/node_modules/three/examples/jsm/loaders/FBXLoader.js';
 import {OrbitControls} from '/PWGW/node_modules/three/examples/jsm/controls/OrbitControls.js';
 import {GUI} from '/PWGW/js/gui.js';
+import {AudioController} from '/PWGW/js/audioController.js'
 
 function main()
 {
@@ -17,59 +16,50 @@ function main()
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
     var Escenario = new Scenee();
+    var Scene;
     var Camara = new Cameraa(45, 2, 0.1, 1000000);
+    //Camara.GetCamera().position.set(0, 140, -370);
 
     const clock = new THREE.Clock();
     
     var keys = {};
+    var Actionkeys = {Attack: false, Dodge: false, Jump: false};
     var mousekeys = [];
 
     document.addEventListener('keydown', onKeyDown);
 	document.addEventListener('keyup', onKeyUp);
     document.addEventListener('mousemove', onMouseMove);
 
-    Escenario.InitScene();
-    Escenario.PantanoScene();
-    Escenario.PraderaScene();
-    Escenario.NieveScene();
+    const loadingManager = new THREE.LoadingManager( () => {
+		const loadingScreen = document.getElementById( 'loading-screen' );
+		loadingScreen.classList.add( 'fade-out' );
+		loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
+        
+	} );
+
+    loadingManager.onLoad = function()
+    {
+        document.querySelector('#loading-screen').remove();
+        //Initialize Player
+        Escenario.GetPlayer().GetModel().Pradera.playAnimation(0,1);
+        //Escenario.GetPraderaScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+        audioCont.PlaySceneSound(1);
+    }
+
+    Escenario.InitScene(loadingManager);
+    Escenario.PantanoScene(loadingManager);
+    Escenario.PraderaScene(loadingManager);
+    Escenario.NieveScene(loadingManager);
     Escenario.Rain();
     Escenario.Snow();
-
-    //Pradera Sound 1
-    const PraderaSound1 = new Audioo();
-    //PraderaSound1.create("Pradera1");
-    //PraderaSound1.Sound("Assets/BGM/Pradera1.mp3");
-    //Camara.GetCamera().add(PraderaSound1.getListener());
-
-    //Pradera Sound 2
-    const PraderaSound2 = new Audioo();
-    PraderaSound2.create("Pradera2");
-    PraderaSound2.Sound("Assets/BGM/Pradera2.mp3");
-    Camara.GetCamera().add(PraderaSound2.getListener());
-
-    //Pantano Sound 1
-    const PantanoSound1 = new Audioo();
-    //PantanoSound1.create("Pantano1");
-    //PantanoSound1.Sound("Assets/BGM/Pantano1.mp3");
-    //Camara.GetCamera().add(PantanoSound1.getListener());
-
-    //Pantano Sound 1
-    const PantanoSound2 = new Audioo();
-    //PantanoSound2.create("Pantano2");
-    //PantanoSound2.Sound("Assets/BGM/Pantano2.mp3");
-    //Camara.GetCamera().add(PantanoSound2.getListener());
-
-    //Nieve Sound 1
-    const NieveSound1 = new Audioo();
-    //NieveSound1.create("Nieve1");
-    //NieveSound1.Sound("Assets/BGM/Nieve1.mp3");
-    //Camara.GetCamera().add(NieveSound1.getListener());
-
-    //Nieve Sound 2
-    const NieveSound2 = new Audioo();
-    //NieveSound2.create("Nieve2");
-    //NieveSound2.Sound("Assets/BGM/Nieve2.mp3");
-    //Camara.GetCamera().add(NieveSound2.getListener());
+    Scene = Escenario.GetPraderaScene();
+    const audioCont = new AudioController();
+    var DodgeDuracion = 1.5;
+    var DodgeContador = 0;
+    var AttackDuracion = 2.2;
+    var AttackContador = 0;
+    var JumpDuracion = 2.5;
+    var JumpContador = 0;
     
     let water;
     const waterGeometry = new THREE.PlaneGeometry( 10000, 10000 );
@@ -102,80 +92,13 @@ function main()
     controls.update();
 
     var leavesMateriala = [];
-    CreatePasto(12000, -2400, 7000, 30, 25, 30, 170, 120);
-    CreatePasto(12000, 4300, 7000, 30, 25, 30, 170, 120);
-    CreatePasto(12000,  300, -6600, 30, 25, 30, 170, 120);
-    CreatePasto(12000, -7300, -3000, 30, 25, 30, 110, 120);
+    CreatePasto(6000, -2400, 7000, 30, 25, 30, 170, 120);
+    CreatePasto(6000, 4300, 7000, 30, 25, 30, 170, 120);
+    CreatePasto(6000,  300, -6600, 30, 25, 30, 170, 120);
+    CreatePasto(6000, -7300, -3000, 30, 25, 30, 110, 120);
 
     const ui = new GUI();
     ui.CreateLife();
-
-    var animations = ["Assets/Models/Player/Idle_Final", "Assets/Models/Player/Run_Final",
-        "Assets/Models/Player/Attack_Final", "Assets/Models/Player/Diying_Final",
-        "Assets/Models/Player/Dodge_Final", "Assets/Models/Player/Hanging_Idle_Final",
-        "Assets/Models/Player/Jump_Final"];
-    var mixer;
-    var actions;
-    var AnimacionActual = 8;
-    var RotacionActual = 0;
-    var PosX = 0;
-    var PosZ = 0;
-
-    const loader = new FBXLoader();
-        loader.load( 'Assets/Models/Player/Player_Idle.fbx', function ( object ) {
-            mixer = new THREE.AnimationMixer( object );
-            actions = [];
-            object.traverse( function ( child ) {
-            if ( child.isMesh ) {
-                child.castShadow = true;
-                child.receiveShadow = false;
-                child.material.side = THREE.DoubleSide;
-             }
-            } );
-            object.name = "player";
-            object.rotation.y = 180 * 3.1416 / 180;
-            object.position.x = 1000;
-            object.position.y = 200;
-            object.position.z = 8550;
-            Escenario.GetPraderaScene().add( object );
-            Escenario.GetPantanoScene().add( object );
-            Escenario.GetNieveScene().add( object );
-            loadNextAnim(loader);
-    } );
-
-    function loadNextAnim(loader)
-    {
-        const anim = animations.pop();
-        loader.load( `${anim}.fbx`, function ( object ) {
-        const action = mixer.clipAction( object.animations[ 0 ] );
-        actions.push(action);
-        object.traverse( function ( child ) {
-            if ( child.isMesh ) {
-                child.castShadow = true;
-                child.receiveShadow = false;
-                child.material.side = THREE.DoubleSide;
-            }
-        } );
-        object.name = "player";
-        Escenario.GetPraderaScene().add( object );
-        Escenario.GetPantanoScene().add( object );
-        Escenario.GetNieveScene().add( object );
-        if (animations.length>0){
-            loadNextAnim(loader);
-        }
-        } );
-    }
-
-    function playAnimation(index){
-        if(index != AnimacionActual)
-        {
-            mixer.stopAllAction();
-            const action = actions[index];
-            action.weight = 1;
-            action.fadeIn(0.5);
-            action.play();
-        }
-    }
 
     function CreatePasto(instanNumber, posx, posz, scalex, scaley, scalez, spacex, spacez)
     {
@@ -298,55 +221,142 @@ function main()
         }
         const delta = clock.getDelta();
 
-        if (keys["W"]){
-            playAnimation(5);
-            AnimacionActual = 5;
-            Escenario.GetPraderaScene().getObjectByName("player").rotation.y = 0 * 3.1416 / 180;
-            PosZ += 50 * delta;
-            Escenario.GetPraderaScene().getObjectByName("player").position.z = PosZ;
-            Escenario.GetPraderaScene().getObjectByName("player").position.x = PosX;
-            RotacionActual = Escenario.GetPraderaScene().getObjectByName("player").rotation.y;
-        } else if (keys["A"]){
-            playAnimation(5);
-            AnimacionActual = 5;
-            Escenario.GetPraderaScene().getObjectByName("player").rotation.y = 90 * 3.1416 / 180;
-            PosX += 50 * delta;
-            Escenario.GetPraderaScene().getObjectByName("player").position.x = PosX;
-            Escenario.GetPraderaScene().getObjectByName("player").position.z = PosZ;
-            RotacionActual = Escenario.GetPraderaScene().getObjectByName("player").rotation.y;
-        } else if (keys["S"]){
-            playAnimation(5);
-            AnimacionActual = 5;
-            Escenario.GetPraderaScene().getObjectByName("player").rotation.y = 180 * 3.1416 / 180;
-            PosZ -= 50 * delta;
-            Escenario.GetPraderaScene().getObjectByName("player").position.z = PosZ;
-            Escenario.GetPraderaScene().getObjectByName("player").position.x = PosX;
-            RotacionActual = Escenario.GetPraderaScene().getObjectByName("player").rotation.y;
-        } else if (keys["D"]){
-            playAnimation(5);
-            AnimacionActual = 5;
-            Escenario.GetPraderaScene().getObjectByName("player").rotation.y = 270 * 3.1416 / 180;
-            PosX -= 50 * delta;
-            Escenario.GetPraderaScene().getObjectByName("player").position.x = PosX;
-            Escenario.GetPraderaScene().getObjectByName("player").position.z = PosZ;
-            RotacionActual = Escenario.GetPraderaScene().getObjectByName("player").rotation.y;
-        } else if (keys["%"] /*<-*/){ 
-            //Camara.GetCamera().rotation.y += (30 * 3.1416 / 180) * delta;
-        } else if (keys["'"] /*->*/){ 
-            //Camara.GetCamera().rotation.y -= (30 * 3.1416 / 180) * delta;
-        } else if (keys["&"] /*^*/){ 
-            //Camara.GetCamera().rotation.x -= (30 * 3.1416 / 180) * delta;
-        } else if (keys["("] /*V*/){ 
-            //Camara.GetCamera().rotation.x += (30 * 3.1416 / 180) * delta;
-        } else if (keys["W"] == false || keys["A"] == false || keys["S"] == false || keys["D"] == false){
-            playAnimation(6);
-            AnimacionActual = 6;
-            Escenario.GetPraderaScene().getObjectByName("player").rotation.y = RotacionActual;
-            Escenario.GetPraderaScene().getObjectByName("player").position.x = PosX;
-            Escenario.GetPraderaScene().getObjectByName("player").position.z = PosZ;
+       /* if (keys["A"]) {
+            if(Actionkeys.Dodge == false && Actionkeys.Jump == false)
+            {
+                Actionkeys.Attack = false;
+                AttackContador = 0;
+                Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateX(550 * (delta));
+                Escenario.GetPlayer().GetModel().Pradera.playAnimation(1,1);
+            }
+		}else if (keys["D"]) {
+            if(Actionkeys.Dodge == false && Actionkeys.Jump == false)
+            {
+                Actionkeys.Attack = false;
+                AttackContador = 0;
+                Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateX(-550 * (delta));
+                Escenario.GetPlayer().GetModel().Pradera.playAnimation(1,1);
+            }
+		}*/
+		if (keys["W"]) {
+            if(Actionkeys.Dodge == false && Actionkeys.Jump == false)
+            {
+                Actionkeys.Attack = false;
+                AttackContador = 0;
+                Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(550 * (delta));
+                Escenario.GetPlayer().GetModel().Pradera.playAnimation(1,1);
+            }
+		}else if (keys["S"]) {
+            if(Actionkeys.Dodge == false && Actionkeys.Jump == false)
+            {
+                Actionkeys.Attack = false;
+                AttackContador = 0;
+                Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(-550 * (delta));
+                Escenario.GetPlayer().GetModel().Pradera.playAnimation(1,1);
+            }
+		}
+        else if(keys["E"]){
+            if(Actionkeys.Dodge == false && Actionkeys.Jump == false)
+            {
+                Actionkeys.Attack = true;
+            }
         }
-        //Camara.GetCamera().position.set(PosX, 140, PosZ - 340);
-        if ( mixer ) mixer.update( delta );
+        else if(keys[" "]){
+            if(Actionkeys.Dodge == false)
+            {
+                Actionkeys.Attack = false;
+                AttackContador = 0;
+                Actionkeys.Jump = true;
+            }
+        }
+        else if ((keys["W"] == false || keys["A"] == false || keys["S"] == false || keys["D"] == false) &&
+                Actionkeys.Attack == false && Actionkeys.Dodge == false && Actionkeys.Jump == false)
+        {
+            if(Escenario.GetPlayer().GetModel().Pradera.getAnimActual() != -1)
+            {
+                Escenario.GetPlayer().GetModel().Pradera.playAnimation(0,1);   
+            }
+        }
+
+        if (keys["%"] /*<-*/){ 
+            Escenario.GetPraderaScene().getObjectByName("PlayerModel").rotation.y += 3 * delta;
+        } else if (keys["'"] /*->*/){ 
+            Escenario.GetPraderaScene().getObjectByName("PlayerModel").rotation.y += -3 * delta;
+        } else if (keys["&"] /*^*/){ 
+            Camara.GetCamera().rotation.x -= (50 * 3.1416 / 180) * (delta);
+        } else if (keys["("] /*V*/){ 
+            Camara.GetCamera().rotation.x += (50 * 3.1416 / 180) * (delta);
+        }
+
+        if(keys["Q"]){
+            if(Actionkeys.Jump == false)
+            {
+                Actionkeys.Attack = false;
+                AttackContador = 0;
+                
+                Actionkeys.Dodge = true;
+                Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(500 * (delta)); 
+            }
+        }
+
+        //Dodge
+        if(Actionkeys.Dodge == true)
+        {
+            DodgeContador += delta;
+            if(DodgeContador <= DodgeDuracion)
+            {
+                Escenario.GetPlayer().GetModel().Pradera.playAnimation(4,1);
+            }else
+            {
+                Actionkeys.Dodge = false;
+                DodgeContador = 0;
+            }
+        }
+        //Attack
+        if(Actionkeys.Attack == true)
+        {
+            AttackContador += delta;
+            if(AttackContador <= AttackDuracion)
+            {
+                Escenario.GetPlayer().GetModel().Pradera.playAnimation(2,1);
+            }else
+            {
+                Actionkeys.Attack = false;
+                AttackContador = 0;
+            }
+        }
+        //Jump
+        if(Actionkeys.Jump == true)
+        {
+            JumpContador += delta;
+            if(JumpContador <= JumpDuracion)
+            {
+                Escenario.GetPlayer().GetModel().Pradera.playAnimation(6,1);
+            }else
+            {
+                Actionkeys.Jump = false;
+                JumpContador = 0;
+            }
+        }
+
+        /*De prueba cambio scene*/
+        if(keys["J"])
+        {
+            Scene = Escenario.GetPraderaScene();
+            audioCont.PlaySceneSound(1);
+        }
+        if(keys["K"])
+        {
+            Scene = Escenario.GetPantanoScene();
+            audioCont.PlaySceneSound(2);
+        }
+        if(keys["L"])
+        {
+            Scene = Escenario.GetNieveScene();
+            audioCont.PlaySceneSound(3);
+        }
+
+        if (Escenario.GetPlayer().GetModel().Pradera.getMixer()) Escenario.GetPlayer().GetModel().Pradera.getMixer().update(delta);
         water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
         stats.update();
         Escenario.RainUpdate();
@@ -354,17 +364,14 @@ function main()
         const time = Date.now() * 0.00005;
         Escenario.SnowUpdate(time);
         //renderer.render(Escenario.GetTestScene(), Camara.GetCamera());
-        //Pradera primer mapa
-        renderer.render(Escenario.GetPraderaScene(), Camara.GetCamera());
-        //renderer.render(Escenario.GetPantanoScene(), Camara.GetCamera());
-        //renderer.render(Escenario.GetNieveScene(), Camara.GetCamera());
-        leavesMateriala[0].uniforms.time.value = clock.getElapsedTime();
+        renderer.render(Scene, Camara.GetCamera());
+        leavesMateriala[0].uniforms.time.value += 1.0 / 60.0;
         leavesMateriala[0].uniformsNeedUpdate = true;
-        leavesMateriala[1].uniforms.time.value = clock.getElapsedTime();
+        leavesMateriala[1].uniforms.time.value += 1.0 / 60.0;
         leavesMateriala[1].uniformsNeedUpdate = true;
-        leavesMateriala[2].uniforms.time.value = clock.getElapsedTime();
+        leavesMateriala[2].uniforms.time.value += 1.0 / 60.0;
         leavesMateriala[2].uniformsNeedUpdate = true;
-        leavesMateriala[3].uniforms.time.value = clock.getElapsedTime();
+        leavesMateriala[3].uniforms.time.value += 1.0 / 60.0;
         leavesMateriala[3].uniformsNeedUpdate = true;
         
         requestAnimationFrame(render);

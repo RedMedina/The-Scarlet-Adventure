@@ -1,8 +1,0 @@
-newmtl initialShadingGroup
-illum 1
-Kd 0.90 0.90 0.90
-Ka 1.00 1.00 1.00
-Tf 1.00 1.00 1.00
-Ni 1.00
-map_Kd ArbolTextura.jpg
-norm ArbolN.png
