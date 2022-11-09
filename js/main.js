@@ -21,6 +21,7 @@ function main()
     //Camara.GetCamera().position.set(0, 140, -370);
 
     const clock = new THREE.Clock();
+    let RotationSky = 0;
     
     var keys = {};
     var Actionkeys = {Attack: false, Dodge: false, Jump: false};
@@ -43,7 +44,8 @@ function main()
         //Initialize Player
         Escenario.GetPlayer().GetModel().Pradera.playAnimation(0,1);
         //Escenario.GetPraderaScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
-        audioCont.PlaySceneSound(1);
+        //Base Sound
+        //audioCont.PlaySceneSound(1);
     }
 
     Escenario.InitScene(loadingManager);
@@ -52,7 +54,7 @@ function main()
     Escenario.NieveScene(loadingManager);
     Escenario.Rain();
     Escenario.Snow();
-    Scene = Escenario.GetPraderaScene();
+    Scene = Escenario.GetPantanoScene();
     const audioCont = new AudioController();
     var DodgeDuracion = 1.5;
     var DodgeContador = 0;
@@ -357,6 +359,11 @@ function main()
         }
 
         if (Escenario.GetPlayer().GetModel().Pradera.getMixer()) Escenario.GetPlayer().GetModel().Pradera.getMixer().update(delta);
+        
+        for (let i = 0; i < Escenario.GetPraderaEnemies().length; i++) {
+            if (Escenario.GetPraderaEnemies()[i].GetMixer()){Escenario.GetPraderaEnemies()[i].GetMixer().update(delta);}
+        }
+
         water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
         stats.update();
         Escenario.RainUpdate();
@@ -373,6 +380,9 @@ function main()
         leavesMateriala[2].uniformsNeedUpdate = true;
         leavesMateriala[3].uniforms.time.value += 1.0 / 60.0;
         leavesMateriala[3].uniformsNeedUpdate = true;
+
+        RotationSky < 360 ? RotationSky += 0.00035 : RotationSky = 0;
+        Escenario.GetPraderaScene().getObjectByName("SkyPradera").rotation.y = RotationSky; 
         
         requestAnimationFrame(render);
     }

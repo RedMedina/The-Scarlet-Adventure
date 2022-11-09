@@ -9,6 +9,7 @@ import {modelAnimController} from '/PWGW/js/modelAnimationController.js';
 import {player} from '/PWGW/js/player.js';
 import {Backpack} from '/PWGW/js/backpack.js';
 import {HealItem} from '/PWGW/js/HealItem.js';
+import {OneModelAnim} from '/PWGW/js/OnemodelAnim.js';
 
 class Scenee
 {
@@ -19,6 +20,9 @@ class Scenee
         "Assets/Models/Player/Attack_Final", "Assets/Models/Player/Diying_Final",
         "Assets/Models/Player/Dodge_Final", "Assets/Models/Player/Hanging_Idle_Final",
         "Assets/Models/Player/Jump_Final"];
+
+        //Pradera Enemies
+        this.PraderaEnemies = []; //Temporal hasta tener la ia y stats
 
         //while obteniendo los items y creando el array
         var HealItems = [new HealItem("Pocion Basica", 100, 1), new HealItem("Pocion Alta", 500, 1)];
@@ -572,6 +576,7 @@ class Scenee
         //Skydome
         var SkydomeT = new skydome();
         SkydomeT.Create('Assets/Images/skyboxDay.png');
+        SkydomeT.Render().name = "SkyPradera";
         this.Pradera.add(SkydomeT.Render());
 
         //Terreno
@@ -1221,6 +1226,191 @@ class Scenee
             PlayerModel.rotation.y = 180 * 3.1416 / 180;
         });
         this.Player.SetModel(ModelPlayer, "Pradera");
+
+        //Enemigos
+        var AvatarEnemy = new OneModelAnim();
+        AvatarEnemy.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-600, 200, -7550);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(AvatarEnemy);
+
+        var AvatarEnemy2 = new OneModelAnim();
+        AvatarEnemy2.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(800, 200, -7550);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(AvatarEnemy2);
+
+        var AvatarEnemy3 = new OneModelAnim();
+        AvatarEnemy3.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-200, 200, -5850);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(AvatarEnemy3);
+
+        var AvatarEnemy4 = new OneModelAnim();
+        AvatarEnemy4.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-2100, 200, -5150);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(AvatarEnemy4);
+
+        var AvatarEnemy5 = new OneModelAnim();
+        AvatarEnemy5.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-6100, 200, -2150);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(AvatarEnemy5);
+
+        var AvatarEnemy6 = new OneModelAnim();
+        AvatarEnemy6.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-8000, 200, -3950);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(AvatarEnemy6);
+
+        var AvatarEnemy7 = new OneModelAnim();
+        AvatarEnemy7.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-7600, 200, -1550);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(AvatarEnemy7);
+
+        var AvatarEnemy8 = new OneModelAnim();
+        AvatarEnemy8.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-5700, 200, -3850);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(AvatarEnemy8);
+
+        var HongoEnemy = new OneModelAnim();
+        HongoEnemy.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
+            object.scale.set(0.7, 0.7, 0.7);
+            object.position.set(-2800, 400, 6950);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(HongoEnemy);
+
+        var HongoEnemy2 = new OneModelAnim();
+        HongoEnemy2.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
+            object.scale.set(0.7, 0.7, 0.7);
+            object.position.set(-800, 400, 7750);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(HongoEnemy2);
+
+        var HongoEnemy3 = new OneModelAnim();
+        HongoEnemy3.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
+            object.scale.set(0.7, 0.7, 0.7);
+            object.position.set(-2500, 400, 8250);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(HongoEnemy3);
+
+        var HongoEnemy4 = new OneModelAnim();
+        HongoEnemy4.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
+            object.scale.set(0.7, 0.7, 0.7);
+            object.position.set(-800, 400, 6000);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(HongoEnemy4);
+
+        var HongoEnemy5 = new OneModelAnim();
+        HongoEnemy5.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
+            object.scale.set(0.7, 0.7, 0.7);
+            object.position.set(-4300, 400, 7800);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(HongoEnemy5);
+
+        var HongoEnemy6 = new OneModelAnim();
+        HongoEnemy6.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
+            object.scale.set(0.7, 0.7, 0.7);
+            object.position.set(2300, 400, 7800);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(HongoEnemy6);
+
+        var HongoEnemy7 = new OneModelAnim();
+        HongoEnemy7.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
+            object.scale.set(0.7, 0.7, 0.7);
+            object.position.set(3100, 400, 5800);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(HongoEnemy7);
+
+        var HongoEnemy8 = new OneModelAnim();
+        HongoEnemy8.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
+            object.scale.set(0.7, 0.7, 0.7);
+            object.position.set(4700, 400, 8300);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(HongoEnemy8);
+
+        var Polilla1 = new OneModelAnim();
+        Polilla1.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
+            object.scale.set(0.03, 0.03, 0.03);
+            object.position.set(-7000, 400, 7700);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(Polilla1);
+
+        var Polilla2 = new OneModelAnim();
+        Polilla2.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
+            object.scale.set(0.03, 0.03, 0.03);
+            object.position.set(-7000, 400, 5800);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(Polilla2);
+
+        var Polilla3 = new OneModelAnim();
+        Polilla3.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
+            object.scale.set(0.03, 0.03, 0.03);
+            object.position.set(-5300, 400, 6700);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(Polilla3);
+
+        var Polilla4 = new OneModelAnim();
+        Polilla4.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
+            object.scale.set(0.03, 0.03, 0.03);
+            object.position.set(800, 400, 2700);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(Polilla4);
+
+        var Polilla5 = new OneModelAnim();
+        Polilla5.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
+            object.scale.set(0.03, 0.03, 0.03);
+            object.position.set(2500, 400, 4500);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(Polilla5);
+
+        var Polilla6 = new OneModelAnim();
+        Polilla6.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
+            object.scale.set(0.03, 0.03, 0.03);
+            object.position.set(3900, 400, -1500);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(Polilla6);
+
+        var Polilla6 = new OneModelAnim();
+        Polilla6.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
+            object.scale.set(0.03, 0.03, 0.03);
+            object.position.set(5300, 400, 1200);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(Polilla6);
     }
 
     NieveScene(loadingManager)
@@ -1656,6 +1846,11 @@ class Scenee
     GetPlayer()
     {
         return this.Player;
+    }
+
+    GetPraderaEnemies()
+    {
+        return this.PraderaEnemies;
     }
 }
 
