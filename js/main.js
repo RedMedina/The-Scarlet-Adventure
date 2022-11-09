@@ -363,6 +363,9 @@ function main()
         for (let i = 0; i < Escenario.GetPraderaEnemies().length; i++) {
             if (Escenario.GetPraderaEnemies()[i].GetMixer()){Escenario.GetPraderaEnemies()[i].GetMixer().update(delta);}
         }
+        for (let i = 0; i < Escenario.GetPantanoEnemies().length; i++) {
+            if (Escenario.GetPantanoEnemies()[i].GetMixer()){Escenario.GetPantanoEnemies()[i].GetMixer().update(delta);}
+        }
 
         water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
         stats.update();
@@ -383,6 +386,7 @@ function main()
 
         RotationSky < 360 ? RotationSky += 0.00035 : RotationSky = 0;
         Escenario.GetPraderaScene().getObjectByName("SkyPradera").rotation.y = RotationSky; 
+        Escenario.GetPantanoScene().getObjectByName("SkyPantano").rotation.y = RotationSky;
         
         requestAnimationFrame(render);
     }

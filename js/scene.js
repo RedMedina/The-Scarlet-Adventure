@@ -23,6 +23,8 @@ class Scenee
 
         //Pradera Enemies
         this.PraderaEnemies = []; //Temporal hasta tener la ia y stats
+        //Pantano Enemies
+        this.PantanoEnemies = []; //Temporal hasta tener la ia y stats
 
         //while obteniendo los items y creando el array
         var HealItems = [new HealItem("Pocion Basica", 100, 1), new HealItem("Pocion Alta", 500, 1)];
@@ -129,6 +131,7 @@ class Scenee
 
         var SkydomeT = new skydome();
         SkydomeT.Create('Assets/Images/skybox_2.png');
+        SkydomeT.Render().name = "SkyPantano";
         this.Pantano.add(SkydomeT.Render());
 
         this.Lodo = new Mud();
@@ -533,6 +536,180 @@ class Scenee
             this.Pantano.add(roca2);
             this.Pantano.add(roca3);
         });
+
+        //Enemigos
+        var Guardian = new OneModelAnim();
+        Guardian.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-5400, 225, 7550);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(Guardian);
+
+        var Guardian2 = new OneModelAnim();
+        Guardian2.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-3800, 225, 6550);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(Guardian2);
+
+        var Guardian3 = new OneModelAnim();
+        Guardian3.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-4600, 380, 5600);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(Guardian3);
+
+        var Guardian4 = new OneModelAnim();
+        Guardian4.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(500, 40, 5000);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(Guardian4);
+
+        var Guardian5 = new OneModelAnim();
+        Guardian5.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-800, 80, 4300);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(Guardian5);
+
+        var Guardian6 = new OneModelAnim();
+        Guardian6.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-2800, 210, -1300);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(Guardian6);
+
+        var Guardian7 = new OneModelAnim();
+        Guardian7.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(3800, 270, -5400);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(Guardian7);
+
+        var DronFly = new OneModelAnim();
+        DronFly.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(3700, 550, 7250);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(DronFly);
+
+        var DronFly2 = new OneModelAnim();
+        DronFly2.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(7000, 550, 6250);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(DronFly2);
+
+        var DronFly3 = new OneModelAnim();
+        DronFly3.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-1000, 550, 3250);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(DronFly3);
+
+        var DronFly4 = new OneModelAnim();
+        DronFly4.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-3800, 800, 2750);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(DronFly4);
+
+        var DronFly5 = new OneModelAnim();
+        DronFly5.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-6800, 400, 1250);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(DronFly5);
+
+        var DronFly6 = new OneModelAnim();
+        DronFly6.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-6100, 400, -4250);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(DronFly6);
+
+        var DronFly7 = new OneModelAnim();
+        DronFly7.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-2100, 400, -4250);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(DronFly7);
+
+        var DronFly8 = new OneModelAnim();
+        DronFly8.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(1500, 700, -4250);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(DronFly8);
+
+        var DronFly9 = new OneModelAnim();
+        DronFly9.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(2900, 780, 1000);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(DronFly9);
+
+        var Cat = new OneModelAnim();
+        Cat.LoadModel("Assets/Pantano/Enemies/Cat/Cat.fbx", loadingManager, 1, (object)=>{
+            object.scale.set(2.3, 2.3, 2.3);
+            object.rotation.x = -90 * 3.1416 / 180;
+            object.position.set(5500, 440, 7250);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(Cat);
+
+        var Cat2 = new OneModelAnim();
+        Cat2.LoadModel("Assets/Pantano/Enemies/Cat/Cat.fbx", loadingManager, 1, (object)=>{
+            object.scale.set(2.3, 2.3, 2.3);
+            object.rotation.x = -90 * 3.1416 / 180;
+            object.position.set(-5100, 540, 3850);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(Cat2);
+
+        var Cat3 = new OneModelAnim();
+        Cat3.LoadModel("Assets/Pantano/Enemies/Cat/Cat.fbx", loadingManager, 1, (object)=>{
+            object.scale.set(2.3, 2.3, 2.3);
+            object.rotation.x = -90 * 3.1416 / 180;
+            object.position.set(-5100, 30, -1350);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(Cat3);
+
+        var Cat4 = new OneModelAnim();
+        Cat4.LoadModel("Assets/Pantano/Enemies/Cat/Cat.fbx", loadingManager, 1, (object)=>{
+            object.scale.set(2.3, 2.3, 2.3);
+            object.rotation.x = -90 * 3.1416 / 180;
+            object.position.set(3800, 450, -1850);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(Cat4);
+
+        var Cat5 = new OneModelAnim();
+        Cat5.LoadModel("Assets/Pantano/Enemies/Cat/Cat.fbx", loadingManager, 1, (object)=>{
+            object.scale.set(2.3, 2.3, 2.3);
+            object.rotation.x = -90 * 3.1416 / 180;
+            object.position.set(3300, 240, 2850);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(Cat5);
     }
 
     PraderaScene(loadingManager)
@@ -1851,6 +2028,11 @@ class Scenee
     GetPraderaEnemies()
     {
         return this.PraderaEnemies;
+    }
+
+    GetPantanoEnemies()
+    {
+        return this.PantanoEnemies;
     }
 }
 
