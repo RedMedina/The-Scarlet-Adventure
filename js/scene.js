@@ -1085,7 +1085,7 @@ class Scenee
         });
 
         this.Load3dModelGLTF("Assets/Models/Roca/RocaGrande.glb", loadingManager, (object)=>{ //Roca_2
-            object.position.y = 800;
+            object.position.y = 700;
             object.scale.set(70, 70, 70);
 
             var GRoca2 = object.clone();
@@ -1140,7 +1140,7 @@ class Scenee
 
             var flores8 = object.clone();
             flores8.position.x = 400;
-            flores8.position.z = -6000;
+            flores8.position.z = -6400;
 
             var flores9 = object.clone();
             flores9.position.x = -6800;
@@ -1188,6 +1188,7 @@ class Scenee
 
             var Arbol2 = object.clone();
             Arbol2.position.x = -3000;
+            Arbol2.position.y = 135;
             Arbol2.position.z = -5000;
 
             var Arbol3 = object.clone();
