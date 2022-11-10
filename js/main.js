@@ -54,7 +54,7 @@ function main()
     Escenario.NieveScene(loadingManager);
     Escenario.Rain();
     Escenario.Snow();
-    Scene = Escenario.GetPantanoScene();
+    Scene = Escenario.GetPraderaScene();
     const audioCont = new AudioController();
     var DodgeDuracion = 1.5;
     var DodgeContador = 0;
@@ -366,6 +366,9 @@ function main()
         for (let i = 0; i < Escenario.GetPantanoEnemies().length; i++) {
             if (Escenario.GetPantanoEnemies()[i].GetMixer()){Escenario.GetPantanoEnemies()[i].GetMixer().update(delta);}
         }
+        for (let i = 0; i < Escenario.GetNieveEnemies().length; i++) {
+            if (Escenario.GetNieveEnemies()[i].GetMixer()){Escenario.GetNieveEnemies()[i].GetMixer().update(delta);}
+        }
 
         water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
         stats.update();
@@ -384,9 +387,10 @@ function main()
         leavesMateriala[3].uniforms.time.value += 1.0 / 60.0;
         leavesMateriala[3].uniformsNeedUpdate = true;
 
-        RotationSky < 360 ? RotationSky += 0.00035 : RotationSky = 0;
+        RotationSky < 360 ? RotationSky += 0.00045 : RotationSky = 0;
         Escenario.GetPraderaScene().getObjectByName("SkyPradera").rotation.y = RotationSky; 
         Escenario.GetPantanoScene().getObjectByName("SkyPantano").rotation.y = RotationSky;
+        Escenario.GetNieveScene().getObjectByName("NieveSky").rotation.y = RotationSky;
         
         requestAnimationFrame(render);
     }

@@ -25,6 +25,8 @@ class Scenee
         this.PraderaEnemies = []; //Temporal hasta tener la ia y stats
         //Pantano Enemies
         this.PantanoEnemies = []; //Temporal hasta tener la ia y stats
+        //Pantano Enemies
+        this.NieveEnemies = []; //Temporal hasta tener la ia y stats
 
         //while obteniendo los items y creando el array
         var HealItems = [new HealItem("Pocion Basica", 100, 1), new HealItem("Pocion Alta", 500, 1)];
@@ -710,6 +712,14 @@ class Scenee
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Cat5);
+
+        var Magic = new OneModelAnim();
+        Magic.LoadModel("Assets/Nieve/Enemies/Magic/Magic.fbx", loadingManager, 2, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-5100, 170, 7800);
+            this.Pantano.add(object);
+        });
+        this.PantanoEnemies.push(Magic);
     }
 
     PraderaScene(loadingManager)
@@ -1588,6 +1598,14 @@ class Scenee
             this.Pradera.add(object);
         });
         this.PraderaEnemies.push(Polilla6);
+
+        var Magic = new OneModelAnim();
+        Magic.LoadModel("Assets/Nieve/Enemies/Magic/Magic.fbx", loadingManager, 2, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-6700, 200, 7000);
+            this.Pradera.add(object);
+        });
+        this.PraderaEnemies.push(Magic);
     }
 
     NieveScene(loadingManager)
@@ -1631,6 +1649,7 @@ class Scenee
         //Skydome
         var SkydomeT = new skydome();
         SkydomeT.Create('Assets/Images/skyboxDay.png');
+        SkydomeT.Render().name = "NieveSky";
         this.Nieve.add(SkydomeT.Render());
 
         //Terreno
@@ -1865,6 +1884,182 @@ class Scenee
             this.Nieve.add(roca7);
             this.Nieve.add(roca8);
         });
+
+        var FlyGuardian = new OneModelAnim();
+        FlyGuardian.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
+            object.scale.set(0.15, 0.15, 0.15);
+            object.position.set(-5900, 500, 6050);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(FlyGuardian);
+
+        var FlyGuardian2 = new OneModelAnim();
+        FlyGuardian2.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
+            object.scale.set(0.15, 0.15, 0.15);
+            object.position.set(-4000, 500, 7050);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(FlyGuardian2);
+
+        var FlyGuardian3 = new OneModelAnim();
+        FlyGuardian3.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
+            object.scale.set(0.15, 0.15, 0.15);
+            object.position.set(-7000, 500, 7450);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(FlyGuardian3);
+
+        var FlyGuardian4 = new OneModelAnim();
+        FlyGuardian4.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
+            object.scale.set(0.15, 0.15, 0.15);
+            object.position.set(-4000, 500, 2450);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(FlyGuardian4);
+
+        var FlyGuardian5 = new OneModelAnim();
+        FlyGuardian5.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
+            object.scale.set(0.15, 0.15, 0.15);
+            object.position.set(-6300, 650, 2950);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(FlyGuardian5);
+
+        var FlyGuardian6 = new OneModelAnim();
+        FlyGuardian6.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
+            object.scale.set(0.15, 0.15, 0.15);
+            object.position.set(5300, 600, 2950);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(FlyGuardian6);
+
+        var FlyGuardian7 = new OneModelAnim();
+        FlyGuardian7.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
+            object.scale.set(0.15, 0.15, 0.15);
+            object.position.set(6600, 500, 5950);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(FlyGuardian7);
+
+        var FlyGuardian8 = new OneModelAnim();
+        FlyGuardian8.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
+            object.scale.set(0.15, 0.15, 0.15);
+            object.position.set(-100, 550, 500);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(FlyGuardian8);
+
+        var FlyGuardian9 = new OneModelAnim();
+        FlyGuardian9.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
+            object.scale.set(0.15, 0.15, 0.15);
+            object.position.set(1200, 550, 2000);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(FlyGuardian9);
+
+        var FlyGuardian10 = new OneModelAnim();
+        FlyGuardian10.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
+            object.scale.set(0.15, 0.15, 0.15);
+            object.position.set(6500, 550, -5000);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(FlyGuardian10);
+
+        var Ghost = new OneModelAnim();
+        Ghost.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
+            object.scale.set(13.5, 13.5, 13.5);
+            object.position.set(-500, 450, 5550);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(Ghost);
+
+        var Ghost2 = new OneModelAnim();
+        Ghost2.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
+            object.scale.set(13.5, 13.5, 13.5);
+            object.position.set(-2500, 200, 6950);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(Ghost2);
+
+        var Ghost3 = new OneModelAnim();
+        Ghost3.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
+            object.scale.set(13.5, 13.5, 13.5);
+            object.position.set(-3900, 40, 3950);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(Ghost3);
+
+        var Ghost4 = new OneModelAnim();
+        Ghost4.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
+            object.scale.set(13.5, 13.5, 13.5);
+            object.position.set(-2500, 40, 250);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(Ghost4);
+
+        var Ghost5 = new OneModelAnim();
+        Ghost5.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
+            object.scale.set(13.5, 13.5, 13.5);
+            object.position.set(-7200, 300, -950);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(Ghost5);
+
+        var Ghost6 = new OneModelAnim();
+        Ghost6.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
+            object.scale.set(13.5, 13.5, 13.5);
+            object.position.set(7300, 130, 3000);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(Ghost6);
+
+        var Ghost7 = new OneModelAnim();
+        Ghost7.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
+            object.scale.set(13.5, 13.5, 13.5);
+            object.position.set(6500, 130, 300);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(Ghost7);
+
+        var Ghost8 = new OneModelAnim();
+        Ghost8.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
+            object.scale.set(13.5, 13.5, 13.5);
+            object.position.set(500, 130, 300);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(Ghost8);
+
+        var Magic = new OneModelAnim();
+        Magic.LoadModel("Assets/Nieve/Enemies/Magic/Magic.fbx", loadingManager, 2, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-5000, 130, -6000);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(Magic);
+
+        var Magic2 = new OneModelAnim();
+        Magic2.LoadModel("Assets/Nieve/Enemies/Magic/Magic.fbx", loadingManager, 2, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-2000, -60, -7000);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(Magic2);
+
+        var Magic3 = new OneModelAnim();
+        Magic3.LoadModel("Assets/Nieve/Enemies/Magic/Magic.fbx", loadingManager, 2, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-2000, 130, -3000);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(Magic3);
+
+        var Magic4 = new OneModelAnim();
+        Magic4.LoadModel("Assets/Nieve/Enemies/Magic/Magic.fbx", loadingManager, 2, (object)=>{
+            object.scale.set(0.5, 0.5, 0.5);
+            object.position.set(-5800, 230, -4000);
+            this.Nieve.add(object);
+        });
+        this.NieveEnemies.push(Magic4);
     }
 
     Load3dModelGLTF(model, loadingManager, onLoadCallback)
@@ -2033,6 +2228,11 @@ class Scenee
     GetPantanoEnemies()
     {
         return this.PantanoEnemies;
+    }
+
+    GetNieveEnemies()
+    {
+        return this.NieveEnemies;
     }
 }
 
