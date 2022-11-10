@@ -539,6 +539,23 @@ class Scenee
             this.Pantano.add(roca3);
         });
 
+        //Personaje
+        var ModelPlayer = new modelAnimController(this.Playeranimations, "Assets/Models/Player/Player_Idle.fbx");
+        ModelPlayer.CreateBaseModel("PlayerModell", loadingManager, (object)=>{
+            var PlayerModel = new THREE.Object3D();
+            PlayerModel.name = "PlayerModel";
+            PlayerModel.add(object);
+            for (let i = 0; i < this.Playeranimations.length; i++) {
+                ModelPlayer.LoadMultipleAnimations(i, (objectAnim)=>{
+                    PlayerModel.add(objectAnim);
+                });
+            }
+            this.Pantano.add(PlayerModel);
+            PlayerModel.position.set(1000, 200, 8550);
+            PlayerModel.rotation.y = 180 * 3.1416 / 180;
+        });
+        this.Player.SetModel(ModelPlayer, "Pantano");
+
         //Enemigos
         var Guardian = new OneModelAnim();
         Guardian.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
@@ -1627,22 +1644,6 @@ class Scenee
         Luces.GetDirectionalLight().shadow.camera.near = 0.5;
         Luces.GetDirectionalLight().shadow.camera.far = 10000;
 
-        //Lensflare
-        const textureLoader = new THREE.TextureLoader();
-        const textureFlare0 = textureLoader.load( 'Assets/Images/LensFlare.png' );
-        const textureFlare3 = textureLoader.load( 'Assets/Images/lensflare3.png' );
-        this.Pointlight = new THREE.PointLight( 0xffffff, 0.2, 2000 );
-        this.Pointlight.color.setHSL( 0.58, 1.0, 0.95 );
-        this.Pointlight.position.set( -15000, 4000, -20000 );
-        //this.Nieve.add( this.Pointlight );
-        const lensflare = new Lensflare();
-        lensflare.addElement( new LensflareElement( textureFlare0, 700, 0, this.Pointlight.color ) );
-        lensflare.addElement( new LensflareElement( textureFlare3, 60, 0.6 ) );
-        lensflare.addElement( new LensflareElement( textureFlare3, 70, 0.7 ) );
-        lensflare.addElement( new LensflareElement( textureFlare3, 120, 0.9 ) );
-        lensflare.addElement( new LensflareElement( textureFlare3, 70, 1 ) );
-        this.Pointlight.add( lensflare );
-
         //Help para el día y la noche
         const helper = new THREE.CameraHelper( Luces.GetDirectionalLight().shadow.camera );
         this.Nieve.add( helper );
@@ -1885,6 +1886,23 @@ class Scenee
             this.Nieve.add(roca7);
             this.Nieve.add(roca8);
         });
+
+        //Personaje
+        var ModelPlayer = new modelAnimController(this.Playeranimations, "Assets/Models/Player/Player_Idle.fbx");
+        ModelPlayer.CreateBaseModel("PlayerModell", loadingManager, (object)=>{
+            var PlayerModel = new THREE.Object3D();
+            PlayerModel.name = "PlayerModel";
+            PlayerModel.add(object);
+            for (let i = 0; i < this.Playeranimations.length; i++) {
+                ModelPlayer.LoadMultipleAnimations(i, (objectAnim)=>{
+                    PlayerModel.add(objectAnim);
+                });
+            }
+            this.Nieve.add(PlayerModel);
+            PlayerModel.position.set(1000, 200, 8550);
+            PlayerModel.rotation.y = 180 * 3.1416 / 180;
+        });
+        this.Player.SetModel(ModelPlayer, "Nieve");
 
         var FlyGuardian = new OneModelAnim();
         FlyGuardian.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
