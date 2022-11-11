@@ -115,6 +115,7 @@ class Scenee
         Luces.DirectionalLight(0xFFFFFF, 0.3);
         Luces.DirectionDLight(20, 90, 0);
         Luces.AmbientLight(0x757575);
+        Luces.GetAmbientLight().name = "LuzPantano";
         this.Pantano.add(Luces.GetAmbientLight());
         this.Pantano.add(Luces.GetDirectionalLight());
         this.Pantano.add(Luces.GetDirectionalLight().target);
@@ -749,6 +750,7 @@ class Scenee
         Luces.DirectionalLight(0xFFFFFF, 0.3);
         Luces.DirectionDLight(20, 90, 0);
         Luces.AmbientLight(0xFFFFFF);
+        Luces.GetAmbientLight().name = "LuzPradera";
         this.Pradera.add(Luces.GetAmbientLight());
         this.Pradera.add(Luces.GetDirectionalLight());
         this.Pradera.add(Luces.GetDirectionalLight().target);
@@ -764,6 +766,7 @@ class Scenee
         this.Pointlight = new THREE.PointLight( 0xffffff, 1.5, 2000 );
         this.Pointlight.color.setHSL( 0.58, 1.0, 0.95 );
         this.Pointlight.position.set( -15000, 4000, -20000 );
+        this.Pointlight.name="Sun";
         this.Pradera.add( this.Pointlight );
         const lensflare = new Lensflare();
         lensflare.addElement( new LensflareElement( textureFlare0, 700, 0, this.Pointlight.color ) );
@@ -771,7 +774,10 @@ class Scenee
         lensflare.addElement( new LensflareElement( textureFlare3, 70, 0.7 ) );
         lensflare.addElement( new LensflareElement( textureFlare3, 120, 0.9 ) );
         lensflare.addElement( new LensflareElement( textureFlare3, 70, 1 ) );
+        lensflare.material.transparent = true;
+        lensflare.name="SunTexture";
         this.Pointlight.add( lensflare );
+        
 
         //Help para el día y la noche
         const helper = new THREE.CameraHelper( Luces.GetDirectionalLight().shadow.camera );
@@ -1636,6 +1642,7 @@ class Scenee
         Luces.DirectionalLight(0xFFFFFF, 0.3);
         Luces.DirectionDLight(20, 90, 0);
         Luces.AmbientLight(0xFFFFFF);
+        Luces.GetAmbientLight().name = "LuzNieve";
         this.Nieve.add(Luces.GetAmbientLight());
         this.Nieve.add(Luces.GetDirectionalLight());
         this.Nieve.add(Luces.GetDirectionalLight().target);

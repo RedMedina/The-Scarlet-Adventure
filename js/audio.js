@@ -21,7 +21,7 @@ class Audioo
         audioLoader.load( bgm, ( buffer )=> {
             this.sound.setBuffer( buffer );
             this.sound.setLoop( true );
-            this.sound.setVolume( 0.01 );
+            this.sound.setVolume( 0.03 );
         });
     }
 

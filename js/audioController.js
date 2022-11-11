@@ -34,6 +34,11 @@ class AudioController
         this.NieveSound2 = new Audioo();
         this.NieveSound2.create("Nieve2");
         this.NieveSound2.Sound("Assets/BGM/Nieve2.mp3");
+
+        //Nochesound
+        this.NocheSound = new Audioo();
+        this.NocheSound.create("Noche");
+        this.NocheSound.Sound("Assets/BGM/Noche.mp3");
     }
 
     PlaySceneSound(sceneActual)
@@ -61,6 +66,10 @@ class AudioController
         if(this.NieveSound2.GetSound())
         {
             this.NieveSound2.GetSound().pause();
+        }
+        if(this.NocheSound.GetSound())
+        {
+            this.NocheSound.GetSound().pause();
         }
 
         if(sceneActual == 1)
@@ -94,6 +103,36 @@ class AudioController
                 this.NieveSound2.GetSound().play();
             }
         }
+    }
+
+    PlayNoche()
+    {
+        if(this.PraderaSound1.GetSound())
+        {
+            this.PraderaSound1.GetSound().pause();
+        }
+        if(this.PraderaSound2.GetSound()) 
+        {
+            this.PraderaSound2.GetSound().pause();
+        }
+        if(this.PantanoSound2.GetSound())
+        {
+            this.PantanoSound1.GetSound().pause();
+        }
+        if(this.PantanoSound2.GetSound())
+        {
+            this.PantanoSound2.GetSound().pause();
+        }
+        if(this.NieveSound1.GetSound())
+        {
+            this.NieveSound1.GetSound().pause();
+        }
+        if(this.NieveSound2.GetSound())
+        {
+            this.NieveSound2.GetSound().pause();
+        }
+        
+        this.NocheSound.GetSound().play();
     }
 }
 

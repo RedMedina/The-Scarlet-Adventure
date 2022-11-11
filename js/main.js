@@ -22,6 +22,9 @@ function main()
 
     const clock = new THREE.Clock();
     let RotationSky = 0;
+    let intensityAmbientLight = 1;
+    let intensityL = true;
+    var Dia = true;
     
     var keys = {};
     var Actionkeys = {Attack: false, Dodge: false, Jump: false};
@@ -457,21 +460,30 @@ function main()
         if(keys["J"])
         {
             Scene = Escenario.GetPraderaScene();
-            audioCont.PlaySceneSound(1);
+            if(intensityAmbientLight > 0.4)
+            {
+                audioCont.PlaySceneSound(1);
+            }
             ActualScene = 1;
             Escenario.GetPraderaScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
         }
         if(keys["K"])
         {
             Scene = Escenario.GetPantanoScene();
-            audioCont.PlaySceneSound(2);
+            if(intensityAmbientLight > 0.4)
+            {
+                audioCont.PlaySceneSound(2);
+            }
             ActualScene = 2;
             Escenario.GetPantanoScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
         }
         if(keys["L"])
         {
             Scene = Escenario.GetNieveScene();
-            audioCont.PlaySceneSound(3);
+            if(intensityAmbientLight > 0.4)
+            {
+                audioCont.PlaySceneSound(3);
+            }
             ActualScene = 3;
             Escenario.GetNieveScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
         }
@@ -511,6 +523,50 @@ function main()
         Escenario.GetPraderaScene().getObjectByName("SkyPradera").rotation.y = RotationSky; 
         Escenario.GetPantanoScene().getObjectByName("SkyPantano").rotation.y = RotationSky;
         Escenario.GetNieveScene().getObjectByName("NieveSky").rotation.y = RotationSky;
+
+        if (intensityL) {
+			intensityAmbientLight += 0.001;
+		}
+		else {
+			intensityAmbientLight -= 0.001;
+		}
+
+		if (intensityAmbientLight > 1.0) {
+			intensityAmbientLight = 1.0;
+			intensityL = false;
+		}
+		else if (intensityAmbientLight < 0) {
+			intensityAmbientLight = 0;
+			intensityL = true;
+		}
+        Escenario.GetPraderaScene().getObjectByName("LuzPradera").intensity = intensityAmbientLight + 0.2;
+        Escenario.GetPantanoScene().getObjectByName("LuzPantano").intensity = intensityAmbientLight + 0.2;
+        Escenario.GetNieveScene().getObjectByName("LuzNieve").intensity = intensityAmbientLight + 0.2;
+        Escenario.GetPraderaScene().getObjectByName("Sun").intensity = intensityAmbientLight + 0.2;
+        if(intensityAmbientLight < 0.65)
+        {
+            Escenario.GetPraderaScene().getObjectByName("Sun").getObjectByName("SunTexture").material.visible = false;
+        }
+        else
+        {
+            Escenario.GetPraderaScene().getObjectByName("Sun").getObjectByName("SunTexture").material.visible = true;
+        }
+        if(intensityAmbientLight < 0.4)
+        {
+            if(Dia)
+            {
+                audioCont.PlayNoche();
+            }
+            Dia = false;
+        }
+        else
+        {
+            if(!Dia)
+            {
+                audioCont.PlaySceneSound(ActualScene);
+            }
+            Dia = true;
+        }
         
         requestAnimationFrame(render);
     }
