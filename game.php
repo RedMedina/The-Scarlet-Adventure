@@ -36,6 +36,10 @@
     <script src="js/Reflector.js"></script>
     <script src="js/Refractor.js"></script>
     <script src="js/Water2.js"></script-->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+    <script src="js/Firebase.js" type="module"></script>
+    <script src="js/OnlineRoom.js" type="module"></script>
     <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
     <script src="js/camera.js" type="module"></script>
     <script src="js/audio.js" type="module"></script>

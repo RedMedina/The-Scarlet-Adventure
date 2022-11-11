@@ -10,6 +10,7 @@ import {player} from '/PWGW/js/player.js';
 import {Backpack} from '/PWGW/js/backpack.js';
 import {HealItem} from '/PWGW/js/HealItem.js';
 import {OneModelAnim} from '/PWGW/js/OnemodelAnim.js';
+import {OnlineRoom} from '/PWGW/js/OnlineRoom.js';
 
 class Scenee
 {
@@ -1416,7 +1417,7 @@ class Scenee
         });
 
         //Personaje
-        var ModelPlayer = new modelAnimController(this.Playeranimations, "Assets/Models/Player/Player_Idle.fbx");
+       /* var ModelPlayer = new modelAnimController(this.Playeranimations, "Assets/Models/Player/Player_Idle.fbx");
         ModelPlayer.CreateBaseModel("PlayerModell", loadingManager, (object)=>{
             var PlayerModel = new THREE.Object3D();
             PlayerModel.name = "PlayerModel";
@@ -1430,7 +1431,7 @@ class Scenee
             PlayerModel.position.set(1000, 200, 8550);
             PlayerModel.rotation.y = 180 * 3.1416 / 180;
         });
-        this.Player.SetModel(ModelPlayer, "Pradera");
+        this.Player.SetModel(ModelPlayer, "Pradera");*/
 
         //Enemigos
         var AvatarEnemy = new OneModelAnim();
@@ -2252,6 +2253,38 @@ class Scenee
     GetNieveEnemies()
     {
         return this.NieveEnemies;
+    }
+
+    CreateOnlineRoom()
+    {
+        this.Online = new OnlineRoom(1);
+    }
+
+    GetOnline()
+    {
+        return this.Online;
+    }
+
+    AddPlayerOnline(loadingManager)
+    {
+        var PlayerModel = new THREE.Object3D();
+        var ModelPlayer = new modelAnimController(this.Playeranimations, "Assets/Models/Player/Player_Idle.fbx");
+        ModelPlayer.CreateBaseModel("PlayerModell", loadingManager, (object)=>{
+            PlayerModel.name = "PlayerModel";
+            PlayerModel.add(object);
+            for (let i = 0; i < this.Playeranimations.length; i++) {
+                ModelPlayer.LoadMultipleAnimations(i, (objectAnim)=>{
+                    PlayerModel.add(objectAnim);
+                });
+            }
+            this.Pradera.add(PlayerModel);
+            PlayerModel.position.set(1000, 200, 8550);
+            PlayerModel.rotation.y = 180 * 3.1416 / 180;
+        });
+        this.Player.SetModel(ModelPlayer, "Pradera");
+        //return PlayerModel;
+        return {object: PlayerModel, jugador: ModelPlayer};
+        //return this.Pradera.getObjectByName("PlayerModel");
     }
 }
 

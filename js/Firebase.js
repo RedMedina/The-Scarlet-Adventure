@@ -1,6 +1,6 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
+//import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+//import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js";
+  
 const firebaseConfig = {
   apiKey: "AIzaSyAq8QR_Nj1whCJG7x3OCIES3rQQPZ-iut4",
   authDomain: "scarletadventure-c1352.firebaseapp.com",
@@ -12,5 +12,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+firebase.initializeApp(firebaseConfig);
+//const analytics = getAnalytics(app);
+
+export {firebaseConfig};
