@@ -10,11 +10,17 @@ class HealItem
     {
         //Usa
         this.Item.cantidad--;
+        return this.Item.curacion;
     }
 
     getCantidad()
     {
         return this.Item.cantidad;
+    }
+
+    setCantidad()
+    {
+        this.Item.cantidad++;
     }
 }
 

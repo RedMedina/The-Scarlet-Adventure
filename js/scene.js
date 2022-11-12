@@ -21,6 +21,11 @@ class Scenee
         "Assets/Models/Player/Dodge_Final", "Assets/Models/Player/Hanging_Idle_Final",
         "Assets/Models/Player/Jump_Final"];
 
+        //Objetos Estaticos Pradera
+        this.PraderaObjects = [];
+        //Objectos Recolectables Pradera
+        this.PraderaItems;
+
         //Pradera Enemies
         this.PraderaEnemies = []; //Temporal hasta tener la ia y stats
         //Pantano Enemies
@@ -29,11 +34,12 @@ class Scenee
         this.NieveEnemies = []; //Temporal hasta tener la ia y stats
 
         //while obteniendo los items y creando el array
-        var HealItems = [new HealItem("Pocion Basica", 100, 1), new HealItem("Pocion Alta", 500, 1)];
+       // var HealItems = [new HealItem("Pocion Basica", 100, 1), new HealItem("Pocion Alta", 500, 1)];
 
         //Obtiene los items por ajax
-        var Mochila = new Backpack(HealItems);
+        var Mochila = new Backpack([]);
         this.Player = new player("User_name", {x: 0, y: 0, z: 0}, 1000, Mochila, 1, {Boss1: false, Boss2: false, Boss3: false});
+        this.Player.GenerateStats();
     }
 
     CreateScene()
@@ -848,6 +854,7 @@ class Scenee
         var Terreno = new Terrain();
         Terreno.MultitextureTerrain("Assets/Pradera/Tierra_2.png", "Assets/Pradera/Pasto.jpg", "Assets/Pradera/Tierra.jpg", "Assets/Pradera/Alturas_Pradera.png", "Assets/Pradera/Blendmap_Pradera.png", 2500, 18000, 18000);
         Terreno.GetPlane().position.y = -160;
+        Terreno.GetPlane().name="TerrenoPradera";
         this.Pradera.add(Terreno.GetPlane());
 
         //Modelos
@@ -1070,6 +1077,49 @@ class Scenee
             this.Pradera.add(arbol41);
             this.Pradera.add(arbol42);
             this.Pradera.add(arbol43);
+            this.PraderaObjects.push(object);
+            this.PraderaObjects.push(arbol2);
+            this.PraderaObjects.push(arbol3);
+            this.PraderaObjects.push(arbol4);
+            this.PraderaObjects.push(arbol5);
+            this.PraderaObjects.push(arbol6);
+            this.PraderaObjects.push(arbol7);
+            this.PraderaObjects.push(arbol8);
+            this.PraderaObjects.push(arbol9);
+            this.PraderaObjects.push(arbol10);
+            this.PraderaObjects.push(arbol11);
+            this.PraderaObjects.push(arbol12);
+            this.PraderaObjects.push(arbol13);
+            this.PraderaObjects.push(arbol14);
+            this.PraderaObjects.push(arbol15);
+            this.PraderaObjects.push(arbol16);
+            this.PraderaObjects.push(arbol17);
+            this.PraderaObjects.push(arbol18);
+            this.PraderaObjects.push(arbol19);
+            this.PraderaObjects.push(arbol20);
+            this.PraderaObjects.push(arbol21);
+            this.PraderaObjects.push(arbol22);
+            this.PraderaObjects.push(arbol23);
+            this.PraderaObjects.push(arbol24);
+            this.PraderaObjects.push(arbol25);
+            this.PraderaObjects.push(arbol26);
+            this.PraderaObjects.push(arbol27);
+            this.PraderaObjects.push(arbol28);
+            this.PraderaObjects.push(arbol29);
+            this.PraderaObjects.push(arbol30);
+            this.PraderaObjects.push(arbol31);
+            this.PraderaObjects.push(arbol32);
+            this.PraderaObjects.push(arbol33);
+            this.PraderaObjects.push(arbol34);
+            this.PraderaObjects.push(arbol35);
+            this.PraderaObjects.push(arbol36);
+            this.PraderaObjects.push(arbol37);
+            this.PraderaObjects.push(arbol38);
+            this.PraderaObjects.push(arbol39);
+            this.PraderaObjects.push(arbol40);
+            this.PraderaObjects.push(arbol41);
+            this.PraderaObjects.push(arbol42);
+            this.PraderaObjects.push(arbol43);
         });
 
         this.Load3dModelGLTF("Assets/Models/Roca/roca3.glb", loadingManager, (object)=>{ //Roca_1
@@ -1160,6 +1210,24 @@ class Scenee
             this.Pradera.add(roca15);
             this.Pradera.add(roca16);
             this.Pradera.add(roca17);
+
+            this.PraderaObjects.push(object);
+            this.PraderaObjects.push(roca2);
+            this.PraderaObjects.push(roca3);
+            this.PraderaObjects.push(roca4);
+            this.PraderaObjects.push(roca5);
+            this.PraderaObjects.push(roca6);
+            this.PraderaObjects.push(roca7);
+            this.PraderaObjects.push(roca8);
+            this.PraderaObjects.push(roca9);
+            this.PraderaObjects.push(roca10);
+            this.PraderaObjects.push(roca11);
+            this.PraderaObjects.push(roca12);
+            this.PraderaObjects.push(roca13);
+            this.PraderaObjects.push(roca14);
+            this.PraderaObjects.push(roca15);
+            this.PraderaObjects.push(roca16);
+            this.PraderaObjects.push(roca17);
         });
 
         this.Load3dModelGLTF("Assets/Models/Roca/RocaGrande.glb", loadingManager, (object)=>{ //Roca_2
@@ -1186,6 +1254,10 @@ class Scenee
             this.Pradera.add(GRoca2);
             this.Pradera.add(GRoca3);
             this.Pradera.add(GRoca4);
+            this.PraderaObjects.push(object);
+            this.PraderaObjects.push(GRoca2);
+            this.PraderaObjects.push(GRoca3);
+            this.PraderaObjects.push(GRoca4);
         });
 
         this.Load3dModelGLTF("Assets/Models/Arbusto/planta_conjunto.glb", loadingManager, (object)=>{ //planta_conjunto
@@ -1256,6 +1328,7 @@ class Scenee
             object.position.z = 6500;
 
             this.Pradera.add(object);
+            this.PraderaObjects.push(object);
         });
         
         this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol2.glb", loadingManager, (object)=>{
@@ -1299,6 +1372,13 @@ class Scenee
             this.Pradera.add(Arbol5);
             this.Pradera.add(Arbol6);
             this.Pradera.add(Arbol7);
+            this.PraderaObjects.push(object);
+            this.PraderaObjects.push(Arbol2);
+            this.PraderaObjects.push(Arbol3);
+            this.PraderaObjects.push(Arbol4);
+            this.PraderaObjects.push(Arbol5);
+            this.PraderaObjects.push(Arbol6);
+            this.PraderaObjects.push(Arbol7);
         });
 
         this.Load3dModelGLTF("Assets/Models/Campamento/Hoguera.glb", loadingManager, (object)=>{
@@ -1308,6 +1388,7 @@ class Scenee
             object.position.x = -6500;
             object.position.z = 6800;
             this.Pradera.add(object);
+            this.PraderaObjects.push(object);
         });
 
         this.Load3dModelGLTF("Assets/Models/Campamento/Antorcha.glb", loadingManager, (object)=>{
@@ -1388,6 +1469,22 @@ class Scenee
             this.Pradera.add(Antorcha13);
             this.Pradera.add(Antorcha14);
             this.Pradera.add(Antorcha15);
+
+            this.PraderaObjects.push(object);
+            this.PraderaObjects.push(Antorcha2);
+            this.PraderaObjects.push(Antorcha3);
+            this.PraderaObjects.push(Antorcha4);
+            this.PraderaObjects.push(Antorcha5);
+            this.PraderaObjects.push(Antorcha6);
+            this.PraderaObjects.push(Antorcha7);
+            this.PraderaObjects.push(Antorcha8);
+            this.PraderaObjects.push(Antorcha9);
+            this.PraderaObjects.push(Antorcha10);
+            this.PraderaObjects.push(Antorcha11);
+            this.PraderaObjects.push(Antorcha12);
+            this.PraderaObjects.push(Antorcha13);
+            this.PraderaObjects.push(Antorcha14);
+            this.PraderaObjects.push(Antorcha15);
         });
 
         this.Load3dModelGLTF("Assets/Models/Campamento/Tronco.glb", loadingManager, (object)=>{
@@ -1415,6 +1512,10 @@ class Scenee
             this.Pradera.add(Tronco);
             this.Pradera.add(Tronco2);
             this.Pradera.add(Tronco3);
+            this.PraderaObjects.push(object);
+            this.PraderaObjects.push(Tronco);
+            this.PraderaObjects.push(Tronco2);
+            this.PraderaObjects.push(Tronco3);
         });
 
         this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol4.glb", loadingManager, (object)=>{
@@ -1474,6 +1575,18 @@ class Scenee
             this.Pradera.add(Arbol9);
             this.Pradera.add(Arbol10);
             this.Pradera.add(Arbol11);
+
+            this.PraderaObjects.push(object);
+            this.PraderaObjects.push(Arbol2);
+            this.PraderaObjects.push(Arbol3);
+            this.PraderaObjects.push(Arbol4);
+            this.PraderaObjects.push(Arbol5);
+            this.PraderaObjects.push(Arbol6);
+            this.PraderaObjects.push(Arbol7);
+            this.PraderaObjects.push(Arbol8);
+            this.PraderaObjects.push(Arbol9);
+            this.PraderaObjects.push(Arbol10);
+            this.PraderaObjects.push(Arbol11);
         });
 
         this.Load3dModelGLTF("Assets/Models/Bag/Bag.glb", loadingManager, (object)=>{
@@ -1481,44 +1594,73 @@ class Scenee
 
             var bolsa2 = object.clone();
             bolsa2.position.set(-1000, 200, 6550);
+            bolsa2.children[0].children[0].children[0].children[0].children[0].name="2";
+            var Item2 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa3 = object.clone();
             bolsa3.position.set(-2000, 200, 8500);
+            bolsa3.children[0].children[0].children[0].children[0].children[0].name="3";
+            var Item3 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa4 = object.clone();
             bolsa4.position.set(-4400, 200, 8500);
+            bolsa4.children[0].children[0].children[0].children[0].children[0].name="4";
+            var Item4 = new HealItem("Pocion Alta", 500, 1);
 
             var bolsa5 = object.clone();
             bolsa5.position.set(-7400, 200, 6000);
+            bolsa5.children[0].children[0].children[0].children[0].children[0].name="5";
+            var Item5 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa6 = object.clone();
             bolsa6.position.set(8400, 200, 8500);
+            bolsa6.children[0].children[0].children[0].children[0].children[0].name="6";
+            var Item6 = new HealItem("Pocion Alta", 500, 1);
 
             var bolsa7 = object.clone();
             bolsa7.position.set(3000, 200, 6100);
+            bolsa7.children[0].children[0].children[0].children[0].children[0].name="7";
+            var Item7 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa8 = object.clone();
             bolsa8.position.set(4500, 200, 7700);
+            bolsa8.children[0].children[0].children[0].children[0].children[0].name="8";
+            var Item8 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa9 = object.clone();
             bolsa9.position.set(1200, 200, 2300);
+            bolsa9.children[0].children[0].children[0].children[0].children[0].name="9";
+            var Item9 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa10 = object.clone();
             bolsa10.position.set(3200, 200, -1300);
+            bolsa10.children[0].children[0].children[0].children[0].children[0].name="10";
+            var Item10 = new HealItem("Pocion Alta", 500, 1);
 
             var bolsa11 = object.clone();
             bolsa11.position.set(4800, 200, -1300);
+            bolsa11.children[0].children[0].children[0].children[0].children[0].name="11";
+            var Item11 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa12 = object.clone();
             bolsa12.position.set(-5800, 200, -2300);
+            bolsa12.children[0].children[0].children[0].children[0].children[0].name="12";
+            var Item12 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa13 = object.clone();
             bolsa13.position.set(-8200, 200, -2300);
+            bolsa13.children[0].children[0].children[0].children[0].children[0].name="13";
+            var Item13 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa14 = object.clone();
             bolsa14.position.set(-1000, 200, -7300);
+            bolsa14.children[0].children[0].children[0].children[0].children[0].name="14";
+            var Item14 = new HealItem("Pocion Alta", 500, 1);
 
             object.position.set(-3000, 200, 6550);
+            object.children[0].children[0].children[0].children[0].children[0].name="1";
+            var Item1 = new HealItem("Pocion Basica", 100, 1);
+
             this.Pradera.add(object);
             this.Pradera.add(bolsa2);
             this.Pradera.add(bolsa3);
@@ -1533,6 +1675,40 @@ class Scenee
             this.Pradera.add(bolsa12);
             this.Pradera.add(bolsa13);
             this.Pradera.add(bolsa14);
+
+            var ItemsArray = [];
+            ItemsArray.push(Item1);
+            ItemsArray.push(Item2);
+            ItemsArray.push(Item3);
+            ItemsArray.push(Item4);
+            ItemsArray.push(Item5);
+            ItemsArray.push(Item6);
+            ItemsArray.push(Item7);
+            ItemsArray.push(Item8);
+            ItemsArray.push(Item9);
+            ItemsArray.push(Item10);
+            ItemsArray.push(Item11);
+            ItemsArray.push(Item12);
+            ItemsArray.push(Item13);
+            ItemsArray.push(Item14);
+
+            var ModelsArray = [];
+            ModelsArray.push(object);
+            ModelsArray.push(bolsa2);
+            ModelsArray.push(bolsa3);
+            ModelsArray.push(bolsa4);
+            ModelsArray.push(bolsa5);
+            ModelsArray.push(bolsa6);
+            ModelsArray.push(bolsa7);
+            ModelsArray.push(bolsa8);
+            ModelsArray.push(bolsa9);
+            ModelsArray.push(bolsa10);
+            ModelsArray.push(bolsa11);
+            ModelsArray.push(bolsa12);
+            ModelsArray.push(bolsa13);
+            ModelsArray.push(bolsa14);
+
+            this.PraderaItems = {model: ModelsArray, items: ItemsArray};
         });
 
         //Personaje
@@ -1540,6 +1716,13 @@ class Scenee
         ModelPlayer.CreateBaseModel("PlayerModell", loadingManager, (object)=>{
             var PlayerModel = new THREE.Object3D();
             PlayerModel.name = "PlayerModel";
+            PlayerModel.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                //new THREE.Vector3(0, -1, 0),
+            ];
             PlayerModel.add(object);
             for (let i = 0; i < this.Playeranimations.length; i++) {
                 ModelPlayer.LoadMultipleAnimations(i, (objectAnim)=>{
@@ -2424,6 +2607,16 @@ class Scenee
     GetNieveEnemies()
     {
         return this.NieveEnemies;
+    }
+
+    GetPraderaObjects()
+    {
+        return this.PraderaObjects;
+    }
+
+    GetPraderaItems()
+    {
+        return this.PraderaItems;
     }
 }
 

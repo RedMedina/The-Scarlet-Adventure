@@ -38,6 +38,27 @@ class player
     {
         this.Scene = scene;
     }
+
+    GetBackpack()
+    {
+        return this.Backpack;
+    }
+
+    GenerateStats()
+    {
+        this.Stats = {Vida: 1000 + (1000 * (this.level * 0.1)), Ataque: 800 + (800 * (this.level * 0.1)), Defensa: 500 + (500 * (this.level * 0.1))};
+        this.MaxLife = this.Stats.Vida;
+    }
+
+    GetMaxLife()
+    {
+        return this.MaxLife;
+    }
+
+    GetStats()
+    {
+        return this.Stats;
+    }
 }
 
 export {player};

@@ -8,16 +8,23 @@ class Backpack
 
     AddItem(item)
     {
-        this.Items.push(item);
+        if(!item.empty)
+        {
+            this.Items.push(item);
+        }
     }
 
     UseItem(itemIndex)
     {
-        this.Items[itemIndex].use();
-        if(this.Items[itemIndex].getCantidad() == 0)
+        if(this.Items.length > 0)
         {
-            this.Items.splice(itemIndex, 1);
-        }   
+            var Curacion = this.Items[itemIndex].use();
+            if(this.Items[itemIndex].getCantidad() == 0)
+            {
+                this.Items.splice(itemIndex, 1);
+            }
+            return Curacion;
+        }
     }
 }
 
