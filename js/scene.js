@@ -143,6 +143,61 @@ class Scenee
         this.tiempo = 0;
 
         //Modelos
+        this.Load3dModelGLTF("Assets/Models/Bag/Bag.glb", loadingManager, (object)=>{
+            object.scale.set(0.1, 0.1, 0.1);
+
+            var bolsa2 = object.clone();
+            bolsa2.position.set(7200, 325, 7000);
+
+            var bolsa3 = object.clone();
+            bolsa3.position.set(3800, 150, 7400);
+
+            var bolsa4 = object.clone();
+            bolsa4.position.set(-4800, 200, 7400);
+
+            var bolsa5 = object.clone();
+            bolsa5.position.set(-800, -50, 5500);
+
+            var bolsa6 = object.clone();
+            bolsa6.position.set(-5200, 475, 4500);
+
+            var bolsa7 = object.clone();
+            bolsa7.position.set(-3300, 445, 3000);
+
+            var bolsa8 = object.clone();
+            bolsa8.position.set(-4800, -40, -1000);
+
+            var bolsa9 = object.clone();
+            bolsa9.position.set(-1000, 160, -100);
+
+            var bolsa10 = object.clone();
+            bolsa10.position.set(1500, 0, -100);
+
+            var bolsa11 = object.clone();
+            bolsa11.position.set(3800, 160, 2300);
+
+            var bolsa12 = object.clone();
+            bolsa12.position.set(3800, 270, -5800);
+
+            var bolsa13 = object.clone();
+            bolsa13.position.set(8000, 90, 4000);
+
+            object.position.set(5000, 250, 8000);
+            this.Pantano.add(object);
+            this.Pantano.add(bolsa2);
+            this.Pantano.add(bolsa3);
+            this.Pantano.add(bolsa4);
+            this.Pantano.add(bolsa5);
+            this.Pantano.add(bolsa6);
+            this.Pantano.add(bolsa7);
+            this.Pantano.add(bolsa8);
+            this.Pantano.add(bolsa9);
+            this.Pantano.add(bolsa10);
+            this.Pantano.add(bolsa11);
+            this.Pantano.add(bolsa12);
+            this.Pantano.add(bolsa13);
+        });
+
         this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol_O2.glb", loadingManager, (object)=>{ //Arbol Otoño
             object.position.y = 340;
             object.scale.x = 100;
@@ -1421,6 +1476,65 @@ class Scenee
             this.Pradera.add(Arbol11);
         });
 
+        this.Load3dModelGLTF("Assets/Models/Bag/Bag.glb", loadingManager, (object)=>{
+            object.scale.set(0.1, 0.1, 0.1);
+
+            var bolsa2 = object.clone();
+            bolsa2.position.set(-1000, 200, 6550);
+
+            var bolsa3 = object.clone();
+            bolsa3.position.set(-2000, 200, 8500);
+
+            var bolsa4 = object.clone();
+            bolsa4.position.set(-4400, 200, 8500);
+
+            var bolsa5 = object.clone();
+            bolsa5.position.set(-7400, 200, 6000);
+
+            var bolsa6 = object.clone();
+            bolsa6.position.set(8400, 200, 8500);
+
+            var bolsa7 = object.clone();
+            bolsa7.position.set(3000, 200, 6100);
+
+            var bolsa8 = object.clone();
+            bolsa8.position.set(4500, 200, 7700);
+
+            var bolsa9 = object.clone();
+            bolsa9.position.set(1200, 200, 2300);
+
+            var bolsa10 = object.clone();
+            bolsa10.position.set(3200, 200, -1300);
+
+            var bolsa11 = object.clone();
+            bolsa11.position.set(4800, 200, -1300);
+
+            var bolsa12 = object.clone();
+            bolsa12.position.set(-5800, 200, -2300);
+
+            var bolsa13 = object.clone();
+            bolsa13.position.set(-8200, 200, -2300);
+
+            var bolsa14 = object.clone();
+            bolsa14.position.set(-1000, 200, -7300);
+
+            object.position.set(-3000, 200, 6550);
+            this.Pradera.add(object);
+            this.Pradera.add(bolsa2);
+            this.Pradera.add(bolsa3);
+            this.Pradera.add(bolsa4);
+            this.Pradera.add(bolsa5);
+            this.Pradera.add(bolsa6);
+            this.Pradera.add(bolsa7);
+            this.Pradera.add(bolsa8);
+            this.Pradera.add(bolsa9);
+            this.Pradera.add(bolsa10);
+            this.Pradera.add(bolsa11);
+            this.Pradera.add(bolsa12);
+            this.Pradera.add(bolsa13);
+            this.Pradera.add(bolsa14);
+        });
+
         //Personaje
         var ModelPlayer = new modelAnimController(this.Playeranimations, "Assets/Models/Player/Player_Idle.fbx");
         ModelPlayer.CreateBaseModel("PlayerModell", loadingManager, (object)=>{
@@ -1892,6 +2006,57 @@ class Scenee
             this.Nieve.add(roca6);
             this.Nieve.add(roca7);
             this.Nieve.add(roca8);
+        });
+
+        this.Load3dModelGLTF("Assets/Models/Bag/Bag.glb", loadingManager, (object)=>{
+            object.scale.set(0.1, 0.1, 0.1);
+
+            var bolsa2 = object.clone();
+            bolsa2.position.set(-7500, 280, 8300);
+
+            var bolsa3 = object.clone();
+            bolsa3.position.set(-7500, 90, 5300);
+
+            var bolsa4 = object.clone();
+            bolsa4.position.set(-3000, 150, 7400);
+
+            var bolsa5 = object.clone();
+            bolsa5.position.set(-60, 460, 6000);
+
+            var bolsa6 = object.clone();
+            bolsa6.position.set(-4000, 300, 1300);
+
+            var bolsa7 = object.clone();
+            bolsa7.position.set(-4000, 300, 4000);
+
+            var bolsa8 = object.clone();
+            bolsa8.position.set(-800, 300, 4000);
+
+            var bolsa9 = object.clone();
+            bolsa9.position.set(6500, -130, 7000);
+
+            var bolsa10 = object.clone();
+            bolsa10.position.set(6500, 200, 3000);
+
+            var bolsa11 = object.clone();
+            bolsa11.position.set(6500, 0, -1300);
+
+            var bolsa12 = object.clone();
+            bolsa12.position.set(6500, 200, -7300);
+
+            object.position.set(-5000, 320, 7000);
+            this.Nieve.add(object);
+            this.Nieve.add(bolsa2);
+            this.Nieve.add(bolsa3);
+            this.Nieve.add(bolsa4);
+            this.Nieve.add(bolsa5);
+            this.Nieve.add(bolsa6);
+            this.Nieve.add(bolsa7);
+            this.Nieve.add(bolsa8);
+            this.Nieve.add(bolsa9);
+            this.Nieve.add(bolsa10);
+            this.Nieve.add(bolsa11);
+            this.Nieve.add(bolsa12);
         });
 
         //Personaje

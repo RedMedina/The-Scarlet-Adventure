@@ -18,7 +18,7 @@ function main()
     var Escenario = new Scenee();
     var Scene;
     var Camara = new Cameraa(45, 2, 0.1, 1000000);
-    Camara.GetCamera().position.set(0, 140, -370);
+    //Camara.GetCamera().position.set(0, 140, -370);
 
     const clock = new THREE.Clock();
     let RotationSky = 0;
@@ -48,7 +48,7 @@ function main()
         Escenario.GetPlayer().GetModel().Pradera.playAnimation(0,1);
         Escenario.GetPlayer().GetModel().Pantano.playAnimation(0,1);
         Escenario.GetPlayer().GetModel().Nieve.playAnimation(0,1);
-        Escenario.GetPraderaScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+        //Escenario.GetPraderaScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
         //Base Sound
         audioCont.PlaySceneSound(1);
     }
@@ -95,9 +95,9 @@ function main()
     let stats = new Stats();
     document.body.appendChild( stats.domElement );
 
-    /*const controls = new OrbitControls(Camara.GetCamera(), canvas);
+    const controls = new OrbitControls(Camara.GetCamera(), canvas);
     controls.target.set(0, 5, 0);
-    controls.update();*/
+    controls.update();
 
     var leavesMateriala = [];
     CreatePasto(6000, -2400, 7000, 30, 25, 30, 170, 120);
@@ -465,7 +465,7 @@ function main()
                 audioCont.PlaySceneSound(1);
             }
             ActualScene = 1;
-            Escenario.GetPraderaScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+            //Escenario.GetPraderaScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
         }
         if(keys["K"])
         {
@@ -475,7 +475,7 @@ function main()
                 audioCont.PlaySceneSound(2);
             }
             ActualScene = 2;
-            Escenario.GetPantanoScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+            //Escenario.GetPantanoScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
         }
         if(keys["L"])
         {
@@ -485,7 +485,7 @@ function main()
                 audioCont.PlaySceneSound(3);
             }
             ActualScene = 3;
-            Escenario.GetNieveScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+            //Escenario.GetNieveScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
         }
 
         if (Escenario.GetPlayer().GetModel().Pradera.getMixer()) Escenario.GetPlayer().GetModel().Pradera.getMixer().update(delta);
@@ -525,10 +525,10 @@ function main()
         Escenario.GetNieveScene().getObjectByName("NieveSky").rotation.y = RotationSky;
 
         if (intensityL) {
-			intensityAmbientLight += 0.001;
+			intensityAmbientLight += 0.0005;
 		}
 		else {
-			intensityAmbientLight -= 0.001;
+			intensityAmbientLight -= 0.0005;
 		}
 
 		if (intensityAmbientLight > 1.0) {
