@@ -53,6 +53,8 @@ class Scenee
         var Mochila = new Backpack([]);
         this.Player = new player("User_name", {x: 0, y: 0, z: 0}, 1000, Mochila, 1, {Boss1: false, Boss2: false, Boss3: false});
         this.Player.GenerateStats();
+        this.Player2 = new player("User_name2", {x: 0, y: 0, z: 0}, 1000, Mochila, 1, {Boss1: false, Boss2: false, Boss3: false});
+        this.Player2.GenerateStats();
     }
 
     CreateScene()
@@ -1881,6 +1883,30 @@ class Scenee
         });
         this.Player.SetModel(ModelPlayer, "Pradera");
 
+        //Personaje 2
+        var ModelPlayer2 = new modelAnimController(this.Playeranimations, "Assets/Models/Player/Player_Idle.fbx");
+        ModelPlayer2.CreateBaseModel("PlayerModell2", loadingManager, (object)=>{
+            var PlayerModel = new THREE.Object3D();
+            PlayerModel.name = "PlayerModel2";
+            PlayerModel.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                //new THREE.Vector3(0, -1, 0),
+            ];
+            PlayerModel.add(object);
+            for (let i = 0; i < this.Playeranimations.length; i++) {
+                ModelPlayer2.LoadMultipleAnimations(i, (objectAnim)=>{
+                    PlayerModel.add(objectAnim);
+                });
+            }
+            this.Pradera.add(PlayerModel);
+            PlayerModel.position.set(2000, 200, 8550);
+            PlayerModel.rotation.y = 180 * 3.1416 / 180;
+        });
+        this.Player2.SetModel(ModelPlayer2, "Pradera");
+
         //Enemigos
         var AvatarEnemy = new OneModelAnim();
         AvatarEnemy.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
@@ -2913,7 +2939,8 @@ class Scenee
 
     GetPlayer()
     {
-        return this.Player;
+        var Jugadores = {Player1: this.Player, Player2: this.Player2};
+        return Jugadores;
     }
 
     GetPraderaEnemies()

@@ -11,8 +11,13 @@
     <link rel="stylesheet" href="css/pause.css">
 </head>
 <body>
-    <canvas id="c"></canvas>
-
+        <!--canvas id="c1"></canvas>
+        <canvas id="c2"></canvas-->
+        <div style="display: flex; height: 100%">
+            <div id="scene-section-1"></div>
+            <div id="scene-section-2"></div>
+        </div>
+        
     <script type="importmap">
 		{
 			"imports": {
@@ -28,18 +33,6 @@
 
     <?php include("pause.php") ?>
 
-    <!--script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
-    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-    <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/controls/OrbitControls.js"></script>
-    <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/loaders/LoaderSupport.js"></script>
-    <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/loaders/OBJLoader2.js"></script>
-    <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/loaders/OBJLoader.js"></script>
-    <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/loaders/GLTFLoader.js"></script>
-    <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/loaders/MTLLoader.js"></script-->
-    <!--script src="js/three.module.js"></script>
-    <script src="js/Reflector.js"></script>
-    <script src="js/Refractor.js"></script>
-    <script src="js/Water2.js"></script-->
     <script>
         var Pause = false;
         const AccionesMenu = {};
@@ -61,7 +54,7 @@
     <script src="js/terrain.js" type="module"></script>
     <script src="js/skydome.js" type="module"></script>
     <script src="js/water.js" type="module"></script>
-    <script src="js/scene.js" type="module"></script>
-    <script src="js/main.js" type="module"></script>
+    <script src="js/scene-multi.js" type="module"></script>
+    <script src="js/main-multi.js" type="module"></script>
 </body>
 </html>

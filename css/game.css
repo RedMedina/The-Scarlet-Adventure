@@ -121,6 +121,14 @@ body
   display: block;
 }
 
+#scene-section-1 {
+ width: 50%;
+}
+
+#scene-section-2 {
+  flex-grow: 1;
+ }
+
 #loading-text
   {
     font-family: Permanent Marker;
