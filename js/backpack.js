@@ -26,6 +26,11 @@ class Backpack
             return Curacion;
         }
     }
+
+    GetItems()
+    {
+        return this.Items;
+    }
 }
 
 export { Backpack };

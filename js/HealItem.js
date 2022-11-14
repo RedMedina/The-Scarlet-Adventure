@@ -22,6 +22,11 @@ class HealItem
     {
         this.Item.cantidad++;
     }
+
+    getItem()
+    {
+        return this.Item;
+    }
 }
 
 export { HealItem };

@@ -213,6 +213,41 @@ function main()
         mousekeys[1] = event.movementY;
     }
 
+    function UseItem(index)
+    {
+        var Curacion = Escenario.GetPlayer().GetBackpack().UseItem(index);
+        if(Escenario.GetPlayer().GetStats().Vida < Escenario.GetPlayer().GetMaxLife())
+        {
+            Escenario.GetPlayer().GetStats().Vida += Curacion;
+            if(Escenario.GetPlayer().GetStats().Vida > Escenario.GetPlayer().GetMaxLife())
+            {
+                var Sobrante = Escenario.GetPlayer().GetStats().Vida - Escenario.GetPlayer().GetMaxLife();
+                Escenario.GetPlayer().GetStats().Vida -= Sobrante;
+            }
+        }
+        ui.SetVidaActual(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife());
+        $(".ItemMenu").remove();
+        $(".btnUse").remove();
+        for (let i = 0; i < Escenario.GetPlayer().GetBackpack().GetItems().length; i++) {
+            $("#MochilaMenu").append("<div class='ItemMenu'>"+Escenario.GetPlayer().GetBackpack().GetItems()[i].getItem().name+"<button class='btnUse' onclick='AccionesMenu.useItem("+i+")'>+</button> <button class='btnUse' onclick='AccionesMenu.DeleteItem("+i+")'>X</button></div>");
+        }
+        console.log(Escenario.GetPlayer().GetBackpack());
+        console.log(Escenario.GetPlayer().GetStats().Vida);
+    }
+
+    function DeleteItem(index)
+    {
+        Escenario.GetPlayer().GetBackpack().UseItem(index);
+        $(".ItemMenu").remove();
+        $(".btnUse").remove();
+        for (let i = 0; i < Escenario.GetPlayer().GetBackpack().GetItems().length; i++) {
+            $("#MochilaMenu").append("<div class='ItemMenu'>"+Escenario.GetPlayer().GetBackpack().GetItems()[i].getItem().name+"<button class='btnUse' onclick='AccionesMenu.useItem("+i+")'>+</button> <button class='btnUse' onclick='AccionesMenu.DeleteItem("+i+")'>X</button></div>");
+        }
+    }
+
+    AccionesMenu.useItem = UseItem;
+    AccionesMenu.DeleteItem = DeleteItem;
+
     function resizeRendererToDisplaySize(renderer) {
         const canvas = renderer.domElement;
         const width = canvas.clientWidth;
@@ -537,24 +572,9 @@ function main()
             }
         }
 
-        //PROVISIONAL MIENTRAS HAGO EL GUI
-        if(keys["X"])
-        {
-            var Curacion = Escenario.GetPlayer().GetBackpack().UseItem(0);
-            if(Escenario.GetPlayer().GetStats().Vida < Escenario.GetPlayer().GetMaxLife())
-            {
-                Escenario.GetPlayer().GetStats().Vida += Curacion;
-                if(Escenario.GetPlayer().GetStats().Vida > Escenario.GetPlayer().GetMaxLife())
-                {
-                    var Sobrante = Escenario.GetPlayer().GetStats().Vida - Escenario.GetPlayer().GetMaxLife();
-                    Escenario.GetPlayer().GetStats().Vida -= Sobrante;
-                }
-            }
-            ui.SetVidaActual(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife());
-            console.log(Escenario.GetPlayer().GetBackpack());
-            console.log(Escenario.GetPlayer().GetStats().Vida);
-        }
-        else if (keys["Z"])
+    
+        //PROVISIONAL PARA PROBAR DAÑO
+        if (keys["Z"])
         {
             Escenario.GetPlayer().GetStats().Vida -= 300;
             console.log(Escenario.GetPlayer().GetStats().Vida);
@@ -566,6 +586,11 @@ function main()
         {
             if(!Pause)
             {
+                $(".ItemMenu").remove();
+                $(".btnUse").remove();
+                for (let i = 0; i < Escenario.GetPlayer().GetBackpack().GetItems().length; i++) {
+                    $("#MochilaMenu").append("<div class='ItemMenu'>"+Escenario.GetPlayer().GetBackpack().GetItems()[i].getItem().name+"<button class='btnUse' onclick='AccionesMenu.useItem("+i+")'>+</button> <button class='btnUse' onclick='AccionesMenu.DeleteItem("+i+")'>X</button></div>");
+                }
                 window.ModalMenu.showModal();
                 Pause = true;
             }

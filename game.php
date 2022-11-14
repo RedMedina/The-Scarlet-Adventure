@@ -47,7 +47,11 @@
                 Pause = false;
                 window.ModalMenu.close();
             }
+            const AccionesMenu = {};
     </script>
+
+    <script type='text/javascript' src="modules/jquery-3.3.1.min.js"></script>
+	<script type='text/javascript' src="modules/jquery.min.js"></script>
     <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
     <script src="js/camera.js" type="module"></script>
     <script src="js/audio.js" type="module"></script>
