@@ -1,0 +1,92 @@
+.menu
+{
+	background-color: rgb(94, 196, 255);
+	width: 80%;
+	height: 80%;
+	position: absolute;
+	border-radius: 15px;
+	border: 10px solid #EBEBEB;
+	font-family: Permanent Marker;
+}
+
+.datosMenu
+{
+	position: absolute;
+	left: 3%;
+	top: 4%;
+	border-right: 1px solid #888888;
+	padding-right: 15px;
+}
+
+.imgMP img
+{
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+}
+
+.MochilaTitulo
+{
+	position: absolute;
+	left: 34%;
+	top: 3%;
+	font-size: 30px;
+}
+
+.MochilaMenu
+{
+	position: absolute;
+	left: 34%;
+	top: 13%;
+	background-color: #F8F8F8;
+	width: 55%;
+	height: 70%;
+	border-radius: 15px;
+}
+
+.ItemMenu
+{
+	padding-left: 25px;
+}
+
+.ItemMenu:hover
+{
+	background-color: #E1E1E1;
+}
+
+.BtnMenu
+{
+	position: absolute;
+	left: 69%;
+	top: 90%;
+}
+
+.BtnCerrarMenu, .BtnGYSMenu
+{
+	background-color: #00A1FF;
+	border: 0px;	
+	border-radius: 5px;
+	width: 120px;
+	height: 30px;
+	font-family: Permanent Marker;
+}
+
+.BtnCerrarMenu:hover, .BtnGYSMenu:hover
+{
+	background-color: #BCE6FF;
+}
+
+.btnUse
+{
+	border: 0px;
+	width: 20px;
+	height: 20px;
+	background-color: #F8F8F8;
+	position: relative;
+	bottom: 3px;
+}
+
+.btnUse:hover
+{
+	background-color: #D5D5D5;
+}

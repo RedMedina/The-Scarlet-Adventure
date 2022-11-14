@@ -1,32 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/font.css">
-    <title>Pause</title>
-    <style>
-        body
-        {
-            padding: 0;
-            margin: 0;
-            border: 0px;
-            background-image: url("Assets/Images/pause.png");
-            background-size: cover;
-        }
-        h1
-        {
-            font-family: Permanent Marker;
-            color: white;
-            font-size: 80px;
-            position: absolute;
-            left: 42%;
-            top: 35%;
-        }
-    </style>
-</head>
-<body>
-    <h1>PAUSA</h1>
-</body>
-</html>
+<dialog class="menu" id="ModalMenu">
+		<div class="datosMenu">
+			<div class="imgMP"><img src="https://static.wikia.nocookie.net/pokemon/images/f/fc/Goh_Cinderace.png"></div>
+			<div>Nombre Usuario</div>
+			<div>Nivel: 5</div>
+			<div>Experiencia: 1200</div>
+			<div>Mapa: Pantano</div>
+			<div>Bruja1: Sí, Bruja2: Sí, Bruja3: Sí</div>
+		</div>
+		<div class="MochilaTitulo">Mochila: </div>
+		<div class="MochilaMenu">
+			<br>
+			<div class="ItemMenu">Coso 1 <button class="btnUse">+</button> <button class="btnUse">X</button></div>
+			<div class="ItemMenu">Coso 2 <button class="btnUse">+</button> <button class="btnUse">X</button></div>
+			<div class="ItemMenu">Coso 3 <button class="btnUse">+</button> <button class="btnUse">X</button></div>
+			<div class="ItemMenu">Coso 4 <button class="btnUse">+</button> <button class="btnUse">X</button></div>
+			<div class="ItemMenu">Coso 5 <button class="btnUse">+</button> <button class="btnUse">X</button></div>
+		</div>
+		<div class="BtnMenu">
+			<button class="BtnCerrarMenu" onclick="CerrarPause();">Cerrar</button>
+			<button class="BtnGYSMenu">Guardar y Salir</button>
+		</div>
+</dialog>

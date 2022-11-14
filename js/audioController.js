@@ -85,7 +85,6 @@ class AudioController
         else if (sceneActual == 2)
         {
             var CancionActual = Math.floor(Math.random() * 2);
-            debugger
             if(CancionActual == 0)
             {
                 this.PantanoSound1.GetSound().play();

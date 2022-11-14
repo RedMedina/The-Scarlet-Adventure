@@ -1,22 +1,31 @@
 class GUI
 {
-    CreateLife()
+    CreateLife(valueVidaActual, MaxLife)
     {
-        const Vida = document.createElement('progress');
-        Vida.max = 100;
-        Vida.value = 80;
-        Vida.id = "Vida_bar";
+        this.Vida = document.createElement('progress');
+        this.Vida.max = 100;
+        var Porcentaje = (valueVidaActual / MaxLife) * 100;
+        this.Vida.value = Math.round(Porcentaje);
+        this.Vida.id = "Vida_bar";
         const Vida_Value = document.createElement('div');
         Vida_Value.id = "Vida_value";
         Vida_Value.className = "Vida_value";
-        Vida_Value.innerHTML = "<label class='Vida_num'>"+Vida.value+"%</label>";
+        Vida_Value.innerHTML = "<label class='Vida_num' id='VidaValorNum'>"+this.Vida.value+"%</label>";
         const Exp = document.createElement('progress');
         Exp.max = 100;
         Exp.value = 40;
         Exp.id = "Exp_bar";
         document.body.appendChild(Exp);
-        document.body.appendChild(Vida);
+        document.body.appendChild(this.Vida);
         document.body.appendChild(Vida_Value);
+    }
+
+    SetVidaActual(valueVidaActual, MaxLife)
+    {
+        var Porcentaje = (valueVidaActual / MaxLife) * 100;
+        this.Vida.value = Math.round(Porcentaje);
+        document.getElementById("VidaValorNum").innerHTML = Math.round(Porcentaje) + "%";
+        //console.log(document.getElementById("VidaValorNum").value);
     }
 
     CreateHelpers()

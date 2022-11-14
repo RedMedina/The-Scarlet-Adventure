@@ -71,7 +71,7 @@ function main()
     var JumpContador = 0;
     var ActualScene = 1;
     var movPas = 0;
-    var rayCaster = new THREE.Raycaster();;
+    var rayCaster = new THREE.Raycaster();
     
     let water;
     const waterGeometry = new THREE.PlaneGeometry( 10000, 10000 );
@@ -110,7 +110,7 @@ function main()
     CreatePasto(6000, -7300, -3000, 30, 25, 30, 110, 120);
 
     const ui = new GUI();
-    ui.CreateLife();
+    ui.CreateLife(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife());
 
     function CreatePasto(instanNumber, posx, posz, scalex, scaley, scalez, spacex, spacez)
     {
@@ -201,8 +201,6 @@ function main()
         }
         leavesMateriala.push(leavesMaterialaa);
     }
-
-   
 
     function onKeyDown(event) {
 		keys[String.fromCharCode(event.keyCode)] = true;
@@ -468,24 +466,73 @@ function main()
         //Colisiones
         if(ModelsLoaded)
         {
-            //Collision Pradera objetos estaticos
-            for (var i = 0; i < Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays.length; i++) {
-                rayCaster.set(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays[i]);
-                var collision = rayCaster.intersectObjects(Escenario.GetPraderaObjects(), true);				
-                if (collision.length > 0 && collision[0].distance < 125) {
-                    Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(-movPas * delta);
-                    console.log("colisionando");
+            if(ActualScene == 1)
+            {
+                //Collision Pradera objetos estaticos
+                for (var i = 0; i < Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays.length; i++) {
+                    rayCaster.set(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays[i]);
+                    var collision = rayCaster.intersectObjects(Escenario.GetPraderaObjects(), true);				
+                    if (collision.length > 0 && collision[0].distance < 125) {
+                        Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(-movPas * delta);
+                        console.log("colisionando");
+                    }
+                }
+                //Collission Pradera Items
+                for (var i = 0; i < Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays.length; i++) {
+                    rayCaster.set(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays[i]);
+                    var collision = rayCaster.intersectObjects(Escenario.GetPraderaItems().model, true);				
+                    if (collision.length > 0 && collision[0].distance < 500 && keys["R"]) {
+                        Escenario.GetPlayer().GetBackpack().AddItem(Escenario.GetPraderaItems().items[collision[0].object.name-1]);
+                        Escenario.GetPraderaItems().items[collision[0].object.name-1] = {empty: true};
+                        Escenario.GetPraderaItems().model[collision[0].object.name-1].visible = false;
+                        console.log(Escenario.GetPlayer().GetBackpack());
+                    }
                 }
             }
-            //Collission Pradera Items
-            for (var i = 0; i < Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays.length; i++) {
-                rayCaster.set(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays[i]);
-                var collision = rayCaster.intersectObjects(Escenario.GetPraderaItems().model, true);				
-                if (collision.length > 0 && collision[0].distance < 500 && keys["R"]) {
-                    Escenario.GetPlayer().GetBackpack().AddItem(Escenario.GetPraderaItems().items[collision[0].object.name-1]);
-                    Escenario.GetPraderaItems().items[collision[0].object.name-1] = {empty: true};
-                    Escenario.GetPraderaItems().model[collision[0].object.name-1].visible = false;
-                    console.log(Escenario.GetPlayer().GetBackpack());
+            else if(ActualScene == 2)
+            {
+                //Collision Pantano objetos estaticos
+                for (var i = 0; i < Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays.length; i++) {
+                    rayCaster.set(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position, Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays[i]);
+                    var collision = rayCaster.intersectObjects(Escenario.GetPantanoObjects(), true);				
+                    if (collision.length > 0 && collision[0].distance < 125) {
+                        Escenario.GetPantanoScene().getObjectByName("PlayerModel").translateZ(-movPas * delta);
+                        console.log("colisionando");
+                    }
+                }
+                //Collission Pantano Items
+                for (var i = 0; i < Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays.length; i++) {
+                    rayCaster.set(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position, Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays[i]);
+                    var collision = rayCaster.intersectObjects(Escenario.GetPantanoItems().model, true);				
+                    if (collision.length > 0 && collision[0].distance < 500 && keys["R"]) {
+                        Escenario.GetPlayer().GetBackpack().AddItem(Escenario.GetPantanoItems().items[collision[0].object.name-1]);
+                        Escenario.GetPantanoItems().items[collision[0].object.name-1] = {empty: true};
+                        Escenario.GetPantanoItems().model[collision[0].object.name-1].visible = false;
+                        console.log(Escenario.GetPlayer().GetBackpack());
+                    }
+                }
+            }
+            else if(ActualScene == 3)
+            {
+                //Collision Nieve objetos estaticos
+                for (var i = 0; i < Escenario.GetNieveScene().getObjectByName("PlayerModel").rays.length; i++) {
+                    rayCaster.set(Escenario.GetNieveScene().getObjectByName("PlayerModel").position, Escenario.GetNieveScene().getObjectByName("PlayerModel").rays[i]);
+                    var collision = rayCaster.intersectObjects(Escenario.GetNieveObjects(), true);				
+                    if (collision.length > 0 && collision[0].distance < 125) {
+                        Escenario.GetNieveScene().getObjectByName("PlayerModel").translateZ(-movPas * delta);
+                        console.log("colisionando");
+                    }
+                }
+                //Collission Nieve Items
+                for (var i = 0; i < Escenario.GetNieveScene().getObjectByName("PlayerModel").rays.length; i++) {
+                    rayCaster.set(Escenario.GetNieveScene().getObjectByName("PlayerModel").position, Escenario.GetNieveScene().getObjectByName("PlayerModel").rays[i]);
+                    var collision = rayCaster.intersectObjects(Escenario.GetNieveItems().model, true);				
+                    if (collision.length > 0 && collision[0].distance < 500 && keys["R"]) {
+                        Escenario.GetPlayer().GetBackpack().AddItem(Escenario.GetNieveItems().items[collision[0].object.name-1]);
+                        Escenario.GetNieveItems().items[collision[0].object.name-1] = {empty: true};
+                        Escenario.GetNieveItems().model[collision[0].object.name-1].visible = false;
+                        console.log(Escenario.GetPlayer().GetBackpack());
+                    }
                 }
             }
         }
@@ -503,6 +550,7 @@ function main()
                     Escenario.GetPlayer().GetStats().Vida -= Sobrante;
                 }
             }
+            ui.SetVidaActual(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife());
             console.log(Escenario.GetPlayer().GetBackpack());
             console.log(Escenario.GetPlayer().GetStats().Vida);
         }
@@ -510,6 +558,17 @@ function main()
         {
             Escenario.GetPlayer().GetStats().Vida -= 300;
             console.log(Escenario.GetPlayer().GetStats().Vida);
+            ui.SetVidaActual(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife());
+        }
+
+        //GUI
+        if(keys["P"])
+        {
+            if(!Pause)
+            {
+                window.ModalMenu.showModal();
+                Pause = true;
+            }
         }
 
         /*De prueba cambio scene*/

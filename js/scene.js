@@ -25,6 +25,15 @@ class Scenee
         this.PraderaObjects = [];
         //Objectos Recolectables Pradera
         this.PraderaItems;
+        //Objetos Estaticos Pantano
+        this.PantanoObjects = [];
+        //Objetos Recolectables Pantano
+        this.PantanoItems;
+        //Objetos Estaticos Nieve
+        this.NieveObjects = [];
+        //Objetos Recolectables Nieve
+        this.NieveItems;
+
 
         //Pradera Enemies
         this.PraderaEnemies = []; //Temporal hasta tener la ia y stats
@@ -154,41 +163,68 @@ class Scenee
 
             var bolsa2 = object.clone();
             bolsa2.position.set(7200, 325, 7000);
+            bolsa2.children[0].children[0].children[0].children[0].children[0].name="2";
+            var Item2 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa3 = object.clone();
             bolsa3.position.set(3800, 150, 7400);
+            bolsa3.children[0].children[0].children[0].children[0].children[0].name="3";
+            var Item3 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa4 = object.clone();
             bolsa4.position.set(-4800, 200, 7400);
+            bolsa4.children[0].children[0].children[0].children[0].children[0].name="4";
+            var Item4 = new HealItem("Pocion Alta", 500, 1);
 
             var bolsa5 = object.clone();
             bolsa5.position.set(-800, -50, 5500);
+            bolsa5.children[0].children[0].children[0].children[0].children[0].name="5";
+            var Item5 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa6 = object.clone();
             bolsa6.position.set(-5200, 475, 4500);
+            bolsa6.children[0].children[0].children[0].children[0].children[0].name="6";
+            var Item6 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa7 = object.clone();
             bolsa7.position.set(-3300, 445, 3000);
+            bolsa7.children[0].children[0].children[0].children[0].children[0].name="7";
+            var Item7 = new HealItem("Pocion Alta", 500, 1);
 
             var bolsa8 = object.clone();
             bolsa8.position.set(-4800, -40, -1000);
+            bolsa8.children[0].children[0].children[0].children[0].children[0].name="8";
+            var Item8 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa9 = object.clone();
             bolsa9.position.set(-1000, 160, -100);
+            bolsa9.children[0].children[0].children[0].children[0].children[0].name="9";
+            var Item9 = new HealItem("Pocion Alta", 500, 1);
 
             var bolsa10 = object.clone();
             bolsa10.position.set(1500, 0, -100);
+            bolsa10.children[0].children[0].children[0].children[0].children[0].name="10";
+            var Item10 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa11 = object.clone();
             bolsa11.position.set(3800, 160, 2300);
+            bolsa11.children[0].children[0].children[0].children[0].children[0].name="11";
+            var Item11 = new HealItem("Pocion Alta", 500, 1);
 
             var bolsa12 = object.clone();
             bolsa12.position.set(3800, 270, -5800);
+            bolsa12.children[0].children[0].children[0].children[0].children[0].name="12";
+            var Item12 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa13 = object.clone();
             bolsa13.position.set(8000, 90, 4000);
+            bolsa13.children[0].children[0].children[0].children[0].children[0].name="13";
+            var Item13 = new HealItem("Pocion Basica", 100, 1);
 
             object.position.set(5000, 250, 8000);
+            object.children[0].children[0].children[0].children[0].children[0].name="1";
+            var Item1 = new HealItem("Pocion Basica", 100, 1);
+
             this.Pantano.add(object);
             this.Pantano.add(bolsa2);
             this.Pantano.add(bolsa3);
@@ -202,6 +238,38 @@ class Scenee
             this.Pantano.add(bolsa11);
             this.Pantano.add(bolsa12);
             this.Pantano.add(bolsa13);
+
+            var ItemsArray = [];
+            ItemsArray.push(Item1);
+            ItemsArray.push(Item2);
+            ItemsArray.push(Item3);
+            ItemsArray.push(Item4);
+            ItemsArray.push(Item5);
+            ItemsArray.push(Item6);
+            ItemsArray.push(Item7);
+            ItemsArray.push(Item8);
+            ItemsArray.push(Item9);
+            ItemsArray.push(Item10);
+            ItemsArray.push(Item11);
+            ItemsArray.push(Item12);
+            ItemsArray.push(Item13);
+
+            var ModelsArray = [];
+            ModelsArray.push(object);
+            ModelsArray.push(bolsa2);
+            ModelsArray.push(bolsa3);
+            ModelsArray.push(bolsa4);
+            ModelsArray.push(bolsa5);
+            ModelsArray.push(bolsa6);
+            ModelsArray.push(bolsa7);
+            ModelsArray.push(bolsa8);
+            ModelsArray.push(bolsa9);
+            ModelsArray.push(bolsa10);
+            ModelsArray.push(bolsa11);
+            ModelsArray.push(bolsa12);
+            ModelsArray.push(bolsa13);
+
+            this.PantanoItems = {model: ModelsArray, items: ItemsArray};
         });
 
         this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol_O2.glb", loadingManager, (object)=>{ //Arbol Otoño
@@ -445,6 +513,47 @@ class Scenee
             this.Pantano.add(Arbol38);
             this.Pantano.add(Arbol39);
             this.Pantano.add(Arbol40);
+
+            this.PantanoObjects.push(object);
+            this.PantanoObjects.push(Arbol2);
+            this.PantanoObjects.push(Arbol3);
+            this.PantanoObjects.push(Arbol4);
+            this.PantanoObjects.push(Arbol5);
+            this.PantanoObjects.push(Arbol6);
+            this.PantanoObjects.push(Arbol7);
+            this.PantanoObjects.push(Arbol8);
+            this.PantanoObjects.push(Arbol9);
+            this.PantanoObjects.push(Arbol10);
+            this.PantanoObjects.push(Arbol11);
+            this.PantanoObjects.push(Arbol12);
+            this.PantanoObjects.push(Arbol13);
+            this.PantanoObjects.push(Arbol14);
+            this.PantanoObjects.push(Arbol15);
+            this.PantanoObjects.push(Arbol16);
+            this.PantanoObjects.push(Arbol17);
+            this.PantanoObjects.push(Arbol18);
+            this.PantanoObjects.push(Arbol19);
+            this.PantanoObjects.push(Arbol20);
+            this.PantanoObjects.push(Arbol21);
+            this.PantanoObjects.push(Arbol22);
+            this.PantanoObjects.push(Arbol23);
+            this.PantanoObjects.push(Arbol24);
+            this.PantanoObjects.push(Arbol25);
+            this.PantanoObjects.push(Arbol26);
+            this.PantanoObjects.push(Arbol27);
+            this.PantanoObjects.push(Arbol28);
+            this.PantanoObjects.push(Arbol29);
+            this.PantanoObjects.push(Arbol30);
+            this.PantanoObjects.push(Arbol31);
+            this.PantanoObjects.push(Arbol32);
+            this.PantanoObjects.push(Arbol33);
+            this.PantanoObjects.push(Arbol34);
+            this.PantanoObjects.push(Arbol35);
+            this.PantanoObjects.push(Arbol36);
+            this.PantanoObjects.push(Arbol37);
+            this.PantanoObjects.push(Arbol38);
+            this.PantanoObjects.push(Arbol39);
+            this.PantanoObjects.push(Arbol40);
         });
 
         this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol_Seco.glb", loadingManager,(object)=>{ //Arbol Seco
@@ -527,6 +636,20 @@ class Scenee
             this.Pantano.add(ArbolS11);
             this.Pantano.add(ArbolS12);
             this.Pantano.add(ArbolS13);
+
+            this.PantanoObjects.push(object);
+            this.PantanoObjects.push(ArbolS2);
+            this.PantanoObjects.push(ArbolS3);
+            this.PantanoObjects.push(ArbolS4);
+            this.PantanoObjects.push(ArbolS5);
+            this.PantanoObjects.push(ArbolS6);
+            this.PantanoObjects.push(ArbolS7);
+            this.PantanoObjects.push(ArbolS8);
+            this.PantanoObjects.push(ArbolS9);
+            this.PantanoObjects.push(ArbolS10);
+            this.PantanoObjects.push(ArbolS11);
+            this.PantanoObjects.push(ArbolS12);
+            this.PantanoObjects.push(ArbolS13);
         });
 
         this.Load3dModelGLTF("Assets/Models/Campamento/Hoguera.glb", loadingManager,(object)=>{ //Hoguera
@@ -536,6 +659,7 @@ class Scenee
             object.position.x = -5000;
             object.position.z = 7300;
             this.Pantano.add(object);
+            this.PantanoObjects.push(object);
         });
 
         this.Load3dModelGLTF("Assets/Models/Campamento/Antorcha.glb", loadingManager,(object)=>{ //Antorcha
@@ -570,6 +694,12 @@ class Scenee
             this.Pantano.add(Antorcha3);
             this.Pantano.add(Antorcha4);
             this.Pantano.add(Antorcha5);
+
+            this.PantanoObjects.push(object);
+            this.PantanoObjects.push(Antorcha2);
+            this.PantanoObjects.push(Antorcha3);
+            this.PantanoObjects.push(Antorcha4);
+            this.PantanoObjects.push(Antorcha5);
         });
 
         this.Load3dModelGLTF("Assets/Models/Campamento/Tronco.glb", loadingManager, (object)=>{ //Tronco
@@ -581,6 +711,7 @@ class Scenee
             object.position.z = 7800;
 
             this.Pantano.add(object);
+            this.PantanoObjects.push(object);
         });
 
         this.Load3dModelGLTF("Assets/Models/Roca/roca3.glb", loadingManager, (object)=>{
@@ -599,6 +730,10 @@ class Scenee
             this.Pantano.add(object);
             this.Pantano.add(roca2);
             this.Pantano.add(roca3);
+
+            this.PantanoObjects.push(object);
+            this.PantanoObjects.push(roca2);
+            this.PantanoObjects.push(roca3);
         });
 
         //Personaje
@@ -606,6 +741,13 @@ class Scenee
         ModelPlayer.CreateBaseModel("PlayerModell", loadingManager, (object)=>{
             var PlayerModel = new THREE.Object3D();
             PlayerModel.name = "PlayerModel";
+            PlayerModel.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                //new THREE.Vector3(0, -1, 0),
+            ];
             PlayerModel.add(object);
             for (let i = 0; i < this.Playeranimations.length; i++) {
                 ModelPlayer.LoadMultipleAnimations(i, (objectAnim)=>{
@@ -2027,6 +2169,22 @@ class Scenee
             this.Nieve.add(Arbol13);
             this.Nieve.add(Arbol14);
             this.Nieve.add(Arbol15);
+
+            this.NieveObjects.push(object);
+            this.NieveObjects.push(Arbol2);
+            this.NieveObjects.push(Arbol3);
+            this.NieveObjects.push(Arbol4);
+            this.NieveObjects.push(Arbol5);
+            this.NieveObjects.push(Arbol6);
+            this.NieveObjects.push(Arbol7);
+            this.NieveObjects.push(Arbol8);
+            this.NieveObjects.push(Arbol9);
+            this.NieveObjects.push(Arbol10);
+            this.NieveObjects.push(Arbol11);
+            this.NieveObjects.push(Arbol12);
+            this.NieveObjects.push(Arbol13);
+            this.NieveObjects.push(Arbol14);
+            this.NieveObjects.push(Arbol15);
         });
 
         this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol_O3.glb", loadingManager, (object)=>{ //Arbol
@@ -2099,6 +2257,24 @@ class Scenee
             this.Nieve.add(Arbol15);
             this.Nieve.add(Arbol16);
             this.Nieve.add(Arbol17);
+
+            this.NieveObjects.push(object);
+            this.NieveObjects.push(Arbol2);
+            this.NieveObjects.push(Arbol3);
+            this.NieveObjects.push(Arbol4);
+            this.NieveObjects.push(Arbol5);
+            this.NieveObjects.push(Arbol6);
+            this.NieveObjects.push(Arbol7);
+            this.NieveObjects.push(Arbol8);
+            this.NieveObjects.push(Arbol9);
+            this.NieveObjects.push(Arbol10);
+            this.NieveObjects.push(Arbol11);
+            this.NieveObjects.push(Arbol12);
+            this.NieveObjects.push(Arbol13);
+            this.NieveObjects.push(Arbol14);
+            this.NieveObjects.push(Arbol15);
+            this.NieveObjects.push(Arbol16);
+            this.NieveObjects.push(Arbol17);
         });
 
         this.Load3dModelGLTF("Assets/Models/Campamento/Antorcha.glb", loadingManager, (object)=>{ //Antorcha
@@ -2135,6 +2311,15 @@ class Scenee
             this.Nieve.add(Antorcha6);
             this.Nieve.add(Antorcha7);
             this.Nieve.add(Antorcha8);
+
+            this.NieveObjects.push(object);
+            this.NieveObjects.push(Antorcha2);
+            this.NieveObjects.push(Antorcha3);
+            this.NieveObjects.push(Antorcha4);
+            this.NieveObjects.push(Antorcha5);
+            this.NieveObjects.push(Antorcha6);
+            this.NieveObjects.push(Antorcha7);
+            this.NieveObjects.push(Antorcha8);
         });
 
         this.Load3dModelGLTF("Assets/Models/Campamento/Hoguera.glb", loadingManager, (object)=>{ //Hoguera
@@ -2142,6 +2327,7 @@ class Scenee
 
             object.position.set(-3900, -30, -5500);
             this.Nieve.add(object);
+            this.NieveObjects.push(object);
         });
 
         this.Load3dModelGLTF("Assets/Models/Campamento/Casa.glb", loadingManager, (object)=>{ //Casa
@@ -2154,6 +2340,9 @@ class Scenee
             object.position.set(-3900, -30, -8000);
             this.Nieve.add(object);
             this.Nieve.add(Casa2);
+            
+            this.NieveObjects.push(object);
+            this.NieveObjects.push(Casa2);
         });
 
         this.Load3dModelGLTF("Assets/Models/Roca/Snow_Rock.glb", loadingManager, (object)=>{ //Roca
@@ -2189,6 +2378,15 @@ class Scenee
             this.Nieve.add(roca6);
             this.Nieve.add(roca7);
             this.Nieve.add(roca8);
+
+            this.NieveObjects.push(object);
+            this.NieveObjects.push(roca2);
+            this.NieveObjects.push(roca3);
+            this.NieveObjects.push(roca4);
+            this.NieveObjects.push(roca5);
+            this.NieveObjects.push(roca6);
+            this.NieveObjects.push(roca7);
+            this.NieveObjects.push(roca8);
         });
 
         this.Load3dModelGLTF("Assets/Models/Bag/Bag.glb", loadingManager, (object)=>{
@@ -2196,38 +2394,62 @@ class Scenee
 
             var bolsa2 = object.clone();
             bolsa2.position.set(-7500, 280, 8300);
+            bolsa2.children[0].children[0].children[0].children[0].children[0].name="2";
+            var Item2 = new HealItem("Pocion Alta", 500, 1);
 
             var bolsa3 = object.clone();
             bolsa3.position.set(-7500, 90, 5300);
+            bolsa3.children[0].children[0].children[0].children[0].children[0].name="3";
+            var Item3 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa4 = object.clone();
             bolsa4.position.set(-3000, 150, 7400);
+            bolsa4.children[0].children[0].children[0].children[0].children[0].name="4";
+            var Item4 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa5 = object.clone();
             bolsa5.position.set(-60, 460, 6000);
+            bolsa5.children[0].children[0].children[0].children[0].children[0].name="5";
+            var Item5 = new HealItem("Pocion Alta", 500, 1);
 
             var bolsa6 = object.clone();
             bolsa6.position.set(-4000, 300, 1300);
+            bolsa6.children[0].children[0].children[0].children[0].children[0].name="6";
+            var Item6 = new HealItem("Pocion Alta", 500, 1);
 
             var bolsa7 = object.clone();
             bolsa7.position.set(-4000, 300, 4000);
+            bolsa7.children[0].children[0].children[0].children[0].children[0].name="7";
+            var Item7 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa8 = object.clone();
             bolsa8.position.set(-800, 300, 4000);
+            bolsa8.children[0].children[0].children[0].children[0].children[0].name="8";
+            var Item8 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa9 = object.clone();
             bolsa9.position.set(6500, -130, 7000);
+            bolsa9.children[0].children[0].children[0].children[0].children[0].name="9";
+            var Item9 = new HealItem("Pocion Alta", 500, 1);
 
             var bolsa10 = object.clone();
             bolsa10.position.set(6500, 200, 3000);
+            bolsa10.children[0].children[0].children[0].children[0].children[0].name="10";
+            var Item10 = new HealItem("Pocion Basica", 100, 1);
 
             var bolsa11 = object.clone();
             bolsa11.position.set(6500, 0, -1300);
+            bolsa11.children[0].children[0].children[0].children[0].children[0].name="11";
+            var Item11 = new HealItem("Pocion Alta", 500, 1);
 
             var bolsa12 = object.clone();
             bolsa12.position.set(6500, 200, -7300);
+            bolsa12.children[0].children[0].children[0].children[0].children[0].name="12";
+            var Item12 = new HealItem("Pocion Basica", 100, 1);
 
             object.position.set(-5000, 320, 7000);
+            object.children[0].children[0].children[0].children[0].children[0].name="1";
+            var Item1 = new HealItem("Pocion Basica", 100, 1);
             this.Nieve.add(object);
             this.Nieve.add(bolsa2);
             this.Nieve.add(bolsa3);
@@ -2240,6 +2462,36 @@ class Scenee
             this.Nieve.add(bolsa10);
             this.Nieve.add(bolsa11);
             this.Nieve.add(bolsa12);
+
+            var ItemsArray = [];
+            ItemsArray.push(Item1);
+            ItemsArray.push(Item2);
+            ItemsArray.push(Item3);
+            ItemsArray.push(Item4);
+            ItemsArray.push(Item5);
+            ItemsArray.push(Item6);
+            ItemsArray.push(Item7);
+            ItemsArray.push(Item8);
+            ItemsArray.push(Item9);
+            ItemsArray.push(Item10);
+            ItemsArray.push(Item11);
+            ItemsArray.push(Item12);
+
+            var ModelsArray = [];
+            ModelsArray.push(object);
+            ModelsArray.push(bolsa2);
+            ModelsArray.push(bolsa3);
+            ModelsArray.push(bolsa4);
+            ModelsArray.push(bolsa5);
+            ModelsArray.push(bolsa6);
+            ModelsArray.push(bolsa7);
+            ModelsArray.push(bolsa8);
+            ModelsArray.push(bolsa9);
+            ModelsArray.push(bolsa10);
+            ModelsArray.push(bolsa11);
+            ModelsArray.push(bolsa12);
+
+            this.NieveItems = {model: ModelsArray, items: ItemsArray};
         });
 
         //Personaje
@@ -2247,6 +2499,13 @@ class Scenee
         ModelPlayer.CreateBaseModel("PlayerModell", loadingManager, (object)=>{
             var PlayerModel = new THREE.Object3D();
             PlayerModel.name = "PlayerModel";
+            PlayerModel.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                //new THREE.Vector3(0, -1, 0),
+            ];
             PlayerModel.add(object);
             for (let i = 0; i < this.Playeranimations.length; i++) {
                 ModelPlayer.LoadMultipleAnimations(i, (objectAnim)=>{
@@ -2617,6 +2876,26 @@ class Scenee
     GetPraderaItems()
     {
         return this.PraderaItems;
+    }
+
+    GetPantanoObjects()
+    {
+        return this.PantanoObjects;
+    }
+
+    GetPantanoItems()
+    {
+        return this.PantanoItems;
+    }
+
+    GetNieveObjects()
+    {
+        return this.NieveObjects;
+    }
+
+    GetNieveItems()
+    {
+        return this.NieveItems;
     }
 }
 

@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Graficas Web</title>
     <link rel="stylesheet" href="css/font.css">
+    <link href='https://fonts.googleapis.com/css?family=Permanent Marker' rel='stylesheet'>
     <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/pause.css">
 </head>
 <body>
     <canvas id="c"></canvas>
@@ -24,6 +26,8 @@
         <center><p id="loading-text">Cargando...</p></center>
     </section>
 
+    <?php include("pause.php") ?>
+
     <!--script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
     <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
     <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/controls/OrbitControls.js"></script>
@@ -36,6 +40,14 @@
     <script src="js/Reflector.js"></script>
     <script src="js/Refractor.js"></script>
     <script src="js/Water2.js"></script-->
+    <script>
+        var Pause = false;
+        function CerrarPause()
+            {
+                Pause = false;
+                window.ModalMenu.close();
+            }
+    </script>
     <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
     <script src="js/camera.js" type="module"></script>
     <script src="js/audio.js" type="module"></script>
