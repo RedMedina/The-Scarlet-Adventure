@@ -1,6 +1,6 @@
 class player
 {
-    constructor(Name, Position, Experiencia, Backpack, level, bosses)
+    constructor(Name, Position, Experiencia, Backpack, level, bosses, ActualLife)
     {
         this.Name = Name;
         this.Position = Position; //Position = {x: 0, y: 0, z: 0}
@@ -11,6 +11,7 @@ class player
         this.Bosses = bosses; //Bosses = {Boss1: true, Boss2: true, Boss3: true}
         this.Model = {}; //Model = {Pradera: a, Pantano: b, Nieve: c}
         this.Scene;
+        this.ActualLife = ActualLife;
     }
 
     SetModel(Model, Scene)
@@ -48,6 +49,7 @@ class player
     {
         this.Stats = {Vida: 1000 + (1000 * (this.level * 0.1)), Ataque: 800 + (800 * (this.level * 0.1)), Defensa: 500 + (500 * (this.level * 0.1))};
         this.MaxLife = this.Stats.Vida;
+        this.Stats.Vida =  this.ActualLife;
     }
 
     GetMaxLife()
@@ -58,6 +60,21 @@ class player
     GetStats()
     {
         return this.Stats;
+    }
+
+    GetLevel()
+    {
+        return this.level;
+    }
+
+    GetExp()
+    {
+        return this.Experiencia;
+    }
+
+    GetBoss()
+    {
+        return this.Bosses;
     }
 }
 

@@ -5,7 +5,8 @@ import Stats from '/PWGW/node_modules/three/examples/jsm/libs/stats.module.js';
 import { Water } from '/PWGW/node_modules/three/examples/jsm/objects/Water.js';
 import {OrbitControls} from '/PWGW/node_modules/three/examples/jsm/controls/OrbitControls.js';
 import {GUI} from '/PWGW/js/gui.js';
-import {AudioController} from '/PWGW/js/audioController.js'
+import {AudioController} from '/PWGW/js/audioController.js';
+import {Shots} from '/PWGW/js/disparo.js';
 
 function main()
 {
@@ -49,9 +50,24 @@ function main()
         Escenario.GetPlayer().GetModel().Pradera.playAnimation(0,1);
         Escenario.GetPlayer().GetModel().Pantano.playAnimation(0,1);
         Escenario.GetPlayer().GetModel().Nieve.playAnimation(0,1);
-        Escenario.GetPraderaScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+        if(PlayerDatos.scene == 1)
+        {
+            Escenario.GetPraderaScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+            Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.set(PlayerDatos.coorX, PlayerDatos.coorY, PlayerDatos.coorZ);
+        }
+        else if (PlayerDatos.scene == 2)
+        {
+            Escenario.GetPantanoScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+            Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.set(PlayerDatos.coorX, PlayerDatos.coorY, PlayerDatos.coorZ);
+        }
+        else if (PlayerDatos.scene == 3)
+        {
+            Escenario.GetNieveScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+            Escenario.GetNieveScene().getObjectByName("PlayerModel").position.set(PlayerDatos.coorX, PlayerDatos.coorY, PlayerDatos.coorZ);
+        }
+        
         //Base Sound
-        audioCont.PlaySceneSound(1);
+        audioCont.PlaySceneSound(PlayerDatos.scene);
         ModelsLoaded = true;
     }
 
@@ -61,15 +77,36 @@ function main()
     Escenario.NieveScene(loadingManager);
     Escenario.Rain();
     Escenario.Snow();
-    Scene = Escenario.GetPraderaScene();
+
+    if(PlayerDatos.scene == 1)
+    {
+        Scene = Escenario.GetPraderaScene();
+    }
+    else if(PlayerDatos.scene == 2)
+    {
+        Scene = Escenario.GetPantanoScene();
+    }
+    else if (PlayerDatos.scene == 3)
+    {
+        Scene = Escenario.GetNieveScene();
+    }
+   
     const audioCont = new AudioController();
+    var SonidoFinal = Configuraciones.sonido * 0.001;
+    audioCont.SetVolume(SonidoFinal);
+    var Disparo = new Shots();
+    var ShotsPradera = [];
+    var ShotsPantano = [];
+    var ShotsNieve = [];
+    var Disparando = false;
+    var DisparandoContador = 0;
     var DodgeDuracion = 1.5;
     var DodgeContador = 0;
     var AttackDuracion = 2.2;
     var AttackContador = 0;
     var JumpDuracion = 2.5;
     var JumpContador = 0;
-    var ActualScene = 1;
+    var ActualScene = PlayerDatos.scene;
     var movPas = 0;
     var rayCaster = new THREE.Raycaster();
     
@@ -247,6 +284,48 @@ function main()
 
     AccionesMenu.useItem = UseItem;
     AccionesMenu.DeleteItem = DeleteItem;
+
+    $(document).ready
+    (
+	    function($){$("#GuardarS_Menu").click(function(){
+            var Items = [];
+            for (let i = 0; i < Escenario.GetPlayer().GetBackpack().GetItems().length; i++) {
+                Items.push(Escenario.GetPlayer().GetBackpack().GetItems()[i].getItem());
+            }
+            SaveItems(Items);
+            if(ActualScene == 1)
+            {
+                var SavePlayer = {level: Escenario.GetPlayer().GetLevel(), ActualLife: Escenario.GetPlayer().GetStats().Vida, 
+                    exp: Escenario.GetPlayer().GetExp(), coorX:Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.x,
+                    coorY:Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.y,
+                    coorZ:Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.z, scene: ActualScene,
+                    boss1: Escenario.GetPlayer().GetBoss().Boss1, boss2: Escenario.GetPlayer().GetBoss().Boss2,
+                    boss3: Escenario.GetPlayer().GetBoss().Boss3};
+                UpdatePlayer(SavePlayer);
+            }
+            else if (ActualScene == 2)
+            {
+                var SavePlayer = {level: Escenario.GetPlayer().GetLevel(), ActualLife: Escenario.GetPlayer().GetStats().Vida, 
+                    exp: Escenario.GetPlayer().GetExp(), coorX:Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.x,
+                    coorY:Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.y,
+                    coorZ:Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.z, scene: ActualScene,
+                    boss1: Escenario.GetPlayer().GetBoss().Boss1, boss2: Escenario.GetPlayer().GetBoss().Boss2,
+                    boss3: Escenario.GetPlayer().GetBoss().Boss3};
+                UpdatePlayer(SavePlayer);
+            }
+            else if (ActualScene == 3)
+            {
+                var SavePlayer = {level: Escenario.GetPlayer().GetLevel(), ActualLife: Escenario.GetPlayer().GetStats().Vida, 
+                    exp: Escenario.GetPlayer().GetExp(), coorX:Escenario.GetNieveScene().getObjectByName("PlayerModel").position.x,
+                    coorY:Escenario.GetNieveScene().getObjectByName("PlayerModel").position.y,
+                    coorZ:Escenario.GetNieveScene().getObjectByName("PlayerModel").position.z, scene: ActualScene,
+                    boss1: Escenario.GetPlayer().GetBoss().Boss1, boss2: Escenario.GetPlayer().GetBoss().Boss2,
+                    boss3: Escenario.GetPlayer().GetBoss().Boss3};
+                UpdatePlayer(SavePlayer);
+            }
+            
+        })}
+    );
 
     function resizeRendererToDisplaySize(renderer) {
         const canvas = renderer.domElement;
@@ -458,14 +537,26 @@ function main()
                 if(ActualScene == 1)
                 {
                     Escenario.GetPlayer().GetModel().Pradera.playAnimation(2,1);
+                    var Particle = Disparo.Disparar(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rotation.y, Camara.GetCamera().rotation.x);
+                    Escenario.GetPraderaScene().add(Particle);
+                    ShotsPradera.push(Particle);
+                    Disparando = true;
                 }
                 else if (ActualScene == 2)
                 {
                     Escenario.GetPlayer().GetModel().Pantano.playAnimation(2,1);
+                    var Particle = Disparo.Disparar(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position, Escenario.GetPantanoScene().getObjectByName("PlayerModel").rotation.y, Camara.GetCamera().rotation.x);
+                    Escenario.GetPantanoScene().add(Particle);
+                    ShotsPantano.push(Particle);
+                    Disparando = true;
                 }
                 else if (ActualScene == 3)
                 {
                     Escenario.GetPlayer().GetModel().Nieve.playAnimation(2,1);
+                    var Particle = Disparo.Disparar(Escenario.GetNieveScene().getObjectByName("PlayerModel").position, Escenario.GetNieveScene().getObjectByName("PlayerModel").rotation.y, Camara.GetCamera().rotation.x);
+                    Escenario.GetNieveScene().add(Particle);
+                    ShotsNieve.push(Particle);
+                    Disparando = true;
                 }
             }else
             {
@@ -507,9 +598,10 @@ function main()
                 for (var i = 0; i < Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays.length; i++) {
                     rayCaster.set(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays[i]);
                     var collision = rayCaster.intersectObjects(Escenario.GetPraderaObjects(), true);				
-                    if (collision.length > 0 && collision[0].distance < 125) {
+                    if (collision.length > 0 && (collision[0].distance < 125 /*|| collision[1].distance < 125 || collision[2].distance < 125 || collision[3].distance < 125*/)) {
                         Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(-movPas * delta);
                         console.log("colisionando");
+                        console.log(collision);
                     }
                 }
                 //Collission Pradera Items
@@ -528,9 +620,13 @@ function main()
                 {
                     rayCaster.set(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays[i]);
                     var collision = rayCaster.intersectObjects(Escenario.GetPraderaEnemies().Collider, true);
-                    if(collision.length > 0 && collision[0].distance < 500)
-                    {
-                        console.log("Colissionando con Enemigo");
+                    if(collision.length > 0 && collision[0].distance < 200)
+                    {            
+                        //var i = parseInt(collision[0].object.name);            
+                        //Escenario.GetPraderaEnemies().Collider[i].parent.lookAt(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.x, Escenario.GetPraderaEnemies().Collider[i].parent.position.y, Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.z);
+                        //Escenario.GetPraderaEnemies().Collider[i].parent.translateZ(450 * delta);
+                        //console.log(Escenario.GetPraderaEnemies().Collider[i].parent);
+                        //console.log("Colissionando con Enemigo");
                     }
                 }
             }
@@ -582,6 +678,38 @@ function main()
             }
         }
 
+        //Shots
+        for (let i = 0; i < ShotsPradera.length; i++) {
+            ShotsPradera[i].translateZ(700 * delta);
+        }
+        for (let i = 0; i < ShotsPantano.length; i++) {
+            ShotsPantano[i].translateZ(700 * delta);
+        }
+        for (let i = 0; i < ShotsNieve.length; i++) {
+            ShotsNieve[i].translateZ(700 * delta);
+        }
+
+        if(Disparando)
+        {
+            DisparandoContador += delta;
+            if(DisparandoContador > 3)
+            {
+                for (let i = 0; i < ShotsPradera.length; i++) {
+                    Escenario.GetPraderaScene().remove(ShotsPradera[i]);
+                }
+                ShotsPradera.splice(0, ShotsPradera.length);
+                for (let i = 0; i < ShotsPantano.length; i++) {
+                    Escenario.GetPantanoScene().remove(ShotsPantano[i]);
+                }
+                ShotsPantano.splice(0, ShotsPantano.length);
+                for (let i = 0; i < ShotsNieve.length; i++) {
+                    Escenario.GetNieveScene().remove(ShotsNieve[i]);
+                }
+                ShotsNieve.splice(0, ShotsNieve.length);
+                Disparando = false;
+                DisparandoContador = 0;
+            }
+        }
     
         //PROVISIONAL PARA PROBAR DAÑO
         if (keys["Z"])
@@ -601,6 +729,21 @@ function main()
                 for (let i = 0; i < Escenario.GetPlayer().GetBackpack().GetItems().length; i++) {
                     $("#MochilaMenu").append("<div class='ItemMenu'>"+Escenario.GetPlayer().GetBackpack().GetItems()[i].getItem().name+"<button class='btnUse' onclick='AccionesMenu.useItem("+i+")'>+</button> <button class='btnUse' onclick='AccionesMenu.DeleteItem("+i+")'>x</button></div>");
                 }
+                document.getElementById("PauseNivel").innerHTML = "Nivel: "+Escenario.GetPlayer().GetLevel();
+                document.getElementById("PauseExp").innerHTML = "Experiencia: " + Escenario.GetPlayer().GetExp();
+                if(ActualScene == 1)
+                {
+                    document.getElementById("PauseMapa").innerHTML = "Mapa: Pradera";
+                }
+                else if(ActualScene == 2)
+                {
+                    document.getElementById("PauseMapa").innerHTML = "Mapa: Pantano";
+                }
+                else 
+                {
+                    document.getElementById("PauseMapa").innerHTML = "Mapa: Nieve";
+                }
+                
                 window.ModalMenu.showModal();
                 Pause = true;
             }

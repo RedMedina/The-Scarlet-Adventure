@@ -133,6 +133,17 @@ class AudioController
         
         this.NocheSound.GetSound().play();
     }
+
+    SetVolume(volumen)
+    {
+        this.PraderaSound1.GetSound().setVolume(volumen);
+        this.PraderaSound2.GetSound().setVolume(volumen);
+        this.PantanoSound1.GetSound().setVolume(volumen);
+        this.PantanoSound2.GetSound().setVolume(volumen);
+        this.NieveSound1.GetSound().setVolume(volumen);
+        this.NieveSound2.GetSound().setVolume(volumen);
+        this.NocheSound.GetSound().setVolume(volumen);
+    }
 }
 
 export { AudioController };

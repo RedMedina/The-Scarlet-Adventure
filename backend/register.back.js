@@ -40,6 +40,7 @@ function upUser()
             btnInicioSesion.setAttribute('onclick','window.modal_perfil.showModal()');
             document.getElementById("imgP").src = JsonResponse.photo;
             document.getElementById("namePerfil").value = JsonResponse.name;
+            createPlayer();
         }
     });
 }

@@ -410,20 +410,31 @@ function main()
         sound.setBuffer( buffer );
         sound.setLoop( true );
         sound.play();
-        sound.setVolume( 0.1 );
+        sound.setVolume( VolumenIndex * 0.01 );
     });
     Terreno.GetPlane().add(sound);
     audioLoader2.load( "Assets/BGM/WaterSound.mp3", function( buffer ) {
         sound2.setBuffer( buffer );
         sound2.setLoop( true );
         sound2.play();
-        sound2.setVolume( 0.2 );
+        sound2.setVolume( VolumenIndex * 0.01 );
     });
     water.add(sound2);   
+
+    
 
     const controls = new OrbitControls(camera, canvas);
     controls.target.set(0, 5, 0);
     controls.update();
+
+    function SetSound()
+    {
+        var VolumenFinal = VolumenIndex * 0.01;
+        sound.setVolume( VolumenFinal );
+        sound2.setVolume( VolumenFinal );
+    }
+
+    AccionesMenuu.Sound = SetSound;
 
     function Load3dModel(model, onLoadCallback)
     {

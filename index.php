@@ -27,7 +27,7 @@
     <div id="large-header" class="large-header">
         <canvas id="c"></canvas>
         <img src="Assets/Images/Inicio.png" height="762" width="620">
-        <button class="jugar">Jugar</button>
+        <button class="jugar" onclick="location.href='game.php'">Jugar</button>
         <button class="Opciones" onclick="window.modal_config.showModal();"><img src="Assets/Images/gear.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
         <button class="Ranking" onclick="window.modal.showModal();"><img src="Assets/Images/ranking.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
         <?php
@@ -66,11 +66,20 @@
 
     <script type='text/javascript' src="modules/jquery-3.3.1.min.js"></script>
 	<script type='text/javascript' src="modules/jquery.min.js"></script>
+    <script type='text/javascript' src="backend/getScores.back.js"></script>
+    <script type='text/javascript' src="backend/createPlayer.back.js"></script>
     <script type='text/javascript' src="backend/register.back.js"></script>
     <script type='text/javascript' src="backend/sesion.back.js"></script>
     <script type='text/javascript' src="backend/logout.back.js"></script>
     <script type='text/javascript' src="backend/update.back.js"></script>
     <script type='text/javascript' src="frontend/sweetalert2.js"></script>
+    <script type='text/javascript' src="frontend/Configuraciones.js"></script>
+    <script>
+        $(document).ready
+        (
+            GetConfig()
+        );
+    </script>
     <script src="jsindex/mainindex.js" type="module"></script>
 </body>
 </html>

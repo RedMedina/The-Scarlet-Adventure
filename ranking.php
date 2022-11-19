@@ -17,25 +17,25 @@ function closeModalClickRanking() {
 <center>
     <dialog id="modal" class="modal">
         <h3>Ranking</h3>
-        <table cellspacing="0">
+        <table cellspacing="0" id="RankingTabla">
             <tr>
                 <th class="nombre">Nombre</th>
                 <th>Nivel</th>
-                <th>Tiempo Jugado</th>
-                <th class="UConexion">Ultima Conexión</th>
+                <th>Fecha de Ingreso</th>
+                <th class="UConexion">Score</th>
             </tr>
-            <tr>
+            <!--tr>
                 <td>Usuario</td>
                 <td>1</td>
                 <td>24:49 horas</td>
-                <td>06-09-20220</td>
+                <td>5454543</td>
             </tr>
             <tr>
                 <td>Usuario</td>
                 <td>2</td>
                 <td>23:44 horas</td>
-                <td>07-09-20220</td>
-            </tr>
+                <td>454545</td>
+            </tr-->
         </table>
         <button onclick="closeModalClickRanking();" class="volverBtn">Volver</button><br>
         <!--img src="Assets/Images/Pincelada.png" width="230" height="85" class="imgRanking"-->

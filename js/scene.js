@@ -50,8 +50,12 @@ class Scenee
        // var HealItems = [new HealItem("Pocion Basica", 100, 1), new HealItem("Pocion Alta", 500, 1)];
 
         //Obtiene los items por ajax
-        var Mochila = new Backpack([]);
-        this.Player = new player("User_name", {x: 0, y: 0, z: 0}, 1000, Mochila, 1, {Boss1: false, Boss2: false, Boss3: false});
+        var GetItems = [];
+        for (let i = 0; i < Items.length; i++) {
+            GetItems.push(new HealItem(Items[i].name, Items[i].curacion, Items[i].cantidad));
+        }
+        var Mochila = new Backpack(GetItems);
+        this.Player = new player(PlayerDatos.Name, {x: PlayerDatos.coorX, y: PlayerDatos.coorY, z: PlayerDatos.coorZ}, PlayerDatos.Experiencia, Mochila, PlayerDatos.level, {Boss1: PlayerDatos.Boss_1, Boss2: PlayerDatos.Boss_2, Boss3: PlayerDatos.Boss_3}, PlayerDatos.ActualLife);
         this.Player.GenerateStats();
     }
 
@@ -750,6 +754,8 @@ class Scenee
                 new THREE.Vector3(-1, 0, 0),
                 new THREE.Vector3(0, 0, 1),
                 new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
                 //new THREE.Vector3(0, -1, 0),
             ];
             PlayerModel.add(object);
@@ -769,6 +775,10 @@ class Scenee
         Guardian.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-5400, 225, 7550);
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 140, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Guardian);
@@ -777,6 +787,10 @@ class Scenee
         Guardian2.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-3800, 225, 6550);
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 140, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Guardian2);
@@ -785,6 +799,10 @@ class Scenee
         Guardian3.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-4600, 380, 5600);
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 140, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Guardian3);
@@ -793,6 +811,10 @@ class Scenee
         Guardian4.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(500, 40, 5000);
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 140, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Guardian4);
@@ -801,6 +823,10 @@ class Scenee
         Guardian5.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-800, 80, 4300);
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 140, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Guardian5);
@@ -809,6 +835,10 @@ class Scenee
         Guardian6.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-2800, 210, -1300);
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 140, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Guardian6);
@@ -817,6 +847,10 @@ class Scenee
         Guardian7.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(3800, 270, -5400);
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 140, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Guardian7);
@@ -825,6 +859,10 @@ class Scenee
         DronFly.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(3700, 550, 7250);
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 110, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(DronFly);
@@ -833,6 +871,10 @@ class Scenee
         DronFly2.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(7000, 550, 6250);
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 110, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(DronFly2);
@@ -841,6 +883,10 @@ class Scenee
         DronFly3.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-1000, 550, 3250);
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 110, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(DronFly3);
@@ -849,6 +895,10 @@ class Scenee
         DronFly4.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-3800, 800, 2750);
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 110, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(DronFly4);
@@ -857,6 +907,10 @@ class Scenee
         DronFly5.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-6800, 400, 1250);
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 110, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(DronFly5);
@@ -865,6 +919,10 @@ class Scenee
         DronFly6.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-6100, 400, -4250);
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 110, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(DronFly6);
@@ -873,6 +931,10 @@ class Scenee
         DronFly7.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-2100, 400, -4250);
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 110, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(DronFly7);
@@ -881,6 +943,10 @@ class Scenee
         DronFly8.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(1500, 700, -4250);
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 110, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(DronFly8);
@@ -889,6 +955,10 @@ class Scenee
         DronFly9.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(2900, 780, 1000);
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 110, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(DronFly9);
@@ -898,6 +968,11 @@ class Scenee
             object.scale.set(2.3, 2.3, 2.3);
             object.rotation.x = -90 * 3.1416 / 180;
             object.position.set(5500, 440, 7250);
+            var Life = this.CreateLife(50, 0.5, 0.5);
+            Life.position.set(0, 0, 170);
+            Life.rotation.x = 90 * 180 / 3.1416;
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Cat);
@@ -907,6 +982,11 @@ class Scenee
             object.scale.set(2.3, 2.3, 2.3);
             object.rotation.x = -90 * 3.1416 / 180;
             object.position.set(-5100, 540, 3850);
+            var Life = this.CreateLife(50, 0.5, 0.5);
+            Life.position.set(0, 0, 170);
+            Life.rotation.x = 90 * 180 / 3.1416;
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Cat2);
@@ -916,6 +996,11 @@ class Scenee
             object.scale.set(2.3, 2.3, 2.3);
             object.rotation.x = -90 * 3.1416 / 180;
             object.position.set(-5100, 30, -1350);
+            var Life = this.CreateLife(50, 0.5, 0.5);
+            Life.position.set(0, 0, 170);
+            Life.rotation.x = 90 * 180 / 3.1416;
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Cat3);
@@ -925,6 +1010,11 @@ class Scenee
             object.scale.set(2.3, 2.3, 2.3);
             object.rotation.x = -90 * 3.1416 / 180;
             object.position.set(3800, 450, -1850);
+            var Life = this.CreateLife(50, 0.5, 0.5);
+            Life.position.set(0, 0, 170);
+            Life.rotation.x = 90 * 180 / 3.1416;
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Cat4);
@@ -934,6 +1024,11 @@ class Scenee
             object.scale.set(2.3, 2.3, 2.3);
             object.rotation.x = -90 * 3.1416 / 180;
             object.position.set(3300, 240, 2850);
+            var Life = this.CreateLife(50, 0.5, 0.5);
+            Life.position.set(0, 0, 170);
+            Life.rotation.x = 90 * 180 / 3.1416;
+            Life.name="vida";
+            object.add(Life);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Cat5);
@@ -1002,7 +1097,7 @@ class Scenee
         Terreno.GetPlane().position.y = -160;
         Terreno.GetPlane().name="TerrenoPradera";
         this.Pradera.add(Terreno.GetPlane());
-
+       
         //Modelos
 
         this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol3.glb", loadingManager, (object)=>{ //Arbol_1
@@ -1010,7 +1105,7 @@ class Scenee
             object.scale.x = 100;
             object.scale.y = 100;
             object.scale.z = 100;
-            
+
             var arbol2 = object.clone();
             arbol2.position.x = 100;
             arbol2.position.z = 6800;
@@ -1867,7 +1962,12 @@ class Scenee
                 new THREE.Vector3(-1, 0, 0),
                 new THREE.Vector3(0, 0, 1),
                 new THREE.Vector3(0, 0, -1),
-                //new THREE.Vector3(0, -1, 0),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+               /* new THREE.Vector3(1, 0, 1),
+                new THREE.Vector3(1, 0, -1),
+                new THREE.Vector3(-1, 0, 1),
+                new THREE.Vector3(-1, 0, -1), */
             ];
             PlayerModel.add(object);
             for (let i = 0; i < this.Playeranimations.length; i++) {
@@ -1886,80 +1986,144 @@ class Scenee
         AvatarEnemy.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-600, 200, -7550);
+            var visor = this.CreateCubeVisor(450, 450, 450);
+            object.add(visor);
+            visor.visible= false;
+            visor.name="0";
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 370, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(5000, 750, 900, "Avatar"));
+        this.PraderaEnemiesStats.push(new Enemigo(5000, 750, 900, "Avatar", 600));
         this.PraderaEnemies.push(AvatarEnemy);
 
         var AvatarEnemy2 = new OneModelAnim();
         AvatarEnemy2.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(800, 200, -7550);
+            var visor = this.CreateCubeVisor(450, 450, 450);
+            object.add(visor);
+            visor.visible= false;
+            visor.name="1";
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 370, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(5000, 750, 900, "Avatar"));
+        this.PraderaEnemiesStats.push(new Enemigo(5000, 750, 900, "Avatar", 600));
         this.PraderaEnemies.push(AvatarEnemy2);
 
         var AvatarEnemy3 = new OneModelAnim();
         AvatarEnemy3.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-200, 200, -5850);
+            var visor = this.CreateCubeVisor(450, 450, 450);
+            object.add(visor);
+            visor.visible= false;
+            visor.name="2";
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 370, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(5000, 750, 900, "Avatar"));
+        this.PraderaEnemiesStats.push(new Enemigo(5000, 750, 900, "Avatar", 600));
         this.PraderaEnemies.push(AvatarEnemy3);
 
         var AvatarEnemy4 = new OneModelAnim();
         AvatarEnemy4.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-2100, 200, -5150);
+            var visor = this.CreateCubeVisor(450, 450, 450);
+            object.add(visor);
+            visor.visible= false;
+            visor.name="3";
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 370, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(5000, 750, 900, "Avatar"));
+        this.PraderaEnemiesStats.push(new Enemigo(5000, 750, 900, "Avatar", 600));
         this.PraderaEnemies.push(AvatarEnemy4);
 
         var AvatarEnemy5 = new OneModelAnim();
         AvatarEnemy5.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-6100, 200, -2150);
+            var visor = this.CreateCubeVisor(450, 450, 450);
+            object.add(visor);
+            visor.visible= false;
+            visor.name="4";
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 370, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(5000, 750, 900, "Avatar"));
+        this.PraderaEnemiesStats.push(new Enemigo(5000, 750, 900, "Avatar", 600));
         this.PraderaEnemies.push(AvatarEnemy5);
 
         var AvatarEnemy6 = new OneModelAnim();
         AvatarEnemy6.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-8000, 200, -3950);
+            var visor = this.CreateCubeVisor(450, 450, 450);
+            object.add(visor);
+            visor.visible= false;
+            visor.name="5";
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 370, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(5000, 750, 900, "Avatar"));
+        this.PraderaEnemiesStats.push(new Enemigo(5000, 750, 900, "Avatar", 600));
         this.PraderaEnemies.push(AvatarEnemy6);
 
         var AvatarEnemy7 = new OneModelAnim();
         AvatarEnemy7.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-7600, 200, -1550);
+            var visor = this.CreateCubeVisor(450, 450, 450);
+            object.add(visor);
+            visor.visible= false;
+            visor.name="6";
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 370, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(5000, 750, 900, "Avatar"));
+        this.PraderaEnemiesStats.push(new Enemigo(5000, 750, 900, "Avatar", 600));
         this.PraderaEnemies.push(AvatarEnemy7);
 
         var AvatarEnemy8 = new OneModelAnim();
         AvatarEnemy8.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-5700, 200, -3850);
+            var visor = this.CreateCubeVisor(450, 450, 450);
+            object.add(visor);
+            visor.visible= false;
+            visor.name="7";
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 370, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(5000, 750, 900, "Avatar"));
+        this.PraderaEnemiesStats.push(new Enemigo(5000, 750, 900, "Avatar", 600));
         this.PraderaEnemies.push(AvatarEnemy8);
 
         var HongoEnemy = new OneModelAnim();
@@ -1969,160 +2133,304 @@ class Scenee
             var visor = this.CreateCubeVisor(200, 300, 300);
             object.add(visor);
             visor.position.set(0, -80, 150);
+            visor.visible= false;
+            visor.name="8";
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 140, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
             this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(3000, 700, 400, "Hongo"));
+        this.PraderaEnemiesStats.push(new Enemigo(3000, 700, 400, "Hongo", 400));
         this.PraderaEnemies.push(HongoEnemy);
 
         var HongoEnemy2 = new OneModelAnim();
         HongoEnemy2.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
             object.scale.set(0.7, 0.7, 0.7);
             object.position.set(-800, 400, 7750);
+            var visor = this.CreateCubeVisor(200, 300, 300);
+            object.add(visor);
+            visor.position.set(0, -80, 150);
+            visor.visible= false;
+            visor.name="9";
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 140, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(3000, 700, 400, "Hongo"));
+        this.PraderaEnemiesStats.push(new Enemigo(3000, 700, 400, "Hongo", 400));
         this.PraderaEnemies.push(HongoEnemy2);
 
         var HongoEnemy3 = new OneModelAnim();
         HongoEnemy3.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
             object.scale.set(0.7, 0.7, 0.7);
             object.position.set(-2500, 400, 8250);
+            var visor = this.CreateCubeVisor(200, 300, 300);
+            object.add(visor);
+            visor.position.set(0, -80, 150);
+            visor.visible= false;
+            visor.name="10";
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 140, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(3000, 700, 400, "Hongo"));
+        this.PraderaEnemiesStats.push(new Enemigo(3000, 700, 400, "Hongo", 400));
         this.PraderaEnemies.push(HongoEnemy3);
 
         var HongoEnemy4 = new OneModelAnim();
         HongoEnemy4.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
             object.scale.set(0.7, 0.7, 0.7);
             object.position.set(-800, 400, 6000);
+            var visor = this.CreateCubeVisor(200, 300, 300);
+            object.add(visor);
+            visor.position.set(0, -80, 150);
+            visor.visible= false;
+            visor.name="11";
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 140, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(3000, 700, 400, "Hongo"));
+        this.PraderaEnemiesStats.push(new Enemigo(3000, 700, 400, "Hongo", 400));
         this.PraderaEnemies.push(HongoEnemy4);
 
         var HongoEnemy5 = new OneModelAnim();
         HongoEnemy5.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
             object.scale.set(0.7, 0.7, 0.7);
             object.position.set(-4300, 400, 7800);
+            var visor = this.CreateCubeVisor(200, 300, 300);
+            object.add(visor);
+            visor.position.set(0, -80, 150);
+            visor.visible= false;
+            visor.name="12";
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 140, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(3000, 700, 400, "Hongo"));
+        this.PraderaEnemiesStats.push(new Enemigo(3000, 700, 400, "Hongo", 400));
         this.PraderaEnemies.push(HongoEnemy5);
 
         var HongoEnemy6 = new OneModelAnim();
         HongoEnemy6.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
             object.scale.set(0.7, 0.7, 0.7);
             object.position.set(2300, 400, 7800);
+            var visor = this.CreateCubeVisor(200, 300, 300);
+            object.add(visor);
+            visor.position.set(0, -80, 150);
+            visor.visible= false;
+            visor.name="13";
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 140, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(3000, 700, 400, "Hongo"));
+        this.PraderaEnemiesStats.push(new Enemigo(3000, 700, 400, "Hongo", 400));
         this.PraderaEnemies.push(HongoEnemy6);
 
         var HongoEnemy7 = new OneModelAnim();
         HongoEnemy7.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
             object.scale.set(0.7, 0.7, 0.7);
             object.position.set(3100, 400, 5800);
+            var visor = this.CreateCubeVisor(200, 300, 300);
+            object.add(visor);
+            visor.position.set(0, -80, 150);
+            visor.visible= false;
+            visor.name="14";
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 140, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(3000, 700, 400, "Hongo"));
+        this.PraderaEnemiesStats.push(new Enemigo(3000, 700, 400, "Hongo", 400));
         this.PraderaEnemies.push(HongoEnemy7);
 
         var HongoEnemy8 = new OneModelAnim();
         HongoEnemy8.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
             object.scale.set(0.7, 0.7, 0.7);
             object.position.set(4700, 400, 8300);
+            var visor = this.CreateCubeVisor(200, 300, 300);
+            object.add(visor);
+            visor.position.set(0, -80, 150);
+            visor.visible= false;
+            visor.name="15";
+            var Life = this.CreateLife(100, 10, 10);
+            Life.position.set(0, 140, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(3000, 700, 400, "Hongo"));
+        this.PraderaEnemiesStats.push(new Enemigo(3000, 700, 400, "Hongo", 400));
         this.PraderaEnemies.push(HongoEnemy8);
 
         var Polilla1 = new OneModelAnim();
         Polilla1.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.03, 0.03, 0.03);
             object.position.set(-7000, 400, 7700);
+            var visor = this.CreateCubeVisor(7000, 9000, 8500);
+            object.add(visor);
+            visor.position.set(0, -150, 150);
+            visor.name="16";
+            visor.visible= false;
+            var Life = this.CreateLife(2000, 200, 200);
+            Life.position.set(0, 2000, 0);
+            Life.rotation.y = 90 * 180/3.1416;
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(1000, 400, 700, "Polilla"));
+        this.PraderaEnemiesStats.push(new Enemigo(1000, 400, 700, "Polilla", 500));
         this.PraderaEnemies.push(Polilla1);
 
         var Polilla2 = new OneModelAnim();
         Polilla2.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.03, 0.03, 0.03);
             object.position.set(-7000, 400, 5800);
+            var visor = this.CreateCubeVisor(7000, 9000, 8500);
+            object.add(visor);
+            visor.position.set(0, -150, 150);
+            visor.name="17";
+            visor.visible= false;
+            var Life = this.CreateLife(2000, 200, 200);
+            Life.position.set(0, 2000, 0);
+            Life.rotation.y = 90 * 180/3.1416;
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(1000, 400, 700, "Polilla"));
+        this.PraderaEnemiesStats.push(new Enemigo(1000, 400, 700, "Polilla", 500));
         this.PraderaEnemies.push(Polilla2);
 
         var Polilla3 = new OneModelAnim();
         Polilla3.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.03, 0.03, 0.03);
             object.position.set(-5300, 400, 6700);
+            var visor = this.CreateCubeVisor(7000, 9000, 8500);
+            object.add(visor);
+            visor.position.set(0, -150, 150);
+            visor.name="18";
+            visor.visible= false;
+            var Life = this.CreateLife(2000, 200, 200);
+            Life.position.set(0, 2000, 0);
+            Life.rotation.y = 90 * 180/3.1416;
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(1000, 400, 700, "Polilla"));
+        this.PraderaEnemiesStats.push(new Enemigo(1000, 400, 700, "Polilla", 500));
         this.PraderaEnemies.push(Polilla3);
 
         var Polilla4 = new OneModelAnim();
         Polilla4.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.03, 0.03, 0.03);
             object.position.set(800, 400, 2700);
+            var visor = this.CreateCubeVisor(7000, 9000, 8500);
+            object.add(visor);
+            visor.position.set(0, -150, 150);
+            visor.name="19";
+            visor.visible= false;
+            var Life = this.CreateLife(2000, 200, 200);
+            Life.position.set(0, 2000, 0);
+            Life.rotation.y = 90 * 180/3.1416;
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(1000, 400, 700, "Polilla"));
+        this.PraderaEnemiesStats.push(new Enemigo(1000, 400, 700, "Polilla", 500));
         this.PraderaEnemies.push(Polilla4);
 
         var Polilla5 = new OneModelAnim();
         Polilla5.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.03, 0.03, 0.03);
             object.position.set(2500, 400, 4500);
+            var visor = this.CreateCubeVisor(7000, 9000, 8500);
+            object.add(visor);
+            visor.position.set(0, -150, 150);
+            visor.name="20";
+            visor.visible= false;
+            var Life = this.CreateLife(2000, 200, 200);
+            Life.position.set(0, 2000, 0);
+            Life.rotation.y = 90 * 180/3.1416;
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(1000, 400, 700, "Polilla"));
+        this.PraderaEnemiesStats.push(new Enemigo(1000, 400, 700, "Polilla", 500));
         this.PraderaEnemies.push(Polilla5);
 
         var Polilla6 = new OneModelAnim();
         Polilla6.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.03, 0.03, 0.03);
             object.position.set(3900, 400, -1500);
+            var visor = this.CreateCubeVisor(7000, 9000, 8500);
+            object.add(visor);
+            visor.position.set(0, -150, 150);
+            visor.name="21";
+            visor.visible= false;
+            var Life = this.CreateLife(2000, 200, 200);
+            Life.position.set(0, 2000, 0);
+            Life.rotation.y = 90 * 180/3.1416;
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(1000, 400, 700, "Polilla"));
+        this.PraderaEnemiesStats.push(new Enemigo(1000, 400, 700, "Polilla", 500));
         this.PraderaEnemies.push(Polilla6);
 
         var Polilla7 = new OneModelAnim();
         Polilla7.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.03, 0.03, 0.03);
             object.position.set(5300, 400, 1200);
+            var visor = this.CreateCubeVisor(7000, 9000, 8500);
+            object.add(visor);
+            visor.position.set(0, -150, 150);
+            visor.name="22";
+            visor.visible= false;
+            var Life = this.CreateLife(2000, 200, 200);
+            Life.position.set(0, 2000, 0);
+            Life.rotation.y = 90 * 180/3.1416;
+            Life.name="vida";
+            object.add(Life);
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(1000, 400, 700, "Polilla"));
+        this.PraderaEnemiesStats.push(new Enemigo(1000, 400, 700, "Polilla", 500));
         this.PraderaEnemies.push(Polilla7);
 
         var Magic = new OneModelAnim();
         Magic.LoadModel("Assets/Nieve/Enemies/Magic/Magic.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-6700, 200, 7000);
+            var visor = this.CreateCubeVisor(10, 10, 10);
+            object.add(visor);
+            visor.position.set(0, 0, 0);
+            visor.name="23";
+            visor.visible= false;
             this.Pradera.add(object);
-            this.PraderaEnemiesCollider.push(object);
+            this.PraderaEnemiesCollider.push(visor);
         });
-        this.PraderaEnemiesStats.push(new Enemigo(99999999, 99999999, 99999999, "Magic"));
+        this.PraderaEnemiesStats.push(new Enemigo(99999999, 99999999, 99999999, "Magic", 99999999));
         this.PraderaEnemies.push(Magic);
     }
 
@@ -2559,6 +2867,8 @@ class Scenee
                 new THREE.Vector3(-1, 0, 0),
                 new THREE.Vector3(0, 0, 1),
                 new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
                 //new THREE.Vector3(0, -1, 0),
             ];
             PlayerModel.add(object);
@@ -2577,6 +2887,10 @@ class Scenee
         FlyGuardian.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(-5900, 500, 6050);
+            var Life = this.CreateLife(800, 50, 50);
+            Life.position.set(0, 400, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian);
@@ -2585,6 +2899,10 @@ class Scenee
         FlyGuardian2.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(-4000, 500, 7050);
+            var Life = this.CreateLife(800, 50, 50);
+            Life.position.set(0, 400, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian2);
@@ -2593,6 +2911,10 @@ class Scenee
         FlyGuardian3.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(-7000, 500, 7450);
+            var Life = this.CreateLife(800, 50, 50);
+            Life.position.set(0, 400, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian3);
@@ -2601,6 +2923,10 @@ class Scenee
         FlyGuardian4.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(-4000, 500, 2450);
+            var Life = this.CreateLife(800, 50, 50);
+            Life.position.set(0, 400, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian4);
@@ -2609,6 +2935,10 @@ class Scenee
         FlyGuardian5.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(-6300, 650, 2950);
+            var Life = this.CreateLife(800, 50, 50);
+            Life.position.set(0, 400, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian5);
@@ -2617,6 +2947,10 @@ class Scenee
         FlyGuardian6.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(5300, 600, 2950);
+            var Life = this.CreateLife(800, 50, 50);
+            Life.position.set(0, 400, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian6);
@@ -2625,6 +2959,10 @@ class Scenee
         FlyGuardian7.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(6600, 500, 5950);
+            var Life = this.CreateLife(800, 50, 50);
+            Life.position.set(0, 400, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian7);
@@ -2633,6 +2971,10 @@ class Scenee
         FlyGuardian8.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(-100, 550, 500);
+            var Life = this.CreateLife(800, 50, 50);
+            Life.position.set(0, 400, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian8);
@@ -2641,6 +2983,10 @@ class Scenee
         FlyGuardian9.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(1200, 550, 2000);
+            var Life = this.CreateLife(800, 50, 50);
+            Life.position.set(0, 400, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian9);
@@ -2649,6 +2995,10 @@ class Scenee
         FlyGuardian10.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(6500, 550, -5000);
+            var Life = this.CreateLife(800, 50, 50);
+            Life.position.set(0, 400, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian10);
@@ -2657,6 +3007,10 @@ class Scenee
         Ghost.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
             object.scale.set(13.5, 13.5, 13.5);
             object.position.set(-500, 450, 5550);
+            var Life = this.CreateLife(10, 0.5, 0.5);
+            Life.position.set(0, 15, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(Ghost);
@@ -2665,6 +3019,10 @@ class Scenee
         Ghost2.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
             object.scale.set(13.5, 13.5, 13.5);
             object.position.set(-2500, 200, 6950);
+            var Life = this.CreateLife(10, 0.5, 0.5);
+            Life.position.set(0, 15, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(Ghost2);
@@ -2673,6 +3031,10 @@ class Scenee
         Ghost3.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
             object.scale.set(13.5, 13.5, 13.5);
             object.position.set(-3900, 40, 3950);
+            var Life = this.CreateLife(10, 0.5, 0.5);
+            Life.position.set(0, 15, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(Ghost3);
@@ -2681,6 +3043,10 @@ class Scenee
         Ghost4.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
             object.scale.set(13.5, 13.5, 13.5);
             object.position.set(-2500, 40, 250);
+            var Life = this.CreateLife(10, 0.5, 0.5);
+            Life.position.set(0, 15, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(Ghost4);
@@ -2689,6 +3055,10 @@ class Scenee
         Ghost5.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
             object.scale.set(13.5, 13.5, 13.5);
             object.position.set(-7200, 300, -950);
+            var Life = this.CreateLife(10, 0.5, 0.5);
+            Life.position.set(0, 15, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(Ghost5);
@@ -2697,6 +3067,10 @@ class Scenee
         Ghost6.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
             object.scale.set(13.5, 13.5, 13.5);
             object.position.set(7300, 130, 3000);
+            var Life = this.CreateLife(10, 0.5, 0.5);
+            Life.position.set(0, 15, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(Ghost6);
@@ -2705,6 +3079,10 @@ class Scenee
         Ghost7.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
             object.scale.set(13.5, 13.5, 13.5);
             object.position.set(6500, 130, 300);
+            var Life = this.CreateLife(10, 0.5, 0.5);
+            Life.position.set(0, 15, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(Ghost7);
@@ -2713,6 +3091,10 @@ class Scenee
         Ghost8.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
             object.scale.set(13.5, 13.5, 13.5);
             object.position.set(500, 130, 300);
+            var Life = this.CreateLife(10, 0.5, 0.5);
+            Life.position.set(0, 15, 0);
+            Life.name="vida";
+            object.add(Life);
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(Ghost8);
@@ -2887,6 +3269,14 @@ class Scenee
     {
         const geometry = new THREE.BoxGeometry( width, height, depth );
         const material = new THREE.MeshBasicMaterial( {color: 0xFFFFFF} );
+        const cube = new THREE.Mesh( geometry, material );
+        return cube;
+    }
+
+    CreateLife(width, height, depth)
+    {
+        const geometry = new THREE.BoxGeometry( width, height, depth );
+        const material = new THREE.MeshBasicMaterial( {color: 0x00FF27} );
         const cube = new THREE.Mesh( geometry, material );
         return cube;
     }

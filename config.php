@@ -23,9 +23,9 @@
             <option value="Normal">Normal</option>
             <option value="Dificil">Dificil</option>
         </select><br>
-        <label class="l2">Volumen: </label><input type="range" min="0" max="100" class="RangoC" value="50" oninput="this.nextElementSibling.value = this.value">
-        <output class="outputRange">50</output><br>
-        <button class="guardarConfig">Guardar</button>
+        <label class="l2">Volumen: </label><input type="range" id="VolumenData" min="0" max="100" class="RangoC" value=<?php echo $_SESSION['volumen'];?> oninput="this.nextElementSibling.value = this.value">
+        <output class="outputRange"><?php echo $_SESSION['volumen'];?></output><br>
+        <button class="guardarConfig" id="GuardarConfig">Guardar</button>
         <button class="SalirConfig" onclick="closeModalClickConfig();">Salir</button>
     </dialog>
 </center>
