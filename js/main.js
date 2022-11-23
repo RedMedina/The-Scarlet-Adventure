@@ -69,6 +69,13 @@ function main()
         //Base Sound
         audioCont.PlaySceneSound(PlayerDatos.scene);
         ModelsLoaded = true;
+
+        Escenario.GetPraderaEnemies().Collider.sort(function(a,b){return a.name - b.name});
+        Escenario.GetPraderaEnemies().Object.sort(function(a,b){return a.GetNum() - b.GetNum()});
+        Escenario.GetPantanoEnemies().Collider.sort(function(a,b){return a.name - b.name});
+        Escenario.GetPantanoEnemies().Object.sort(function(a,b){return a.GetNum() - b.GetNum()});
+        Escenario.GetNieveEnemies().Collider.sort(function(a,b){return a.name - b.name});
+        Escenario.GetNieveEnemies().Object.sort(function(a,b){return a.GetNum() - b.GetNum()});
     }
 
     Escenario.InitScene(loadingManager);
@@ -620,13 +627,20 @@ function main()
                 {
                     rayCaster.set(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays[i]);
                     var collision = rayCaster.intersectObjects(Escenario.GetPraderaEnemies().Collider, true);
-                    if(collision.length > 0 && collision[0].distance < 200)
+                    if(collision.length > 0 && collision[0].distance < 800)
                     {            
-                        //var i = parseInt(collision[0].object.name);            
-                        //Escenario.GetPraderaEnemies().Collider[i].parent.lookAt(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.x, Escenario.GetPraderaEnemies().Collider[i].parent.position.y, Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.z);
-                        //Escenario.GetPraderaEnemies().Collider[i].parent.translateZ(450 * delta);
-                        //console.log(Escenario.GetPraderaEnemies().Collider[i].parent);
-                        //console.log("Colissionando con Enemigo");
+                        var j = parseInt(collision[0].object.name);
+                        if(j < 23)
+                        {
+                            Escenario.GetPraderaEnemies().Collider[j].parent.lookAt(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.x, Escenario.GetPraderaEnemies().Collider[j].parent.position.y, Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.z);
+                            Escenario.GetPraderaEnemies().Collider[j].parent.translateZ(450 * delta);
+                        }   
+                        else if (j == 23)
+                        {
+                            Escenario.GetPraderaEnemies().Collider[23].parent.lookAt(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.x, Escenario.GetPraderaEnemies().Collider[23].parent.position.y, Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.z);
+                        }  
+                        console.log(j);
+                        console.log(Escenario.GetPraderaEnemies().Collider[j].name);
                     }
                 }
             }
@@ -652,6 +666,35 @@ function main()
                         console.log(Escenario.GetPlayer().GetBackpack());
                     }
                 }
+
+                //Collission Pantano Enemies
+                for(var i = 0; i < Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays.length; i++)
+                {
+                    rayCaster.set(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position, Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays[i]);
+                    var collision = rayCaster.intersectObjects(Escenario.GetPantanoEnemies().Collider, true);
+                    if(collision.length > 0 && collision[0].distance < 800)
+                    {            
+                        var j = parseInt(collision[0].object.name);
+                        if(j < 21)
+                        {
+                            if(j < 16)
+                            {
+                                Escenario.GetPantanoEnemies().Collider[j].parent.lookAt(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.x, Escenario.GetPantanoEnemies().Collider[j].parent.position.y, Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.z);
+                                Escenario.GetPantanoEnemies().Collider[j].parent.translateZ(450 * delta);
+                            }
+                            else
+                            {
+                                Escenario.GetPantanoEnemies().Collider[j].parent.lookAt(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.x, Escenario.GetPantanoEnemies().Collider[j].parent.position.y, Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.z);
+                                Escenario.GetPantanoEnemies().Collider[j].parent.translateZ(450 * delta);
+                            }
+
+                        }   
+                        else if (j == 21)
+                        {
+                            Escenario.GetPantanoEnemies().Collider[21].parent.lookAt(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.x, Escenario.GetPantanoEnemies().Collider[21].parent.position.y, Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.z);
+                        }  
+                    }
+                }
             }
             else if(ActualScene == 3)
             {
@@ -673,6 +716,25 @@ function main()
                         Escenario.GetNieveItems().items[collision[0].object.name-1] = {empty: true};
                         Escenario.GetNieveItems().model[collision[0].object.name-1].visible = false;
                         console.log(Escenario.GetPlayer().GetBackpack());
+                    }
+                }
+                //Collission Pantano Enemies
+                for(var i = 0; i < Escenario.GetNieveScene().getObjectByName("PlayerModel").rays.length; i++)
+                {
+                    rayCaster.set(Escenario.GetNieveScene().getObjectByName("PlayerModel").position, Escenario.GetNieveScene().getObjectByName("PlayerModel").rays[i]);
+                    var collision = rayCaster.intersectObjects(Escenario.GetNieveEnemies().Collider, true);
+                    if(collision.length > 0 && collision[0].distance < 800)
+                    {            
+                        var j = parseInt(collision[0].object.name);
+                        if(j < 19)
+                        {
+                            Escenario.GetNieveEnemies().Collider[j].parent.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel").position.x, Escenario.GetNieveEnemies().Collider[j].parent.position.y, Escenario.GetNieveScene().getObjectByName("PlayerModel").position.z);
+                            Escenario.GetNieveEnemies().Collider[j].parent.translateZ(450 * delta);
+                        }   
+                        else
+                        {
+                            Escenario.GetNieveEnemies().Collider[j].parent.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel").position.x, Escenario.GetNieveEnemies().Collider[j].parent.position.y, Escenario.GetNieveScene().getObjectByName("PlayerModel").position.z);
+                        }  
                     }
                 }
             }
@@ -788,11 +850,11 @@ function main()
         for (let i = 0; i < Escenario.GetPraderaEnemies().Model.length; i++) {
             if (Escenario.GetPraderaEnemies().Model[i].GetMixer()){Escenario.GetPraderaEnemies().Model[i].GetMixer().update(delta);}
         }
-        for (let i = 0; i < Escenario.GetPantanoEnemies().length; i++) {
-            if (Escenario.GetPantanoEnemies()[i].GetMixer()){Escenario.GetPantanoEnemies()[i].GetMixer().update(delta);}
+        for (let i = 0; i < Escenario.GetPantanoEnemies().Model.length; i++) {
+            if (Escenario.GetPantanoEnemies().Model[i].GetMixer()){Escenario.GetPantanoEnemies().Model[i].GetMixer().update(delta);}
         }
-        for (let i = 0; i < Escenario.GetNieveEnemies().length; i++) {
-            if (Escenario.GetNieveEnemies()[i].GetMixer()){Escenario.GetNieveEnemies()[i].GetMixer().update(delta);}
+        for (let i = 0; i < Escenario.GetNieveEnemies().Model.length; i++) {
+            if (Escenario.GetNieveEnemies().Model[i].GetMixer()){Escenario.GetNieveEnemies().Model[i].GetMixer().update(delta);}
         }
 
         water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
