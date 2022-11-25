@@ -50,6 +50,7 @@ class player
         this.Stats = {Vida: 1000 + (1000 * (this.level * 0.1)), Ataque: 800 + (800 * (this.level * 0.1)), Defensa: 500 + (500 * (this.level * 0.1))};
         this.MaxLife = this.Stats.Vida;
         this.Stats.Vida =  this.ActualLife;
+        this.MaxExpLevel = this.level * 1000;
     }
 
     GetMaxLife()
@@ -70,6 +71,21 @@ class player
     GetExp()
     {
         return this.Experiencia;
+    }
+
+    SetExp(exp)
+    {
+        this.Experiencia = exp;
+    }
+
+    GetMaxExp()
+    {
+        return this.MaxExpLevel;
+    }
+
+    SetLevel(lvl)
+    {
+        this.level = lvl;
     }
 
     GetBoss()

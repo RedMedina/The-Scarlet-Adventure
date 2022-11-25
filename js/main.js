@@ -169,7 +169,7 @@ function main()
     CreatePasto(6000, -7300, -3000, 30, 25, 30, 110, 120);
 
     const ui = new GUI();
-    ui.CreateLife(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife());
+    ui.CreateLife(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife(), Escenario.GetPlayer().GetExp(), Escenario.GetPlayer().GetMaxExp());
 
     function CreatePasto(instanNumber, posx, posz, scalex, scaley, scalez, spacex, spacez)
     {
@@ -707,8 +707,19 @@ function main()
                         Escenario.GetPraderaEnemies().Collider[j].parent.getObjectByName("vida").scale.set(Porcentaje / 100, 1 ,1);
                         if(Escenario.GetPraderaEnemies().Object[j].GetStats().Vida <= 0)
                         {
-                            Escenario.GetPraderaEnemies().Object[j].SetActive(false);
                             Escenario.GetPraderaScene().remove(Escenario.GetPraderaEnemies().Collider[j].parent);
+                            if (Escenario.GetPraderaEnemies().Object[j].GetActive()) {
+                                Escenario.GetPlayer().SetExp(Escenario.GetPlayer().GetExp() + 500);
+                                if(Escenario.GetPlayer().GetExp() >= Escenario.GetPlayer().GetMaxExp())
+                                {
+                                    var newlevel = Escenario.GetPlayer().GetLevel();
+                                    newlevel++;
+                                    Escenario.GetPlayer().SetLevel(newlevel);
+                                    Escenario.GetPlayer().SetExp(0);
+                                }
+                                ui.SetExpActual(Escenario.GetPlayer().GetExp(), Escenario.GetPlayer().GetMaxExp());
+                            }
+                            Escenario.GetPraderaEnemies().Object[j].SetActive(false);
                         }
                     }
                  }
@@ -810,8 +821,21 @@ function main()
                         Escenario.GetPantanoEnemies().Collider[j].parent.getObjectByName("vida").scale.set(Porcentaje / 100, 1 ,1);
                         if(Escenario.GetPantanoEnemies().Object[j].GetStats().Vida <= 0)
                         {
-                            Escenario.GetPantanoEnemies().Object[j].SetActive(false);
                             Escenario.GetPantanoScene().remove(Escenario.GetPantanoEnemies().Collider[j].parent);
+                            if(Escenario.GetPantanoEnemies().Object[j].GetActive())
+                            {
+                                Escenario.GetPlayer().SetExp(Escenario.GetPlayer().GetExp() + 500);
+                                if(Escenario.GetPlayer().GetExp() >= Escenario.GetPlayer().GetMaxExp())
+                                {
+                                    var newlevel = Escenario.GetPlayer().GetLevel();
+                                    newlevel++;
+                                    Escenario.GetPlayer().SetLevel(newlevel);
+                                    Escenario.GetPlayer().SetExp(0);
+                                }
+                                ui.SetExpActual(Escenario.GetPlayer().GetExp(), Escenario.GetPlayer().GetMaxExp());
+                            }
+                            
+                            Escenario.GetPantanoEnemies().Object[j].SetActive(false);
                         }
                     }
                  }
@@ -904,8 +928,20 @@ function main()
                         Escenario.GetNieveEnemies().Collider[j].parent.getObjectByName("vida").scale.set(Porcentaje / 100, 1 ,1);
                         if(Escenario.GetNieveEnemies().Object[j].GetStats().Vida <= 0)
                         {
-                            Escenario.GetNieveEnemies().Object[j].SetActive(false);
                             Escenario.GetNieveScene().remove(Escenario.GetNieveEnemies().Collider[j].parent);
+                            if(Escenario.GetNieveEnemies().Object[j].GetActive())
+                            {
+                                Escenario.GetPlayer().SetExp(Escenario.GetPlayer().GetExp() + 500);
+                                if(Escenario.GetPlayer().GetExp() >= Escenario.GetPlayer().GetMaxExp())
+                                {
+                                    var newlevel = Escenario.GetPlayer().GetLevel();
+                                    newlevel++;
+                                    Escenario.GetPlayer().SetLevel(newlevel);
+                                    Escenario.GetPlayer().SetExp(0);
+                                }
+                                ui.SetExpActual(Escenario.GetPlayer().GetExp(), Escenario.GetPlayer().GetMaxExp());
+                            }
+                            Escenario.GetNieveEnemies().Object[j].SetActive(false);
                         }
                     }
                  }

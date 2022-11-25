@@ -1362,7 +1362,7 @@ class Scenee
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Magic);
-        this.PraderaEnemiesStats.push(new Enemigo(99999999, 99999999, 99999999, "Magic", 99999999, 21));
+        this.PantanoEnemiesStats.push(new Enemigo(99999999, 99999999, 99999999, "Magic", 99999999, 21));
     }
 
     PraderaScene(loadingManager)
