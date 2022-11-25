@@ -7,6 +7,12 @@ class Enemigo
         this.MaxLife = Vida;
         this.Velocidad = Velocidad;
         this.Num = num;
+        this.Active = true;
+    }
+
+    GetStats()
+    {
+        return this.Stats;
     }
 
     GetVelocidad()
@@ -17,6 +23,21 @@ class Enemigo
     GetNum()
     {
         return this.Num;
+    }
+
+    GetActive()
+    {
+        return this.Active;
+    }
+
+    SetActive(act)
+    {
+        this.Active = act;
+    }
+
+    GetMaxLife()
+    {
+        return this.MaxLife;
     }
 }
 

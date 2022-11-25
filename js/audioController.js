@@ -144,6 +144,38 @@ class AudioController
         this.NieveSound2.GetSound().setVolume(volumen);
         this.NocheSound.GetSound().setVolume(volumen);
     }
+
+    StopAllSound()
+    {
+        if(this.PraderaSound1.GetSound())
+        {
+            this.PraderaSound1.GetSound().pause();
+        }
+        if(this.PraderaSound2.GetSound()) 
+        {
+            this.PraderaSound2.GetSound().pause();
+        }
+        if(this.PantanoSound2.GetSound())
+        {
+            this.PantanoSound1.GetSound().pause();
+        }
+        if(this.PantanoSound2.GetSound())
+        {
+            this.PantanoSound2.GetSound().pause();
+        }
+        if(this.NieveSound1.GetSound())
+        {
+            this.NieveSound1.GetSound().pause();
+        }
+        if(this.NieveSound2.GetSound())
+        {
+            this.NieveSound2.GetSound().pause();
+        }
+        if(this.NocheSound.GetSound())
+        {
+            this.NocheSound.GetSound().pause();
+        }
+    }
 }
 
 export { AudioController };

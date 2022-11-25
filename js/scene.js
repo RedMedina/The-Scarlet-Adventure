@@ -781,6 +781,14 @@ class Scenee
         Guardian.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-5400, 225, 7550);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(100, 10, 10);
             Life.position.set(0, 140, 0);
             Life.name="vida";
@@ -793,12 +801,20 @@ class Scenee
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Guardian);
-        this.PantanoEnemiesStats.push(new Enemigo(3000, 900, 500, "Guardian", 600, 0));
+        this.PantanoEnemiesStats.push(new Enemigo(3000, 500, 500, "Guardian", 600, 0));
 
         var Guardian2 = new OneModelAnim();
         Guardian2.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-3800, 225, 6550);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(100, 10, 10);
             Life.position.set(0, 140, 0);
             Life.name="vida";
@@ -811,12 +827,20 @@ class Scenee
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Guardian2);
-        this.PantanoEnemiesStats.push(new Enemigo(3000, 900, 500, "Guardian", 600, 1));
+        this.PantanoEnemiesStats.push(new Enemigo(3000, 500, 500, "Guardian", 600, 1));
 
         var Guardian3 = new OneModelAnim();
         Guardian3.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-4600, 380, 5600);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(100, 10, 10);
             Life.position.set(0, 140, 0);
             Life.name="vida";
@@ -829,12 +853,20 @@ class Scenee
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Guardian3);
-        this.PantanoEnemiesStats.push(new Enemigo(3000, 900, 500, "Guardian", 600, 2));
+        this.PantanoEnemiesStats.push(new Enemigo(3000, 500, 500, "Guardian", 600, 2));
 
         var Guardian4 = new OneModelAnim();
         Guardian4.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(500, 40, 5000);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(100, 10, 10);
             Life.position.set(0, 140, 0);
             Life.name="vida";
@@ -847,12 +879,20 @@ class Scenee
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Guardian4);
-        this.PantanoEnemiesStats.push(new Enemigo(3000, 900, 500, "Guardian", 600, 3));
+        this.PantanoEnemiesStats.push(new Enemigo(3000, 500, 500, "Guardian", 600, 3));
 
         var Guardian5 = new OneModelAnim();
         Guardian5.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-800, 80, 4300);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(100, 10, 10);
             Life.position.set(0, 140, 0);
             Life.name="vida";
@@ -865,12 +905,20 @@ class Scenee
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Guardian5);
-        this.PantanoEnemiesStats.push(new Enemigo(3000, 900, 500, "Guardian", 600, 4));
+        this.PantanoEnemiesStats.push(new Enemigo(3000, 500, 500, "Guardian", 600, 4));
 
         var Guardian6 = new OneModelAnim();
         Guardian6.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-2800, 210, -1300);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(100, 10, 10);
             Life.position.set(0, 140, 0);
             Life.name="vida";
@@ -883,12 +931,20 @@ class Scenee
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Guardian6);
-        this.PantanoEnemiesStats.push(new Enemigo(3000, 900, 500, "Guardian", 600, 5));
+        this.PantanoEnemiesStats.push(new Enemigo(3000, 500, 500, "Guardian", 600, 5));
 
         var Guardian7 = new OneModelAnim();
         Guardian7.LoadModel("Assets/Pantano/Enemies/Guardian/Guardian1.fbx", loadingManager, 0.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(3800, 270, -5400);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(100, 10, 10);
             Life.position.set(0, 140, 0);
             Life.name="vida";
@@ -901,12 +957,20 @@ class Scenee
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Guardian7);
-        this.PantanoEnemiesStats.push(new Enemigo(3000, 900, 500, "Guardian", 600, 6));
+        this.PantanoEnemiesStats.push(new Enemigo(3000, 500, 500, "Guardian", 600, 6));
 
         var DronFly = new OneModelAnim();
         DronFly.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(3700, 550, 7250);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(100, 10, 10);
             Life.position.set(0, 110, 0);
             Life.name="vida";
@@ -926,6 +990,14 @@ class Scenee
         DronFly2.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(7000, 550, 6250);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(100, 10, 10);
             Life.position.set(0, 110, 0);
             Life.name="vida";
@@ -945,6 +1017,14 @@ class Scenee
         DronFly3.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-1000, 550, 3250);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(100, 10, 10);
             Life.position.set(0, 110, 0);
             Life.name="vida";
@@ -964,6 +1044,14 @@ class Scenee
         DronFly4.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-3800, 800, 2750);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(100, 10, 10);
             Life.position.set(0, 110, 0);
             Life.name="vida";
@@ -983,6 +1071,14 @@ class Scenee
         DronFly5.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-6800, 400, 1250);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(100, 10, 10);
             Life.position.set(0, 110, 0);
             Life.name="vida";
@@ -1002,6 +1098,14 @@ class Scenee
         DronFly6.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-6100, 400, -4250);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(100, 10, 10);
             Life.position.set(0, 110, 0);
             Life.name="vida";
@@ -1021,6 +1125,14 @@ class Scenee
         DronFly7.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-2100, 400, -4250);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(100, 10, 10);
             Life.position.set(0, 110, 0);
             Life.name="vida";
@@ -1040,6 +1152,14 @@ class Scenee
         DronFly8.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(1500, 700, -4250);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(100, 10, 10);
             Life.position.set(0, 110, 0);
             Life.name="vida";
@@ -1059,6 +1179,14 @@ class Scenee
         DronFly9.LoadModel("Assets/Pantano/Enemies/DronFly/DronFly.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(2900, 780, 1000);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(100, 10, 10);
             Life.position.set(0, 110, 0);
             Life.name="vida";
@@ -1079,6 +1207,14 @@ class Scenee
             object.scale.set(2.3, 2.3, 2.3);
             object.rotation.x = -90 * 3.1416 / 180;
             object.position.set(5500, 440, 7250);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(50, 0.5, 0.5);
             Life.position.set(0, 0, 170);
             Life.rotation.x = 90 * 180 / 3.1416;
@@ -1099,6 +1235,14 @@ class Scenee
             object.scale.set(2.3, 2.3, 2.3);
             object.rotation.x = -90 * 3.1416 / 180;
             object.position.set(-5100, 540, 3850);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(50, 0.5, 0.5);
             Life.position.set(0, 0, 170);
             Life.rotation.x = 90 * 180 / 3.1416;
@@ -1119,6 +1263,14 @@ class Scenee
             object.scale.set(2.3, 2.3, 2.3);
             object.rotation.x = -90 * 3.1416 / 180;
             object.position.set(-5100, 30, -1350);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(50, 0.5, 0.5);
             Life.position.set(0, 0, 170);
             Life.rotation.x = 90 * 180 / 3.1416;
@@ -1139,6 +1291,14 @@ class Scenee
             object.scale.set(2.3, 2.3, 2.3);
             object.rotation.x = -90 * 3.1416 / 180;
             object.position.set(3800, 450, -1850);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(50, 0.5, 0.5);
             Life.position.set(0, 0, 170);
             Life.rotation.x = 90 * 180 / 3.1416;
@@ -1159,6 +1319,14 @@ class Scenee
             object.scale.set(2.3, 2.3, 2.3);
             object.rotation.x = -90 * 3.1416 / 180;
             object.position.set(3300, 240, 2850);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(50, 0.5, 0.5);
             Life.position.set(0, 0, 170);
             Life.rotation.x = 90 * 180 / 3.1416;
@@ -1178,6 +1346,14 @@ class Scenee
         Magic.LoadModel("Assets/Nieve/Enemies/Magic/Magic.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-5100, 170, 7800);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(10, 10, 10);
             object.add(visor);
             visor.position.set(0, 0, 0);
@@ -2133,6 +2309,14 @@ class Scenee
         AvatarEnemy.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-600, 200, -7550);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(450, 450, 450);
             object.add(visor);
             visor.visible= false;
@@ -2151,6 +2335,14 @@ class Scenee
         AvatarEnemy2.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(800, 200, -7550);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(450, 450, 450);
             object.add(visor);
             visor.visible= false;
@@ -2169,6 +2361,14 @@ class Scenee
         AvatarEnemy3.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-200, 200, -5850);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(450, 450, 450);
             object.add(visor);
             visor.visible= false;
@@ -2187,6 +2387,14 @@ class Scenee
         AvatarEnemy4.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-2100, 200, -5150);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(450, 450, 450);
             object.add(visor);
             visor.visible= false;
@@ -2205,6 +2413,14 @@ class Scenee
         AvatarEnemy5.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-6100, 200, -2150);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(450, 450, 450);
             object.add(visor);
             visor.visible= false;
@@ -2223,6 +2439,14 @@ class Scenee
         AvatarEnemy6.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-8000, 200, -3950);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(450, 450, 450);
             object.add(visor);
             visor.visible= false;
@@ -2241,6 +2465,14 @@ class Scenee
         AvatarEnemy7.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-7600, 200, -1550);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(450, 450, 450);
             object.add(visor);
             visor.visible= false;
@@ -2259,6 +2491,14 @@ class Scenee
         AvatarEnemy8.LoadModel("Assets/Pradera/Enemies/Avatar/Avatar1.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-5700, 200, -3850);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(450, 450, 450);
             object.add(visor);
             visor.visible= false;
@@ -2277,6 +2517,14 @@ class Scenee
         HongoEnemy.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
             object.scale.set(0.7, 0.7, 0.7);
             object.position.set(-2800, 400, 6950);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(200, 300, 300);
             object.add(visor);
             visor.position.set(0, -80, 150);
@@ -2296,6 +2544,14 @@ class Scenee
         HongoEnemy2.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
             object.scale.set(0.7, 0.7, 0.7);
             object.position.set(-800, 400, 7750);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(200, 300, 300);
             object.add(visor);
             visor.position.set(0, -80, 150);
@@ -2315,6 +2571,14 @@ class Scenee
         HongoEnemy3.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
             object.scale.set(0.7, 0.7, 0.7);
             object.position.set(-2500, 400, 8250);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(200, 300, 300);
             object.add(visor);
             visor.position.set(0, -80, 150);
@@ -2334,6 +2598,14 @@ class Scenee
         HongoEnemy4.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
             object.scale.set(0.7, 0.7, 0.7);
             object.position.set(-800, 400, 6000);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(200, 300, 300);
             object.add(visor);
             visor.position.set(0, -80, 150);
@@ -2353,6 +2625,14 @@ class Scenee
         HongoEnemy5.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
             object.scale.set(0.7, 0.7, 0.7);
             object.position.set(-4300, 400, 7800);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(200, 300, 300);
             object.add(visor);
             visor.position.set(0, -80, 150);
@@ -2372,6 +2652,14 @@ class Scenee
         HongoEnemy6.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
             object.scale.set(0.7, 0.7, 0.7);
             object.position.set(2300, 400, 7800);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(200, 300, 300);
             object.add(visor);
             visor.position.set(0, -80, 150);
@@ -2391,6 +2679,14 @@ class Scenee
         HongoEnemy7.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
             object.scale.set(0.7, 0.7, 0.7);
             object.position.set(3100, 400, 5800);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(200, 300, 300);
             object.add(visor);
             visor.position.set(0, -80, 150);
@@ -2410,6 +2706,14 @@ class Scenee
         HongoEnemy8.LoadModel("Assets/Pradera/Enemies/Hongo/Hongo1.fbx", loadingManager, 3, (object)=>{
             object.scale.set(0.7, 0.7, 0.7);
             object.position.set(4700, 400, 8300);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(200, 300, 300);
             object.add(visor);
             visor.position.set(0, -80, 150);
@@ -2429,6 +2733,14 @@ class Scenee
         Polilla1.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.03, 0.03, 0.03);
             object.position.set(-7000, 400, 7700);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(7000, 9000, 8500);
             object.add(visor);
             visor.position.set(0, -150, 150);
@@ -2449,6 +2761,14 @@ class Scenee
         Polilla2.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.03, 0.03, 0.03);
             object.position.set(-7000, 400, 5800);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(7000, 9000, 8500);
             object.add(visor);
             visor.position.set(0, -150, 150);
@@ -2469,6 +2789,14 @@ class Scenee
         Polilla3.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.03, 0.03, 0.03);
             object.position.set(-5300, 400, 6700);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(7000, 9000, 8500);
             object.add(visor);
             visor.position.set(0, -150, 150);
@@ -2489,6 +2817,14 @@ class Scenee
         Polilla4.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.03, 0.03, 0.03);
             object.position.set(800, 400, 2700);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(7000, 9000, 8500);
             object.add(visor);
             visor.position.set(0, -150, 150);
@@ -2509,6 +2845,14 @@ class Scenee
         Polilla5.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.03, 0.03, 0.03);
             object.position.set(2500, 400, 4500);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(7000, 9000, 8500);
             object.add(visor);
             visor.position.set(0, -150, 150);
@@ -2529,6 +2873,14 @@ class Scenee
         Polilla6.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.03, 0.03, 0.03);
             object.position.set(3900, 400, -1500);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(7000, 9000, 8500);
             object.add(visor);
             visor.position.set(0, -150, 150);
@@ -2549,6 +2901,14 @@ class Scenee
         Polilla7.LoadModel("Assets/Pradera/Enemies/butterfly/Mariposa.fbx", loadingManager, 1.5, (object)=>{
             object.scale.set(0.03, 0.03, 0.03);
             object.position.set(5300, 400, 1200);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(7000, 9000, 8500);
             object.add(visor);
             visor.position.set(0, -150, 150);
@@ -2569,6 +2929,14 @@ class Scenee
         Magic.LoadModel("Assets/Nieve/Enemies/Magic/Magic.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-6700, 200, 7000);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(10, 10, 10);
             object.add(visor);
             visor.position.set(0, 0, 0);
@@ -3035,6 +3403,14 @@ class Scenee
         FlyGuardian.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(-5900, 500, 6050);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(800, 50, 50);
             Life.position.set(0, 400, 0);
             Life.name="vida";
@@ -3048,12 +3424,20 @@ class Scenee
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian);
-        this.NieveEnemiesStats.push(new Enemigo(3000, 900, 500, "FlyGuardian", 600, 0));
+        this.NieveEnemiesStats.push(new Enemigo(3000, 500, 500, "FlyGuardian", 600, 0));
 
         var FlyGuardian2 = new OneModelAnim();
         FlyGuardian2.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(-4000, 500, 7050);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(800, 50, 50);
             Life.position.set(0, 400, 0);
             Life.name="vida";
@@ -3067,12 +3451,20 @@ class Scenee
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian2);
-        this.NieveEnemiesStats.push(new Enemigo(3000, 900, 500, "FlyGuardian", 600, 1));
+        this.NieveEnemiesStats.push(new Enemigo(3000, 500, 500, "FlyGuardian", 600, 1));
 
         var FlyGuardian3 = new OneModelAnim();
         FlyGuardian3.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(-7000, 500, 7450);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(800, 50, 50);
             Life.position.set(0, 400, 0);
             Life.name="vida";
@@ -3086,12 +3478,20 @@ class Scenee
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian3);
-        this.NieveEnemiesStats.push(new Enemigo(3000, 900, 500, "FlyGuardian", 600, 2));
+        this.NieveEnemiesStats.push(new Enemigo(3000, 500, 500, "FlyGuardian", 600, 2));
 
         var FlyGuardian4 = new OneModelAnim();
         FlyGuardian4.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(-4000, 500, 2450);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(800, 50, 50);
             Life.position.set(0, 400, 0);
             Life.name="vida";
@@ -3105,12 +3505,20 @@ class Scenee
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian4);
-        this.NieveEnemiesStats.push(new Enemigo(3000, 900, 500, "FlyGuardian", 600, 3));
+        this.NieveEnemiesStats.push(new Enemigo(3000, 500, 500, "FlyGuardian", 600, 3));
 
         var FlyGuardian5 = new OneModelAnim();
         FlyGuardian5.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(-6300, 650, 2950);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(800, 50, 50);
             Life.position.set(0, 400, 0);
             Life.name="vida";
@@ -3124,12 +3532,20 @@ class Scenee
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian5);
-        this.NieveEnemiesStats.push(new Enemigo(3000, 900, 500, "FlyGuardian", 600, 4));
+        this.NieveEnemiesStats.push(new Enemigo(3000, 500, 500, "FlyGuardian", 600, 4));
 
         var FlyGuardian6 = new OneModelAnim();
         FlyGuardian6.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(5300, 600, 2950);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(800, 50, 50);
             Life.position.set(0, 400, 0);
             Life.name="vida";
@@ -3143,12 +3559,20 @@ class Scenee
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian6);
-        this.NieveEnemiesStats.push(new Enemigo(3000, 900, 500, "FlyGuardian", 600, 5));
+        this.NieveEnemiesStats.push(new Enemigo(3000, 500, 500, "FlyGuardian", 600, 5));
 
         var FlyGuardian7 = new OneModelAnim();
         FlyGuardian7.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(6600, 500, 5950);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(800, 50, 50);
             Life.position.set(0, 400, 0);
             Life.name="vida";
@@ -3162,12 +3586,20 @@ class Scenee
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian7);
-        this.NieveEnemiesStats.push(new Enemigo(3000, 900, 500, "FlyGuardian", 600, 6));
+        this.NieveEnemiesStats.push(new Enemigo(3000, 500, 500, "FlyGuardian", 600, 6));
 
         var FlyGuardian8 = new OneModelAnim();
         FlyGuardian8.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(-100, 550, 500);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(800, 50, 50);
             Life.position.set(0, 400, 0);
             Life.name="vida";
@@ -3181,12 +3613,20 @@ class Scenee
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian8);
-        this.NieveEnemiesStats.push(new Enemigo(3000, 900, 500, "FlyGuardian", 600, 7));
+        this.NieveEnemiesStats.push(new Enemigo(3000, 500, 500, "FlyGuardian", 600, 7));
 
         var FlyGuardian9 = new OneModelAnim();
         FlyGuardian9.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(1200, 550, 2000);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(800, 50, 50);
             Life.position.set(0, 400, 0);
             Life.name="vida";
@@ -3200,12 +3640,20 @@ class Scenee
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian9);
-        this.NieveEnemiesStats.push(new Enemigo(3000, 900, 500, "FlyGuardian", 600, 8));
+        this.NieveEnemiesStats.push(new Enemigo(3000, 500, 500, "FlyGuardian", 600, 8));
 
         var FlyGuardian10 = new OneModelAnim();
         FlyGuardian10.LoadModel("Assets/Nieve/Enemies/FlyGuardian/FlyGuardian1.fbx", loadingManager, 2.5, (object)=>{
             object.scale.set(0.15, 0.15, 0.15);
             object.position.set(6500, 550, -5000);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(800, 50, 50);
             Life.position.set(0, 400, 0);
             Life.name="vida";
@@ -3219,12 +3667,20 @@ class Scenee
             this.Nieve.add(object);
         });
         this.NieveEnemies.push(FlyGuardian10);
-        this.NieveEnemiesStats.push(new Enemigo(3000, 900, 500, "FlyGuardian", 600, 10));
+        this.NieveEnemiesStats.push(new Enemigo(3000, 500, 500, "FlyGuardian", 600, 10));
 
         var Ghost = new OneModelAnim();
         Ghost.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
             object.scale.set(13.5, 13.5, 13.5);
             object.position.set(-500, 450, 5550);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(10, 0.5, 0.5);
             Life.position.set(0, 15, 0);
             Life.name="vida";
@@ -3243,6 +3699,14 @@ class Scenee
         Ghost2.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
             object.scale.set(13.5, 13.5, 13.5);
             object.position.set(-2500, 200, 6950);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(10, 0.5, 0.5);
             Life.position.set(0, 15, 0);
             Life.name="vida";
@@ -3261,6 +3725,14 @@ class Scenee
         Ghost3.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
             object.scale.set(13.5, 13.5, 13.5);
             object.position.set(-3900, 40, 3950);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(10, 0.5, 0.5);
             Life.position.set(0, 15, 0);
             Life.name="vida";
@@ -3279,6 +3751,14 @@ class Scenee
         Ghost4.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
             object.scale.set(13.5, 13.5, 13.5);
             object.position.set(-2500, 40, 250);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(10, 0.5, 0.5);
             Life.position.set(0, 15, 0);
             Life.name="vida";
@@ -3297,6 +3777,14 @@ class Scenee
         Ghost5.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
             object.scale.set(13.5, 13.5, 13.5);
             object.position.set(-7200, 300, -950);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(10, 0.5, 0.5);
             Life.position.set(0, 15, 0);
             Life.name="vida";
@@ -3315,6 +3803,14 @@ class Scenee
         Ghost6.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
             object.scale.set(13.5, 13.5, 13.5);
             object.position.set(7300, 130, 3000);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(10, 0.5, 0.5);
             Life.position.set(0, 15, 0);
             Life.name="vida";
@@ -3333,6 +3829,14 @@ class Scenee
         Ghost7.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
             object.scale.set(13.5, 13.5, 13.5);
             object.position.set(6500, 130, 300);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(10, 0.5, 0.5);
             Life.position.set(0, 15, 0);
             Life.name="vida";
@@ -3351,6 +3855,14 @@ class Scenee
         Ghost8.LoadModel("Assets/Nieve/Enemies/Ghost/A_GhostFly.fbx", loadingManager, 1, (object)=>{
             object.scale.set(13.5, 13.5, 13.5);
             object.position.set(500, 130, 300);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var Life = this.CreateLife(10, 0.5, 0.5);
             Life.position.set(0, 15, 0);
             Life.name="vida";
@@ -3369,6 +3881,14 @@ class Scenee
         Magic.LoadModel("Assets/Nieve/Enemies/Magic/Magic.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-5000, 130, -6000);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(10, 10, 10);
             object.add(visor);
             visor.position.set(0, 0, 0);
@@ -3384,6 +3904,14 @@ class Scenee
         Magic2.LoadModel("Assets/Nieve/Enemies/Magic/Magic.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-2000, -60, -7000);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(10, 10, 10);
             object.add(visor);
             visor.position.set(0, 0, 0);
@@ -3399,6 +3927,14 @@ class Scenee
         Magic3.LoadModel("Assets/Nieve/Enemies/Magic/Magic.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-2000, 130, -3000);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(10, 10, 10);
             object.add(visor);
             visor.position.set(0, 0, 0);
@@ -3414,6 +3950,14 @@ class Scenee
         Magic4.LoadModel("Assets/Nieve/Enemies/Magic/Magic.fbx", loadingManager, 2, (object)=>{
             object.scale.set(0.5, 0.5, 0.5);
             object.position.set(-5800, 230, -4000);
+            object.rays = [
+                new THREE.Vector3(1, 0, 0),
+                new THREE.Vector3(-1, 0, 0),
+                new THREE.Vector3(0, 0, 1),
+                new THREE.Vector3(0, 0, -1),
+                new THREE.Vector3(0, 0.5, 0),
+                new THREE.Vector3(0, -0.5, 0),
+            ];
             var visor = this.CreateCubeVisor(10, 10, 10);
             object.add(visor);
             visor.position.set(0, 0, 0);

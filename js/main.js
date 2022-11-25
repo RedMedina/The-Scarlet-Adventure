@@ -6,7 +6,9 @@ import { Water } from '/PWGW/node_modules/three/examples/jsm/objects/Water.js';
 import {OrbitControls} from '/PWGW/node_modules/three/examples/jsm/controls/OrbitControls.js';
 import {GUI} from '/PWGW/js/gui.js';
 import {AudioController} from '/PWGW/js/audioController.js';
+import {Audioo} from '/PWGW/js/audio.js';
 import {Shots} from '/PWGW/js/disparo.js';
+import { BooleanKeyframeTrack } from 'three';
 
 function main()
 {
@@ -28,7 +30,7 @@ function main()
     var Dia = true;
     
     var keys = {};
-    var Actionkeys = {Attack: false, Dodge: false, Jump: false};
+    var Actionkeys = {Attack: false, Dodge: false, Jump: false, Die: false};
     var mousekeys = [];
     var ModelsLoaded = false;
 
@@ -101,12 +103,21 @@ function main()
     const audioCont = new AudioController();
     var SonidoFinal = Configuraciones.sonido * 0.001;
     audioCont.SetVolume(SonidoFinal);
+    const AudioM = new Audioo();
+    AudioM.create("Muerte");
+    AudioM.Sound("Assets/BGM/Death.mp3");
+    AudioM.GetSound().setVolume(SonidoFinal);
     var Disparo = new Shots();
     var ShotsPradera = [];
     var ShotsPantano = [];
     var ShotsNieve = [];
+    var ShotsEnemiePradera = [];
+    var ShotsEnemiePantano = [];
+    var ShotsEnemieNieve = [];
     var Disparando = false;
+    var EnemyDisparando = false;
     var DisparandoContador = 0;
+    var DisparandoEnemyContador = 0;
     var DodgeDuracion = 1.5;
     var DodgeContador = 0;
     var AttackDuracion = 2.2;
@@ -116,6 +127,10 @@ function main()
     var ActualScene = PlayerDatos.scene;
     var movPas = 0;
     var rayCaster = new THREE.Raycaster();
+    var Invesible = false;
+    var InvensibleContador = 0;
+    var Die = false;
+    var DieDuracion = 0;
     
     let water;
     const waterGeometry = new THREE.PlaneGeometry( 10000, 10000 );
@@ -372,7 +387,7 @@ function main()
             }
 		}*/
 		if (keys["W"]) {
-            if(Actionkeys.Dodge == false && Actionkeys.Jump == false)
+            if(Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false)
             {
                 Actionkeys.Attack = false;
                 AttackContador = 0;
@@ -394,7 +409,7 @@ function main()
                 movPas = 550;
             }
 		}else if (keys["S"]) {
-            if(Actionkeys.Dodge == false && Actionkeys.Jump == false)
+            if(Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false)
             {
                 Actionkeys.Attack = false;
                 AttackContador = 0;
@@ -417,13 +432,13 @@ function main()
             }
 		}
         else if(keys["E"]){
-            if(Actionkeys.Dodge == false && Actionkeys.Jump == false)
+            if(Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false)
             {
                 Actionkeys.Attack = true;
             }
         }
         else if(keys[" "]){
-            if(Actionkeys.Dodge == false)
+            if(Actionkeys.Dodge == false && Actionkeys.Die == false)
             {
                 Actionkeys.Attack = false;
                 AttackContador = 0;
@@ -431,7 +446,7 @@ function main()
             }
         }
         else if ((keys["W"] == false || keys["A"] == false || keys["S"] == false || keys["D"] == false) &&
-                Actionkeys.Attack == false && Actionkeys.Dodge == false && Actionkeys.Jump == false)
+                Actionkeys.Attack == false && Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false)
         {
             if(ActualScene == 1)
             {
@@ -489,12 +504,13 @@ function main()
         }
 
         if(keys["Q"]){
-            if(Actionkeys.Jump == false)
+            if(Actionkeys.Jump == false && Actionkeys.Die == false)
             {
                 Actionkeys.Attack = false;
                 AttackContador = 0;
                 
                 Actionkeys.Dodge = true;
+                Invesible = true;
                 if(ActualScene == 1)
                 {
                     Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(500 * (delta)); 
@@ -532,6 +548,7 @@ function main()
             }else
             {
                 Actionkeys.Dodge = false;
+                Invesible = false;
                 DodgeContador = 0;
             }
         }
@@ -544,7 +561,7 @@ function main()
                 if(ActualScene == 1)
                 {
                     Escenario.GetPlayer().GetModel().Pradera.playAnimation(2,1);
-                    var Particle = Disparo.Disparar(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rotation.y, Camara.GetCamera().rotation.x);
+                    var Particle = Disparo.Disparar(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rotation.y, Camara.GetCamera().rotation.x, 'Assets/Images/shot.png', true);
                     Escenario.GetPraderaScene().add(Particle);
                     ShotsPradera.push(Particle);
                     Disparando = true;
@@ -552,7 +569,7 @@ function main()
                 else if (ActualScene == 2)
                 {
                     Escenario.GetPlayer().GetModel().Pantano.playAnimation(2,1);
-                    var Particle = Disparo.Disparar(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position, Escenario.GetPantanoScene().getObjectByName("PlayerModel").rotation.y, Camara.GetCamera().rotation.x);
+                    var Particle = Disparo.Disparar(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position, Escenario.GetPantanoScene().getObjectByName("PlayerModel").rotation.y, Camara.GetCamera().rotation.x, 'Assets/Images/shot.png', true);
                     Escenario.GetPantanoScene().add(Particle);
                     ShotsPantano.push(Particle);
                     Disparando = true;
@@ -560,7 +577,7 @@ function main()
                 else if (ActualScene == 3)
                 {
                     Escenario.GetPlayer().GetModel().Nieve.playAnimation(2,1);
-                    var Particle = Disparo.Disparar(Escenario.GetNieveScene().getObjectByName("PlayerModel").position, Escenario.GetNieveScene().getObjectByName("PlayerModel").rotation.y, Camara.GetCamera().rotation.x);
+                    var Particle = Disparo.Disparar(Escenario.GetNieveScene().getObjectByName("PlayerModel").position, Escenario.GetNieveScene().getObjectByName("PlayerModel").rotation.y, Camara.GetCamera().rotation.x, 'Assets/Images/shot.png', true);
                     Escenario.GetNieveScene().add(Particle);
                     ShotsNieve.push(Particle);
                     Disparando = true;
@@ -632,17 +649,70 @@ function main()
                         var j = parseInt(collision[0].object.name);
                         if(j < 23)
                         {
-                            Escenario.GetPraderaEnemies().Collider[j].parent.lookAt(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.x, Escenario.GetPraderaEnemies().Collider[j].parent.position.y, Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.z);
-                            Escenario.GetPraderaEnemies().Collider[j].parent.translateZ(450 * delta);
+                            if(Escenario.GetPraderaEnemies().Object[j].GetActive())
+                            {
+                                Escenario.GetPraderaEnemies().Collider[j].parent.lookAt(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.x, Escenario.GetPraderaEnemies().Collider[j].parent.position.y, Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.z);
+                                Escenario.GetPraderaEnemies().Collider[j].parent.translateZ(450 * delta);
+                                if(j < 8)
+                                {
+                                    var Particle = Disparo.Disparar(Escenario.GetPraderaEnemies().Collider[j].parent.position, 0/*Escenario.GetPraderaEnemies().Collider[j].parent.rotation.y*/, /*5 * 3.1416 / 180*/0, 'Assets/Images/shot_enemy.png', false);
+                                    Particle.lookAt(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position);
+                                    Escenario.GetPraderaScene().add(Particle);
+                                    ShotsEnemiePradera.push(Particle);
+                                    EnemyDisparando = true;
+                                }else
+                                {
+                                    var Particle = Disparo.Disparar(Escenario.GetPraderaEnemies().Collider[j].parent.position, /*Escenario.GetPraderaEnemies().Collider[j].parent.rotation.y*/0, 0/*Escenario.GetPraderaEnemies().Collider[j].parent.rotation.x25 * 3.1416 / 180*/, 'Assets/Images/shot_enemy.png', false);
+                                   // Particle.rotation.x = 25 * 3.1416 / 180;
+                                    Particle.lookAt(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position);
+                                    Escenario.GetPraderaScene().add(Particle);
+                                    ShotsEnemiePradera.push(Particle);
+                                    EnemyDisparando = true;
+                                }
+                            }
                         }   
                         else if (j == 23)
                         {
                             Escenario.GetPraderaEnemies().Collider[23].parent.lookAt(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.x, Escenario.GetPraderaEnemies().Collider[23].parent.position.y, Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.z);
                         }  
-                        console.log(j);
-                        console.log(Escenario.GetPraderaEnemies().Collider[j].name);
+                        //console.log(j);
+                        //console.log(Escenario.GetPraderaEnemies().Collider[j].name);
                     }
+                    
                 }
+                //Colissiones Disparos
+                for (var i = 0; i < Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays.length; i++) {
+                        rayCaster.set(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays[i]);
+                        var collision = rayCaster.intersectObjects(ShotsEnemiePradera, false);				
+                        if (collision.length > 0 && (collision[0].distance < 1200)) {
+                            if(!Invesible)
+                            {
+                                var Daño = 650 /*<-Este daño es provisional*/ - Escenario.GetPlayer().GetStats().Defensa;
+                                Escenario.GetPlayer().GetStats().Vida -= Daño;
+                                ui.SetVidaActual(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife());
+                                Invesible = true;
+                            }
+                        }
+                }
+
+                //Collission Disparos Enemies
+               for (let j = 0; j < Escenario.GetPraderaEnemies().Collider.length; j++) {
+                for (var i = 0; i < Escenario.GetPraderaEnemies().Collider[j].parent.rays.length; i++) {
+                    rayCaster.set(Escenario.GetPraderaEnemies().Collider[j].parent.position, Escenario.GetPraderaEnemies().Collider[j].parent.rays[i]);
+                    var collision = rayCaster.intersectObjects(ShotsPradera, false);				
+                    if (collision.length > 0 && (collision[0].distance < 1200)) {
+                        var Daño = Escenario.GetPlayer().GetStats().Ataque - Escenario.GetPraderaEnemies().Object[j].GetStats().Defensa;
+                        Escenario.GetPraderaEnemies().Object[j].GetStats().Vida -= Daño / 20;
+                        var Porcentaje = (Escenario.GetPraderaEnemies().Object[j].GetStats().Vida / Escenario.GetPraderaEnemies().Object[j].GetMaxLife()) * 100;
+                        Escenario.GetPraderaEnemies().Collider[j].parent.getObjectByName("vida").scale.set(Porcentaje / 100, 1 ,1);
+                        if(Escenario.GetPraderaEnemies().Object[j].GetStats().Vida <= 0)
+                        {
+                            Escenario.GetPraderaEnemies().Object[j].SetActive(false);
+                            Escenario.GetPraderaScene().remove(Escenario.GetPraderaEnemies().Collider[j].parent);
+                        }
+                    }
+                 }
+               }
             }
             else if(ActualScene == 2)
             {
@@ -677,17 +747,36 @@ function main()
                         var j = parseInt(collision[0].object.name);
                         if(j < 21)
                         {
-                            if(j < 16)
+                            if(Escenario.GetPantanoEnemies().Object[j].GetActive())
                             {
-                                Escenario.GetPantanoEnemies().Collider[j].parent.lookAt(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.x, Escenario.GetPantanoEnemies().Collider[j].parent.position.y, Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.z);
-                                Escenario.GetPantanoEnemies().Collider[j].parent.translateZ(450 * delta);
+                                if(j < 16)
+                                {
+                                    Escenario.GetPantanoEnemies().Collider[j].parent.lookAt(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.x, Escenario.GetPantanoEnemies().Collider[j].parent.position.y, Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.z);
+                                    Escenario.GetPantanoEnemies().Collider[j].parent.translateZ(450 * delta);
+                                    if(j < 7)
+                                    {
+                                        var Particle = Disparo.Disparar(Escenario.GetPantanoEnemies().Collider[j].parent.position, /*Escenario.GetPantanoEnemies().Collider[j].parent.rotation.y*/0, /*Escenario.GetPantanoEnemies().Collider[j].parent.rotation.x*/0, 'Assets/Images/shot_enemy.png', false);
+                                        Particle.lookAt(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position);
+                                        Escenario.GetPantanoScene().add(Particle);
+                                        ShotsEnemiePantano.push(Particle);
+                                        EnemyDisparando = true;
+                                    }
+                                    else
+                                    {
+                                        var Particle = Disparo.Disparar(Escenario.GetPantanoEnemies().Collider[j].parent.position, /*Escenario.GetPantanoEnemies().Collider[j].parent.rotation.y*/0, 0/*Escenario.GetPantanoEnemies().Collider[j].parent.rotation.x30 * 3.1416 / 180*/, 'Assets/Images/shot_enemy.png', false);
+                                        //Particle.rotation.x = 30 * 3.1416 / 180;
+                                        Particle.lookAt(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position);
+                                        Escenario.GetPantanoScene().add(Particle);
+                                        ShotsEnemiePantano.push(Particle);
+                                        EnemyDisparando = true;
+                                    }
+                                }
+                                else
+                                {
+                                    Escenario.GetPantanoEnemies().Collider[j].parent.lookAt(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.x, Escenario.GetPantanoEnemies().Collider[j].parent.position.y, Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.z);
+                                    Escenario.GetPantanoEnemies().Collider[j].parent.translateZ(450 * delta);
+                                }
                             }
-                            else
-                            {
-                                Escenario.GetPantanoEnemies().Collider[j].parent.lookAt(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.x, Escenario.GetPantanoEnemies().Collider[j].parent.position.y, Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.z);
-                                Escenario.GetPantanoEnemies().Collider[j].parent.translateZ(450 * delta);
-                            }
-
                         }   
                         else if (j == 21)
                         {
@@ -695,6 +784,38 @@ function main()
                         }  
                     }
                 }
+                //Collision Disparos
+                for (var i = 0; i < Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays.length; i++) {
+                    rayCaster.set(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position, Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays[i]);
+                    var collision = rayCaster.intersectObjects(ShotsEnemiePantano, false);				
+                    if (collision.length > 0 && (collision[0].distance < 1200)) {
+                        if(!Invesible)
+                        {
+                            var Daño = 650 /*<-Este daño es provisional*/ - Escenario.GetPlayer().GetStats().Defensa;
+                            Escenario.GetPlayer().GetStats().Vida -= Daño;
+                            ui.SetVidaActual(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife());
+                            Invesible = true;
+                        }
+                    }
+                }
+                //Collission Disparos Enemies
+               for (let j = 0; j < Escenario.GetPantanoEnemies().Collider.length; j++) {
+                for (var i = 0; i < Escenario.GetPantanoEnemies().Collider[j].parent.rays.length; i++) {
+                    rayCaster.set(Escenario.GetPantanoEnemies().Collider[j].parent.position, Escenario.GetPantanoEnemies().Collider[j].parent.rays[i]);
+                    var collision = rayCaster.intersectObjects(ShotsPantano, false);				
+                    if (collision.length > 0 && (collision[0].distance < 1200)) {
+                        var Daño = Escenario.GetPlayer().GetStats().Ataque - Escenario.GetPantanoEnemies().Object[j].GetStats().Defensa;
+                        Escenario.GetPantanoEnemies().Object[j].GetStats().Vida -= Daño / 20;
+                        var Porcentaje = (Escenario.GetPantanoEnemies().Object[j].GetStats().Vida / Escenario.GetPantanoEnemies().Object[j].GetMaxLife()) * 100;
+                        Escenario.GetPantanoEnemies().Collider[j].parent.getObjectByName("vida").scale.set(Porcentaje / 100, 1 ,1);
+                        if(Escenario.GetPantanoEnemies().Object[j].GetStats().Vida <= 0)
+                        {
+                            Escenario.GetPantanoEnemies().Object[j].SetActive(false);
+                            Escenario.GetPantanoScene().remove(Escenario.GetPantanoEnemies().Collider[j].parent);
+                        }
+                    }
+                 }
+               }
             }
             else if(ActualScene == 3)
             {
@@ -718,7 +839,7 @@ function main()
                         console.log(Escenario.GetPlayer().GetBackpack());
                     }
                 }
-                //Collission Pantano Enemies
+                //Collission Nieve Enemies
                 for(var i = 0; i < Escenario.GetNieveScene().getObjectByName("PlayerModel").rays.length; i++)
                 {
                     rayCaster.set(Escenario.GetNieveScene().getObjectByName("PlayerModel").position, Escenario.GetNieveScene().getObjectByName("PlayerModel").rays[i]);
@@ -728,8 +849,28 @@ function main()
                         var j = parseInt(collision[0].object.name);
                         if(j < 19)
                         {
-                            Escenario.GetNieveEnemies().Collider[j].parent.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel").position.x, Escenario.GetNieveEnemies().Collider[j].parent.position.y, Escenario.GetNieveScene().getObjectByName("PlayerModel").position.z);
-                            Escenario.GetNieveEnemies().Collider[j].parent.translateZ(450 * delta);
+                            Escenario.GetNieveEnemies().Object[j].GetActive()
+                            {
+                                Escenario.GetNieveEnemies().Collider[j].parent.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel").position.x, Escenario.GetNieveEnemies().Collider[j].parent.position.y, Escenario.GetNieveScene().getObjectByName("PlayerModel").position.z);
+                                Escenario.GetNieveEnemies().Collider[j].parent.translateZ(450 * delta);
+                                if(j < 11)
+                                {
+                                    var Particle = Disparo.Disparar(Escenario.GetNieveEnemies().Collider[j].parent.position, /*Escenario.GetNieveEnemies().Collider[j].parent.rotation.y*/0, /*Escenario.GetNieveEnemies().Collider[j].parent.rotation.x 30 * 3.1416 / 180*/0, 'Assets/Images/shot_enemy.png', false);
+                                    //Particle.rotation.x = 30 * 3.1416 / 180;
+                                    Particle.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel").position);
+                                    Escenario.GetNieveScene().add(Particle);
+                                    ShotsEnemieNieve.push(Particle);
+                                    EnemyDisparando = true;
+                                }
+                                else
+                                {
+                                    var Particle = Disparo.Disparar(Escenario.GetNieveEnemies().Collider[j].parent.position, /*Escenario.GetNieveEnemies().Collider[j].parent.rotation.y*/0, /*Escenario.GetNieveEnemies().Collider[j].parent.rotation.x*/0, 'Assets/Images/shot_enemy.png', false);
+                                    Particle.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel").position);
+                                    Escenario.GetNieveScene().add(Particle);
+                                    ShotsEnemieNieve.push(Particle);
+                                    EnemyDisparando = true;
+                                }
+                            }
                         }   
                         else
                         {
@@ -737,6 +878,38 @@ function main()
                         }  
                     }
                 }
+                //Collision disparos
+                for (var i = 0; i < Escenario.GetNieveScene().getObjectByName("PlayerModel").rays.length; i++) {
+                    rayCaster.set(Escenario.GetNieveScene().getObjectByName("PlayerModel").position, Escenario.GetNieveScene().getObjectByName("PlayerModel").rays[i]);
+                    var collision = rayCaster.intersectObjects(ShotsEnemieNieve, false);				
+                    if (collision.length > 0 && (collision[0].distance < 1200)) {
+                        if(!Invesible)
+                        {
+                            var Daño = 650 /*<-Este daño es provisional*/ - Escenario.GetPlayer().GetStats().Defensa;
+                            Escenario.GetPlayer().GetStats().Vida -= Daño;
+                            ui.SetVidaActual(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife());
+                            Invesible = true;
+                        }
+                    }
+                }
+                 //Collission Disparos Enemies
+               for (let j = 0; j < Escenario.GetNieveEnemies().Collider.length; j++) {
+                for (var i = 0; i < Escenario.GetNieveEnemies().Collider[j].parent.rays.length; i++) {
+                    rayCaster.set(Escenario.GetNieveEnemies().Collider[j].parent.position, Escenario.GetNieveEnemies().Collider[j].parent.rays[i]);
+                    var collision = rayCaster.intersectObjects(ShotsNieve, false);				
+                    if (collision.length > 0 && (collision[0].distance < 1200)) {
+                        var Daño = Escenario.GetPlayer().GetStats().Ataque - Escenario.GetNieveEnemies().Object[j].GetStats().Defensa;
+                        Escenario.GetNieveEnemies().Object[j].GetStats().Vida -= Daño / 20;
+                        var Porcentaje = (Escenario.GetNieveEnemies().Object[j].GetStats().Vida / Escenario.GetNieveEnemies().Object[j].GetMaxLife()) * 100;
+                        Escenario.GetNieveEnemies().Collider[j].parent.getObjectByName("vida").scale.set(Porcentaje / 100, 1 ,1);
+                        if(Escenario.GetNieveEnemies().Object[j].GetStats().Vida <= 0)
+                        {
+                            Escenario.GetNieveEnemies().Object[j].SetActive(false);
+                            Escenario.GetNieveScene().remove(Escenario.GetNieveEnemies().Collider[j].parent);
+                        }
+                    }
+                 }
+               }
             }
         }
 
@@ -749,6 +922,17 @@ function main()
         }
         for (let i = 0; i < ShotsNieve.length; i++) {
             ShotsNieve[i].translateZ(700 * delta);
+        }
+
+        //ShotsEnemies
+        for (let i = 0; i < ShotsEnemiePradera.length; i++) {
+            ShotsEnemiePradera[i].translateZ(700 * delta);
+        }
+        for (let i = 0; i < ShotsEnemiePantano.length; i++) {
+            ShotsEnemiePantano[i].translateZ(700 * delta);
+        }
+        for (let i = 0; i < ShotsEnemieNieve.length; i++) {
+            ShotsEnemieNieve[i].translateZ(700 * delta);
         }
 
         if(Disparando)
@@ -770,6 +954,41 @@ function main()
                 ShotsNieve.splice(0, ShotsNieve.length);
                 Disparando = false;
                 DisparandoContador = 0;
+            }
+        }
+
+        if(EnemyDisparando)
+        {
+            DisparandoEnemyContador += delta;
+            if(DisparandoEnemyContador > 3)
+            {
+                for (let i = 0; i < ShotsEnemiePradera.length; i++) {
+                    Escenario.GetPraderaScene().remove(ShotsEnemiePradera[i]);
+                }
+                ShotsEnemiePradera.splice(0, ShotsEnemiePradera.length);
+
+                for (let i = 0; i < ShotsEnemiePantano.length; i++) {
+                    Escenario.GetPantanoScene().remove(ShotsEnemiePantano[i]);
+                }
+                ShotsEnemiePantano.splice(0, ShotsEnemiePantano.length);
+
+                for (let i = 0; i < ShotsEnemieNieve.length; i++) {
+                    Escenario.GetNieveScene().remove(ShotsEnemieNieve[i]);
+                }
+                ShotsEnemieNieve.splice(0, ShotsEnemieNieve.length);
+
+                EnemyDisparando = false;
+                DisparandoEnemyContador = 0;
+            }
+        }
+
+        if(Invesible)
+        {
+            InvensibleContador += delta;
+            if(InvensibleContador > 0.2)
+            {
+                Invesible = false;
+                InvensibleContador = 0;
             }
         }
     
@@ -921,6 +1140,39 @@ function main()
                 audioCont.PlaySceneSound(ActualScene);
             }
             Dia = true;
+        }
+
+        if (Escenario.GetPlayer().GetStats().Vida <= 0) {
+            audioCont.StopAllSound();
+            AudioM.GetSound().play();
+            Actionkeys.Die = true;
+            $("#bg").animate({ opacity: 1 }, 1000);
+            Die = true;
+            if(ActualScene == 1)
+            {
+                Escenario.GetPlayer().GetModel().Pradera.playAnimation(3,1);
+            }
+            else if (ActualScene == 2)
+            {
+                Escenario.GetPlayer().GetModel().Pantano.playAnimation(3,1);
+            }
+            else if (ActualScene == 3)
+            {
+                Escenario.GetPlayer().GetModel().Nieve.playAnimation(3,1);
+            }
+        }
+
+        if(Die)
+        {
+            DieDuracion += delta;
+           
+            if(DieDuracion > 4)
+            {
+                Die = false;
+                DieDuracion = 0;
+                //Funcion para perder 1 nivel
+                location.reload();
+            }
         }
         
         if(Pause) return;

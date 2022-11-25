@@ -34,6 +34,7 @@
         <div id="loader"></div>
         <center><p id="loading-text">Cargando...</p></center>
     </section>
+    <div id="bg" class="bg"><p style="color: white; font-family: Permanent Marker; font-size: 80px;">GAME OVER</p></div>
 
     <?php include("pause.php") ?>
 
