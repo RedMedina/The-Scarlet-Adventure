@@ -178,7 +178,7 @@ class Scenee
             var bolsa2 = object.clone();
             bolsa2.position.set(7200, 325, 7000);
             bolsa2.children[0].children[0].children[0].children[0].children[0].name="2";
-            var Item2 = new HealItem("Pocion Basica", 100, 1);
+            var Item2 = new HealItem("Pocion Defensa", 100, 1);
 
             var bolsa3 = object.clone();
             bolsa3.position.set(3800, 150, 7400);
@@ -193,12 +193,12 @@ class Scenee
             var bolsa5 = object.clone();
             bolsa5.position.set(-800, -50, 5500);
             bolsa5.children[0].children[0].children[0].children[0].children[0].name="5";
-            var Item5 = new HealItem("Pocion Basica", 100, 1);
+            var Item5 = new HealItem("Pocion Ataque", 300, 1);
 
             var bolsa6 = object.clone();
             bolsa6.position.set(-5200, 475, 4500);
             bolsa6.children[0].children[0].children[0].children[0].children[0].name="6";
-            var Item6 = new HealItem("Pocion Basica", 100, 1);
+            var Item6 = new HealItem("Pocion Defensa", 100, 1);
 
             var bolsa7 = object.clone();
             bolsa7.position.set(-3300, 445, 3000);
@@ -208,7 +208,7 @@ class Scenee
             var bolsa8 = object.clone();
             bolsa8.position.set(-4800, -40, -1000);
             bolsa8.children[0].children[0].children[0].children[0].children[0].name="8";
-            var Item8 = new HealItem("Pocion Basica", 100, 1);
+            var Item8 = new HealItem("Pocion Ataque", 300, 1);
 
             var bolsa9 = object.clone();
             bolsa9.position.set(-1000, 160, -100);
@@ -218,12 +218,12 @@ class Scenee
             var bolsa10 = object.clone();
             bolsa10.position.set(1500, 0, -100);
             bolsa10.children[0].children[0].children[0].children[0].children[0].name="10";
-            var Item10 = new HealItem("Pocion Basica", 100, 1);
+            var Item10 = new HealItem("Pocion Defensa", 100, 1);
 
             var bolsa11 = object.clone();
             bolsa11.position.set(3800, 160, 2300);
             bolsa11.children[0].children[0].children[0].children[0].children[0].name="11";
-            var Item11 = new HealItem("Pocion Alta", 500, 1);
+            var Item11 = new HealItem("Pocion Ataque", 300, 1);
 
             var bolsa12 = object.clone();
             bolsa12.position.set(3800, 270, -5800);
@@ -233,11 +233,11 @@ class Scenee
             var bolsa13 = object.clone();
             bolsa13.position.set(8000, 90, 4000);
             bolsa13.children[0].children[0].children[0].children[0].children[0].name="13";
-            var Item13 = new HealItem("Pocion Basica", 100, 1);
+            var Item13 = new HealItem("Pocion Defensa", 100, 1);
 
             object.position.set(5000, 250, 8000);
             object.children[0].children[0].children[0].children[0].children[0].name="1";
-            var Item1 = new HealItem("Pocion Basica", 100, 1);
+            var Item1 = new HealItem("Pocion Ataque", 300, 1);
 
             this.Pantano.add(object);
             this.Pantano.add(bolsa2);
@@ -2172,7 +2172,7 @@ class Scenee
             var bolsa2 = object.clone();
             bolsa2.position.set(-1000, 200, 6550);
             bolsa2.children[0].children[0].children[0].children[0].children[0].name="2";
-            var Item2 = new HealItem("Pocion Basica", 100, 1);
+            var Item2 = new HealItem("Pocion Defensa", 100, 1);
 
             var bolsa3 = object.clone();
             bolsa3.position.set(-2000, 200, 8500);
@@ -2187,7 +2187,7 @@ class Scenee
             var bolsa5 = object.clone();
             bolsa5.position.set(-7400, 200, 6000);
             bolsa5.children[0].children[0].children[0].children[0].children[0].name="5";
-            var Item5 = new HealItem("Pocion Basica", 100, 1);
+            var Item5 = new HealItem("Pocion Ataque", 300, 1);
 
             var bolsa6 = object.clone();
             bolsa6.position.set(8400, 200, 8500);
@@ -2197,17 +2197,17 @@ class Scenee
             var bolsa7 = object.clone();
             bolsa7.position.set(3000, 200, 6100);
             bolsa7.children[0].children[0].children[0].children[0].children[0].name="7";
-            var Item7 = new HealItem("Pocion Basica", 100, 1);
+            var Item7 = new HealItem("Pocion Defensa", 100, 1);
 
             var bolsa8 = object.clone();
             bolsa8.position.set(4500, 200, 7700);
             bolsa8.children[0].children[0].children[0].children[0].children[0].name="8";
-            var Item8 = new HealItem("Pocion Basica", 100, 1);
+            var Item8 = new HealItem("Pocion Defensa", 100, 1);
 
             var bolsa9 = object.clone();
             bolsa9.position.set(1200, 200, 2300);
             bolsa9.children[0].children[0].children[0].children[0].children[0].name="9";
-            var Item9 = new HealItem("Pocion Basica", 100, 1);
+            var Item9 = new HealItem("Pocion Ataque", 300, 1);
 
             var bolsa10 = object.clone();
             bolsa10.position.set(3200, 200, -1300);
@@ -2222,12 +2222,12 @@ class Scenee
             var bolsa12 = object.clone();
             bolsa12.position.set(-5800, 200, -2300);
             bolsa12.children[0].children[0].children[0].children[0].children[0].name="12";
-            var Item12 = new HealItem("Pocion Basica", 100, 1);
+            var Item12 = new HealItem("Pocion Defensa", 100, 1);
 
             var bolsa13 = object.clone();
             bolsa13.position.set(-8200, 200, -2300);
             bolsa13.children[0].children[0].children[0].children[0].children[0].name="13";
-            var Item13 = new HealItem("Pocion Basica", 100, 1);
+            var Item13 = new HealItem("Pocion Ataque", 300, 1);
 
             var bolsa14 = object.clone();
             bolsa14.position.set(-1000, 200, -7300);
@@ -2236,7 +2236,7 @@ class Scenee
 
             object.position.set(-3000, 200, 6550);
             object.children[0].children[0].children[0].children[0].children[0].name="1";
-            var Item1 = new HealItem("Pocion Basica", 100, 1);
+            var Item1 = new HealItem("Pocion Ataque", 300, 1);
 
             this.Pradera.add(object);
             this.Pradera.add(bolsa2);
@@ -3303,7 +3303,7 @@ class Scenee
             var bolsa4 = object.clone();
             bolsa4.position.set(-3000, 150, 7400);
             bolsa4.children[0].children[0].children[0].children[0].children[0].name="4";
-            var Item4 = new HealItem("Pocion Basica", 100, 1);
+            var Item4 = new HealItem("Pocion Defensa", 100, 1);
 
             var bolsa5 = object.clone();
             bolsa5.position.set(-60, 460, 6000);
@@ -3318,7 +3318,7 @@ class Scenee
             var bolsa7 = object.clone();
             bolsa7.position.set(-4000, 300, 4000);
             bolsa7.children[0].children[0].children[0].children[0].children[0].name="7";
-            var Item7 = new HealItem("Pocion Basica", 100, 1);
+            var Item7 = new HealItem("Pocion Defensa", 100, 1);
 
             var bolsa8 = object.clone();
             bolsa8.position.set(-800, 300, 4000);
@@ -3333,12 +3333,12 @@ class Scenee
             var bolsa10 = object.clone();
             bolsa10.position.set(6500, 200, 3000);
             bolsa10.children[0].children[0].children[0].children[0].children[0].name="10";
-            var Item10 = new HealItem("Pocion Basica", 100, 1);
+            var Item10 = new HealItem("Pocion Ataque", 300, 1);
 
             var bolsa11 = object.clone();
             bolsa11.position.set(6500, 0, -1300);
             bolsa11.children[0].children[0].children[0].children[0].children[0].name="11";
-            var Item11 = new HealItem("Pocion Alta", 500, 1);
+            var Item11 = new HealItem("Pocion Ataque", 300, 1);
 
             var bolsa12 = object.clone();
             bolsa12.position.set(6500, 200, -7300);
@@ -3347,7 +3347,7 @@ class Scenee
 
             object.position.set(-5000, 320, 7000);
             object.children[0].children[0].children[0].children[0].children[0].name="1";
-            var Item1 = new HealItem("Pocion Basica", 100, 1);
+            var Item1 = new HealItem("Pocion Ataque", 300, 1);
             this.Nieve.add(object);
             this.Nieve.add(bolsa2);
             this.Nieve.add(bolsa3);

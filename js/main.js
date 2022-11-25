@@ -134,6 +134,11 @@ function main()
     var tiempoPortales = 0;
     var CambiandoDeMapa = false;
     var CambiandoDeMapaCont = 0;
+
+    var DefensaExtraPlayer = false;
+    var DefensaExtraCont = 0;
+    var AtaqueExtraPlayer = false;
+    var AtaqueExtraCont = 0;
     
     let water;
     const waterGeometry = new THREE.PlaneGeometry( 10000, 10000 );
@@ -278,17 +283,68 @@ function main()
 
     function UseItem(index)
     {
+        var NameItem = Escenario.GetPlayer().GetBackpack().GetItems()[index].getItem().name;
         var Curacion = Escenario.GetPlayer().GetBackpack().UseItem(index);
-        if(Escenario.GetPlayer().GetStats().Vida < Escenario.GetPlayer().GetMaxLife())
+        
+        if(NameItem == "Pocion Defensa")
         {
-            Escenario.GetPlayer().GetStats().Vida += Curacion;
-            if(Escenario.GetPlayer().GetStats().Vida > Escenario.GetPlayer().GetMaxLife())
-            {
-                var Sobrante = Escenario.GetPlayer().GetStats().Vida - Escenario.GetPlayer().GetMaxLife();
-                Escenario.GetPlayer().GetStats().Vida -= Sobrante;
-            }
+            Escenario.GetPlayer().GetStats().Defensa += Curacion;
+            DefensaExtraPlayer = true;
+            const text = new THREE.TextureLoader().load( "Assets/Images/DefText.png" );;
+            text.wrapS = text.wrapT = THREE.RepeatWrapping; 
+            const geometry = new THREE.CylinderGeometry( 50, 50, 250, 19 );
+            const material = new THREE.MeshBasicMaterial( {map: text, transparent: true} );
+            const cylinder = new THREE.Mesh( geometry, material );
+            cylinder.name = "DefCilinder";
+            cylinder.position.y = 30;
+            const cylinder2 = new THREE.Mesh( geometry, material );
+            cylinder2.name = "DefCilinder";
+            cylinder2.position.y = 30;
+            const cylinder3 = new THREE.Mesh( geometry, material );
+            cylinder3.name = "DefCilinder";
+            cylinder3.position.y = 30;
+            Escenario.GetPraderaScene().getObjectByName("PlayerModel").add(cylinder);
+            Escenario.GetPantanoScene().getObjectByName("PlayerModel").add(cylinder2);
+            Escenario.GetNieveScene().getObjectByName("PlayerModel").add(cylinder3);
         }
-        ui.SetVidaActual(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife());
+        else if(NameItem == "Pocion Ataque")
+        {
+            console.log(Escenario.GetPlayer().GetStats().Ataque);
+            Escenario.GetPlayer().GetStats().Ataque += Curacion;
+            console.log(Escenario.GetPlayer().GetStats().Ataque);
+            AtaqueExtraPlayer = true;
+            const text = new THREE.TextureLoader().load( "Assets/Images/AttackText.png" );;
+            text.wrapS = text.wrapT = THREE.RepeatWrapping; 
+            const geometry = new THREE.CylinderGeometry( 50, 50, 250, 19 );
+            const material = new THREE.MeshBasicMaterial( {map: text, transparent: true} );
+            const cylinder = new THREE.Mesh( geometry, material );
+            cylinder.name="AtkCilinder";
+            cylinder.position.y = 30;
+            const cylinder2 = new THREE.Mesh( geometry, material );
+            cylinder2.name="AtkCilinder";
+            cylinder2.position.y = 30;
+            const cylinder3 = new THREE.Mesh( geometry, material );
+            cylinder3.name="AtkCilinder";
+            cylinder3.position.y = 30;
+            Escenario.GetPraderaScene().getObjectByName("PlayerModel").add(cylinder);
+            Escenario.GetPantanoScene().getObjectByName("PlayerModel").add(cylinder2);
+            Escenario.GetNieveScene().getObjectByName("PlayerModel").add(cylinder3);
+        }
+        else
+        {
+            if(Escenario.GetPlayer().GetStats().Vida < Escenario.GetPlayer().GetMaxLife())
+            {
+                Escenario.GetPlayer().GetStats().Vida += Curacion;
+                if(Escenario.GetPlayer().GetStats().Vida > Escenario.GetPlayer().GetMaxLife())
+                {
+                    var Sobrante = Escenario.GetPlayer().GetStats().Vida - Escenario.GetPlayer().GetMaxLife();
+                    Escenario.GetPlayer().GetStats().Vida -= Sobrante;
+                }
+            }
+            ui.SetVidaActual(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife());
+        }
+        
+        
         $(".ItemMenu").remove();
         $(".btnUse").remove();
         for (let i = 0; i < Escenario.GetPlayer().GetBackpack().GetItems().length; i++) {
@@ -1112,6 +1168,42 @@ function main()
             {
                 CambiandoDeMapa = false;
                 CambiandoDeMapaCont = 0;
+            }
+        }
+
+        if(AtaqueExtraPlayer)
+        {
+            AtaqueExtraCont += delta;
+            Escenario.GetPraderaScene().getObjectByName("PlayerModel").getObjectByName("AtkCilinder").material.map.offset.y = tiempoPortales * 0.0025;
+            Escenario.GetPantanoScene().getObjectByName("PlayerModel").getObjectByName("AtkCilinder").material.map.offset.y = tiempoPortales * 0.0025;
+            Escenario.GetPraderaScene().getObjectByName("PlayerModel").getObjectByName("AtkCilinder").material.map.offset.y = tiempoPortales * 0.0025;
+            if(AtaqueExtraCont > 10)
+            {
+                Escenario.GetPraderaScene().getObjectByName("PlayerModel").remove(Escenario.GetPraderaScene().getObjectByName("PlayerModel").getObjectByName("AtkCilinder"));
+                Escenario.GetPantanoScene().getObjectByName("PlayerModel").remove(Escenario.GetPantanoScene().getObjectByName("PlayerModel").getObjectByName("AtkCilinder"));
+                Escenario.GetPraderaScene().getObjectByName("PlayerModel").remove(Escenario.GetPraderaScene().getObjectByName("PlayerModel").getObjectByName("AtkCilinder"));
+                Escenario.GetPlayer().GetStats().Ataque = 800 + (800 * (Escenario.GetPlayer().GetLevel() * 0.1));
+                console.log(Escenario.GetPlayer().GetStats().Ataque);
+                AtaqueExtraPlayer = false;
+                AtaqueExtraCont = 0;
+            }
+        }
+
+        if(DefensaExtraPlayer)
+        {
+            DefensaExtraCont += delta;
+            Escenario.GetPraderaScene().getObjectByName("PlayerModel").getObjectByName("DefCilinder").material.map.offset.y = tiempoPortales * 0.0025;
+            Escenario.GetPantanoScene().getObjectByName("PlayerModel").getObjectByName("DefCilinder").material.map.offset.y = tiempoPortales * 0.0025;
+            Escenario.GetPraderaScene().getObjectByName("PlayerModel").getObjectByName("DefCilinder").material.map.offset.y = tiempoPortales * 0.0025;
+            if(DefensaExtraCont > 10)
+            {
+                Escenario.GetPraderaScene().getObjectByName("PlayerModel").remove(Escenario.GetPraderaScene().getObjectByName("PlayerModel").getObjectByName("DefCilinder"));
+                Escenario.GetPantanoScene().getObjectByName("PlayerModel").remove(Escenario.GetPantanoScene().getObjectByName("PlayerModel").getObjectByName("DefCilinder"));
+                Escenario.GetPraderaScene().getObjectByName("PlayerModel").remove(Escenario.GetPraderaScene().getObjectByName("PlayerModel").getObjectByName("DefCilinder"));
+                Escenario.GetPlayer().GetStats().Defensa = 500 + (500 * (Escenario.GetPlayer().GetLevel() * 0.1));
+                console.log(Escenario.GetPlayer().GetStats().Defensa);
+                DefensaExtraPlayer = false;
+                DefensaExtraCont = 0;
             }
         }
 

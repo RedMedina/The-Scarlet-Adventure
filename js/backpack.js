@@ -27,6 +27,11 @@ class Backpack
         }
     }
 
+    GetNameItem(itemIndex)
+    {
+        return this.Items[itemIndex].getItem().name;
+    }
+
     GetItems()
     {
         return this.Items;
