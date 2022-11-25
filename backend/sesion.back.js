@@ -3,6 +3,8 @@ $(document).ready
 	function($){$("#IS_enviar").click(function(){ SesUser(); })}
 );
 
+var MyName;
+
 function SesUser()
 {
     var user = $("#is_us").val();
@@ -26,6 +28,7 @@ function SesUser()
                 btnInicioSesion.setAttribute('onclick','window.modal_perfil.showModal()');
                 document.getElementById("imgP").src = JsonResponse.photo;
                 document.getElementById("namePerfil").value = JsonResponse.name;
+                MyName = JsonResponse.name;
             }
             else
             {

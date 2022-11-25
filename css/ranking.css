@@ -61,7 +61,7 @@ th, .nombre, .UConexion
 {
     font-family: Permanent Marker;
     position: relative;
-    top: 73%;
+    top: 67%;
     left: 0%;
     border: 0px;
     width: 140px;
@@ -72,6 +72,25 @@ th, .nombre, .UConexion
 }
 
 .volverBtn:hover
+{
+    background-color: rgb(158, 219, 255);
+}
+
+.FacebookBtn
+{
+    font-family: Permanent Marker;
+    position: relative;
+    top: 63%;
+    left: 0%;
+    border: 0px;
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgb(94, 196, 255);
+    font-size: 19px;
+}
+
+.FacebookBtn:hover
 {
     background-color: rgb(158, 219, 255);
 }

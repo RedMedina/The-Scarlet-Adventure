@@ -66,14 +66,15 @@
 
     <script type='text/javascript' src="modules/jquery-3.3.1.min.js"></script>
 	<script type='text/javascript' src="modules/jquery.min.js"></script>
+    <script type='text/javascript' src="backend/sesion.back.js"></script>
     <script type='text/javascript' src="backend/getScores.back.js"></script>
     <script type='text/javascript' src="backend/createPlayer.back.js"></script>
     <script type='text/javascript' src="backend/register.back.js"></script>
-    <script type='text/javascript' src="backend/sesion.back.js"></script>
     <script type='text/javascript' src="backend/logout.back.js"></script>
     <script type='text/javascript' src="backend/update.back.js"></script>
     <script type='text/javascript' src="frontend/sweetalert2.js"></script>
     <script type='text/javascript' src="frontend/Configuraciones.js"></script>
+    <script type='text/javascript' src="frontend/Facebook.js"></script>
     <script>
         $(document).ready
         (

@@ -37,6 +37,16 @@ function closeModalClickRanking() {
                 <td>454545</td>
             </tr-->
         </table>
+        <?php
+            if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
+            {
+                
+            
+        ?>
+        <button onclick="shareScore();" class="FacebookBtn">Compartir Mi Score</button><br>
+        <?php
+            }
+        ?>
         <button onclick="closeModalClickRanking();" class="volverBtn">Volver</button><br>
         <!--img src="Assets/Images/Pincelada.png" width="230" height="85" class="imgRanking"-->
     </dialog>
