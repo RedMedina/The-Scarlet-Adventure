@@ -750,6 +750,18 @@ class Scenee
             this.PantanoObjects.push(roca3);
         });
 
+        var portal = this.CreateRIcon("Assets/Images/energy.png");
+        portal.position.set(1000, 320, 7550);
+        portal.name="portalPradera";
+        this.Pantano.add(portal);
+        this.PantanoObjects.push(portal);
+
+        var portal2 = this.CreateRIcon("Assets/Images/energy.png");
+        portal2.position.set(100, 120, -7550);
+        portal2.name="portalNieve";
+        this.Pantano.add(portal2);
+        this.PantanoObjects.push(portal2);
+
         //Personaje
         var ModelPlayer = new modelAnimController(this.Playeranimations, "Assets/Models/Player/Player_Idle.fbx");
         ModelPlayer.CreateBaseModel("PlayerModell", loadingManager, (object)=>{
@@ -2156,6 +2168,7 @@ class Scenee
         this.Load3dModelGLTF("Assets/Models/Bag/Bag.glb", loadingManager, (object)=>{
             object.scale.set(0.1, 0.1, 0.1);
 
+            
             var bolsa2 = object.clone();
             bolsa2.position.set(-1000, 200, 6550);
             bolsa2.children[0].children[0].children[0].children[0].children[0].name="2";
@@ -2255,7 +2268,7 @@ class Scenee
             ItemsArray.push(Item12);
             ItemsArray.push(Item13);
             ItemsArray.push(Item14);
-
+            debugger
             var ModelsArray = [];
             ModelsArray.push(object);
             ModelsArray.push(bolsa2);
@@ -2274,6 +2287,12 @@ class Scenee
 
             this.PraderaItems = {model: ModelsArray, items: ItemsArray};
         });
+
+        var portal = this.CreateRIcon("Assets/Images/energy.png");
+        portal.position.set(6500, 340, -1000);
+        portal.name="portalPantano";
+        this.Pradera.add(portal);
+        this.PraderaObjects.push(portal);
 
         //Personaje
         var ModelPlayer = new modelAnimController(this.Playeranimations, "Assets/Models/Player/Player_Idle.fbx");
@@ -3373,6 +3392,12 @@ class Scenee
             this.NieveItems = {model: ModelsArray, items: ItemsArray};
         });
 
+        var portal = this.CreateRIcon("Assets/Images/energy.png");
+        portal.position.set(100, 200, 8550);
+        portal.name="portalPantano";
+        this.Nieve.add(portal);
+        this.NieveObjects.push(portal);
+
         //Personaje
         var ModelPlayer = new modelAnimController(this.Playeranimations, "Assets/Models/Player/Player_Idle.fbx");
         ModelPlayer.CreateBaseModel("PlayerModell", loadingManager, (object)=>{
@@ -4117,6 +4142,16 @@ class Scenee
         const material = new THREE.MeshBasicMaterial( {color: 0x00FF27} );
         const cube = new THREE.Mesh( geometry, material );
         return cube;
+    }
+
+    CreateRIcon(texture)
+    {
+        const text = new THREE.TextureLoader().load( texture );;
+        text.wrapS = text.wrapT = THREE.RepeatWrapping; 
+        const geometry = new THREE.CylinderGeometry( 70, 70, 300, 19 );
+        const material = new THREE.MeshBasicMaterial( {map: text, transparent: true /*color: 0x00FF27*/} );
+        const cylinder = new THREE.Mesh( geometry, material );
+        return cylinder;
     }
 
     GetTestScene()

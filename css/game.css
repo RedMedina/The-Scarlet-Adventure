@@ -82,6 +82,17 @@ body
   top:20%;
 }
 
+#InteractuarH
+{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 30%;
+  left: 1%;
+  font-family: Permanent Marker;
+  font-size: 22px;
+}
+
 #movement
 {
   position: absolute;
@@ -104,12 +115,23 @@ body
   font-size: 22px;
 }
 
-#MenuH
+#DodgeH
 {
   position: absolute;
   margin: 0;
   padding: 0;
   top: 60%;
+  left: 1%;
+  font-family: Permanent Marker;
+  font-size: 22px;
+}
+
+#MenuH
+{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 70%;
   left: 1%;
   font-family: Permanent Marker;
   font-size: 22px;

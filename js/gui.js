@@ -32,25 +32,45 @@ class GUI
     SetExpActual(valueExpActual, MaxExp)
     {
         var Porcentaje = (valueExpActual / MaxExp) * 100;
-        this.Exp.value = Math.round(Porcentaje);
+        this.Exp.value = Math.round(Porcentaje); 
     }
 
     CreateHelpers()
     {
+
+        this.Interactuar = document.createElement('label');
+        this.Interactuar.id = "InteractuarH";
+        document.body.appendChild(this.Interactuar);
+
         const movement = document.createElement('label');
         movement.id = "movement";
-        movement.innerHTML = "Movimento  <b>WASD</b>";
+        movement.innerHTML = "Movimento: <img src='Assets/Images/w.png' width='30' height='30'><img src='Assets/Images/a.png' width='30' height='30'><img src='Assets/Images/flechaI.png' width='30' height='30'><img src='Assets/Images/FlechaD.png' width='30' height='30'>";
         document.body.appendChild(movement);
 
         const Attack = document.createElement('label');
         Attack.id = "AttackH";
-        Attack.innerHTML = "Atacar  <b>E</b>";
+        Attack.innerHTML = "Atacar: <img src='Assets/Images/e.png' width='30' height='30'>";
         document.body.appendChild(Attack);
+
+        const Dodge = document.createElement('label');
+        Dodge.id = "DodgeH";
+        Dodge.innerHTML = "Esquivar: <img src='Assets/Images/q.png' width='30' height='30'>";
+        document.body.appendChild(Dodge);
 
         const Menu = document.createElement('label');
         Menu.id = "MenuH";
-        Menu.innerHTML = "Menu/Pausa  <b>M</b>";
+        Menu.innerHTML = "Menu/Pausa: <img src='Assets/Images/p.png' width='30' height='30'>";
         document.body.appendChild(Menu);
+    }
+
+    DesbrillarReaction()
+    {
+        this.Interactuar.innerHTML = "Interactuar: <img src='Assets/Images/r.png' width='30' height='30'>";
+    }
+
+    BrillarReaction()
+    {
+        this.Interactuar.innerHTML = "Interactuar: <img src='Assets/Images/r_select.png' width='30' height='30'>";
     }
 }
 

@@ -131,6 +131,9 @@ function main()
     var InvensibleContador = 0;
     var Die = false;
     var DieDuracion = 0;
+    var tiempoPortales = 0;
+    var CambiandoDeMapa = false;
+    var CambiandoDeMapaCont = 0;
     
     let water;
     const waterGeometry = new THREE.PlaneGeometry( 10000, 10000 );
@@ -170,6 +173,7 @@ function main()
 
     const ui = new GUI();
     ui.CreateLife(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife(), Escenario.GetPlayer().GetExp(), Escenario.GetPlayer().GetMaxExp());
+    ui.CreateHelpers();
 
     function CreatePasto(instanNumber, posx, posz, scalex, scaley, scalez, spacex, spacez)
     {
@@ -386,6 +390,9 @@ function main()
                 Escenario.GetPlayer().GetModel().Pradera.playAnimation(1,1);
             }
 		}*/
+
+        ui.DesbrillarReaction();
+
 		if (keys["W"]) {
             if(Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false)
             {
@@ -623,20 +630,41 @@ function main()
                     rayCaster.set(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays[i]);
                     var collision = rayCaster.intersectObjects(Escenario.GetPraderaObjects(), true);				
                     if (collision.length > 0 && (collision[0].distance < 125 /*|| collision[1].distance < 125 || collision[2].distance < 125 || collision[3].distance < 125*/)) {
-                        Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(-movPas * delta);
                         console.log("colisionando");
                         console.log(collision);
+                        if(collision[0].object.name == "portalPantano")
+                        {
+                            ui.BrillarReaction();
+                            if(keys["R"] && CambiandoDeMapa==false)
+                            {
+                                CambiandoDeMapa = true;
+                                Scene = Escenario.GetPantanoScene();
+                                if(intensityAmbientLight > 0.4)
+                                {
+                                    audioCont.PlaySceneSound(2);
+                                }
+                                ActualScene = 2;
+                                Escenario.GetPantanoScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+                            }
+                        }else
+                        {
+                            Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(-movPas * delta);
+                        }
                     }
                 }
                 //Collission Pradera Items
                 for (var i = 0; i < Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays.length; i++) {
                     rayCaster.set(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays[i]);
                     var collision = rayCaster.intersectObjects(Escenario.GetPraderaItems().model, true);				
-                    if (collision.length > 0 && collision[0].distance < 500 && keys["R"]) {
-                        Escenario.GetPlayer().GetBackpack().AddItem(Escenario.GetPraderaItems().items[collision[0].object.name-1]);
-                        Escenario.GetPraderaItems().items[collision[0].object.name-1] = {empty: true};
-                        Escenario.GetPraderaItems().model[collision[0].object.name-1].visible = false;
-                        console.log(Escenario.GetPlayer().GetBackpack());
+                    if (collision.length > 0 && collision[0].distance < 500) {
+                        ui.BrillarReaction();
+                        if(keys["R"])
+                        {
+                            Escenario.GetPlayer().GetBackpack().AddItem(Escenario.GetPraderaItems().items[collision[0].object.name-1]);
+                            Escenario.GetPraderaItems().items[collision[0].object.name-1] = {empty: true};
+                            Escenario.GetPraderaItems().model[collision[0].object.name-1].visible = false;
+                            console.log(Escenario.GetPlayer().GetBackpack());
+                        }
                     }
                 }
                 //Collision PraderaEnemies
@@ -732,7 +760,40 @@ function main()
                     rayCaster.set(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position, Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays[i]);
                     var collision = rayCaster.intersectObjects(Escenario.GetPantanoObjects(), true);				
                     if (collision.length > 0 && collision[0].distance < 125) {
-                        Escenario.GetPantanoScene().getObjectByName("PlayerModel").translateZ(-movPas * delta);
+                        if(collision[0].object.name == "portalPradera")
+                        {
+                            ui.BrillarReaction();
+                            if(keys["R"] && CambiandoDeMapa==false)
+                            {
+                                CambiandoDeMapa = true;
+                                Scene = Escenario.GetPraderaScene();
+                                if(intensityAmbientLight > 0.4)
+                                {
+                                    audioCont.PlaySceneSound(1);
+                                }
+                                ActualScene = 1;
+                                Escenario.GetPraderaScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+                            }
+                        }
+                        else if(collision[0].object.name == "portalNieve")
+                        {
+                            ui.BrillarReaction();
+                            if(keys["R"] && CambiandoDeMapa==false)
+                            {
+                                CambiandoDeMapa = true;
+                                Scene = Escenario.GetNieveScene();
+                                if(intensityAmbientLight > 0.4)
+                                {
+                                    audioCont.PlaySceneSound(3);
+                                }
+                                ActualScene = 3;
+                                Escenario.GetNieveScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+                            }
+                        }
+                        else
+                        {
+                            Escenario.GetPantanoScene().getObjectByName("PlayerModel").translateZ(-movPas * delta);
+                        }
                         console.log("colisionando");
                     }
                 }
@@ -740,11 +801,15 @@ function main()
                 for (var i = 0; i < Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays.length; i++) {
                     rayCaster.set(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position, Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays[i]);
                     var collision = rayCaster.intersectObjects(Escenario.GetPantanoItems().model, true);				
-                    if (collision.length > 0 && collision[0].distance < 500 && keys["R"]) {
-                        Escenario.GetPlayer().GetBackpack().AddItem(Escenario.GetPantanoItems().items[collision[0].object.name-1]);
-                        Escenario.GetPantanoItems().items[collision[0].object.name-1] = {empty: true};
-                        Escenario.GetPantanoItems().model[collision[0].object.name-1].visible = false;
-                        console.log(Escenario.GetPlayer().GetBackpack());
+                    if (collision.length > 0 && collision[0].distance < 500) {
+                        ui.BrillarReaction();
+                        if(keys["R"])
+                        {
+                            Escenario.GetPlayer().GetBackpack().AddItem(Escenario.GetPantanoItems().items[collision[0].object.name-1]);
+                            Escenario.GetPantanoItems().items[collision[0].object.name-1] = {empty: true};
+                            Escenario.GetPantanoItems().model[collision[0].object.name-1].visible = false;
+                            console.log(Escenario.GetPlayer().GetBackpack());
+                        }
                     }
                 }
 
@@ -848,7 +913,25 @@ function main()
                     rayCaster.set(Escenario.GetNieveScene().getObjectByName("PlayerModel").position, Escenario.GetNieveScene().getObjectByName("PlayerModel").rays[i]);
                     var collision = rayCaster.intersectObjects(Escenario.GetNieveObjects(), true);				
                     if (collision.length > 0 && collision[0].distance < 125) {
-                        Escenario.GetNieveScene().getObjectByName("PlayerModel").translateZ(-movPas * delta);
+                        if(collision[0].object.name == "portalPantano")
+                        {
+                            ui.BrillarReaction();
+                            if(keys["R"] && CambiandoDeMapa==false)
+                            {
+                                CambiandoDeMapa = true;
+                                Scene = Escenario.GetPantanoScene();
+                                if(intensityAmbientLight > 0.4)
+                                {
+                                    audioCont.PlaySceneSound(2);
+                                }
+                                ActualScene = 2;
+                                Escenario.GetPantanoScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+                            }
+                        }
+                        else
+                        {
+                            Escenario.GetNieveScene().getObjectByName("PlayerModel").translateZ(-movPas * delta);
+                        }
                         console.log("colisionando");
                     }
                 }
@@ -856,11 +939,15 @@ function main()
                 for (var i = 0; i < Escenario.GetNieveScene().getObjectByName("PlayerModel").rays.length; i++) {
                     rayCaster.set(Escenario.GetNieveScene().getObjectByName("PlayerModel").position, Escenario.GetNieveScene().getObjectByName("PlayerModel").rays[i]);
                     var collision = rayCaster.intersectObjects(Escenario.GetNieveItems().model, true);				
-                    if (collision.length > 0 && collision[0].distance < 500 && keys["R"]) {
-                        Escenario.GetPlayer().GetBackpack().AddItem(Escenario.GetNieveItems().items[collision[0].object.name-1]);
-                        Escenario.GetNieveItems().items[collision[0].object.name-1] = {empty: true};
-                        Escenario.GetNieveItems().model[collision[0].object.name-1].visible = false;
-                        console.log(Escenario.GetPlayer().GetBackpack());
+                    if (collision.length > 0 && collision[0].distance < 500) {
+                        ui.BrillarReaction();
+                        if(keys["R"])
+                        {
+                            Escenario.GetPlayer().GetBackpack().AddItem(Escenario.GetNieveItems().items[collision[0].object.name-1]);
+                            Escenario.GetNieveItems().items[collision[0].object.name-1] = {empty: true};
+                            Escenario.GetNieveItems().model[collision[0].object.name-1].visible = false;
+                            console.log(Escenario.GetPlayer().GetBackpack());
+                        }
                     }
                 }
                 //Collission Nieve Enemies
@@ -1018,6 +1105,16 @@ function main()
             }
         }
 
+        if(CambiandoDeMapa)
+        {
+            CambiandoDeMapaCont += delta;
+            if(CambiandoDeMapaCont > 1)
+            {
+                CambiandoDeMapa = false;
+                CambiandoDeMapaCont = 0;
+            }
+        }
+
         if(Invesible)
         {
             InvensibleContador += delta;
@@ -1153,6 +1250,13 @@ function main()
         Escenario.GetPantanoScene().getObjectByName("LuzPantano").intensity = intensityAmbientLight + 0.2;
         Escenario.GetNieveScene().getObjectByName("LuzNieve").intensity = intensityAmbientLight + 0.2;
         Escenario.GetPraderaScene().getObjectByName("Sun").intensity = intensityAmbientLight + 0.2;
+
+        tiempoPortales++;
+        Escenario.GetPraderaScene().getObjectByName("portalPantano").material.map.offset.y = tiempoPortales * 0.0025;
+        Escenario.GetPantanoScene().getObjectByName("portalPradera").material.map.offset.y = tiempoPortales * 0.0025;
+        Escenario.GetPantanoScene().getObjectByName("portalNieve").material.map.offset.y = tiempoPortales * 0.0025;
+        Escenario.GetNieveScene().getObjectByName("portalPantano").material.map.offset.y = tiempoPortales * 0.0025;
+
         if(intensityAmbientLight < 0.65)
         {
             Escenario.GetPraderaScene().getObjectByName("Sun").getObjectByName("SunTexture").material.visible = false;
