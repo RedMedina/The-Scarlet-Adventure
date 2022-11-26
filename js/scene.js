@@ -161,6 +161,12 @@ class Scenee
         Terreno.GetPlane().position.y = -720;
         this.Pantano.add(Terreno.GetPlane());
 
+         //Muros
+         var Muros = new Terrain();
+         Muros.MultitextureTerrainWall("Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/AltsMuros.png", "Assets/Images/BlendMuros.png", 1000, 23000, 24000);
+         Muros.GetPlane2().position.y = -300;
+         this.Pantano.add(Muros.GetPlane2());
+
         var SkydomeT = new skydome();
         SkydomeT.Create('Assets/Images/skybox_2.png');
         SkydomeT.Render().name = "SkyPantano";
@@ -1432,7 +1438,13 @@ class Scenee
         Terreno.GetPlane().position.y = -160;
         Terreno.GetPlane().name="TerrenoPradera";
         this.Pradera.add(Terreno.GetPlane());
-       
+
+        //Muros
+        var Muros = new Terrain();
+        Muros.MultitextureTerrainWall("Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/AltsMuros.png", "Assets/Images/BlendMuros.png", 1000, 23000, 24000);
+        Muros.GetPlane2().position.y = -200;
+        this.Pradera.add(Muros.GetPlane2());
+
         //Modelos
 
         this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Arbol3.glb", loadingManager, (object)=>{ //Arbol_1
@@ -2999,6 +3011,12 @@ class Scenee
         Terreno.MultitextureTerrain("Assets/Nieve/Rock_Nieve.png", "Assets/Nieve/Snow.jpg", "Assets/Nieve/Snow2.jpg", "Assets/Nieve/Alturas.png", "Assets/Nieve/Blendmap_Nieve.png", 900, 18000, 18000);
         Terreno.GetPlane().position.y = -290;
         this.Nieve.add(Terreno.GetPlane());
+
+        //Muros
+        var Muros = new Terrain();
+        Muros.MultitextureTerrainWall("Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/AltsMuros.png", "Assets/Images/BlendMuros.png", 1000, 23000, 24000);
+        Muros.GetPlane2().position.y = -310;
+        this.Nieve.add(Muros.GetPlane2());
 
         //Modelos
         this.Load3dModelGLTF("Assets/Models/Arboles_Inicio/Pino.glb", loadingManager, (object)=>{ //Pino
