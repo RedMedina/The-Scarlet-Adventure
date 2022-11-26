@@ -39,6 +39,7 @@
     </section>
 
     <?php include("pause-multi.php") ?>
+    <?php include("dialog.php") ?>
 
     <script>
         var Pause = false;

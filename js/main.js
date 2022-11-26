@@ -462,6 +462,7 @@ function main()
             {
                 Actionkeys.Attack = false;
                 AttackContador = 0;
+                window.DialogMagic.close();
                 if(ActualScene == 1)
                 {
                     Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(550 * (delta));
@@ -487,6 +488,7 @@ function main()
             {
                 Actionkeys.Attack = false;
                 AttackContador = 0;
+                window.DialogMagic.close();
                 if(ActualScene == 1)
                 {
                     Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(-550 * (delta));
@@ -511,6 +513,7 @@ function main()
             if(Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false)
             {
                 Actionkeys.Attack = true;
+                window.DialogMagic.close();
             }
         }
         else if(keys[" "]){
@@ -519,6 +522,7 @@ function main()
                 Actionkeys.Attack = false;
                 AttackContador = 0;
                 Actionkeys.Jump = true;
+                window.DialogMagic.close();
             }
         }
         else if ((keys["W"] == false || keys["A"] == false || keys["S"] == false || keys["D"] == false) &&
@@ -548,6 +552,7 @@ function main()
         }
 
         if (keys["%"] /*<-*/){ 
+            window.DialogMagic.close();
             if(ActualScene == 1)
             {
                 Escenario.GetPraderaScene().getObjectByName("PlayerModel").rotation.y += 3 * delta;
@@ -561,6 +566,7 @@ function main()
                 Escenario.GetNieveScene().getObjectByName("PlayerModel").rotation.y += 3 * delta;
             }
         } else if (keys["'"] /*->*/){ 
+            window.DialogMagic.close();
             if(ActualScene == 1)
             {
                 Escenario.GetPraderaScene().getObjectByName("PlayerModel").rotation.y += -3 * delta;
@@ -574,12 +580,15 @@ function main()
                 Escenario.GetNieveScene().getObjectByName("PlayerModel").rotation.y += -3 * delta;
             }
         } else if (keys["&"] /*^*/){ 
+            window.DialogMagic.close();
             Camara.GetCamera().rotation.x -= (50 * 3.1416 / 180) * (delta);
         } else if (keys["("] /*V*/){ 
+            window.DialogMagic.close();
             Camara.GetCamera().rotation.x += (50 * 3.1416 / 180) * (delta);
         }
 
         if(keys["Q"]){
+            window.DialogMagic.close();
             if(Actionkeys.Jump == false && Actionkeys.Die == false)
             {
                 Actionkeys.Attack = false;
@@ -780,6 +789,13 @@ function main()
                         else if (j == 23)
                         {
                             Escenario.GetPraderaEnemies().Collider[23].parent.lookAt(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.x, Escenario.GetPraderaEnemies().Collider[23].parent.position.y, Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.z);
+                            ui.BrillarReaction();
+                            if(keys["R"] && CambiandoDeMapa==false)
+                            {
+                                CambiandoDeMapa = true;
+                                document.getElementById("MessageMagic").innerHTML="Hola viajero bienvenido! Soy un Magic, te daré un consejo, los hongos no pueden ver detrás de ellos, pero las mariposas y hadas sí pueden y son agresivas. Cuidado!";
+                                window.DialogMagic.showModal();
+                            }
                         }  
                         //console.log(j);
                         //console.log(Escenario.GetPraderaEnemies().Collider[j].name);
@@ -949,6 +965,13 @@ function main()
                         else if (j == 21)
                         {
                             Escenario.GetPantanoEnemies().Collider[21].parent.lookAt(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.x, Escenario.GetPantanoEnemies().Collider[21].parent.position.y, Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.z);
+                            ui.BrillarReaction();
+                            if(keys["R"] && CambiandoDeMapa==false)
+                            {
+                                CambiandoDeMapa = true;
+                                document.getElementById("MessageMagic").innerHTML="Los guardianes son demasiado agresivos y persistentes, intenta golpearlos de lejos, lo mismo para los drones, ten cuidado si pasas debajo de ellos pues podrán verte con facilidad.";
+                                window.DialogMagic.showModal();
+                            }
                         }  
                     }
                 }
@@ -1087,6 +1110,43 @@ function main()
                         else
                         {
                             Escenario.GetNieveEnemies().Collider[j].parent.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel").position.x, Escenario.GetNieveEnemies().Collider[j].parent.position.y, Escenario.GetNieveScene().getObjectByName("PlayerModel").position.z);
+                            ui.BrillarReaction();
+                            if(j == 19)
+                            {
+                                if(keys["R"] && CambiandoDeMapa==false)
+                                {
+                                    CambiandoDeMapa = true;
+                                    document.getElementById("MessageMagic").innerHTML="Los fantasmas dan miedo, parece que no atacan pero realmente pueden ver donde no te lo esperas. Atacas a uno y tienes a varios siguiendote.";
+                                    window.DialogMagic.showModal();
+                                }
+                            }
+                            else if(j == 20)
+                            {
+                                if(keys["R"] && CambiandoDeMapa==false)
+                                {
+                                    CambiandoDeMapa = true;
+                                    document.getElementById("MessageMagic").innerHTML="Los fantasmas pueden verte desde lugares inesperados y también son dificiles de atacar, te recomiendo no acercarte a ellos hasta conocerlos bien.";
+                                    window.DialogMagic.showModal();
+                                }
+                            }
+                            else if(j == 21)
+                            {
+                                if(keys["R"] && CambiandoDeMapa==false)
+                                {
+                                    CambiandoDeMapa = true;
+                                    document.getElementById("MessageMagic").innerHTML="Algunos enemigos son dificiles de atacar, parecen tener escondida su debilidad haciendo complicado atacarlos.";
+                                    window.DialogMagic.showModal();
+                                }
+                            }
+                            else if(j == 22)
+                            {
+                                if(keys["R"] && CambiandoDeMapa==false)
+                                {
+                                    CambiandoDeMapa = true;
+                                    document.getElementById("MessageMagic").innerHTML="Las pociones de ataquen suben 300 puntos de ataque y las pociones de defensa suben 100 puntos de defensa, las pociones básicas te curan 100 puntos de salud y las pociones altas te curan 300.";
+                                    window.DialogMagic.showModal();
+                                }
+                            }
                         }  
                     }
                 }

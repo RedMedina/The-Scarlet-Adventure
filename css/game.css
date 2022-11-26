@@ -402,3 +402,39 @@ body
     padding:0;
     opacity: 0;
   }
+
+/*Dialog*/
+
+  .DialogMagic
+		{
+			width: 70%;
+			height: 150px;
+			background-color: #EDFCFF;
+			border-radius: 40px;
+			border: 3px solid black;
+      position: absolute;
+      top: 70%;
+      font-family: Permanent Marker;
+		}
+		.MessageMagic
+		{
+			padding-left: 20px;
+			font-size: 20px;
+      font-family: Permanent Marker;
+		}
+		.BtnDialog
+		{
+			background-color: #00A1FF;
+			border: 0px;	
+			border-radius: 5px;
+			width: 50px;
+			height: 30px;
+			position: absolute;
+			left: 90%;
+			padding-right: 5px;
+      font-family: Permanent Marker;
+		}
+		.BtnDialog:hover
+		{
+			background-color: #BCE6FF;
+		}

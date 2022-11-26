@@ -37,6 +37,7 @@
     <div id="bg" class="bg"><p style="color: white; font-family: Permanent Marker; font-size: 80px;">GAME OVER</p></div>
 
     <?php include("pause.php") ?>
+    <?php include("dialog.php") ?>
 
     <!--script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
     <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
