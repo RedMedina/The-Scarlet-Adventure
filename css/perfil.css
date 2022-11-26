@@ -86,6 +86,28 @@
     font-size: 18px;
 }
 
+.SelectGame
+{
+    border-radius: 10px;
+    background-color: rgb(94, 196, 255);
+    font-family: Permanent Marker;
+    border: 0px;
+    height: 50px;
+    width: 190px;
+    position: relative;
+    top: 30%;
+    font-size: 18px;
+}
+
+.SelectGameText
+{
+    font-family: Permanent Marker;
+    font-size: 35px;
+    position: absolute;
+    bottom: 70%;
+    left: 33%;
+}
+
 .Logout
 {
     border-radius: 50%;
@@ -100,7 +122,7 @@
     font-size: 18px;
 }
 
-.guardarPerfil:hover, .SalirPerfil:hover, .filePerfilL:hover
+.guardarPerfil:hover, .SalirPerfil:hover, .filePerfilL:hover, .SelectGame:hover
 {
     background-color: rgb(158, 219, 255);
 }

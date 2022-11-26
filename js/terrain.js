@@ -136,7 +136,7 @@ class Terrain
         });
 
         var planeGeo = new THREE.PlaneGeometry( width, height, 100, 100 );
-	    this.plane = new THREE.Mesh(	planeGeo, customMaterial );
+	    this.plane = new THREE.Mesh(planeGeo, customMaterial );
 	    this.plane.rotation.x = -Math.PI / 2;
 	    this.plane.position.y = -2;
         this.plane.receiveShadow = true;

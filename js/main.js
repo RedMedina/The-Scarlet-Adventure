@@ -469,13 +469,16 @@ function main()
                 }
                 else if(ActualScene == 2)
                 {
+                    
                     Escenario.GetPantanoScene().getObjectByName("PlayerModel").translateZ(550 * (delta));
                     Escenario.GetPlayer().GetModel().Pantano.playAnimation(1,1);
+                    
                 }
                 else if (ActualScene == 3)
                 {
                     Escenario.GetNieveScene().getObjectByName("PlayerModel").translateZ(550 * (delta));
                     Escenario.GetPlayer().GetModel().Nieve.playAnimation(1,1);
+                    
                 }
                 movPas = 550;
             }
@@ -488,11 +491,13 @@ function main()
                 {
                     Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(-550 * (delta));
                     Escenario.GetPlayer().GetModel().Pradera.playAnimation(1,1);
+                    
                 }
                 else if(ActualScene == 2)
                 {
                     Escenario.GetPantanoScene().getObjectByName("PlayerModel").translateZ(-550 * (delta));
                     Escenario.GetPlayer().GetModel().Pantano.playAnimation(1,1);
+                    
                 }
                 else if (ActualScene == 3)
                 {
@@ -689,6 +694,15 @@ function main()
         {
             if(ActualScene == 1)
             {
+
+                if(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.x > 8750 ||
+                Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.x < -8750 ||
+                Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.z > 8750 ||
+                Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.z < -8750)
+                {
+                    Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(-movPas * delta);
+                }
+
                 //Collision Pradera objetos estaticos
                 for (var i = 0; i < Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays.length; i++) {
                     rayCaster.set(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays[i]);
@@ -823,6 +837,15 @@ function main()
             }
             else if(ActualScene == 2)
             {
+
+                if(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.x > 8750 ||
+                Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.x < -8750 ||
+                Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.z > 8750 ||
+                Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.z < -8750)
+                {
+                    Escenario.GetPantanoScene().getObjectByName("PlayerModel").translateZ(-movPas * delta);
+                }
+
                 //Collision Pantano objetos estaticos
                 for (var i = 0; i < Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays.length; i++) {
                     rayCaster.set(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position, Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays[i]);
@@ -977,6 +1000,15 @@ function main()
             }
             else if(ActualScene == 3)
             {
+
+                if(Escenario.GetNieveScene().getObjectByName("PlayerModel").position.x > 8750 ||
+                Escenario.GetNieveScene().getObjectByName("PlayerModel").position.x < -8750 ||
+                Escenario.GetNieveScene().getObjectByName("PlayerModel").position.z > 8750 ||
+                Escenario.GetNieveScene().getObjectByName("PlayerModel").position.z < -8750)
+                {
+                    Escenario.GetNieveScene().getObjectByName("PlayerModel").translateZ(-movPas * delta);
+                }
+
                 //Collision Nieve objetos estaticos
                 for (var i = 0; i < Escenario.GetNieveScene().getObjectByName("PlayerModel").rays.length; i++) {
                     rayCaster.set(Escenario.GetNieveScene().getObjectByName("PlayerModel").position, Escenario.GetNieveScene().getObjectByName("PlayerModel").rays[i]);

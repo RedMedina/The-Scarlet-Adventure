@@ -421,8 +421,6 @@ function main()
     });
     water.add(sound2);   
 
-    
-
     const controls = new OrbitControls(camera, canvas);
     controls.target.set(0, 5, 0);
     controls.update();

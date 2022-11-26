@@ -27,7 +27,7 @@
     <div id="large-header" class="large-header">
         <canvas id="c"></canvas>
         <img src="Assets/Images/Inicio.png" height="762" width="620">
-        <button class="jugar" onclick="location.href='game.php'">Jugar</button>
+        <button class="jugar" onclick="window.modal_ChoseGame.showModal();">Jugar</button>
         <button class="Opciones" onclick="window.modal_config.showModal();"><img src="Assets/Images/gear.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
         <button class="Ranking" onclick="window.modal.showModal();"><img src="Assets/Images/ranking.png" width="45" height="45" style="position: absolute; left: 2%;"></button>
         <?php
@@ -50,6 +50,7 @@
     <?php include("login.php") ?>
     <?php include("config.php") ?>
     <?php include("perfil.php") ?>
+    <?php include("ChoseGame.php") ?>
 
     <section id="loading-screen">
         <div id="loader"></div>
