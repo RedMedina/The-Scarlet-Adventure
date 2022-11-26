@@ -72,6 +72,84 @@ class GUI
     {
         this.Interactuar.innerHTML = "Interactuar: <img src='Assets/Images/r_select.png' width='30' height='30'>";
     }
+
+
+    //Gui Multijugador
+    CreateMultiplayerGUI(valueVidaActual, MaxLife, valueExpActual, MaxExp)
+    {
+        this.VidaP1 = document.createElement('progress');
+        this.VidaP1.max = 100;
+        var PorcentajeP1 = (valueVidaActual / MaxLife) * 100;
+        this.VidaP1.value = Math.round(PorcentajeP1);
+        this.VidaP1.id = "Vida_barP1";
+
+        const Vida_ValueP1 = document.createElement('div');
+        Vida_ValueP1.id = "Vida_valueP1";
+        Vida_ValueP1.className = "Vida_valueP1";
+        Vida_ValueP1.innerHTML = "<label class='Vida_num' id='VidaValorNumP1'>"+this.VidaP1.value+"%</label>";
+
+
+        this.ExpP1 = document.createElement('progress');
+        this.ExpP1.max = 100;
+        var PorcentajeExpP1 = (valueExpActual / MaxExp) * 100;
+        this.ExpP1.value = Math.round(PorcentajeExpP1);
+        this.ExpP1.id = "Exp_barP1";
+
+        document.body.appendChild(this.ExpP1);
+        document.body.appendChild(this.VidaP1);
+        document.body.appendChild(Vida_ValueP1);
+
+
+        this.VidaP2 = document.createElement('progress');
+        this.VidaP2.max = 100;
+        var PorcentajeP2 = (valueVidaActual / MaxLife) * 100;
+        this.VidaP2.value = Math.round(PorcentajeP2);
+        this.VidaP2.id = "Vida_barP2";
+
+        const Vida_ValueP2 = document.createElement('div');
+        Vida_ValueP2.id = "Vida_valueP2";
+        Vida_ValueP2.className = "Vida_valueP2";
+        Vida_ValueP2.innerHTML = "<label class='Vida_num' id='VidaValorNumP2'>"+this.VidaP2.value+"%</label>";
+
+
+        this.ExpP2 = document.createElement('progress');
+        this.ExpP2.max = 100;
+        var PorcentajeExpP2 = (valueExpActual / MaxExp) * 100;
+        this.ExpP2.value = Math.round(PorcentajeExpP2);
+        this.ExpP2.id = "Exp_barP2";
+
+        document.body.appendChild(this.ExpP2);
+        document.body.appendChild(this.VidaP2);
+        document.body.appendChild(Vida_ValueP2);
+    }
+
+    SetVidaActualP1(valueVidaActual, MaxLife)
+    {
+        var Porcentaje = (valueVidaActual / MaxLife) * 100;
+        this.VidaP1.value = Math.round(Porcentaje);
+        document.getElementById("VidaValorNumP1").innerHTML = Math.round(Porcentaje) + "%";
+        //console.log(document.getElementById("VidaValorNum").value);
+    }
+
+    SetExpActualP1(valueExpActual, MaxExp)
+    {
+        var Porcentaje = (valueExpActual / MaxExp) * 100;
+        this.ExpP1.value = Math.round(Porcentaje); 
+    }
+
+    SetVidaActualP2(valueVidaActual, MaxLife)
+    {
+        var Porcentaje = (valueVidaActual / MaxLife) * 100;
+        this.VidaP2.value = Math.round(Porcentaje);
+        document.getElementById("VidaValorNumP2").innerHTML = Math.round(Porcentaje) + "%";
+        //console.log(document.getElementById("VidaValorNum").value);
+    }
+
+    SetExpActualP2(valueExpActual, MaxExp)
+    {
+        var Porcentaje = (valueExpActual / MaxExp) * 100;
+        this.ExpP2.value = Math.round(Porcentaje); 
+    }
 }
 
 export { GUI };

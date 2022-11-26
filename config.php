@@ -18,10 +18,10 @@
     <dialog id="modal_config" class="modal_config">
         <h3 class="TituloConfig">Ajustes</h3>
         <label class="l1">Dificultad: </label><br>
-        <select class="DificultadConfig">
-            <option value="Facil">Facil</option>
-            <option value="Normal">Normal</option>
-            <option value="Dificil">Dificil</option>
+        <select class="DificultadConfig" id="DificultadConfig">
+            <option value="1">Facil</option>
+            <option value="2">Normal</option>
+            <option value="3">Dificil</option>
         </select><br>
         <label class="l2">Volumen: </label><input type="range" id="VolumenData" min="0" max="100" class="RangoC" value=<?php if(isset($_SESSION['loggedin'])){echo $_SESSION['volumen'];}else {echo 50;} ?> oninput="this.nextElementSibling.value = this.value">
         <output class="outputRange"><?php if(isset($_SESSION['loggedin'])){echo $_SESSION['volumen'];}else {echo 50;}?></output><br>

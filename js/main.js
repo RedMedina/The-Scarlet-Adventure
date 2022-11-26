@@ -8,7 +8,6 @@ import {GUI} from '/PWGW/js/gui.js';
 import {AudioController} from '/PWGW/js/audioController.js';
 import {Audioo} from '/PWGW/js/audio.js';
 import {Shots} from '/PWGW/js/disparo.js';
-import { BooleanKeyframeTrack } from 'three';
 
 function main()
 {
@@ -102,35 +101,44 @@ function main()
    
     const audioCont = new AudioController();
     var SonidoFinal = Configuraciones.sonido * 0.001;
+    console.log(Configuraciones.dif);
     audioCont.SetVolume(SonidoFinal);
     const AudioM = new Audioo();
     AudioM.create("Muerte");
     AudioM.Sound("Assets/BGM/Death.mp3");
     AudioM.GetSound().setVolume(SonidoFinal);
+
     var Disparo = new Shots();
     var ShotsPradera = [];
     var ShotsPantano = [];
     var ShotsNieve = [];
+
     var ShotsEnemiePradera = [];
     var ShotsEnemiePantano = [];
     var ShotsEnemieNieve = [];
+
     var Disparando = false;
     var EnemyDisparando = false;
     var DisparandoContador = 0;
     var DisparandoEnemyContador = 0;
+
     var DodgeDuracion = 1.5;
     var DodgeContador = 0;
     var AttackDuracion = 2.2;
     var AttackContador = 0;
     var JumpDuracion = 2.5;
     var JumpContador = 0;
+
     var ActualScene = PlayerDatos.scene;
     var movPas = 0;
     var rayCaster = new THREE.Raycaster();
+
     var Invesible = false;
     var InvensibleContador = 0;
+
     var Die = false;
     var DieDuracion = 0;
+
     var tiempoPortales = 0;
     var CambiandoDeMapa = false;
     var CambiandoDeMapaCont = 0;
@@ -764,6 +772,8 @@ function main()
                     }
                     
                 }
+
+
                 //Colissiones Disparos
                 for (var i = 0; i < Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays.length; i++) {
                         rayCaster.set(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays[i]);
@@ -771,7 +781,7 @@ function main()
                         if (collision.length > 0 && (collision[0].distance < 1200)) {
                             if(!Invesible)
                             {
-                                var Daño = 650 /*<-Este daño es provisional*/ - Escenario.GetPlayer().GetStats().Defensa;
+                                var Daño = (650 * Configuraciones.dif) /*<-Este daño es provisional*/ - Escenario.GetPlayer().GetStats().Defensa;
                                 Escenario.GetPlayer().GetStats().Vida -= Daño;
                                 ui.SetVidaActual(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife());
                                 Invesible = true;
@@ -808,6 +818,8 @@ function main()
                     }
                  }
                }
+
+
             }
             else if(ActualScene == 2)
             {
@@ -853,6 +865,7 @@ function main()
                         console.log("colisionando");
                     }
                 }
+
                 //Collission Pantano Items
                 for (var i = 0; i < Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays.length; i++) {
                     rayCaster.set(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position, Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays[i]);
@@ -923,7 +936,7 @@ function main()
                     if (collision.length > 0 && (collision[0].distance < 1200)) {
                         if(!Invesible)
                         {
-                            var Daño = 650 /*<-Este daño es provisional*/ - Escenario.GetPlayer().GetStats().Defensa;
+                            var Daño = (650 * Configuraciones.dif) /*<-Este daño es provisional*/ - Escenario.GetPlayer().GetStats().Defensa;
                             Escenario.GetPlayer().GetStats().Vida -= Daño;
                             ui.SetVidaActual(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife());
                             Invesible = true;
@@ -1052,7 +1065,7 @@ function main()
                     if (collision.length > 0 && (collision[0].distance < 1200)) {
                         if(!Invesible)
                         {
-                            var Daño = 650 /*<-Este daño es provisional*/ - Escenario.GetPlayer().GetStats().Defensa;
+                            var Daño = (650 * Configuraciones.dif) /*<-Este daño es provisional*/ - Escenario.GetPlayer().GetStats().Defensa;
                             Escenario.GetPlayer().GetStats().Vida -= Daño;
                             ui.SetVidaActual(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife());
                             Invesible = true;
@@ -1218,12 +1231,12 @@ function main()
         }
     
         //PROVISIONAL PARA PROBAR DAÑO
-        if (keys["Z"])
+       /* if (keys["Z"])
         {
             Escenario.GetPlayer().GetStats().Vida -= 300;
             console.log(Escenario.GetPlayer().GetStats().Vida);
             ui.SetVidaActual(Escenario.GetPlayer().GetStats().Vida, Escenario.GetPlayer().GetMaxLife());
-        }
+        } */
 
         //GUI
         if(keys["P"])
@@ -1398,7 +1411,7 @@ function main()
         {
             DieDuracion += delta;
            
-            if(DieDuracion > 4)
+            if(DieDuracion > 2)
             {
                 Die = false;
                 DieDuracion = 0;

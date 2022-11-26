@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="css/pause.css">
 </head>
 <body>
+    <?php
+        session_start();
+        if(!isset($_SESSION['loggedin']))
+        {
+            header("Location: index.php");
+        }
+    ?>
         <!--canvas id="c1"></canvas>
         <canvas id="c2"></canvas-->
         <div style="display: flex; height: 100%">
@@ -31,7 +38,7 @@
         <center><p id="loading-text">Cargando...</p></center>
     </section>
 
-    <?php include("pause.php") ?>
+    <?php include("pause-multi.php") ?>
 
     <script>
         var Pause = false;
@@ -48,6 +55,17 @@
     <script type='text/javascript' src="modules/jquery-3.3.1.min.js"></script>
 	<script type='text/javascript' src="modules/jquery.min.js"></script>
     <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+    <script type='text/javascript' src="backend/readPlayer.back.js"></script>
+    <script type='text/javascript' src="backend/saveItems.back.js"></script>
+    <script type='text/javascript' src="backend/getItems.back.js"></script>
+    <script type='text/javascript' src="backend/updatePlayer.back.js"></script>
+    <script type='text/javascript' src="frontend/Configuraciones.js"></script>
+    <script>
+        $(document).ready
+        (
+            GetConfig()
+        );
+    </script>
     <script src="js/camera.js" type="module"></script>
     <script src="js/audio.js" type="module"></script>
     <script src="js/light.js" type="module"></script>

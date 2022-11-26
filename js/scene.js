@@ -2306,10 +2306,6 @@ class Scenee
                 new THREE.Vector3(0, 0, -1),
                 new THREE.Vector3(0, 0.5, 0),
                 new THREE.Vector3(0, -0.5, 0),
-               /* new THREE.Vector3(1, 0, 1),
-                new THREE.Vector3(1, 0, -1),
-                new THREE.Vector3(-1, 0, 1),
-                new THREE.Vector3(-1, 0, -1), */
             ];
             PlayerModel.add(object);
             for (let i = 0; i < this.Playeranimations.length; i++) {

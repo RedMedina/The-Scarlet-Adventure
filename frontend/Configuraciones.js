@@ -3,14 +3,15 @@ $(document).ready
 	function($){$("#GuardarConfig").click(function(){ SetConfig(); })}
 );
 
-var Configuraciones = {sonido: 0};
+var Configuraciones = {/*sonido: 0, dif: 1*/};
 var VolumenIndex = 50;
 const AccionesMenuu = {};
 
 function SetConfig()
 {
     var volumen = $('#VolumenData').val();
-    var dataToSend = {active: true, sonido: volumen};
+    var dif = $('#DificultadConfig').val();
+    var dataToSend = {active: true, sonido: volumen, dificultad: dif};
     var Json = JSON.stringify(dataToSend);
     $.ajax({
         url: './Include/SetConfiguracion_Inc.php',
@@ -37,7 +38,7 @@ function GetConfig()
         data: {'set':Json},
         success: function(response)
         {
-            Configuraciones.sonido = JSON.parse(response);
+            Configuraciones = JSON.parse(response);
             VolumenIndex = Configuraciones.sonido;
         }
     });
