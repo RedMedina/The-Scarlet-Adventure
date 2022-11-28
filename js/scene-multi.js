@@ -19,7 +19,7 @@ class Scenee
     {
         this.Playeranimations = ["Assets/Models/Player/Idle_Final", "Assets/Models/Player/Run_Final",
         "Assets/Models/Player/Attack_Final", "Assets/Models/Player/Diying_Final",
-        "Assets/Models/Player/Dodge_Final", "Assets/Models/Player/Hanging_Idle_Final",
+        "Assets/Models/Player/Dodge_Final", "Assets/Models/Player/Swimming",
         "Assets/Models/Player/Jump_Final"];
 
         //Objetos Estaticos Pradera
@@ -65,6 +65,11 @@ class Scenee
         this.Player.GenerateStats();
         this.Player2 = new player(PlayerDatos.Name, {x: PlayerDatos.coorX, y: PlayerDatos.coorY, z: PlayerDatos.coorZ}, PlayerDatos.Experiencia, Mochila, PlayerDatos.level, {Boss1: PlayerDatos.Boss_1, Boss2: PlayerDatos.Boss_2, Boss3: PlayerDatos.Boss_3}, PlayerDatos.ActualLife);
         this.Player2.GenerateStats();
+
+        //Terrenos
+        this.TarrainPradera;
+        this.TarrainPantano;
+        this.TarrainNieve;
     }
 
     CreateScene()
@@ -156,12 +161,19 @@ class Scenee
         Luces.GetDirectionalLight().shadow.camera.far = 500;
 
         const helper = new THREE.CameraHelper( Luces.GetDirectionalLight().shadow.camera );
-        this.Pantano.add( helper );
+        //this.Pantano.add( helper );
 
         var Terreno = new Terrain();
         Terreno.MultitextureTerrain("Assets/Pantano/Pasto_Ot.jpg", "Assets/Pantano/Tierra_Mojada.jpg", "Assets/Pantano/Hojas_Tierra.jpg", "Assets/Pantano/Alts.png", "Assets/Pantano/Blendmap_Pantano.png", 1700, 18000, 18000);
         Terreno.GetPlane().position.y = -720;
         this.Pantano.add(Terreno.GetPlane());
+
+        Terreno.CreateTerrainCollision("Assets/Pantano/Alts_Col.png", 1700, (object)=>{
+            object.position.y = -720;
+            object.name = "CollisionTerrain";
+            this.TarrainPantano = object;
+            this.Pantano.add(object);
+        });
 
         //Muros
         var Muros = new Terrain();
@@ -1399,11 +1411,12 @@ class Scenee
                 new THREE.Vector3(0, 0.5, 0),
                 new THREE.Vector3(0, -0.5, 0),
             ];
-            var visor = this.CreateCubeVisor(10, 10, 10);
+            var visor = this.CreateCubeVisor(100, 100, 100);
             object.add(visor);
             visor.position.set(0, 0, 0);
             visor.name="21";
             visor.visible= false;
+            this.PantanoEnemiesCollider.push(visor);
             this.Pantano.add(object);
         });
         this.PantanoEnemies.push(Magic);
@@ -1451,7 +1464,7 @@ class Scenee
  
          //Help para el día y la noche
          const helper = new THREE.CameraHelper( Luces.GetDirectionalLight().shadow.camera );
-         this.Pradera.add( helper );
+         //this.Pradera.add( helper );
  
          //Skydome
          var SkydomeT = new skydome();
@@ -1465,6 +1478,13 @@ class Scenee
          Terreno.GetPlane().position.y = -160;
          Terreno.GetPlane().name="TerrenoPradera";
          this.Pradera.add(Terreno.GetPlane());
+
+         Terreno.CreateTerrainCollision("Assets/Pradera/Alturas_Pradera_Col.png", 2500, (object)=>{
+            object.position.y = -160;
+            object.name = "CollisionTerrain";
+            this.TarrainPradera = object;
+            this.Pradera.add(object);
+        });
 
           //Muros
         var Muros = new Terrain();
@@ -3016,7 +3036,7 @@ class Scenee
                  new THREE.Vector3(0, 0.5, 0),
                  new THREE.Vector3(0, -0.5, 0),
              ];
-             var visor = this.CreateCubeVisor(10, 10, 10);
+             var visor = this.CreateCubeVisor(100, 100, 100);
              object.add(visor);
              visor.position.set(0, 0, 0);
              visor.name="23";
@@ -3049,7 +3069,7 @@ class Scenee
 
         //Help para el día y la noche
         const helper = new THREE.CameraHelper( Luces.GetDirectionalLight().shadow.camera );
-        this.Nieve.add( helper );
+        //this.Nieve.add( helper );
 
         //Skydome
         var SkydomeT = new skydome();
@@ -3062,6 +3082,13 @@ class Scenee
         Terreno.MultitextureTerrain("Assets/Nieve/Rock_Nieve.png", "Assets/Nieve/Snow.jpg", "Assets/Nieve/Snow2.jpg", "Assets/Nieve/Alturas.png", "Assets/Nieve/Blendmap_Nieve.png", 900, 18000, 18000);
         Terreno.GetPlane().position.y = -290;
         this.Nieve.add(Terreno.GetPlane());
+
+        Terreno.CreateTerrainCollision("Assets/Nieve/Alturas_Col.png", 900, (object)=>{
+            object.position.y = -290;
+            object.name = "CollisionTerrain";
+            this.TarrainNieve = object;
+            this.Nieve.add(object);
+        });
 
         //Muros
         var Muros = new Terrain();
@@ -4004,7 +4031,7 @@ class Scenee
                 new THREE.Vector3(0, 0.5, 0),
                 new THREE.Vector3(0, -0.5, 0),
             ];
-            var visor = this.CreateCubeVisor(10, 10, 10);
+            var visor = this.CreateCubeVisor(100, 100, 100);
             object.add(visor);
             visor.position.set(0, 0, 0);
             visor.name="19";
@@ -4027,7 +4054,7 @@ class Scenee
                 new THREE.Vector3(0, 0.5, 0),
                 new THREE.Vector3(0, -0.5, 0),
             ];
-            var visor = this.CreateCubeVisor(10, 10, 10);
+            var visor = this.CreateCubeVisor(100, 100, 100);
             object.add(visor);
             visor.position.set(0, 0, 0);
             visor.name="20";
@@ -4050,7 +4077,7 @@ class Scenee
                 new THREE.Vector3(0, 0.5, 0),
                 new THREE.Vector3(0, -0.5, 0),
             ];
-            var visor = this.CreateCubeVisor(10, 10, 10);
+            var visor = this.CreateCubeVisor(100, 100, 100);
             object.add(visor);
             visor.position.set(0, 0, 0);
             visor.name="21";
@@ -4073,8 +4100,9 @@ class Scenee
                 new THREE.Vector3(0, 0.5, 0),
                 new THREE.Vector3(0, -0.5, 0),
             ];
-            var visor = this.CreateCubeVisor(10, 10, 10);
+            var visor = this.CreateCubeVisor(100, 100, 100);
             object.add(visor);
+            object.visible = false;
             visor.position.set(0, 0, 0);
             visor.name="22";
             visor.visible= false;
@@ -4242,6 +4270,12 @@ class Scenee
         const material = new THREE.MeshBasicMaterial( {map: text, transparent: true /*color: 0x00FF27*/} );
         const cylinder = new THREE.Mesh( geometry, material );
         return cylinder;
+    }
+
+    GetTerrains()
+    {
+        var Terrenos = {Pradera: this.TarrainPradera, Pantano: this.TarrainPantano, Nieve:  this.TarrainNieve};
+        return Terrenos;
     }
 
     GetTestScene()

@@ -40,8 +40,8 @@ function main()
     var Dia = true;
     
     var keys = {};
-    var Actionkeys = {Attack: false, Dodge: false, Jump: false,  Die: false};
-    var Actionkeys2 = {Attack: false, Dodge: false, Jump: false,  Die: false};
+    var Actionkeys = {Attack: false, Dodge: false, Jump: false,  Die: false, Nado: false};
+    var Actionkeys2 = {Attack: false, Dodge: false, Jump: false,  Die: false, Nado: false};
     var mousekeys = [];
     var ModelsLoaded = false;
 
@@ -523,19 +523,35 @@ function main()
 
 		if (keys["W"]) {
             window.DialogMagic.close();
-            if(Actionkeys.Dodge == false && Actionkeys.Jump == false)
+            if(Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false)
             {
                 Actionkeys.Attack = false;
                 AttackContador = 0;
                 if(ActualScene == 1)
                 {
                     Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(550 * (delta));
-                    Escenario.GetPlayer().Player1.GetModel().Pradera.playAnimation(1,1);
+                    if(Actionkeys.Nado)
+                    {
+                        Escenario.GetPlayer().Player1.GetModel().Pradera.playAnimation(5,1);
+                    }
+                    else
+                    {
+                        Escenario.GetPlayer().Player1.GetModel().Pradera.playAnimation(1,1);
+                    }
+                    //Escenario.GetPlayer().Player1.GetModel().Pradera.playAnimation(1,1);
                 }
                 else if(ActualScene == 2)
                 {
                     Escenario.GetPantanoScene().getObjectByName("PlayerModel").translateZ(550 * (delta));
-                    Escenario.GetPlayer().Player1.GetModel().Pantano.playAnimation(1,1);
+                    if(Actionkeys.Nado)
+                    {
+                        Escenario.GetPlayer().Player1.GetModel().Pantano.playAnimation(5,1);
+                    }
+                    else
+                    {
+                        Escenario.GetPlayer().Player1.GetModel().Pantano.playAnimation(1,1);
+                    }
+                    //Escenario.GetPlayer().Player1.GetModel().Pantano.playAnimation(1,1);
                 }
                 else if (ActualScene == 3)
                 {
@@ -546,19 +562,35 @@ function main()
             }
 		}else if (keys["S"]) {
             window.DialogMagic.close();
-            if(Actionkeys.Dodge == false && Actionkeys.Jump == false)
+            if(Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false)
             {
                 Actionkeys.Attack = false;
                 AttackContador = 0;
                 if(ActualScene == 1)
                 {
                     Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(-550 * (delta));
-                    Escenario.GetPlayer().Player1.GetModel().Pradera.playAnimation(1,1);
+                    if(Actionkeys.Nado)
+                    {
+                        Escenario.GetPlayer().Player1.GetModel().Pradera.playAnimation(5,1);
+                    }
+                    else
+                    {
+                        Escenario.GetPlayer().Player1.GetModel().Pradera.playAnimation(1,1);
+                    }
+                    //Escenario.GetPlayer().Player1.GetModel().Pradera.playAnimation(1,1);
                 }
                 else if(ActualScene == 2)
                 {
                     Escenario.GetPantanoScene().getObjectByName("PlayerModel").translateZ(-550 * (delta));
-                    Escenario.GetPlayer().Player1.GetModel().Pantano.playAnimation(1,1);
+                    if(Actionkeys.Nado)
+                    {
+                        Escenario.GetPlayer().Player1.GetModel().Pantano.playAnimation(5,1);
+                    }
+                    else
+                    {
+                        Escenario.GetPlayer().Player1.GetModel().Pantano.playAnimation(1,1);
+                    }
+                    //Escenario.GetPlayer().Player1.GetModel().Pantano.playAnimation(1,1);
                 }
                 else if (ActualScene == 3)
                 {
@@ -570,14 +602,14 @@ function main()
 		}
         else if(keys["E"]){
             window.DialogMagic.close();
-            if(Actionkeys.Dodge == false && Actionkeys.Jump == false)
+            if(Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false && Actionkeys.Nado == false)
             {
                 Actionkeys.Attack = true;
             }
         }
         else if(keys[" "]){
             window.DialogMagic.close();
-            if(Actionkeys.Dodge == false)
+            if(Actionkeys.Dodge == false && Actionkeys.Die == false && Actionkeys.Nado == false)
             {
                 Actionkeys.Attack = false;
                 AttackContador = 0;
@@ -585,7 +617,7 @@ function main()
             }
         }
         else if ((keys["W"] == false || keys["A"] == false || keys["S"] == false || keys["D"] == false) &&
-                Actionkeys.Attack == false && Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false)
+                Actionkeys.Attack == false && Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false && Actionkeys.Nado == false)
         {
             if(ActualScene == 1)
             {
@@ -648,7 +680,7 @@ function main()
 
         if(keys["Q"]){
             window.DialogMagic.close();
-            if(Actionkeys.Jump == false)
+            if(Actionkeys.Jump == false && Actionkeys.Die == false && Actionkeys.Nado == false)
             {
                 Actionkeys.Attack = false;
                 AttackContador = 0;
@@ -761,19 +793,35 @@ function main()
 
         if (keys["I"]) {
             window.DialogMagic.close();
-            if(Actionkeys2.Dodge == false && Actionkeys2.Jump == false)
+            if(Actionkeys2.Dodge == false && Actionkeys2.Jump == false && Actionkeys2.Die == false)
             {
                 Actionkeys2.Attack = false;
                 AttackContador2 = 0;
                 if(ActualScene == 1)
                 {
                     Escenario.GetPraderaScene().getObjectByName("PlayerModel2").translateZ(550 * (delta));
-                    Escenario.GetPlayer().Player2.GetModel().Pradera.playAnimation(1,1);
+                    if(Actionkeys2.Nado)
+                    {
+                        Escenario.GetPlayer().Player2.GetModel().Pradera.playAnimation(5,1);
+                    }
+                    else
+                    {
+                        Escenario.GetPlayer().Player2.GetModel().Pradera.playAnimation(1,1);
+                    }
+                    //Escenario.GetPlayer().Player2.GetModel().Pradera.playAnimation(1,1);
                 }
                 else if(ActualScene == 2)
                 {
                     Escenario.GetPantanoScene().getObjectByName("PlayerModel2").translateZ(550 * (delta));
-                    Escenario.GetPlayer().Player2.GetModel().Pantano.playAnimation(1,1);
+                    if(Actionkeys2.Nado)
+                    {
+                        Escenario.GetPlayer().Player2.GetModel().Pantano.playAnimation(5,1);
+                    }
+                    else
+                    {
+                        Escenario.GetPlayer().Player2.GetModel().Pantano.playAnimation(1,1);
+                    }
+                    //Escenario.GetPlayer().Player2.GetModel().Pantano.playAnimation(1,1);
                 }
                 else if (ActualScene == 3)
                 {
@@ -784,19 +832,35 @@ function main()
             }
 		}else if (keys["K"]) {
             window.DialogMagic.close();
-            if(Actionkeys2.Dodge == false && Actionkeys2.Jump == false)
+            if(Actionkeys2.Dodge == false && Actionkeys2.Jump == false && Actionkeys2.Die == false)
             {
                 Actionkeys2.Attack = false;
                 AttackContador2 = 0;
                 if(ActualScene == 1)
                 {
                     Escenario.GetPraderaScene().getObjectByName("PlayerModel2").translateZ(-550 * (delta));
-                    Escenario.GetPlayer().Player2.GetModel().Pradera.playAnimation(1,1);
+                    if(Actionkeys2.Nado)
+                    {
+                        Escenario.GetPlayer().Player2.GetModel().Pradera.playAnimation(5,1);
+                    }
+                    else
+                    {
+                        Escenario.GetPlayer().Player2.GetModel().Pradera.playAnimation(1,1);
+                    }
+                    //Escenario.GetPlayer().Player2.GetModel().Pradera.playAnimation(1,1);
                 }
                 else if(ActualScene == 2)
                 {
                     Escenario.GetPantanoScene().getObjectByName("PlayerModel2").translateZ(-550 * (delta));
-                    Escenario.GetPlayer().Player2.GetModel().Pantano.playAnimation(1,1);
+                    if(Actionkeys2.Nado)
+                    {
+                        Escenario.GetPlayer().Player2.GetModel().Pantano.playAnimation(5,1);
+                    }
+                    else
+                    {
+                        Escenario.GetPlayer().Player2.GetModel().Pantano.playAnimation(1,1);
+                    }
+                    //Escenario.GetPlayer().Player2.GetModel().Pantano.playAnimation(1,1);
                 }
                 else if (ActualScene == 3)
                 {
@@ -808,14 +872,14 @@ function main()
 		}
         else if(keys["O"]){
             window.DialogMagic.close();
-            if(Actionkeys2.Dodge == false && Actionkeys2.Jump == false)
+            if(Actionkeys2.Dodge == false && Actionkeys2.Jump == false && Actionkeys2.Die == false && Actionkeys2.Nado == false) 
             {
                 Actionkeys2.Attack = true;
             }
         }
         else if(keys["M"]){
             window.DialogMagic.close();
-            if(Actionkeys2.Dodge == false)
+            if(Actionkeys2.Dodge == false && Actionkeys2.Die == false && Actionkeys2.Nado == false)
             {
                 Actionkeys2.Attack = false;
                 AttackContador2 = 0;
@@ -823,7 +887,7 @@ function main()
             }
         }
         else if ((keys["I"] == false || keys["J"] == false || keys["K"] == false || keys["L"] == false) &&
-                Actionkeys2.Attack == false && Actionkeys2.Dodge == false && Actionkeys2.Jump == false && Actionkeys2.Die == false)
+                Actionkeys2.Attack == false && Actionkeys2.Dodge == false && Actionkeys2.Jump == false && Actionkeys2.Die == false && Actionkeys2.Nado == false)
         {
             if(ActualScene == 1)
             {
@@ -886,7 +950,7 @@ function main()
 
         if(keys["U"]){
             window.DialogMagic.close();
-            if(Actionkeys2.Jump == false)
+            if(Actionkeys2.Jump == false && Actionkeys2.Nado == false && Actionkeys2.Die == false)
             {
                 Actionkeys2.Attack = false;
                 AttackContador2 = 0;
@@ -1002,6 +1066,45 @@ function main()
             if(ActualScene == 1)
             {
 
+                for (var i = 0; i < Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays.length; i++) {
+                    rayCaster.set(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays[i]);
+                    var collision = rayCaster.intersectObject(Escenario.GetTerrains().Pradera, true);			
+                    if (collision.length > 0) {
+                        Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.y = collision[0].point.y;
+                        if(collision[0].point.y < -50)
+                        {
+                            //console.log(collision[0].point.y);
+                            Actionkeys.Nado = true;
+                            Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.y = -39;
+                            Escenario.GetPlayer().Player1.GetModel().Pradera.playAnimation(5,1);
+                        }
+                        else
+                        {
+                            Actionkeys.Nado = false;
+                        }
+                    }
+                }
+
+                for (var i = 0; i < Escenario.GetPraderaScene().getObjectByName("PlayerModel2").rays.length; i++) {
+                    rayCaster.set(Escenario.GetPraderaScene().getObjectByName("PlayerModel2").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel2").rays[i]);
+                    var collision = rayCaster.intersectObject(Escenario.GetTerrains().Pradera, true);			
+                    if (collision.length > 0) {
+                        Escenario.GetPraderaScene().getObjectByName("PlayerModel2").position.y = collision[0].point.y;
+                        if(collision[0].point.y < -50)
+                        {
+                            //console.log(collision[0].point.y);
+                            Actionkeys2.Nado = true;
+                            Escenario.GetPraderaScene().getObjectByName("PlayerModel2").position.y = -39;
+                            Escenario.GetPlayer().Player2.GetModel().Pradera.playAnimation(5,1);
+                        }
+                        else
+                        {
+                            Actionkeys2.Nado = false;
+                        }
+                    }
+                }
+
+
                 if(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.x > 8750 ||
                 Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.x < -8750 ||
                 Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.z > 8750 ||
@@ -1077,7 +1180,7 @@ function main()
                 for (var i = 0; i < Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays.length; i++) {
                     rayCaster.set(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rays[i]);
                     var collision = rayCaster.intersectObjects(Escenario.GetPraderaItems().model, true);				
-                    if (collision.length > 0 && collision[0].distance < 500) {
+                    if (collision.length > 0 /*&& collision[0].distance < 500*/) {
                         //ui.BrillarReaction();
                         if(keys["R"])
                         {
@@ -1093,7 +1196,7 @@ function main()
                 for (var i = 0; i < Escenario.GetPraderaScene().getObjectByName("PlayerModel2").rays.length; i++) {
                     rayCaster.set(Escenario.GetPraderaScene().getObjectByName("PlayerModel2").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel2").rays[i]);
                     var collision = rayCaster.intersectObjects(Escenario.GetPraderaItems().model, true);				
-                    if (collision.length > 0 && collision[0].distance < 500) {
+                    if (collision.length > 0 /*&& collision[0].distance < 500*/) {
                         //ui.BrillarReaction();
                         if(keys["Y"])
                         {
@@ -1302,6 +1405,44 @@ function main()
             else if(ActualScene == 2)
             {
 
+                for (var i = 0; i < Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays.length; i++) {
+                    rayCaster.set(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position, Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays[i]);
+                    var collision = rayCaster.intersectObject(Escenario.GetTerrains().Pantano, true);			
+                    if (collision.length > 0) {
+                        Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.y = collision[0].point.y;
+                        if(collision[0].point.y < -205)
+                        {
+                            //console.log(collision[0].point.y);
+                            Actionkeys.Nado = true;
+                            Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.y = -205;
+                            Escenario.GetPlayer().Player1.GetModel().Pantano.playAnimation(5,1);
+                        }
+                        else
+                        {
+                            Actionkeys.Nado = false;
+                        }
+                    }
+                }
+
+                for (var i = 0; i < Escenario.GetPantanoScene().getObjectByName("PlayerModel2").rays.length; i++) {
+                    rayCaster.set(Escenario.GetPantanoScene().getObjectByName("PlayerModel2").position, Escenario.GetPantanoScene().getObjectByName("PlayerModel2").rays[i]);
+                    var collision = rayCaster.intersectObject(Escenario.GetTerrains().Pantano, true);			
+                    if (collision.length > 0) {
+                        Escenario.GetPantanoScene().getObjectByName("PlayerModel2").position.y = collision[0].point.y;
+                        if(collision[0].point.y < -205)
+                        {
+                            //console.log(collision[0].point.y);
+                            Actionkeys2.Nado = true;
+                            Escenario.GetPantanoScene().getObjectByName("PlayerModel2").position.y = -205;
+                            Escenario.GetPlayer().Player2.GetModel().Pantano.playAnimation(5,1);
+                        }
+                        else
+                        {
+                            Actionkeys2.Nado = false;
+                        }
+                    }
+                }
+
                 if(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.x > 8750 ||
                 Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.x < -8750 ||
                 Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.z > 8750 ||
@@ -1409,7 +1550,7 @@ function main()
                 for (var i = 0; i < Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays.length; i++) {
                     rayCaster.set(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position, Escenario.GetPantanoScene().getObjectByName("PlayerModel").rays[i]);
                     var collision = rayCaster.intersectObjects(Escenario.GetPantanoItems().model, true);				
-                    if (collision.length > 0 && collision[0].distance < 500) {
+                    if (collision.length > 0 /*&& collision[0].distance < 500*/) {
                         //ui.BrillarReaction();
                         if(keys["R"])
                         {
@@ -1425,7 +1566,7 @@ function main()
                  for (var i = 0; i < Escenario.GetPantanoScene().getObjectByName("PlayerModel2").rays.length; i++) {
                     rayCaster.set(Escenario.GetPantanoScene().getObjectByName("PlayerModel2").position, Escenario.GetPantanoScene().getObjectByName("PlayerModel2").rays[i]);
                     var collision = rayCaster.intersectObjects(Escenario.GetPantanoItems().model, true);				
-                    if (collision.length > 0 && collision[0].distance < 500) {
+                    if (collision.length > 0 /*&& collision[0].distance < 500*/) {
                         //ui.BrillarReaction();
                         if(keys["Y"])
                         {
@@ -1478,9 +1619,9 @@ function main()
                                 }
                             }
                         }   
-                        else if (j == 21)
+                        else
                         {
-                            Escenario.GetPantanoEnemies().Collider[21].parent.lookAt(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.x, Escenario.GetPantanoEnemies().Collider[21].parent.position.y, Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.z);
+                            Escenario.GetPantanoEnemies().Collider[j].parent.lookAt(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.x, Escenario.GetPantanoEnemies().Collider[j].parent.position.y, Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.z);
                             if(keys["R"] && CambiandoDeMapa==false)
                             {
                                 CambiandoDeMapa = true;
@@ -1532,9 +1673,9 @@ function main()
                                 }
                             }
                         }   
-                        else if (j == 21)
+                        else
                         {
-                            Escenario.GetPantanoEnemies().Collider[21].parent.lookAt(Escenario.GetPantanoScene().getObjectByName("PlayerModel2").position.x, Escenario.GetPantanoEnemies().Collider[21].parent.position.y, Escenario.GetPantanoScene().getObjectByName("PlayerModel2").position.z);
+                            Escenario.GetPantanoEnemies().Collider[j].parent.lookAt(Escenario.GetPantanoScene().getObjectByName("PlayerModel2").position.x, Escenario.GetPantanoEnemies().Collider[j].parent.position.y, Escenario.GetPantanoScene().getObjectByName("PlayerModel2").position.z);
                             if(keys["Y"] && CambiandoDeMapa==false)
                             {
                                 CambiandoDeMapa = true;
@@ -1652,6 +1793,22 @@ function main()
             else if(ActualScene == 3)
             {
 
+                for (var i = 0; i < Escenario.GetNieveScene().getObjectByName("PlayerModel").rays.length; i++) {
+                    rayCaster.set(Escenario.GetNieveScene().getObjectByName("PlayerModel").position, Escenario.GetNieveScene().getObjectByName("PlayerModel").rays[i]);
+                    var collision = rayCaster.intersectObject(Escenario.GetTerrains().Nieve, true);			
+                    if (collision.length > 0) {
+                        Escenario.GetNieveScene().getObjectByName("PlayerModel").position.y = collision[0].point.y;
+                    }
+                }
+
+                for (var i = 0; i < Escenario.GetNieveScene().getObjectByName("PlayerModel2").rays.length; i++) {
+                    rayCaster.set(Escenario.GetNieveScene().getObjectByName("PlayerModel2").position, Escenario.GetNieveScene().getObjectByName("PlayerModel2").rays[i]);
+                    var collision = rayCaster.intersectObject(Escenario.GetTerrains().Nieve, true);			
+                    if (collision.length > 0) {
+                        Escenario.GetNieveScene().getObjectByName("PlayerModel2").position.y = collision[0].point.y;
+                    }
+                }
+
                 if(Escenario.GetNieveScene().getObjectByName("PlayerModel").position.x > 8750 ||
                 Escenario.GetNieveScene().getObjectByName("PlayerModel").position.x < -8750 ||
                 Escenario.GetNieveScene().getObjectByName("PlayerModel").position.z > 8750 ||
@@ -1727,7 +1884,7 @@ function main()
                 for (var i = 0; i < Escenario.GetNieveScene().getObjectByName("PlayerModel").rays.length; i++) {
                     rayCaster.set(Escenario.GetNieveScene().getObjectByName("PlayerModel").position, Escenario.GetNieveScene().getObjectByName("PlayerModel").rays[i]);
                     var collision = rayCaster.intersectObjects(Escenario.GetNieveItems().model, true);				
-                    if (collision.length > 0 && collision[0].distance < 500) {
+                    if (collision.length > 0 /*&& collision[0].distance < 500*/) {
                         //ui.BrillarReaction();
                         if(keys["R"])
                         {
@@ -1742,7 +1899,7 @@ function main()
                 for (var i = 0; i < Escenario.GetNieveScene().getObjectByName("PlayerModel2").rays.length; i++) {
                     rayCaster.set(Escenario.GetNieveScene().getObjectByName("PlayerModel2").position, Escenario.GetNieveScene().getObjectByName("PlayerModel2").rays[i]);
                     var collision = rayCaster.intersectObjects(Escenario.GetNieveItems().model, true);				
-                    if (collision.length > 0 && collision[0].distance < 500) {
+                    if (collision.length > 0 /*&& collision[0].distance < 500*/) {
                         //ui.BrillarReaction();
                         if(keys["Y"])
                         {
@@ -1789,9 +1946,9 @@ function main()
                         }   
                         else
                         {
-                            Escenario.GetNieveEnemies().Collider[j].parent.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel").position.x, Escenario.GetNieveEnemies().Collider[j].parent.position.y, Escenario.GetNieveScene().getObjectByName("PlayerModel").position.z);
                             if(j == 19)
                             {
+                                Escenario.GetNieveEnemies().Collider[j].parent.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel").position.x, Escenario.GetNieveEnemies().Collider[j].parent.position.y, Escenario.GetNieveScene().getObjectByName("PlayerModel").position.z);
                                 if(keys["R"] && CambiandoDeMapa==false)
                                 {
                                     CambiandoDeMapa = true;
@@ -1801,6 +1958,7 @@ function main()
                             }
                             else if(j == 20)
                             {
+                                Escenario.GetNieveEnemies().Collider[j].parent.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel").position.x, Escenario.GetNieveEnemies().Collider[j].parent.position.y, Escenario.GetNieveScene().getObjectByName("PlayerModel").position.z);
                                 if(keys["R"] && CambiandoDeMapa==false)
                                 {
                                     CambiandoDeMapa = true;
@@ -1810,6 +1968,7 @@ function main()
                             }
                             else if(j == 21)
                             {
+                                Escenario.GetNieveEnemies().Collider[j].parent.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel").position.x, Escenario.GetNieveEnemies().Collider[j].parent.position.y, Escenario.GetNieveScene().getObjectByName("PlayerModel").position.z);
                                 if(keys["R"] && CambiandoDeMapa==false)
                                 {
                                     CambiandoDeMapa = true;
@@ -1819,6 +1978,7 @@ function main()
                             }
                             else if(j == 22)
                             {
+                                Escenario.GetNieveEnemies().Collider[j].parent.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel").position.x, Escenario.GetNieveEnemies().Collider[j].parent.position.y, Escenario.GetNieveScene().getObjectByName("PlayerModel").position.z);
                                 if(keys["R"] && CambiandoDeMapa==false)
                                 {
                                     CambiandoDeMapa = true;
@@ -1865,9 +2025,9 @@ function main()
                         }   
                         else
                         {
-                            Escenario.GetNieveEnemies().Collider[j].parent.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel2").position.x, Escenario.GetNieveEnemies().Collider[j].parent.position.y, Escenario.GetNieveScene().getObjectByName("PlayerModel2").position.z);
                             if(j == 19)
                             {
+                                Escenario.GetNieveEnemies().Collider[j].parent.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel2").position.x, Escenario.GetNieveEnemies().Collider[j].parent.position.y, Escenario.GetNieveScene().getObjectByName("PlayerModel2").position.z);
                                 if(keys["Y"] && CambiandoDeMapa==false)
                                 {
                                     CambiandoDeMapa = true;
@@ -1877,6 +2037,7 @@ function main()
                             }
                             else if(j == 20)
                             {
+                                Escenario.GetNieveEnemies().Collider[j].parent.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel2").position.x, Escenario.GetNieveEnemies().Collider[j].parent.position.y, Escenario.GetNieveScene().getObjectByName("PlayerModel2").position.z);
                                 if(keys["Y"] && CambiandoDeMapa==false)
                                 {
                                     CambiandoDeMapa = true;
@@ -1886,6 +2047,7 @@ function main()
                             }
                             else if(j == 21)
                             {
+                                Escenario.GetNieveEnemies().Collider[j].parent.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel2").position.x, Escenario.GetNieveEnemies().Collider[j].parent.position.y, Escenario.GetNieveScene().getObjectByName("PlayerModel2").position.z);
                                 if(keys["Y"] && CambiandoDeMapa==false)
                                 {
                                     CambiandoDeMapa = true;
@@ -1895,6 +2057,7 @@ function main()
                             }
                             else if(j == 22)
                             {
+                                Escenario.GetNieveEnemies().Collider[j].parent.lookAt(Escenario.GetNieveScene().getObjectByName("PlayerModel2").position.x, Escenario.GetNieveEnemies().Collider[j].parent.position.y, Escenario.GetNieveScene().getObjectByName("PlayerModel2").position.z);
                                 if(keys["Y"] && CambiandoDeMapa==false)
                                 {
                                     CambiandoDeMapa = true;
@@ -2131,21 +2294,21 @@ function main()
 
             Escenario.GetPraderaScene().getObjectByName("PlayerModel").getObjectByName("AtkCilinder").material.map.offset.y = tiempoPortales * 0.0025;
             Escenario.GetPantanoScene().getObjectByName("PlayerModel").getObjectByName("AtkCilinder").material.map.offset.y = tiempoPortales * 0.0025;
-            Escenario.GetPraderaScene().getObjectByName("PlayerModel").getObjectByName("AtkCilinder").material.map.offset.y = tiempoPortales * 0.0025;
+            Escenario.GetNieveScene().getObjectByName("PlayerModel").getObjectByName("AtkCilinder").material.map.offset.y = tiempoPortales * 0.0025;
             
             Escenario.GetPraderaScene().getObjectByName("PlayerModel2").getObjectByName("AtkCilinder").material.map.offset.y = tiempoPortales * 0.0025;
             Escenario.GetPantanoScene().getObjectByName("PlayerModel2").getObjectByName("AtkCilinder").material.map.offset.y = tiempoPortales * 0.0025;
-            Escenario.GetPraderaScene().getObjectByName("PlayerModel2").getObjectByName("AtkCilinder").material.map.offset.y = tiempoPortales * 0.0025;
+            Escenario.GetNieveScene().getObjectByName("PlayerModel2").getObjectByName("AtkCilinder").material.map.offset.y = tiempoPortales * 0.0025;
             
             if(AtaqueExtraCont > 10)
             {
                 Escenario.GetPraderaScene().getObjectByName("PlayerModel").remove(Escenario.GetPraderaScene().getObjectByName("PlayerModel").getObjectByName("AtkCilinder"));
                 Escenario.GetPantanoScene().getObjectByName("PlayerModel").remove(Escenario.GetPantanoScene().getObjectByName("PlayerModel").getObjectByName("AtkCilinder"));
-                Escenario.GetPraderaScene().getObjectByName("PlayerModel").remove(Escenario.GetPraderaScene().getObjectByName("PlayerModel").getObjectByName("AtkCilinder"));
+                Escenario.GetNieveScene().getObjectByName("PlayerModel").remove(Escenario.GetNieveScene().getObjectByName("PlayerModel").getObjectByName("AtkCilinder"));
                 
                 Escenario.GetPraderaScene().getObjectByName("PlayerModel2").remove(Escenario.GetPraderaScene().getObjectByName("PlayerModel2").getObjectByName("AtkCilinder"));
                 Escenario.GetPantanoScene().getObjectByName("PlayerModel2").remove(Escenario.GetPantanoScene().getObjectByName("PlayerModel2").getObjectByName("AtkCilinder"));
-                Escenario.GetPraderaScene().getObjectByName("PlayerModel2").remove(Escenario.GetPraderaScene().getObjectByName("PlayerModel2").getObjectByName("AtkCilinder"));
+                Escenario.GetNieveScene().getObjectByName("PlayerModel2").remove(Escenario.GetNieveScene().getObjectByName("PlayerModel2").getObjectByName("AtkCilinder"));
                 
                 Escenario.GetPlayer().Player1.GetStats().Ataque = 800 + (800 * (Escenario.GetPlayer().Player1.GetLevel() * 0.1));
                 Escenario.GetPlayer().Player2.GetStats().Ataque = 800 + (800 * (Escenario.GetPlayer().Player2.GetLevel() * 0.1));
@@ -2162,21 +2325,21 @@ function main()
 
             Escenario.GetPraderaScene().getObjectByName("PlayerModel").getObjectByName("DefCilinder").material.map.offset.y = tiempoPortales * 0.0025;
             Escenario.GetPantanoScene().getObjectByName("PlayerModel").getObjectByName("DefCilinder").material.map.offset.y = tiempoPortales * 0.0025;
-            Escenario.GetPraderaScene().getObjectByName("PlayerModel").getObjectByName("DefCilinder").material.map.offset.y = tiempoPortales * 0.0025;
+            Escenario.GetNieveScene().getObjectByName("PlayerModel").getObjectByName("DefCilinder").material.map.offset.y = tiempoPortales * 0.0025;
 
             Escenario.GetPraderaScene().getObjectByName("PlayerModel2").getObjectByName("DefCilinder").material.map.offset.y = tiempoPortales * 0.0025;
             Escenario.GetPantanoScene().getObjectByName("PlayerModel2").getObjectByName("DefCilinder").material.map.offset.y = tiempoPortales * 0.0025;
-            Escenario.GetPraderaScene().getObjectByName("PlayerModel2").getObjectByName("DefCilinder").material.map.offset.y = tiempoPortales * 0.0025;
+            Escenario.GetNieveScene().getObjectByName("PlayerModel2").getObjectByName("DefCilinder").material.map.offset.y = tiempoPortales * 0.0025;
 
             if(DefensaExtraCont > 10)
             {
                 Escenario.GetPraderaScene().getObjectByName("PlayerModel").remove(Escenario.GetPraderaScene().getObjectByName("PlayerModel").getObjectByName("DefCilinder"));
                 Escenario.GetPantanoScene().getObjectByName("PlayerModel").remove(Escenario.GetPantanoScene().getObjectByName("PlayerModel").getObjectByName("DefCilinder"));
-                Escenario.GetPraderaScene().getObjectByName("PlayerModel").remove(Escenario.GetPraderaScene().getObjectByName("PlayerModel").getObjectByName("DefCilinder"));
+                Escenario.GetNieveScene().getObjectByName("PlayerModel").remove(Escenario.GetNieveScene().getObjectByName("PlayerModel").getObjectByName("DefCilinder"));
 
                 Escenario.GetPraderaScene().getObjectByName("PlayerModel2").remove(Escenario.GetPraderaScene().getObjectByName("PlayerModel2").getObjectByName("DefCilinder"));
                 Escenario.GetPantanoScene().getObjectByName("PlayerModel2").remove(Escenario.GetPantanoScene().getObjectByName("PlayerModel2").getObjectByName("DefCilinder"));
-                Escenario.GetPraderaScene().getObjectByName("PlayerModel2").remove(Escenario.GetPraderaScene().getObjectByName("PlayerModel2").getObjectByName("DefCilinder"));
+                Escenario.GetNieveScene().getObjectByName("PlayerModel2").remove(Escenario.GetNieveScene().getObjectByName("PlayerModel2").getObjectByName("DefCilinder"));
 
                 Escenario.GetPlayer().Player1.GetStats().Defensa = 500 + (500 * (Escenario.GetPlayer().Player1.GetLevel() * 0.1));
                 Escenario.GetPlayer().Player2.GetStats().Defensa = 500 + (500 * (Escenario.GetPlayer().Player2.GetLevel() * 0.1));

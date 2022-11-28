@@ -27,6 +27,97 @@ class Terrain
         return this.mesh;
     }
 
+    
+
+    CreateTerrainCollision(bumpmap, scaleBump, onLoadCallback)
+    {
+        var img = new Image();
+        // load img source
+        img.onload =  () => {
+         
+            //get height data from img
+
+           var canvas = document.createElement( 'canvas' );
+           canvas.width = img.width;
+           canvas.height = img.height;
+           var context = canvas.getContext( '2d' );
+   
+           var size = img.width * img.height;
+           var data = new Float32Array( size );
+   
+           context.drawImage(img,0,0);
+   
+           for ( var i = 0; i < size; i ++ ) {
+               data[i] = 0
+           }
+   
+           var imgd = context.getImageData(0, 0, img.width, img.height);
+           var pix = imgd.data;
+   
+           var j=0;
+           for (var i = 0; i<pix.length; i +=4) {
+               var all = pix[i]+pix[i+1]+pix[i+2];
+               data[j++] = all/3;
+           }
+
+            var data2 = data;
+         
+            // plane
+            var geometry = new THREE.PlaneGeometry(18000*img.width/img.height, 18000, img.width-1, img.height-1);
+            var texture = new THREE.TextureLoader().load( bumpmap );
+            var material = new THREE.MeshLambertMaterial( { map: texture, side: THREE.DoubleSide} );
+            this.planeColl = new THREE.Mesh( geometry, material );
+            this.planeColl.visible = false;
+            //set height of vertices
+
+            for ( var i = 0; i<this.planeColl.geometry.attributes.position.array.length; i++ ) {
+                var terrainValue = data2[i] / 255;
+                this.planeColl.geometry.attributes.position.array[(i*3)-1] =  this.planeColl.geometry.attributes.position.array[(i*3)-1] + terrainValue * scaleBump ;
+            }
+            this.planeColl.geometry.attributes.position.array[this.planeColl.geometry.attributes.position.array.length-1] = 160;
+            console.log( this.planeColl.geometry.attributes.position.array);
+            this.planeColl.rotation.x = -Math.PI / 2;
+	        this.planeColl.position.y = -2;
+            onLoadCallback(this.planeColl);
+        };
+        img.src = bumpmap;
+    }
+
+    GetTerrainCollision()
+    {
+        return this.planeColl;
+    }
+
+    getHeightData(img,scale) {
+     
+        if (scale == undefined) scale=1;
+        
+           var canvas = document.createElement( 'canvas' );
+           canvas.width = img.width;
+           canvas.height = img.height;
+           var context = canvas.getContext( '2d' );
+   
+           var size = img.width * img.height;
+           var data = new Float32Array( size );
+   
+           context.drawImage(img,0,0);
+   
+           for ( var i = 0; i < size; i ++ ) {
+               data[i] = 0
+           }
+   
+           var imgd = context.getImageData(0, 0, img.width, img.height);
+           var pix = imgd.data;
+   
+           var j=0;
+           for (var i = 0; i<pix.length; i +=4) {
+               var all = pix[i]+pix[i+1]+pix[i+2];
+               data[j++] = all/(12*scale);
+           }
+           
+           return data;
+       }
+
     MultitextureTerrain(textura1, textura2, textura3, heighmap, blendmap, bump, width, height)
     {
         const vertexShader = `
@@ -209,7 +300,7 @@ class Terrain
 
         // texture used to generate "bumpiness"
         var bumpTexture = new THREE.TextureLoader().load( heighmap );
-        bumpTexture.wrapS = bumpTexture.wrapT = THREE.RepeatWrapping; 
+        bumpTexture.wrapS = bumpTexture.wrapT = THREE.RepeatWrapping;
         //blendMap
         var BlendTexture = new THREE.TextureLoader().load( blendmap );
         BlendTexture.wrapS = BlendTexture.wrapT = THREE.RepeatWrapping;

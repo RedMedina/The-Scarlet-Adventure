@@ -33,6 +33,7 @@ class Mud
             normalMap: textureNormal,
             //combine:  THREE.MultiplyOperation,
             //reflectivity: 1
+            side: THREE.DoubleSide,
             transparent: true,
             opacity: 0.85
         });

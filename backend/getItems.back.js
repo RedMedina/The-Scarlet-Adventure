@@ -1,4 +1,4 @@
-var Items;
+var Items = [];
 
 $(document).ready
 (
