@@ -33,6 +33,7 @@
      <section id="loading-screen">
         <div id="loader"></div>
         <center><p id="loading-text">Cargando...</p></center>
+        <progress value="0" max="100" id="ProgressLoad"></progress>
     </section>
     <div id="bg" class="bg"><p style="color: white; font-family: Permanent Marker; font-size: 80px;">GAME OVER</p></div>
 

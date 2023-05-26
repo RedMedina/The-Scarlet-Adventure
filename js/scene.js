@@ -18,7 +18,7 @@ class Scenee
     constructor()
     {
         this.Playeranimations = ["Assets/Models/Player/Idle_Final", "Assets/Models/Player/Run_Final",
-        "Assets/Models/Player/Attack_Final", "Assets/Models/Player/Diying_Final",
+        "Assets/Models/Player/Attack2", "Assets/Models/Player/Diying_Final",
         "Assets/Models/Player/Dodge_Final", "Assets/Models/Player/Swimming",
         "Assets/Models/Player/Jump_Final"];
 
@@ -164,6 +164,8 @@ class Scenee
         var Terreno = new Terrain();
         Terreno.MultitextureTerrain("Assets/Pantano/Pasto_Ot.jpg", "Assets/Pantano/Tierra_Mojada.jpg", "Assets/Pantano/Hojas_Tierra.jpg", "Assets/Pantano/Alts.png", "Assets/Pantano/Blendmap_Pantano.png", 1700, 18000, 18000);
         Terreno.GetPlane().position.y = -720;
+        Terreno.GetPlane().name="TerrenoPantano";
+        Terreno.SetTiempo(this.TiempoTerreno);
         this.Pantano.add(Terreno.GetPlane());
 
         Terreno.CreateTerrainCollision("Assets/Pantano/Alts_Col2.png", 1700, (object)=>{
@@ -180,7 +182,7 @@ class Scenee
          this.Pantano.add(Muros.GetPlane2());
 
         var SkydomeT = new skydome();
-        SkydomeT.Create('Assets/Images/skybox_2.png');
+        SkydomeT.Create('Assets/Images/skybox_2.png', 'Assets/Images/skybox_2T.png', 'Assets/Images/skybox_2N.png');
         SkydomeT.Render().name = "SkyPantano";
         this.Pantano.add(SkydomeT.Render());
 
@@ -1441,7 +1443,7 @@ class Scenee
 
         //Skydome
         var SkydomeT = new skydome();
-        SkydomeT.Create('Assets/Images/skyboxDay.png');
+        SkydomeT.Create('Assets/Images/skyboxDay.png', 'Assets/Images/skyboxSunset.png', 'Assets/Images/SkyNight.png');
         SkydomeT.Render().name = "SkyPradera";
         this.Pradera.add(SkydomeT.Render());
 
@@ -1450,6 +1452,7 @@ class Scenee
         Terreno.MultitextureTerrain("Assets/Pradera/Tierra_2.png", "Assets/Pradera/Pasto.jpg", "Assets/Pradera/Tierra.jpg", "Assets/Pradera/Alturas_Pradera.png", "Assets/Pradera/Blendmap_Pradera.png", 2500, 18000, 18000);
         Terreno.GetPlane().position.y = -160;
         Terreno.GetPlane().name="TerrenoPradera";
+        Terreno.SetTiempo(this.TiempoTerreno);
         this.Pradera.add(Terreno.GetPlane());
 
         Terreno.CreateTerrainCollision("Assets/Pradera/Alturas_Pradera_Col.png", 2500, (object)=>{
@@ -3025,7 +3028,7 @@ class Scenee
 
         //Skydome
         var SkydomeT = new skydome();
-        SkydomeT.Create('Assets/Images/skyboxDay.png');
+        SkydomeT.Create('Assets/Images/skyboxDay.png', 'Assets/Images/skyboxSunset.png', 'Assets/Images/SkyNight.png');
         SkydomeT.Render().name = "NieveSky";
         this.Nieve.add(SkydomeT.Render());
 
@@ -3033,6 +3036,8 @@ class Scenee
         var Terreno = new Terrain();
         Terreno.MultitextureTerrain("Assets/Nieve/Rock_Nieve.png", "Assets/Nieve/Snow.jpg", "Assets/Nieve/Snow2.jpg", "Assets/Nieve/Alturas.png", "Assets/Nieve/Blendmap_Nieve.png", 900, 18000, 18000);
         Terreno.GetPlane().position.y = -290;
+        Terreno.GetPlane().name = "TerrenoNieve";
+        Terreno.SetTiempo(this.TiempoTerreno);
         this.Nieve.add(Terreno.GetPlane());
 
         Terreno.CreateTerrainCollision("Assets/Nieve/Alturas_Col2.png", 900, (object)=>{
@@ -4197,6 +4202,11 @@ class Scenee
         const material = new THREE.MeshBasicMaterial( {map: text, transparent: true /*color: 0x00FF27*/} );
         const cylinder = new THREE.Mesh( geometry, material );
         return cylinder;
+    }
+
+    SetTimeT(tiempo)
+    {
+        this.TiempoTerreno = tiempo;
     }
 
     GetTerrains()

@@ -2,6 +2,11 @@ import * as THREE from 'three';
 
 class Terrain
 {
+    constructor()
+    {
+        //this.Tiempo = 0;
+    }
+
     Create(Texture, size)
     {
         const planeSize = size;
@@ -118,6 +123,11 @@ class Terrain
            return data;
        }
 
+    SetTiempo(time)
+    {
+        this.Tiempo = time;
+    }
+
     MultitextureTerrain(textura1, textura2, textura3, heighmap, blendmap, bump, width, height)
     {
         const vertexShader = `
@@ -131,10 +141,12 @@ class Terrain
         varying float vBlendg;
         varying float vBlendb;
         varying vec2 vUV;
+        varying vec3 vNormal;
         
         void main() 
         { 
             vUV = uv;
+            vNormal = normal;
             vec4 bumpData = texture2D( bumpTexture, uv );
             vec4 blendData = texture2D( blendmap, uv );
 
@@ -154,6 +166,7 @@ class Terrain
         uniform sampler2D oceanTexture;
         uniform sampler2D sandyTexture;
         uniform sampler2D grassTexture;
+        uniform float time;
         //uniform sampler2D rockyTexture;
         //uniform sampler2D snowyTexture;
         
@@ -164,6 +177,8 @@ class Terrain
         varying float vBlendr;
         varying float vBlendg;
         varying float vBlendb;
+        varying vec3 vNormal;
+
         
         void main() 
         {
@@ -172,10 +187,25 @@ class Terrain
             //vec4 grass = (smoothstep(0.28, 0.32, vAmount) - smoothstep(0.35, 0.40, vAmount)) * texture2D( grassTexture, vUV * 20.0 );
             //vec4 rocky = (smoothstep(0.30, 0.50, vAmount) - smoothstep(0.40, 0.70, vAmount)) * texture2D( rockyTexture, vUV * 20.0 );
             //vec4 snowy = (smoothstep(0.50, 0.65, vAmount))                                   * texture2D( snowyTexture, vUV * 10.0 );
+            float intensity = dot(vNormal, vec3(0.0, 0.0, 1.0));
             vec4 water = vBlendr * texture2D( oceanTexture, vUV * 25.0 );
             vec4 sandy = vBlendg * texture2D( sandyTexture, vUV * 25.0 );
             vec4 grass = vBlendb * texture2D( grassTexture, vUV * 25.0 );
-            gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0) + water + sandy + grass; //, 1.0);
+            vec4 color1a = vec4(0.75, 0.75, 0.75, 1); // Primer color de transición (celeste)
+            vec4 color2b = vec4(1.0, 0.5, 0.2, 1); // Segundo color de transición (naranja)
+            vec4 color3c = vec4(0.0, 0.0, 0.0, 1); // Tercer color de transición (negro)
+            vec4 finalColor = mix(color1a, color2b, time);
+            finalColor = mix(finalColor, color3c, time);
+            float MixValue;
+            if(time>0.5)
+            {
+                MixValue=0.7f;
+            }
+            else
+            {
+                MixValue=0.3f;
+            }
+            gl_FragColor = mix( (vec4(0.0, 0.0, 0.0, 1.0) + water + sandy + grass)*intensity, finalColor, MixValue); //, 1.0);
         }`;
 
         // texture used to generate "bumpiness"
@@ -199,12 +229,11 @@ class Terrain
 
         const mirrorShader = {
             uniforms: THREE.UniformsUtils.merge( [
-            THREE.UniformsLib[ 'fog' ],
-            THREE.UniformsLib[ 'lights' ],
-            THREE.UniformsLib.fog,
+			//UniformsLib[ 'lights' ],
+            //THREE.UniformsLib.fog,
             THREE.UniformsLib.lights,
-            THREE.UniformsLib.shadowmap,
-            THREE.UniformsLib.ambient,
+            //THREE.UniformsLib.shadowmap,
+            //THREE.UniformsLib.ambient,
             {
                 'bumpTexture': { value: bumpTexture },
                 'blendmap': { value: BlendTexture },
@@ -212,6 +241,7 @@ class Terrain
                 'oceanTexture': { value: oceanTexture },
                 'sandyTexture': { value: sandyTexture },
                 'grassTexture': { value: grassTexture },
+                'time': { value: 0 },
             }
         ] )
         };
@@ -222,8 +252,8 @@ class Terrain
             vertexShader:   vertexShader,
             fragmentShader: fragmentShader,
             lights: true,
-            shadowmap: true,
-            // side: THREE.DoubleSide
+           // shadowmap: true,
+            side: THREE.DoubleSide
         });
 
         var planeGeo = new THREE.PlaneGeometry( width, height, 100, 100 );
@@ -231,6 +261,7 @@ class Terrain
 	    this.plane.rotation.x = -Math.PI / 2;
 	    this.plane.position.y = -2;
         this.plane.receiveShadow = true;
+        this.plane.castShadow = true;
     }
 
     GetPlane()

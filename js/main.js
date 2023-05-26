@@ -30,22 +30,37 @@ function main()
     let intensityAmbientLight = 1;
     let intensityL = true;
     var Dia = true;
+
+    let ColorDia = new THREE.Color(0xFFFFFF);
+    let ColorTarde = new THREE.Color(0xffa500);
+    let ColorNoche = new THREE.Color(0x000033);
     
     var keys = {};
     var Actionkeys = {Attack: false, Dodge: false, Jump: false, Die: false, Nado: false};
     var mousekeys = [];
     var ModelsLoaded = false;
+    var pos1;
 
     document.addEventListener('keydown', onKeyDown);
 	document.addEventListener('keyup', onKeyUp);
     document.addEventListener('mousemove', onMouseMove);
 
+    var ProgressBar = document.getElementById( 'ProgressLoad' );
+
     const loadingManager = new THREE.LoadingManager( () => {
 		const loadingScreen = document.getElementById( 'loading-screen' );
 		loadingScreen.classList.add( 'fade-out' );
 		loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
-        
+       
 	} );
+
+    
+    loadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+        // Calcula el porcentaje de recursos cargados
+        const progress = (itemsLoaded / itemsTotal) * 100;
+        // Actualiza el valor de tu barra de progreso
+        ProgressBar.value = progress;
+    };
 
     loadingManager.onLoad = function()
     {
@@ -80,6 +95,10 @@ function main()
         Escenario.GetPantanoEnemies().Object.sort(function(a,b){return a.GetNum() - b.GetNum()});
         Escenario.GetNieveEnemies().Collider.sort(function(a,b){return a.name - b.name});
         Escenario.GetNieveEnemies().Object.sort(function(a,b){return a.GetNum() - b.GetNum()});
+
+        //pos1 = Escenario.GetPraderaScene().getObjectByName("PlayerModel").position;
+        //var pos2 = Escenario.GetPantanoScene().getObjectByName("PlayerModel").position;
+        //var pos3 = Escenario.GetNieveScene().getObjectByName("PlayerModel").position;
     }
 
     Escenario.InitScene(loadingManager);
@@ -243,6 +262,8 @@ function main()
                 }
             },
             side: THREE.DoubleSide,
+           // lights: true,
+           // shadowmap: true
         });
 
         const instanceNumber = instanNumber;
@@ -758,6 +779,7 @@ function main()
                 Escenario.GetPraderaScene().getObjectByName("PlayerModel").position.z < -8750)
                 {
                     Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(-movPas * delta);
+                    //Escenario.GetPraderaScene().getObjectByName("PlayerModel").position = pos1;
                 }
 
                 //Collision Pradera objetos estaticos
@@ -784,6 +806,7 @@ function main()
                         }else
                         {
                             Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(-movPas * delta);
+                            //Escenario.GetPraderaScene().getObjectByName("PlayerModel").position = pos1;
                         }
                     }
                 }
@@ -1522,9 +1545,30 @@ function main()
 			intensityAmbientLight = 0;
 			intensityL = true;
 		}
-        Escenario.GetPraderaScene().getObjectByName("LuzPradera").intensity = intensityAmbientLight + 0.2;
-        Escenario.GetPantanoScene().getObjectByName("LuzPantano").intensity = intensityAmbientLight + 0.2;
-        Escenario.GetNieveScene().getObjectByName("LuzNieve").intensity = intensityAmbientLight + 0.2;
+
+        //Change Ambient Light
+        let finalColor = new THREE.Color().lerpColors(ColorDia, ColorTarde, 1-intensityAmbientLight);
+        finalColor = new THREE.Color().lerpColors(finalColor, ColorNoche, 1-intensityAmbientLight);
+        Escenario.SetTimeT(1-intensityAmbientLight);
+
+        //Escenario.GetPraderaScene().getObjectByName("LuzPradera").intensity = intensityAmbientLight + 0.2;
+        Escenario.GetPraderaScene().getObjectByName("LuzPradera").color = finalColor;
+        Escenario.GetPraderaScene().getObjectByName("TerrenoPradera").material.uniforms.time.value = 1-intensityAmbientLight;
+        Escenario.GetPraderaScene().getObjectByName("TerrenoPradera").material.needsUpdate = true;
+        Escenario.GetPraderaScene().getObjectByName("SkyPradera").material.uniforms.mixValue.value= 1-intensityAmbientLight;
+        Escenario.GetPraderaScene().getObjectByName("SkyPradera").material.needsUpdate = true;
+        //Escenario.GetPantanoScene().getObjectByName("LuzPantano").intensity = intensityAmbientLight + 0.2;
+        Escenario.GetPantanoScene().getObjectByName("LuzPantano").color = finalColor;
+        Escenario.GetPantanoScene().getObjectByName("TerrenoPantano").material.uniforms.time.value = 1-intensityAmbientLight;
+        Escenario.GetPantanoScene().getObjectByName("TerrenoPantano").material.needsUpdate = true;
+        Escenario.GetPantanoScene().getObjectByName("SkyPantano").material.uniforms.mixValue.value= 1-intensityAmbientLight;
+        Escenario.GetPantanoScene().getObjectByName("SkyPantano").material.needsUpdate = true;
+        //Escenario.GetNieveScene().getObjectByName("LuzNieve").intensity = intensityAmbientLight + 0.2;
+        Escenario.GetNieveScene().getObjectByName("LuzNieve").color = finalColor;
+        Escenario.GetNieveScene().getObjectByName("TerrenoNieve").material.uniforms.time.value = 1-intensityAmbientLight;
+        Escenario.GetNieveScene().getObjectByName("TerrenoNieve").material.needsUpdate = true;
+        Escenario.GetNieveScene().getObjectByName("NieveSky").material.uniforms.mixValue.value= 1-intensityAmbientLight;
+        Escenario.GetNieveScene().getObjectByName("NieveSky").material.needsUpdate = true;
         Escenario.GetPraderaScene().getObjectByName("Sun").intensity = intensityAmbientLight + 0.2;
 
         tiempoPortales++;
