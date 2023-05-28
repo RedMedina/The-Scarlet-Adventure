@@ -162,7 +162,7 @@ class Scenee
         //this.Pantano.add( helper );
 
         var Terreno = new Terrain();
-        Terreno.MultitextureTerrain("Assets/Pantano/Pasto_Ot.jpg", "Assets/Pantano/Tierra_Mojada.jpg", "Assets/Pantano/Hojas_Tierra.jpg", "Assets/Pantano/Alts.png", "Assets/Pantano/Blendmap_Pantano.png", 1700, 18000, 18000);
+        Terreno.MultitextureTerrain("Assets/Pantano/Pasto_Ot.jpg", "Assets/Pantano/Tierra_Mojada.jpg", "Assets/Pantano/Hojas_Tierra.jpg", "Assets/Pantano/Pasto_OtN.png", "Assets/Pantano/Tierra_MojadaN.png", "Assets/Pantano/Hojas_TierraN.png", "Assets/Pantano/Alts.png", "Assets/Pantano/Blendmap_Pantano.png", 1700, 18000, 18000);
         Terreno.GetPlane().position.y = -720;
         Terreno.GetPlane().name="TerrenoPantano";
         Terreno.SetTiempo(this.TiempoTerreno);
@@ -1449,7 +1449,7 @@ class Scenee
 
         //Terreno
         var Terreno = new Terrain();
-        Terreno.MultitextureTerrain("Assets/Pradera/Tierra_2.png", "Assets/Pradera/Pasto.jpg", "Assets/Pradera/Tierra.jpg", "Assets/Pradera/Alturas_Pradera.png", "Assets/Pradera/Blendmap_Pradera.png", 2500, 18000, 18000);
+        Terreno.MultitextureTerrain("Assets/Pradera/Tierra_2.png", "Assets/Pradera/Pasto.jpg", "Assets/Pradera/Tierra.jpg", "Assets/Pradera/Tierra_2N.png", "Assets/Pradera/PastoN.png", "Assets/Pradera/TierraN.png","Assets/Pradera/Alturas_Pradera.png", "Assets/Pradera/Blendmap_Pradera.png", 2500, 18000, 18000);
         Terreno.GetPlane().position.y = -160;
         Terreno.GetPlane().name="TerrenoPradera";
         Terreno.SetTiempo(this.TiempoTerreno);
@@ -3034,7 +3034,7 @@ class Scenee
 
         //Terreno
         var Terreno = new Terrain();
-        Terreno.MultitextureTerrain("Assets/Nieve/Rock_Nieve.png", "Assets/Nieve/Snow.jpg", "Assets/Nieve/Snow2.jpg", "Assets/Nieve/Alturas.png", "Assets/Nieve/Blendmap_Nieve.png", 900, 18000, 18000);
+        Terreno.MultitextureTerrain("Assets/Nieve/Rock_Nieve.png", "Assets/Nieve/Snow.jpg", "Assets/Nieve/Snow2.jpg", "Assets/Nieve/Rock_NieveN.png", "Assets/Nieve/SnowN.png", "Assets/Nieve/Snow2N.png", "Assets/Nieve/Alturas.png", "Assets/Nieve/Blendmap_Nieve.png", 900, 18000, 18000);
         Terreno.GetPlane().position.y = -290;
         Terreno.GetPlane().name = "TerrenoNieve";
         Terreno.SetTiempo(this.TiempoTerreno);
