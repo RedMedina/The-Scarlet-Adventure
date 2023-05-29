@@ -177,8 +177,9 @@ class Scenee
 
          //Muros
          var Muros = new Terrain();
-         Muros.MultitextureTerrainWall("Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/AltsMuros.png", "Assets/Images/BlendMuros.png", 1000, 23000, 24000);
+         Muros.MultitextureTerrainWall("Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/MuroNormal.png", "Assets/Images/AltsMuros.png", "Assets/Images/BlendMuros.png", 1000, 23000, 24000);
          Muros.GetPlane2().position.y = -300;
+         Muros.GetPlane2().name="MuroPantano";
          this.Pantano.add(Muros.GetPlane2());
 
         var SkydomeT = new skydome();
@@ -187,7 +188,7 @@ class Scenee
         this.Pantano.add(SkydomeT.Render());
 
         this.Lodo = new Mud();
-        this.Lodo.CreateMud('Assets/Images/skyboxDay.png', "Assets/Pantano/lodo.jpg", "Assets/Pantano/lodoNormal.png");
+        this.Lodo.CreateMud('Assets/Images/skyboxDay.png', "Assets/Pantano/lodo.jpg", "Assets/Pantano/lodoNormal.png", "Assets/Pantano/lodoNormal2.png");
         this.Pantano.add(this.Lodo.GetMud());
         this.tiempo = 0;
 
@@ -1467,8 +1468,9 @@ class Scenee
 
         //Muros
         var Muros = new Terrain();
-        Muros.MultitextureTerrainWall("Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/AltsMuros.png", "Assets/Images/BlendMuros.png", 1000, 23000, 24000);
+        Muros.MultitextureTerrainWall("Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/MuroNormal.png", "Assets/Images/AltsMuros.png", "Assets/Images/BlendMuros.png", 1000, 23000, 24000);
         Muros.GetPlane2().position.y = -200;
+        Muros.GetPlane2().name="MuroPradera";
         this.Pradera.add(Muros.GetPlane2());
 
         //Modelos
@@ -3049,8 +3051,9 @@ class Scenee
 
         //Muros
         var Muros = new Terrain();
-        Muros.MultitextureTerrainWall("Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/AltsMuros.png", "Assets/Images/BlendMuros.png", 1000, 23000, 24000);
+        Muros.MultitextureTerrainWall("Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/Muro.png", "Assets/Images/MuroNormal.png", "Assets/Images/AltsMuros.png", "Assets/Images/BlendMuros.png", 1000, 23000, 24000);
         Muros.GetPlane2().position.y = -310;
+        Muros.GetPlane2().name="MuroNieve";
         this.Nieve.add(Muros.GetPlane2());
 
         //Modelos
@@ -4112,10 +4115,12 @@ class Scenee
         }
     }
 
-    LodoUpdate()
+    LodoUpdate(time2)
     {
         this.tiempo++;
-        this.Lodo.GetMud().material.map.offset.y = this.tiempo * 0.0025;
+        //this.Lodo.GetMud().material.uniforms.offset.y = this.tiempo * 0.0025;
+        this.Lodo.GetMud().material.uniforms.time.value = this.tiempo * 0.0025;
+        this.Lodo.GetMud().material.uniforms.timeDay.value = time2;
     }
 
     Snow()
