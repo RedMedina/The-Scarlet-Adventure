@@ -13,6 +13,7 @@ class Shots
         const materialCollider = new THREE.MeshBasicMaterial( {color: 0xFFFFFF} );
         const cube = new THREE.Mesh( geometry, materialCollider );
         cube.position.set(position.x, position.y + 150, position.z);
+        //const light = new THREE.PointLight(0xBE00F1, 1, 10);
         if(disparo)
         {
             cube.rotation.y = rotY;
@@ -29,6 +30,7 @@ class Shots
         particle.scale.set(60, 60, 60);
         cube.name = "disparo";
         cube.add(particle);
+        //cube.add(light);
         cube.material.transparent = true;
         cube.material.opacity = 0;
         return cube;

@@ -180,7 +180,7 @@ function main()
 				waterNormals: new THREE.TextureLoader().load( 'Assets/Images/Water_1_M_Normal.jpg', function ( texture ) {
 					texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 				} ),
-				sunDirection: new THREE.Vector3(),
+				sunDirection: new THREE.Vector3(-2,0,-4),
 				sunColor: 0xffffff,
 				//waterColor: 0x001e0f,
                 waterColor: 0xDEF1FF,
@@ -1552,6 +1552,8 @@ function main()
         Escenario.SetTimeT(1-intensityAmbientLight);
 
         Escenario.LodoUpdate(1-intensityAmbientLight);
+
+        water.material.uniforms[ 'sunColor' ].value = finalColor;
 
         //Escenario.GetPraderaScene().getObjectByName("LuzPradera").intensity = intensityAmbientLight + 0.2;
         Escenario.GetPraderaScene().getObjectByName("LuzPradera").color = finalColor;
