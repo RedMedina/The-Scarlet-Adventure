@@ -16,6 +16,11 @@ function main()
 
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    const shadowRenderTarget = new THREE.WebGLRenderTarget(1920, 1080);
+    // Configurar el renderer para renderizar al render target
+    const originalRenderTarget = renderer.getRenderTarget();
+    renderer.setRenderTarget(shadowRenderTarget);
+   
 
     var Escenario = new Scenee();
     var Scene;
@@ -30,6 +35,8 @@ function main()
     let intensityAmbientLight = 1;
     let intensityL = true;
     var Dia = true;
+
+    let InitMusicTime = 0;
 
     let ColorDia = new THREE.Color(0xFFFFFF);
     let ColorTarde = new THREE.Color(0xffa500);
@@ -60,6 +67,7 @@ function main()
         const progress = (itemsLoaded / itemsTotal) * 100;
         // Actualiza el valor de tu barra de progreso
         ProgressBar.value = progress;
+        document.getElementById("loading-text").innerHTML = "Cargando... "+ progress.toFixed(2) + " %" + " <br>" + url;
     };
 
     loadingManager.onLoad = function()
@@ -96,6 +104,32 @@ function main()
         Escenario.GetNieveEnemies().Collider.sort(function(a,b){return a.name - b.name});
         Escenario.GetNieveEnemies().Object.sort(function(a,b){return a.GetNum() - b.GetNum()});
 
+        audioCont.PlayInit();
+
+        window.Dialog_Present.show();
+        var dialog = document.getElementById('Dialog_Present');
+        switch (PlayerDatos.scene) {
+            case 1:
+                document.getElementById('MessagePresent').innerHTML="Zona Pradera";
+                break;
+            case 2:
+                document.getElementById('MessagePresent').innerHTML="Zona Pantano";
+                break;
+            case 3:
+                document.getElementById('MessagePresent').innerHTML="Zona de Nieve";
+                break;
+            default:
+                break;
+        }
+      
+        dialog.classList.add('show');
+        setTimeout(function() {
+            dialog.classList.remove('show');
+            dialog.classList.add('hide');
+            //window.Dialog_Present.close();// Agrega la clase para ocultar gradualmente el cuadro de diálogo
+          }, 7000);
+          
+
         //pos1 = Escenario.GetPraderaScene().getObjectByName("PlayerModel").position;
         //var pos2 = Escenario.GetPantanoScene().getObjectByName("PlayerModel").position;
         //var pos3 = Escenario.GetNieveScene().getObjectByName("PlayerModel").position;
@@ -120,6 +154,12 @@ function main()
     {
         Scene = Escenario.GetNieveScene();
     }
+
+    renderer.render(Scene, Camara.GetCamera());
+    // Restaurar el render target original
+    renderer.setRenderTarget(originalRenderTarget);
+    const shadowMapTexture = shadowRenderTarget.texture;
+    console.log(shadowMapTexture);
    
     const audioCont = new AudioController();
     var SonidoFinal = Configuraciones.sonido * 0.001;
@@ -802,6 +842,17 @@ function main()
                                 }
                                 ActualScene = 2;
                                 Escenario.GetPantanoScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+                                
+                                audioCont.PlayInit();
+                                var dialog = document.getElementById('Dialog_Present');
+                                document.getElementById('MessagePresent').innerHTML="Zona Pantano";
+                                dialog.classList.remove('hide');
+                                dialog.classList.add('show');
+                                setTimeout(function() {
+                                    dialog.classList.remove('show');
+                                    dialog.classList.add('hide');
+                                    //window.Dialog_Present.close();// Agrega la clase para ocultar gradualmente el cuadro de diálogo
+                                }, 7000);
                             }
                         }else
                         {
@@ -970,6 +1021,17 @@ function main()
                                 }
                                 ActualScene = 1;
                                 Escenario.GetPraderaScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+
+                                audioCont.PlayInit();
+                                var dialog = document.getElementById('Dialog_Present');
+                                document.getElementById('MessagePresent').innerHTML="Zona Pradera";
+                                dialog.classList.remove('hide');
+                                dialog.classList.add('show');
+                                setTimeout(function() {
+                                    dialog.classList.remove('show');
+                                    dialog.classList.add('hide');
+                                    //window.Dialog_Present.close();// Agrega la clase para ocultar gradualmente el cuadro de diálogo
+                                }, 7000);
                             }
                         }
                         else if(collision[0].object.name == "portalNieve")
@@ -985,6 +1047,17 @@ function main()
                                 }
                                 ActualScene = 3;
                                 Escenario.GetNieveScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+
+                                audioCont.PlayInit();
+                                var dialog = document.getElementById('Dialog_Present');
+                                document.getElementById('MessagePresent').innerHTML="Zona de Nieve";
+                                dialog.classList.remove('hide');
+                                dialog.classList.add('show');
+                                setTimeout(function() {
+                                    dialog.classList.remove('show');
+                                    dialog.classList.add('hide');
+                                    //window.Dialog_Present.close();// Agrega la clase para ocultar gradualmente el cuadro de diálogo
+                                }, 7000);
                             }
                         }
                         else
@@ -1148,6 +1221,17 @@ function main()
                                 }
                                 ActualScene = 2;
                                 Escenario.GetPantanoScene().getObjectByName("PlayerModel").add(Camara.GetCamera());
+
+                                audioCont.PlayInit();
+                                var dialog = document.getElementById('Dialog_Present');
+                                document.getElementById('MessagePresent').innerHTML="Zona Pantano";
+                                dialog.classList.remove('hide');
+                                dialog.classList.add('show');
+                                setTimeout(function() {
+                                    dialog.classList.remove('show');
+                                    dialog.classList.add('hide');
+                                    //window.Dialog_Present.close();// Agrega la clase para ocultar gradualmente el cuadro de diálogo
+                                }, 7000);
                             }
                         }
                         else
@@ -1558,6 +1642,7 @@ function main()
         //Escenario.GetPraderaScene().getObjectByName("LuzPradera").intensity = intensityAmbientLight + 0.2;
         Escenario.GetPraderaScene().getObjectByName("LuzPradera").color = finalColor;
         Escenario.GetPraderaScene().getObjectByName("TerrenoPradera").material.uniforms.time.value = 1-intensityAmbientLight;
+        Escenario.GetPraderaScene().getObjectByName("TerrenoPradera").material.uniforms.shadowMap.value = shadowMapTexture;
         Escenario.GetPraderaScene().getObjectByName("TerrenoPradera").material.needsUpdate = true;
         Escenario.GetPraderaScene().getObjectByName("MuroPradera").material.uniforms.time.value = 1-intensityAmbientLight;
         Escenario.GetPraderaScene().getObjectByName("MuroPradera").material.needsUpdate = true;
@@ -1566,6 +1651,7 @@ function main()
         //Escenario.GetPantanoScene().getObjectByName("LuzPantano").intensity = intensityAmbientLight + 0.2;
         Escenario.GetPantanoScene().getObjectByName("LuzPantano").color = finalColor;
         Escenario.GetPantanoScene().getObjectByName("TerrenoPantano").material.uniforms.time.value = 1-intensityAmbientLight;
+        Escenario.GetPantanoScene().getObjectByName("TerrenoPantano").material.uniforms.shadowMap.value = shadowMapTexture;
         Escenario.GetPantanoScene().getObjectByName("TerrenoPantano").material.needsUpdate = true;
         Escenario.GetPantanoScene().getObjectByName("MuroPantano").material.uniforms.time.value = 1-intensityAmbientLight;
         Escenario.GetPantanoScene().getObjectByName("MuroPantano").material.needsUpdate = true;
@@ -1574,6 +1660,7 @@ function main()
         //Escenario.GetNieveScene().getObjectByName("LuzNieve").intensity = intensityAmbientLight + 0.2;
         Escenario.GetNieveScene().getObjectByName("LuzNieve").color = finalColor;
         Escenario.GetNieveScene().getObjectByName("TerrenoNieve").material.uniforms.time.value = 1-intensityAmbientLight;
+        Escenario.GetNieveScene().getObjectByName("TerrenoNieve").material.uniforms.shadowMap.value = shadowMapTexture;
         Escenario.GetNieveScene().getObjectByName("TerrenoNieve").material.needsUpdate = true;
         Escenario.GetNieveScene().getObjectByName("MuroNieve").material.uniforms.time.value = 1-intensityAmbientLight;
         Escenario.GetNieveScene().getObjectByName("MuroNieve").material.needsUpdate = true;
@@ -1635,8 +1722,11 @@ function main()
         if(Die)
         {
             DieDuracion += delta;
+            window.Dialog_Death.show();
+            var dialog = document.getElementById('Dialog_Death');
+            dialog.classList.add('show');
            
-            if(DieDuracion > 2)
+            if(DieDuracion > 4)
             {
                 Die = false;
                 DieDuracion = 0;

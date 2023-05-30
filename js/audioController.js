@@ -39,6 +39,17 @@ class AudioController
         this.NocheSound = new Audioo();
         this.NocheSound.create("Noche");
         this.NocheSound.Sound("Assets/BGM/Noche.mp3");
+
+        //InitSound 
+        this.InitSound = new Audioo();
+        this.InitSound.create("InitSound");
+        this.InitSound.Sound("Assets/BGM/NewArea.mp3");
+    }
+
+    PlayInit()
+    {
+        this.InitSound.GetSound().setLoop( false );
+        this.InitSound.GetSound().play();
     }
 
     PlaySceneSound(sceneActual)
@@ -143,6 +154,7 @@ class AudioController
         this.NieveSound1.GetSound().setVolume(volumen);
         this.NieveSound2.GetSound().setVolume(volumen);
         this.NocheSound.GetSound().setVolume(volumen);
+        this.InitSound.GetSound().setVolume(volumen);
     }
 
     StopAllSound()

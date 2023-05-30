@@ -153,6 +153,9 @@ class Terrain
         varying vec3 LightDirection_cameraspace;
         varying vec3 LightDirection_tangentspace;
         varying vec3 EyeDirection_tangentspace;
+
+        //--------
+        varying vec4 vPosition;
         
         vec3 calculateTangent(vec3 position1, vec3 position2, vec3 position3, vec2 uv1, vec2 uv2, vec2 uv3) {
             vec3 edge1 = position2 - position1;
@@ -211,7 +214,7 @@ class Terrain
             
             // move the position along the normal
             vec3 newPosition = position + normal * bumpScale * vAmount;
-            
+            vPosition = modelMatrix * vec4(position, 1.0);
             gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
         }`;
 
@@ -223,6 +226,8 @@ class Terrain
         uniform sampler2D Texture2Normal;
         uniform sampler2D Texture3Normal;
         uniform float time;
+        uniform vec3 lightPosition;
+        uniform sampler2D shadowMap;
         
         varying vec2 vUV;
         
@@ -244,6 +249,9 @@ class Terrain
         varying vec3 LightDirection_tangentspace;
         varying vec3 EyeDirection_tangentspace;
 
+        //--------
+        varying vec4 vPosition;
+
         const float ambientStrength = 0.8;
         const float specularStrength = 0.9;
         const float shininess = 32.0;
@@ -252,6 +260,15 @@ class Terrain
         
         void main() 
         {
+
+            vec4 shadowCoord = vPosition / vPosition.w;
+            shadowCoord.xyz = shadowCoord.xyz * 0.5 + 0.5;
+
+            float shadow = texture2D(shadowMap, shadowCoord.xy).r;
+            vec3 lightDirection = normalize(lightPosition - vPosition.xyz);
+            float lightIntensity = dot(vNormal, lightDirection);
+            lightIntensity = clamp(lightIntensity, 0.0, 1.0);
+            lightIntensity *= shadow;
 
             float intensity = dot(vNormal, vec3(0.0, 0.0, 1.0));
             vec4 water = vBlendr * texture2D( oceanTexture, vUV * 25.0 );
@@ -310,7 +327,7 @@ class Terrain
                 MixValue=0.3f;
             
             }
-            gl_FragColor = mix( vec4(colorFinal, 1.0), finalColor, MixValue); //, 1.0);
+            gl_FragColor = mix( vec4(colorFinal, 1.0), finalColor, MixValue) /* *  lightIntensity*/; //, 1.0);
         }`;
 
         // texture used to generate "bumpiness"
@@ -345,7 +362,7 @@ class Terrain
 			//UniformsLib[ 'lights' ],
             //THREE.UniformsLib.fog,
             THREE.UniformsLib.lights,
-            //THREE.UniformsLib.shadowmap,
+            THREE.UniformsLib.shadowmap,
             //THREE.UniformsLib.ambient,
             {
                 'bumpTexture': { value: bumpTexture },
@@ -357,6 +374,8 @@ class Terrain
                 'Texture1Normal': { value: NormalT1 },
                 'Texture2Normal': { value: NormalT2 },
                 'Texture3Normal': { value: NormalT3 },
+                'lightPosition': { value: new THREE.Vector3(20, 90, 0) },
+                'shadowMap': { value: NormalT3 },
                 'time': { value: 0 },
             }
         ] )
@@ -368,7 +387,7 @@ class Terrain
             vertexShader:   vertexShader,
             fragmentShader: fragmentShader,
             lights: true,
-           // shadowmap: true,
+            shadowmap: true,
             side: THREE.DoubleSide
         });
 
