@@ -44,33 +44,33 @@ class GUI
 
         const movement = document.createElement('label');
         movement.id = "movement";
-        movement.innerHTML = "Movimento: <img src='Assets/Images/w.png' width='30' height='30'><img src='Assets/Images/a.png' width='30' height='30'><img src='Assets/Images/flechaI.png' width='30' height='30'><img src='Assets/Images/FlechaD.png' width='30' height='30'>";
+        movement.innerHTML = "Movimento: <img src='Assets/Images/mov1.png' width='30' height='30'><img src='Assets/Images/mov2.png' width='30' height='30'><!------img src='Assets/Images/flechaI.png' width='30' height='30'><img src='Assets/Images/FlechaD.png' width='30' height='30'------>";
         document.body.appendChild(movement);
 
         const Attack = document.createElement('label');
         Attack.id = "AttackH";
-        Attack.innerHTML = "Atacar: <img src='Assets/Images/e.png' width='30' height='30'>";
+        Attack.innerHTML = "Atacar: <img src='Assets/Images/zr.png' width='30' height='30'>";
         document.body.appendChild(Attack);
 
         const Dodge = document.createElement('label');
         Dodge.id = "DodgeH";
-        Dodge.innerHTML = "Esquivar: <img src='Assets/Images/q.png' width='30' height='30'>";
+        Dodge.innerHTML = "Esquivar: <img src='Assets/Images/zl.png' width='30' height='30'>";
         document.body.appendChild(Dodge);
 
         const Menu = document.createElement('label');
         Menu.id = "MenuH";
-        Menu.innerHTML = "Menu/Pausa: <img src='Assets/Images/p.png' width='30' height='30'>";
+        Menu.innerHTML = "Menu/Pausa: <img src='Assets/Images/+.png' width='30' height='30'>";
         document.body.appendChild(Menu);
     }
 
     DesbrillarReaction()
     {
-        this.Interactuar.innerHTML = "Interactuar: <img src='Assets/Images/r.png' width='30' height='30'>";
+        this.Interactuar.innerHTML = "Interactuar: <img src='Assets/Images/X.png' width='30' height='30'>";
     }
 
     BrillarReaction()
     {
-        this.Interactuar.innerHTML = "Interactuar: <img src='Assets/Images/r_select.png' width='30' height='30'>";
+        this.Interactuar.innerHTML = "Interactuar: <img src='Assets/Images/X_selected.png' width='30' height='30'>";
     }
 
 

@@ -21,7 +21,7 @@ class modelAnimController
             personaje.traverse( function ( child ) {
                 if (child.isMesh) {
                     child.castShadow = true;
-                    child.receiveShadow = false;
+                    child.receiveShadow = true;
                     child.material.side = THREE.DoubleSide;
                  }
             });
@@ -38,7 +38,7 @@ class modelAnimController
             object.traverse( function (child) {
                 if (child.isMesh) {
                     child.castShadow = true;
-                    child.receiveShadow = false;
+                    child.receiveShadow = true;
                     child.material.side = THREE.DoubleSide;
                 }
             });

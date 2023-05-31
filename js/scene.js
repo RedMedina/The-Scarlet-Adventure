@@ -35,6 +35,9 @@ class Scenee
         //Objetos Recolectables Nieve
         this.NieveItems;
 
+        //Fuego
+        this.PraderaFuego = [];
+
 
         //Pradera Enemies
         this.PraderaEnemies = []; //Temporal hasta tener la ia y stats
@@ -700,26 +703,42 @@ class Scenee
         this.Load3dModelGLTF("Assets/Models/Campamento/Antorcha.glb", loadingManager,(object)=>{ //Antorcha
             object.position.y = 320;
             object.scale.set(13, 13, 13);
+            //---Point Light
+            const light = new THREE.PointLight( 0xE8442A, 5, 300 );
+            light.position.set( -5000, 370, 6300 );
+            this.Pantano.add(light);
 
             var Antorcha2 = object.clone();
             Antorcha2.position.x = -200;
             Antorcha2.position.y = -50;
             Antorcha2.position.z = 6500;
+            var light2 = light.clone();
+            light2.position.set(-200, 0, 6500 );
+            this.Pantano.add(light2);
 
             var Antorcha3 = object.clone();
             Antorcha3.position.x = 1500;
             Antorcha3.position.y = 250;
             Antorcha3.position.z = 6500;
+            var light3 = light.clone();
+            light3.position.set(1500, 300, 6500 );
+            this.Pantano.add(light3);
 
             var Antorcha4 = object.clone();
             Antorcha4.position.x = 1500;
             Antorcha4.position.y = 320;
             Antorcha4.position.z = -6500;
+            var light4 = light.clone();
+            light4.position.set(1500, 380, -6500 );
+            this.Pantano.add(light4);
 
             var Antorcha5 = object.clone();
             Antorcha5.position.x = -2500;
             Antorcha5.position.y = -60;
             Antorcha5.position.z = -6500;
+            var light5 = light.clone();
+            light5.position.set(-2500, 0, -6500 );
+            this.Pantano.add(light5);
 
             object.position.x = -5000;
             object.position.z = 6300;
@@ -1407,14 +1426,14 @@ class Scenee
         //Luces
         var Luces = new Lightt();
         Luces.DirectionalLight(0xFFFFFF, 0.3);
-        Luces.DirectionDLight(20, 90, 0);
+        Luces.DirectionDLight(20, 1000, 0);
         Luces.AmbientLight(0xFFFFFF);
         Luces.GetAmbientLight().name = "LuzPradera";
         this.Pradera.add(Luces.GetAmbientLight());
         this.Pradera.add(Luces.GetDirectionalLight());
         this.Pradera.add(Luces.GetDirectionalLight().target);
-        Luces.GetDirectionalLight().shadow.mapSize.width = 512;
-        Luces.GetDirectionalLight().shadow.mapSize.height = 512;
+        Luces.GetDirectionalLight().shadow.mapSize.width = 2048;
+        Luces.GetDirectionalLight().shadow.mapSize.height = 2048;
         Luces.GetDirectionalLight().shadow.camera.near = 0.5;
         Luces.GetDirectionalLight().shadow.camera.far = 10000;
 
@@ -1453,6 +1472,7 @@ class Scenee
         Terreno.MultitextureTerrain("Assets/Pradera/Tierra_2.png", "Assets/Pradera/Pasto.jpg", "Assets/Pradera/Tierra.jpg", "Assets/Pradera/Tierra_2N.png", "Assets/Pradera/PastoN.png", "Assets/Pradera/TierraN.png","Assets/Pradera/Alturas_Pradera.png", "Assets/Pradera/Blendmap_Pradera.png", 2500, 18000, 18000);
         Terreno.GetPlane().position.y = -160;
         Terreno.GetPlane().name="TerrenoPradera";
+        //Terreno.GetPlane().visible = false;
         Terreno.SetTiempo(this.TiempoTerreno);
         this.Pradera.add(Terreno.GetPlane());
 
@@ -1472,6 +1492,20 @@ class Scenee
         Muros.GetPlane2().position.y = -200;
         Muros.GetPlane2().name="MuroPradera";
         this.Pradera.add(Muros.GetPlane2());
+
+        //---Fuego
+        const textureLoaderr = new THREE.TextureLoader();
+        const gifFrames = textureLoaderr.load('Assets/Images/Fuego.gif');
+        gifFrames.minFilter = THREE.LinearFilter;
+        const spriteMaterial = new THREE.SpriteMaterial({
+            map: gifFrames,
+        });
+        const sprite = new THREE.Sprite(spriteMaterial);
+        sprite.scale.set(100, 100, 100);
+        sprite.position.set(-8000, 400, 5800);
+        this.Pradera.add(sprite);
+        console.log(sprite);
+        this.PraderaFuego.push(sprite);
 
         //Modelos
 
@@ -2010,62 +2044,123 @@ class Scenee
         this.Load3dModelGLTF("Assets/Models/Campamento/Antorcha.glb", loadingManager, (object)=>{
             object.position.y = 220;
             object.scale.set(13, 13, 13);
+            //---Point Light
+            const light = new THREE.PointLight( 0xE8442A, 5, 300 );
+            light.position.set( -8000, 280, 5800 );
+            this.Pradera.add(light);
+           
 
             var Antorcha2 = object.clone();
             Antorcha2.position.x = -5000;
             Antorcha2.position.z = 5800;
+            var light2 = light.clone();
+            light2.position.x = -5000;
+            light2.position.z = 5800;
+            this.Pradera.add(light2);
 
             var Antorcha3 = object.clone();
             Antorcha3.position.x = -1000;
             Antorcha3.position.z = -5800;
+            var light3 = light.clone();
+            light3.position.x = -1000;
+            light3.position.z = -5800;
+            this.Pradera.add(light3);
 
             var Antorcha4 = object.clone();
             Antorcha4.position.x = -5600;
             Antorcha4.position.z = -2200;
+            var light4 = light.clone();
+            light4.position.x = -5600;
+            light4.position.z = -2200;
+            this.Pradera.add(light4);
 
             var Antorcha5 = object.clone();
             Antorcha5.position.x = -5600;
             Antorcha5.position.z = -4200;
+            var light5 = light.clone();
+            light5.position.x = -5600;
+            light5.position.z = -4200;
+            this.Pradera.add(light5);
 
             var Antorcha6 = object.clone();
             Antorcha6.position.x = 1800;
             Antorcha6.position.z = 5300;
+            var light6 = light.clone();
+            light6.position.x = 1800;
+            light6.position.z = 5300;
+            this.Pradera.add(light6);
 
             var Antorcha7 = object.clone();
             Antorcha7.position.x = 2100;
             Antorcha7.position.z = 4500;
+            var light7 = light.clone();
+            light7.position.x = 2100;
+            light7.position.z = 4500;
+            this.Pradera.add(light7);
 
             var Antorcha8 = object.clone();
             Antorcha8.position.x = 2400;
             Antorcha8.position.z = 3800;
+            var light8 = light.clone();
+            light8.position.x = 2400;
+            light8.position.z = 3800;
+            this.Pradera.add(light8);
 
             var Antorcha9 = object.clone();
             Antorcha9.position.x = 2750;
             Antorcha9.position.z = 3000;
+            var light9 = light.clone();
+            light9.position.x = 2750;
+            light9.position.z = 3000;
+            this.Pradera.add(light9);
 
             var Antorcha10 = object.clone();
             Antorcha10.position.x = 100;
             Antorcha10.position.z = 5300;
+            var light10 = light.clone();
+            light10.position.x = 100;
+            light10.position.z = 5300;
+            this.Pradera.add(light10);
 
             var Antorcha11 = object.clone();
             Antorcha11.position.x = 400;
             Antorcha11.position.z = 4500;
+            var light11 = light.clone();
+            light11.position.x = 400;
+            light11.position.z = 4500;
+            this.Pradera.add(light11);
 
             var Antorcha12 = object.clone();
             Antorcha12.position.x = 700;
             Antorcha12.position.z = 3800;
+            var light12 = light.clone();
+            light12.position.x = 700;
+            light12.position.z = 3800;
+            this.Pradera.add(light12);
 
             var Antorcha13 = object.clone();
             Antorcha13.position.x = 1050;
             Antorcha13.position.z = 3000;
+            var light13 = light.clone();
+            light13.position.x = 1050;
+            light13.position.z = 3000;
+            this.Pradera.add(light13);
 
             var Antorcha14 = object.clone();
             Antorcha14.position.x = 5300;
             Antorcha14.position.z = -1000;
+            var light14 = light.clone();
+            light14.position.x = 5300;
+            light14.position.z = -1000;
+            this.Pradera.add(light14);
 
             var Antorcha15 = object.clone();
             Antorcha15.position.x = 5300;
             Antorcha15.position.z = 0;
+            var light15 = light.clone();
+            light15.position.x = 5300;
+            light15.position.z = 0;
+            this.Pradera.add(light15);
 
             object.position.x = -8000;
             object.position.z = 5800;
@@ -3229,27 +3324,52 @@ class Scenee
 
         this.Load3dModelGLTF("Assets/Models/Campamento/Antorcha.glb", loadingManager, (object)=>{ //Antorcha
             object.scale.set(13, 13, 13);
+             //---Point Light
+             const light = new THREE.PointLight( 0xE8442A, 5, 300 );
+             light.position.set( 3700, 390, -500 );
+             this.Nieve.add(light);
 
             var Antorcha2 = object.clone();
             Antorcha2.position.set(5200, 240, -500);
+            var light2 = light.clone();
+            light2.position.set(5200, 290, -500);
+            this.Nieve.add(light2);
 
             var Antorcha3 = object.clone();
             Antorcha3.position.set(3300, 420, -2500);
+            var light3 = light.clone();
+            light3.position.set(3300, 480, -2500);
+            this.Nieve.add(light3);
 
             var Antorcha4 = object.clone();
             Antorcha4.position.set(5200, 110, -2500);
+            var light4 = light.clone();
+            light4.position.set(5200, 170, -2500);
+            this.Nieve.add(light4);
 
             var Antorcha5 = object.clone();
             Antorcha5.position.set(500, 380, -3500);
+            var light5 = light.clone();
+            light5.position.set(500, 430, -3500);
+            this.Nieve.add(light5);
 
             var Antorcha6 = object.clone();
             Antorcha6.position.set(500, 250, -7200);
+            var light6 = light.clone();
+            light6.position.set(500, 300, -7200);
+            this.Nieve.add(light6);
 
             var Antorcha7 = object.clone();
             Antorcha7.position.set(-6500, 210, -3500);
+            var light7 = light.clone();
+            light7.position.set(-6500, 280, -3500);
+            this.Nieve.add(light7);
 
             var Antorcha8 = object.clone();
             Antorcha8.position.set(-6500, 300, -7200);
+            var light8 = light.clone();
+            light8.position.set(-6500, 370, -7200);
+            this.Nieve.add(light8);
 
             object.position.set(3700, 330, -500);
 
@@ -4054,7 +4174,7 @@ class Scenee
         gltfLoader.load(model, (gltf) => {
             gltf.scene.traverse((child)=>{
                 child.castShadow = true;
-                child.receiveShadow = false;
+                child.receiveShadow = true;
             })
             gltf.scene.frustumCulled = true;
             onLoadCallback(gltf.scene);
@@ -4075,6 +4195,12 @@ class Scenee
             this.TestScene.add(Root);
           });
         });
+    }
+
+    FuegoUpdate()
+    {
+        this.PraderaFuego[0].material.map.offset.x += 0.1;
+        //console.log(this.PraderaFuego[0].offset.x);
     }
 
     Rain()

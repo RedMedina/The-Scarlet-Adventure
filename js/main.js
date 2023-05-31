@@ -16,11 +16,6 @@ function main()
 
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    const shadowRenderTarget = new THREE.WebGLRenderTarget(1920, 1080);
-    // Configurar el renderer para renderizar al render target
-    const originalRenderTarget = renderer.getRenderTarget();
-    renderer.setRenderTarget(shadowRenderTarget);
-   
 
     var Escenario = new Scenee();
     var Scene;
@@ -154,12 +149,6 @@ function main()
     {
         Scene = Escenario.GetNieveScene();
     }
-
-    renderer.render(Scene, Camara.GetCamera());
-    // Restaurar el render target original
-    renderer.setRenderTarget(originalRenderTarget);
-    const shadowMapTexture = shadowRenderTarget.texture;
-    console.log(shadowMapTexture);
    
     const audioCont = new AudioController();
     var SonidoFinal = Configuraciones.sonido * 0.001;
@@ -1592,6 +1581,9 @@ function main()
             if (Escenario.GetNieveEnemies().Model[i].GetMixer()){Escenario.GetNieveEnemies().Model[i].GetMixer().update(delta);}
         }
 
+        //Fuego
+        Escenario.FuegoUpdate();
+
         water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
         stats.update();
         Escenario.RainUpdate();
@@ -1642,7 +1634,6 @@ function main()
         //Escenario.GetPraderaScene().getObjectByName("LuzPradera").intensity = intensityAmbientLight + 0.2;
         Escenario.GetPraderaScene().getObjectByName("LuzPradera").color = finalColor;
         Escenario.GetPraderaScene().getObjectByName("TerrenoPradera").material.uniforms.time.value = 1-intensityAmbientLight;
-        Escenario.GetPraderaScene().getObjectByName("TerrenoPradera").material.uniforms.shadowMap.value = shadowMapTexture;
         Escenario.GetPraderaScene().getObjectByName("TerrenoPradera").material.needsUpdate = true;
         Escenario.GetPraderaScene().getObjectByName("MuroPradera").material.uniforms.time.value = 1-intensityAmbientLight;
         Escenario.GetPraderaScene().getObjectByName("MuroPradera").material.needsUpdate = true;
@@ -1651,7 +1642,6 @@ function main()
         //Escenario.GetPantanoScene().getObjectByName("LuzPantano").intensity = intensityAmbientLight + 0.2;
         Escenario.GetPantanoScene().getObjectByName("LuzPantano").color = finalColor;
         Escenario.GetPantanoScene().getObjectByName("TerrenoPantano").material.uniforms.time.value = 1-intensityAmbientLight;
-        Escenario.GetPantanoScene().getObjectByName("TerrenoPantano").material.uniforms.shadowMap.value = shadowMapTexture;
         Escenario.GetPantanoScene().getObjectByName("TerrenoPantano").material.needsUpdate = true;
         Escenario.GetPantanoScene().getObjectByName("MuroPantano").material.uniforms.time.value = 1-intensityAmbientLight;
         Escenario.GetPantanoScene().getObjectByName("MuroPantano").material.needsUpdate = true;
@@ -1660,7 +1650,6 @@ function main()
         //Escenario.GetNieveScene().getObjectByName("LuzNieve").intensity = intensityAmbientLight + 0.2;
         Escenario.GetNieveScene().getObjectByName("LuzNieve").color = finalColor;
         Escenario.GetNieveScene().getObjectByName("TerrenoNieve").material.uniforms.time.value = 1-intensityAmbientLight;
-        Escenario.GetNieveScene().getObjectByName("TerrenoNieve").material.uniforms.shadowMap.value = shadowMapTexture;
         Escenario.GetNieveScene().getObjectByName("TerrenoNieve").material.needsUpdate = true;
         Escenario.GetNieveScene().getObjectByName("MuroNieve").material.uniforms.time.value = 1-intensityAmbientLight;
         Escenario.GetNieveScene().getObjectByName("MuroNieve").material.needsUpdate = true;
