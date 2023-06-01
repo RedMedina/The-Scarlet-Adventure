@@ -74,7 +74,7 @@ class Terrain
                 opacity: 0,
                 } );
             this.planeColl = new THREE.Mesh( geometry, material );
-            //this.planeColl.visible = false;
+            this.planeColl.visible = false;
             //set height of vertices
 
             for ( var i = 0; i<this.planeColl.geometry.attributes.position.array.length; i++ ) {
