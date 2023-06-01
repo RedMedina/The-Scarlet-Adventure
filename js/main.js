@@ -411,6 +411,7 @@ function main()
         for (let i = 0; i < Escenario.GetPlayer().GetBackpack().GetItems().length; i++) {
             $("#MochilaMenu").append("<div class='ItemMenu'>"+Escenario.GetPlayer().GetBackpack().GetItems()[i].getItem().name+"<button class='btnUse' onclick='AccionesMenu.useItem("+i+")'>+</button> <button class='btnUse' onclick='AccionesMenu.DeleteItem("+i+")'>x</button></div>");
         }
+        audioCont.PlaySelect();
         console.log(Escenario.GetPlayer().GetBackpack());
         console.log(Escenario.GetPlayer().GetStats().Vida);
     }
@@ -860,6 +861,10 @@ function main()
                         {
                             Escenario.GetPlayer().GetBackpack().AddItem(Escenario.GetPraderaItems().items[collision[0].object.name-1]);
                             Escenario.GetPraderaItems().items[collision[0].object.name-1] = {empty: true};
+                            if(Escenario.GetPraderaItems().model[collision[0].object.name-1].visible==true)
+                            {
+                                audioCont.PlayItem();
+                            }
                             Escenario.GetPraderaItems().model[collision[0].object.name-1].visible = false;
                             console.log(Escenario.GetPlayer().GetBackpack());
                         }
@@ -1067,6 +1072,10 @@ function main()
                         {
                             Escenario.GetPlayer().GetBackpack().AddItem(Escenario.GetPantanoItems().items[collision[0].object.name-1]);
                             Escenario.GetPantanoItems().items[collision[0].object.name-1] = {empty: true};
+                            if(Escenario.GetPantanoItems().model[collision[0].object.name-1].visible==true)
+                            {
+                                audioCont.PlayItem();
+                            }
                             Escenario.GetPantanoItems().model[collision[0].object.name-1].visible = false;
                             console.log(Escenario.GetPlayer().GetBackpack());
                         }
@@ -1240,6 +1249,10 @@ function main()
                         {
                             Escenario.GetPlayer().GetBackpack().AddItem(Escenario.GetNieveItems().items[collision[0].object.name-1]);
                             Escenario.GetNieveItems().items[collision[0].object.name-1] = {empty: true};
+                            if(Escenario.GetNieveItems().model[collision[0].object.name-1].visible==true)
+                            {
+                                audioCont.PlayItem();
+                            }
                             Escenario.GetNieveItems().model[collision[0].object.name-1].visible = false;
                             console.log(Escenario.GetPlayer().GetBackpack());
                         }

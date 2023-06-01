@@ -44,12 +44,34 @@ class AudioController
         this.InitSound = new Audioo();
         this.InitSound.create("InitSound");
         this.InitSound.Sound("Assets/BGM/NewArea.mp3");
+
+        //Select
+        this.Select = new Audioo();
+        this.Select.create("SelectSound");
+        this.Select.Sound("Assets/BGM/select.mp3");
+
+        //Item
+        this.Item = new Audioo();
+        this.Item.create("ItemSound");
+        this.Item.Sound("Assets/BGM/shiny.mp3");
     }
 
     PlayInit()
     {
         this.InitSound.GetSound().setLoop( false );
         this.InitSound.GetSound().play();
+    }
+
+    PlaySelect()
+    {
+        this.Select.GetSound().setLoop( false );
+        this.Select.GetSound().play();
+    }
+
+    PlayItem()
+    {
+        this.Item.GetSound().setLoop( false );
+        this.Item.GetSound().play();
     }
 
     PlaySceneSound(sceneActual)
