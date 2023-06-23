@@ -20,7 +20,7 @@ class Scenee
         this.Playeranimations = ["Assets/Models/Player/Idle_Final", "Assets/Models/Player/Run_Final",
         "Assets/Models/Player/Attack2", "Assets/Models/Player/Diying_Final",
         "Assets/Models/Player/Dodge_Final", "Assets/Models/Player/Swimming",
-        "Assets/Models/Player/Jump_Final"];
+        "Assets/Models/Player/Jump_Final", "Assets/Models/Player/Attack_Run"];
 
         //Objetos Estaticos Pradera
         this.PraderaObjects = [];

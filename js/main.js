@@ -38,7 +38,7 @@ function main()
     let ColorNoche = new THREE.Color(0x000033);
     
     var keys = {};
-    var Actionkeys = {Attack: false, Dodge: false, Jump: false, Die: false, Nado: false};
+    var Actionkeys = {Attack: false, Dodge: false, Jump: false, Die: false, Nado: false, AtkRun: false};
     var mousekeys = [];
     var ModelsLoaded = false;
     var pos1;
@@ -424,6 +424,7 @@ function main()
         for (let i = 0; i < Escenario.GetPlayer().GetBackpack().GetItems().length; i++) {
             $("#MochilaMenu").append("<div class='ItemMenu'>"+Escenario.GetPlayer().GetBackpack().GetItems()[i].getItem().name+"<button class='btnUse' onclick='AccionesMenu.useItem("+i+")'>+</button> <button class='btnUse' onclick='AccionesMenu.DeleteItem("+i+")'>x</button></div>");
         }
+        audioCont.PlaySelect();
     }
 
     AccionesMenu.useItem = UseItem;
@@ -512,7 +513,7 @@ function main()
         ui.DesbrillarReaction();
 
 		if (keys["W"]) {
-            if(Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false)
+            if(Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false && Actionkeys.AtkRun == false)
             {
                 Actionkeys.Attack = false;
                 AttackContador = 0;
@@ -552,7 +553,7 @@ function main()
                 movPas = 550;
             }
 		}else if (keys["S"]) {
-            if(Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false)
+            if(Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false && Actionkeys.AtkRun == false)
             {
                 Actionkeys.Attack = false;
                 AttackContador = 0;
@@ -590,7 +591,7 @@ function main()
             }
 		}
         else if(keys["E"]){
-            if(Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false && Actionkeys.Nado == false)
+            if(Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false && Actionkeys.Nado == false && Actionkeys.AtkRun == false)
             {
                 Actionkeys.Attack = true;
                 window.DialogMagic.close();
@@ -605,8 +606,9 @@ function main()
                 window.DialogMagic.close();
             }
         }
+
         else if ((keys["W"] == false || keys["A"] == false || keys["S"] == false || keys["D"] == false) &&
-                Actionkeys.Attack == false && Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false && Actionkeys.Nado == false)
+                Actionkeys.Attack == false && Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false && Actionkeys.Nado == false && Actionkeys.AtkRun == false)
         {
             if(ActualScene == 1)
             {
@@ -630,6 +632,38 @@ function main()
                 }
             }
         }
+
+        if(keys["E"] && keys["W"])
+        {
+            if(Actionkeys.Dodge == false && Actionkeys.Jump == false && Actionkeys.Die == false && Actionkeys.Nado == false)
+            {
+                Actionkeys.Attack = false;
+                AttackContador = 0;
+                Actionkeys.AtkRun = true;
+                window.DialogMagic.close();
+
+                if(ActualScene == 1)
+                {
+                    Escenario.GetPraderaScene().getObjectByName("PlayerModel").translateZ(550 * (delta));
+                }
+                else if(ActualScene == 2)
+                {
+                    
+                    Escenario.GetPantanoScene().getObjectByName("PlayerModel").translateZ(550 * (delta));
+                }
+                else if (ActualScene == 3)
+                {
+                    Escenario.GetNieveScene().getObjectByName("PlayerModel").translateZ(550 * (delta));    
+                }
+                movPas = 550;
+                //console.log("ATACANDO Y CORRIENDO");
+            }
+        }
+        else if(keys["E"] == false)
+        {
+            Actionkeys.AtkRun = false;
+        }
+
 
         if (keys["%"] /*<-*/){ 
             window.DialogMagic.close();
@@ -753,6 +787,38 @@ function main()
                 AttackContador = 0;
             }
         }
+
+
+        //Attack and Run
+        if(Actionkeys.AtkRun == true)
+        {
+                if(ActualScene == 1)
+                {
+                    Escenario.GetPlayer().GetModel().Pradera.playAnimation(7,1);
+                    var Particle = Disparo.Disparar(Escenario.GetPraderaScene().getObjectByName("PlayerModel").position, Escenario.GetPraderaScene().getObjectByName("PlayerModel").rotation.y, Camara.GetCamera().rotation.x, 'Assets/Images/shot.png', true);
+                    Escenario.GetPraderaScene().add(Particle);
+                    ShotsPradera.push(Particle);
+                    Disparando = true;
+                }
+                else if (ActualScene == 2)
+                {
+                    Escenario.GetPlayer().GetModel().Pantano.playAnimation(7,1);
+                    var Particle = Disparo.Disparar(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position, Escenario.GetPantanoScene().getObjectByName("PlayerModel").rotation.y, Camara.GetCamera().rotation.x, 'Assets/Images/shot.png', true);
+                    Escenario.GetPantanoScene().add(Particle);
+                    ShotsPantano.push(Particle);
+                    Disparando = true;
+                }
+                else if (ActualScene == 3)
+                {
+                    Escenario.GetPlayer().GetModel().Nieve.playAnimation(7,1);
+                    var Particle = Disparo.Disparar(Escenario.GetNieveScene().getObjectByName("PlayerModel").position, Escenario.GetNieveScene().getObjectByName("PlayerModel").rotation.y, Camara.GetCamera().rotation.x, 'Assets/Images/shot.png', true);
+                    Escenario.GetNieveScene().add(Particle);
+                    ShotsNieve.push(Particle);
+                    Disparando = true;
+                }
+        }
+
+
         //Jump
         if(Actionkeys.Jump == true)
         {
@@ -1094,6 +1160,7 @@ function main()
                         {
                             if(Escenario.GetPantanoEnemies().Object[j].GetActive())
                             {
+
                                 if(j < 16)
                                 {
                                     Escenario.GetPantanoEnemies().Collider[j].parent.lookAt(Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.x, Escenario.GetPantanoEnemies().Collider[j].parent.position.y, Escenario.GetPantanoScene().getObjectByName("PlayerModel").position.z);
